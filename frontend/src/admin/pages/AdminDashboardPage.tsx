@@ -502,7 +502,17 @@ export function AdminDashboardPage() {
                         <div className="col-span-5 pl-4 font-medium text-[#2A4939] text-sm truncate pr-2" title={item.name}>{item.name}</div>
                         <div className="col-span-4 text-xs text-[#64C08E] font-medium truncate pr-2" title={item.email}>{item.email}</div>
                         <div className="col-span-3">
-                           <div className="font-medium text-[#2A4939] text-xs">{new Date(item.createdAt).toLocaleDateString()}</div>
+                           <div className="font-medium text-[#2A4939] text-xs">
+                             {(() => {
+                               const diff = Date.now() - new Date(item.createdAt).getTime();
+                               const mins = Math.floor(diff / 60000);
+                               if (mins < 1) return "Just now";
+                               if (mins < 60) return `${mins}m ago`;
+                               const hrs = Math.floor(mins / 60);
+                               if (hrs < 24) return `${hrs}h ago`;
+                               return new Date(item.createdAt).toLocaleDateString();
+                             })()}
+                           </div>
                            <div className="text-[10px] text-gray-500 font-semibold">{new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                         </div>
                      </div>
