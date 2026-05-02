@@ -73,7 +73,7 @@ export function AdminDashboardPage() {
         const [statsResponse, bookingsResponse, usersResponse, companionsResponse] = await Promise.all([
           fetch(`${apiBaseUrl}/api/admin/stats`),
           fetch(`${apiBaseUrl}/api/bookings`),
-          fetch(`${apiBaseUrl}/api/users?limit=5`),
+          fetch(`${apiBaseUrl}/api/users/recent-users`),
           fetch(`${apiBaseUrl}/api/companion-applications?status=all`),
         ]);
 
@@ -192,7 +192,7 @@ export function AdminDashboardPage() {
           const [statsResponse, bookingsResponse, usersResponse, companionsResponse] = await Promise.all([
             fetch(`${apiBaseUrl}/api/admin/stats`),
             fetch(`${apiBaseUrl}/api/bookings`),
-            fetch(`${apiBaseUrl}/api/users?limit=5`),
+            fetch(`${apiBaseUrl}/api/users/recent-users`),
             fetch(`${apiBaseUrl}/api/companion-applications?status=all`),
           ]);
 
