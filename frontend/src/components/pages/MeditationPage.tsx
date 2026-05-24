@@ -4829,7 +4829,7 @@ const SessionCard: React.FC<{ session: any }> = ({ session }) => {
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(
-          `${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-session`,
+          `${BACKEND_CONFIG.API_URL}/profile/log-session`,
           {
             method: "POST",
             headers: {
@@ -5002,7 +5002,7 @@ const MeditationSessions: React.FC = () => {
 
   // Fetch active sessions from backend
   useEffect(() => {
-    fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/meditations`)
+    fetch(`${BACKEND_CONFIG.API_URL}/meditations`)
       .then((res) => res.json())
       .then((data) => {
         // Show only Active sessions

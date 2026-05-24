@@ -135,7 +135,7 @@ export function CompanionManagementPage() {
     setBookingsLoading(true);
     setCompanionBookings([]);
     try {
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`);
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/bookings`);
       if (response.ok) {
         const bookingsData = await response.json();
         const filtered = Array.isArray(bookingsData)

@@ -71,7 +71,7 @@ const AddItemModal: React.FC<AddItemModalProps> = ({
       };
 
       // Send to backend API
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/requests`, {
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/marketplace/requests`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import DecorativeShapes from './DecorativeShapes';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
-const certificationCourses = [
+const allCertificationCourses = [
     {
         title: 'Mindfulness Meditation Certification',
         description: 'Learn the art and science of mindfulness meditation and become a certified instructor.',
@@ -31,7 +32,21 @@ const certificationCourses = [
         image: 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80',
         feel: 'Connected & Uplifted',
         cta: 'Start Your Spiritual Path'
-    }
+    },
+    {
+        title: 'Breathwork Healing Practitioner',
+        description: 'Master transformative breathwork techniques to facilitate deep healing and emotional release.',
+        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+        feel: 'Grounded & Free',
+        cta: 'Begin Your Breathwork Journey'
+    },
+    {
+        title: 'Inner Leadership Certification',
+        description: 'Develop soulful leadership skills rooted in self-awareness, purpose, and compassionate action.',
+        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
+        feel: 'Purposeful & Clear',
+        cta: 'Lead From Within'
+    },
 ];
 
 const cardStyles = [
@@ -39,12 +54,23 @@ const cardStyles = [
     'bg-gradient-to-br from-[#fceabb] to-[#f8b500] shadow-xl',
     'bg-gradient-to-br from-[#f8ffae] to-[#888888] shadow-lg',
     'bg-gradient-to-br from-[#e0c3fc] to-[#8ec5fc] shadow-xl',
+    'bg-gradient-to-br from-[#f5f5f5] to-[#d4f5e9] shadow-lg',
+    'bg-gradient-to-br from-[#fce4ec] to-[#e8f5e9] shadow-xl',
 ];
 
+const INITIAL_COUNT = 4;
+
 const AcademyCertificationSection: React.FC = () => {
+    const navigate = useNavigate();
+    const [showAll, setShowAll] = useState(false);
+
+    const visibleCourses = showAll
+        ? allCertificationCourses
+        : allCertificationCourses.slice(0, INITIAL_COUNT);
+
     // Animation state for each card heading
     const headingRefs = useRef<(HTMLHeadingElement | null)[]>([]);
-    const [visible, setVisible] = useState([false, false, false, false]);
+    const [visible, setVisible] = useState(allCertificationCourses.map(() => false));
 
     useEffect(() => {
         const observers: IntersectionObserver[] = [];
@@ -67,7 +93,7 @@ const AcademyCertificationSection: React.FC = () => {
             observers.push(observer);
         });
         return () => observers.forEach((obs) => obs.disconnect());
-    }, []);
+    }, [visibleCourses.length]);
 
     return (
         <section className="py-10 bg-[#f7fafc] relative overflow-hidden">
@@ -75,20 +101,21 @@ const AcademyCertificationSection: React.FC = () => {
             <div className="max-w-6xl mx-auto px-1 sm:px-2 relative z-10">
                 <div className="text-center mb-8">
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F131A] tracking-tight" style={{ fontFamily: "'Cinzel', serif" }}>
-                        Nirvaha Academy <span className="text-[#333333]">Certification Courses</span>
+                        Nirvaha <span className="text-[#333333]">Certification Courses</span>
                     </h2>
                     <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
                         Unlock your potential with our expert-led, accredited programs designed for personal and professional growth.
                     </p>
                 </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-                    {certificationCourses.map((course, idx) => (
+                    {visibleCourses.map((course, idx) => (
                         <motion.div
-                            key={idx}
+                            key={course.title}
                             initial={{ opacity: 0, y: 40, scale: 0.95 }}
                             whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: false, margin: "-50px" }}
-                            transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+                            transition={{ duration: 0.6, delay: (idx % 2) * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
                             whileHover={{ scale: 1.03, y: -4 }}
                             className={`relative group rounded-xl border border-[#e2e8f0] flex flex-col sm:flex-row items-stretch overflow-hidden ${cardStyles[idx % cardStyles.length]}`}
                             style={{ minHeight: 180, height: 'auto', maxHeight: 260 }}
@@ -120,13 +147,12 @@ const AcademyCertificationSection: React.FC = () => {
                                     </span>
                                 </div>
                             </div>
-                            {/* CTA Button overlay, hidden by default, appears centered on hover with blurred, white-faded background */}
+                            {/* CTA Button overlay on hover */}
                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                                 <div className="opacity-0 group-hover:opacity-100 pointer-events-auto flex items-center justify-center transition-all duration-300 w-full h-full">
                                     <div className="backdrop-blur-md bg-white/60 rounded-2xl flex items-center justify-center w-full h-full absolute z-0 transition-all duration-300" />
                                     <button
                                         className="relative z-10 px-8 py-3 rounded-full bg-white/80 backdrop-blur-lg text-[#333333] text-lg font-bold shadow-2xl border border-[#333333]/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#333333]/50 hover:bg-gradient-to-r hover:from-[#555555] hover:to-[#777777] hover:text-white hover:border-transparent"
-                                        style={{ transitionProperty: 'opacity, transform' }}
                                     >
                                         {course.cta}
                                     </button>
@@ -135,11 +161,38 @@ const AcademyCertificationSection: React.FC = () => {
                         </motion.div>
                     ))}
                 </div>
-                <div className="flex justify-center mt-10">
-                    <Link to="/academy" className="px-8 py-3 rounded-xl bg-[#333333] text-white text-lg font-bold shadow-lg hover:bg-[#222222] transition-all duration-200 inline-block">
-                        Explore More Courses
-                    </Link>
-                </div>
+
+                {/* View More / Show Less button */}
+                {allCertificationCourses.length > INITIAL_COUNT && (
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={showAll ? 'less' : 'more'}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.3 }}
+                            className="flex justify-center mt-10"
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setShowAll((prev) => !prev)}
+                                className="inline-flex items-center gap-3 px-8 py-3 rounded-xl bg-[#333333] text-white text-lg font-bold shadow-lg hover:bg-[#222222] transition-all duration-200"
+                            >
+                                {showAll ? (
+                                    <>
+                                        Show Less
+                                        <ChevronUp className="w-5 h-5" />
+                                    </>
+                                ) : (
+                                    <>
+                                        View More Certifications
+                                        <ChevronDown className="w-5 h-5" />
+                                    </>
+                                )}
+                            </button>
+                        </motion.div>
+                    </AnimatePresence>
+                )}
             </div>
         </section>
     );

@@ -8,7 +8,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { ArrowUp, ArrowDown, Save, Eye, EyeOff, GripVertical } from 'lucide-react';
 
-const API_URL = BACKEND_CONFIG.API_BASE_URL;
+const API_URL = BACKEND_CONFIG.API_URL;
 
 export interface LandingSection {
   id: string;
@@ -43,7 +43,7 @@ export const LandingPageManager: React.FC = () => {
   const fetchConfig = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/api/content/landing_page_config`);
+      const response = await axios.get(`${API_URL}/content/landing_page_config`);
       if (response.data && response.data.value && Array.isArray(response.data.value)) {
         setSections(response.data.value);
       } else {
@@ -65,7 +65,7 @@ export const LandingPageManager: React.FC = () => {
   const handleSave = async () => {
     try {
       setSaving(true);
-      await axios.put(`${API_URL}/api/content/landing_page_config`, {
+      await axios.put(`${API_URL}/content/landing_page_config`, {
         value: sections,
         type: 'json',
         section: 'landing_page',

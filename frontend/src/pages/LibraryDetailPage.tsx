@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Quote, BookOpen, CheckCircle, Sparkles, Flame, Star, Sun } from 'lucide-react';
@@ -7,10 +7,32 @@ import { defaultLibraryItems, LibraryItem } from '../data/libraryData';
 const LibraryDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const [enrolledIds, setEnrolledIds] = useState<string[]>([]);
 
     const item: LibraryItem | undefined = defaultLibraryItems.find(i => i.id === id);
+    const enrolled = item ? enrolledIds.includes(item.id) : false;
 
     useEffect(() => { window.scrollTo(0, 0); }, [id]);
+
+    useEffect(() => {
+        const savedEnrollments = localStorage.getItem('nirvaha_enrollments');
+        if (savedEnrollments) {
+            try {
+                setEnrolledIds(JSON.parse(savedEnrollments));
+            } catch (e) {
+                console.error('Failed to load library enrollments', e);
+            }
+        }
+    }, []);
+
+    const handleEnrollmentToggle = () => {
+        if (!item) return;
+        setEnrolledIds((prev) => {
+            const next = prev.includes(item.id) ? prev : [item.id, ...prev];
+            localStorage.setItem('nirvaha_enrollments', JSON.stringify(next));
+            return next;
+        });
+    };
 
     if (!item) return (
         <div className="min-h-screen flex items-center justify-center bg-[#0d1410]">
@@ -102,6 +124,25 @@ const LibraryDetailPage: React.FC = () => {
                     >
                         "{item.story.split('\n')[0].trim()}"
                     </motion.p>
+
+                    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.8 }}
+                        className="mt-10 inline-flex flex-col gap-4 rounded-[2rem] border border-[#d4af37]/20 bg-[#132118]/90 p-6 text-left text-sm text-[#e8e6df] md:flex-row md:items-center md:justify-between"
+                    >
+                        <div className="space-y-2">
+                            <p className="font-semibold text-[#f5f2df]">
+                                {enrolled ? 'You are enrolled in this journey.' : 'This masterclass is ready for you.'}
+                            </p>
+                            <p className="text-[#b8c5ae]">
+                                {enrolled ? 'Continue your exploration with the next step of the course.' : 'Tap below to begin your guided experience and unlock deeper insight.'}
+                            </p>
+                        </div>
+                        <button
+                            onClick={handleEnrollmentToggle}
+                            className="inline-flex items-center justify-center rounded-full bg-[#d4af37] px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-black shadow-[0_20px_50px_rgba(212,175,55,0.25)] transition hover:bg-[#e5c963]"
+                        >
+                            {enrolled ? 'Continue Journey' : 'Enroll in This Course'}
+                        </button>
+                    </motion.div>
                 </motion.div>
 
                 {/* Background glow centered behind text */}
@@ -221,6 +262,14 @@ const LibraryDetailPage: React.FC = () => {
                     </div>
                 </motion.div>
 
+                <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10 text-center">
+                    <button
+                        onClick={handleEnrollmentToggle}
+                        className="inline-flex items-center justify-center rounded-full bg-[#d4af37] px-8 py-4 text-sm font-semibold uppercase tracking-[0.25em] text-black shadow-[0_20px_50px_rgba(212,175,55,0.25)] transition hover:bg-[#e5c963]"
+                    >
+                        {enrolled ? 'Continue Journey' : 'Enroll and Begin'}
+                    </button>
+                </motion.div>
                 {/* Back CTA */}
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center">
                     <button

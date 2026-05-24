@@ -114,11 +114,11 @@ export function MeditationSessionModal({ isOpen, onClose, session }: MeditationS
     const sessionType = session?.sessionType || 'meditation';
     
     try {
-      let apiUrl = `${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-session`;
+      let apiUrl = `${BACKEND_CONFIG.API_URL}/profile/log-session`;
       
       // Use sound-specific endpoint for sound sessions (≥1 min)
       if (sessionType === 'sound' && sessionDuration >= 1) {
-        apiUrl = `${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-sound-session`;
+        apiUrl = `${BACKEND_CONFIG.API_URL}/profile/log-sound-session`;
       }
       
       const category = session?.category || session?.type;

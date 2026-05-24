@@ -100,7 +100,7 @@ export function SessionRegistrationModal({
         type: "session",
       };
       try {
-        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`, {
+        await fetch(`${BACKEND_CONFIG.API_URL}/bookings`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

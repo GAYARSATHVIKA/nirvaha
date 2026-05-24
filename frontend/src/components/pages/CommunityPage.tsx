@@ -11,7 +11,7 @@ import RightSidebar from "../community/RightSidebar";
 import CreatePost from "../community/CreatePost";
 import type { Post } from "../community/communityData";
 
-const API = BACKEND_CONFIG.API_BASE_URL;
+const API = BACKEND_CONFIG.API_URL;
 
 export function CommunityPage() {
   const { user } = useAuth();
@@ -111,7 +111,7 @@ export function CommunityPage() {
       params.set("page", String(pageNum));
       params.set("limit", "20");
 
-      const res = await fetch(`${API}/api/posts?${params}`);
+      const res = await fetch(`${API}/posts?${params}`);
       if (res.ok) {
         const data = await res.json();
         // Handle both old array response and new {posts, total} shape
@@ -138,7 +138,7 @@ export function CommunityPage() {
   // ── Fetch trending ───────────────────────────────────────────────────────
   const fetchTrending = async () => {
     try {
-      const res = await fetch(`${API}/api/posts/trending`);
+      const res = await fetch(`${API}/posts/trending`);
       if (res.ok) {
         const data = await res.json();
         if (data.length > 0) setTrending(data);
@@ -274,7 +274,7 @@ export function CommunityPage() {
       isOnline: true,
     };
     try {
-      const res = await fetch(`${API}/api/posts`, {
+      const res = await fetch(`${API}/posts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

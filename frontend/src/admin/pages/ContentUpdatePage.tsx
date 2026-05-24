@@ -113,13 +113,13 @@ export function ContentUpdatePage() {
     },
   ]);
 
-  const apiBaseUrl = BACKEND_CONFIG.API_BASE_URL;
+  const apiBaseUrl = BACKEND_CONFIG.API_URL;
 
   // Load from backend on mount
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/content`);
+        const response = await fetch(`${apiBaseUrl}/content`);
         if (!response.ok) return;
         const data = await response.json();
 
@@ -154,7 +154,7 @@ export function ContentUpdatePage() {
   // Save to backend
   const saveContent = async (key: string, value: any, sectionName: string) => {
     try {
-      const response = await fetch(`${apiBaseUrl}/api/content/${key}`, {
+      const response = await fetch(`${apiBaseUrl}/content/${key}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

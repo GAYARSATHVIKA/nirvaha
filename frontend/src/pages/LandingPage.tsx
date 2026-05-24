@@ -10,7 +10,6 @@ import AncientWisdomSection from '../components/landing/AncientWisdomSection';
 import LeadershipHeroSection from '../components/landing/LeadershipHeroSection';
 import DifferentPathsSection from '../components/landing/DifferentPathsSection';
 import CollaboratorsSection from '../components/landing/CollaboratorsSection';
-import CertificationCoursesSection from '../components/landing/CertificationCoursesSection';
 import Contact from '../components/landing/Contact';
 import ClosingSection from '../components/landing/ClosingSection';
 import Header from '../components/landing/Header';
@@ -26,7 +25,6 @@ const SECTION_COMPONENTS: Record<string, React.FC<any>> = {
   AncientWisdomSection,
   LeadershipHeroSection,
   DifferentPathsSection,
-  CertificationCoursesSection,
   CollaboratorsSection,
   Contact,
   ClosingSection
@@ -41,7 +39,6 @@ const DEFAULT_SECTIONS = [
   { id: 'AncientWisdomSection', visible: true },
   { id: 'LeadershipHeroSection', visible: true },
   { id: 'DifferentPathsSection', visible: true },
-  { id: 'CertificationCoursesSection', visible: true },
   { id: 'CollaboratorsSection', visible: true },
   { id: 'Contact', visible: true },
   { id: 'ClosingSection', visible: true }
@@ -57,7 +54,7 @@ const LandingPage: React.FC = () => {
 
     const fetchConfig = async () => {
       try {
-        const response = await axios.get(`${BACKEND_CONFIG.API_BASE_URL}/api/content/landing_page_config`);
+        const response = await axios.get(`${BACKEND_CONFIG.API_URL}/content/landing_page_config`);
         if (response.data && response.data.value && Array.isArray(response.data.value)) {
           setSections(response.data.value);
         }

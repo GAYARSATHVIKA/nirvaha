@@ -154,7 +154,7 @@ export function ChatbotPage() {
 
     // Try backend first
     try {
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/reflect`, {
+      const res = await fetch(`${BACKEND_CONFIG.API_URL}/reflect`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: sentMessage, userId: user?.id }),

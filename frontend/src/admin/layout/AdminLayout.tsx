@@ -17,6 +17,7 @@ import {
   FileText,
   Palette,
   MessageSquare,
+  GraduationCap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -93,6 +94,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           title: "Success Stories",
           icon: FileText,
           path: "/admin/success-stories",
+        },
+        {
+          title: "Enrollments",
+          icon: GraduationCap,
+          path: "/admin/enrollments",
         },
         {
           title: "Booking Management",

@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Trash2, Edit2, Save, X, Plus, Upload } from 'lucide-react';
 
-const API_URL = BACKEND_CONFIG.API_BASE_URL;
+const API_URL = BACKEND_CONFIG.API_URL;
 
 interface ContentItem {
   _id: string;
@@ -45,7 +45,7 @@ export const ContentEditor: React.FC = () => {
 
   const fetchContents = async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/content-admin/all`);
+      const response = await axios.get(`${API_URL}/content-admin/all`);
       setContents(response.data);
       setLoading(false);
     } catch (error) {
@@ -65,7 +65,7 @@ export const ContentEditor: React.FC = () => {
       const content = contents.find(c => c.key === key);
       if (!content) return;
 
-      await axios.put(`${API_URL}/api/content/${key}`, {
+      await axios.put(`${API_URL}/content/${key}`, {
         value: editValue,
         type: content.type,
         section: content.section,
@@ -89,7 +89,7 @@ export const ContentEditor: React.FC = () => {
       const content = contents.find(c => c.key === key);
       formData.append('section', content?.section || 'general');
 
-      await axios.post(`${API_URL}/api/content/upload`, formData, {
+      await axios.post(`${API_URL}/content/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
@@ -104,7 +104,7 @@ export const ContentEditor: React.FC = () => {
   const handleAddContent = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put(`${API_URL}/api/content/${newContent.key}`, newContent);
+      await axios.put(`${API_URL}/content/${newContent.key}`, newContent);
 
       setShowAddForm(false);
       setNewContent({
@@ -128,7 +128,7 @@ export const ContentEditor: React.FC = () => {
     }
 
     try {
-      await axios.delete(`${API_URL}/api/content/${key}`);
+      await axios.delete(`${API_URL}/content/${key}`);
       fetchContents();
       toast.success('Content deleted successfully');
     } catch (error) {
@@ -270,7 +270,7 @@ export const ContentEditor: React.FC = () => {
                         {content.type === 'image' ? (
                           <div className="space-y-4">
                             <img
-                              src={`${API_URL}${content.value}`}
+                              src={`${BACKEND_CONFIG.SOCKET_URL}${content.value}`}
                               alt={content.key}
                               className="max-w-sm rounded-lg border"
                             />

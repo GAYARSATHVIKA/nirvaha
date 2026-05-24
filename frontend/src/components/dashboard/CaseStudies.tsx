@@ -63,7 +63,7 @@ export const CaseStudies = () => {
     useEffect(() => {
         const fetchStories = async () => {
             try {
-                const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/success-stories`);
+                const response = await fetch(`${BACKEND_CONFIG.API_URL}/success-stories`);
                 const data = await response.json();
                 if (data.stories && data.stories.length > 0) {
                     setStories(data.stories);

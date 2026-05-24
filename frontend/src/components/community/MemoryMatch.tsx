@@ -157,7 +157,7 @@ export default function MemoryMatch({ currentUser }: { currentUser: any }) {
     if (user?.id) {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/increment-game`, {
+        const res = await fetch(`${BACKEND_CONFIG.API_URL}/profile/increment-game`, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",

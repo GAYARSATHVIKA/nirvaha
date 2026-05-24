@@ -316,9 +316,9 @@ router.post('/firebase', async (req, res) => {
 
     // Generate backend JWT token
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
+      { id: user._id, email: user.email, role: user.role },
       JWT_SECRET,
-      { expiresIn: '365d' }
+      { expiresIn: '7d' }
     );
 
     const safeUser = {

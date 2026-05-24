@@ -108,7 +108,7 @@ export function MarketplacePage() {
   const [approvedItems, setApprovedItems] = useState<MarketplaceItem[]>([]);
 
   const { user } = useAuth();
-  const apiBaseUrl = BACKEND_CONFIG.API_BASE_URL;
+  const apiBaseUrl = BACKEND_CONFIG.API_URL;
 
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutItem, setCheckoutItem] = useState<{
@@ -199,7 +199,7 @@ export function MarketplacePage() {
   const loadApprovedItems = async () => {
     try {
       const response = await fetch(
-        `${apiBaseUrl}/api/marketplace/items?status=active`,
+        `${apiBaseUrl}/marketplace/items?status=active`,
       );
       if (!response.ok) {
         throw new Error("Failed to fetch marketplace items");
@@ -210,7 +210,7 @@ export function MarketplacePage() {
       // If user is logged in, fetch their bookings to sync status
       if (user?.email) {
         try {
-          const bRes = await fetch(`${apiBaseUrl}/api/bookings/user/${user.email}`);
+          const bRes = await fetch(`${apiBaseUrl}/bookings/user/${user.email}`);
           if (bRes.ok) {
             const bookings = await bRes.json();
             const normalized = bookings
@@ -306,7 +306,7 @@ export function MarketplacePage() {
   const handleCompleteItem = async (itemId: string) => {
     try {
       const response = await fetch(
-        `${apiBaseUrl}/api/marketplace/items/${itemId}/complete`,
+        `${apiBaseUrl}/marketplace/items/${itemId}/complete`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -341,7 +341,7 @@ export function MarketplacePage() {
       createdAt: new Date(),
     };
 
-    const response = await fetch(`${apiBaseUrl}/api/bookings`, {
+    const response = await fetch(`${apiBaseUrl}/bookings`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

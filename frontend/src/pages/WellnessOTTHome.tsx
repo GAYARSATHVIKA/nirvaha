@@ -19,7 +19,6 @@ import {
 } from 'lucide-react';
 import { wellnessSessions, WellnessSession } from '../data/wellnessSessions';
 import HeroBanner from '../components/wellness-ott/HeroBanner';
-
 // Interface for unified continue watching
 interface ContinueWatchingItem {
   seriesId: string;

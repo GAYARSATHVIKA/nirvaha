@@ -63,7 +63,7 @@ export function AdminDashboardPage() {
   const [activeSessions, setActiveSessions] = useState("0");
   const [revenue, setRevenue] = useState("₹0");
   const [loading, setLoading] = useState(true);
-  const apiBaseUrl = BACKEND_CONFIG.API_BASE_URL;
+  const apiBaseUrl = BACKEND_CONFIG.API_URL;
 
   // Fetch data from backend
   useEffect(() => {
@@ -72,10 +72,10 @@ export function AdminDashboardPage() {
         setLoading(true);
 
         const [statsResponse, bookingsResponse, usersResponse, companionsResponse] = await Promise.all([
-          fetch(`${apiBaseUrl}/api/admin/stats`),
-          fetch(`${apiBaseUrl}/api/bookings`),
-          fetch(`${apiBaseUrl}/api/users?limit=5`),
-          fetch(`${apiBaseUrl}/api/companion/applications`),
+          fetch(`${apiBaseUrl}/admin/stats`),
+          fetch(`${apiBaseUrl}/bookings`),
+          fetch(`${apiBaseUrl}/users?limit=5`),
+          fetch(`${apiBaseUrl}/companion/applications`),
         ]);
 
         if (statsResponse.ok) {
@@ -189,10 +189,10 @@ export function AdminDashboardPage() {
       const fetchData = async () => {
         try {
           const [statsResponse, bookingsResponse, usersResponse, companionsResponse] = await Promise.all([
-            fetch(`${apiBaseUrl}/api/admin/stats`),
-            fetch(`${apiBaseUrl}/api/bookings`),
-            fetch(`${apiBaseUrl}/api/users?limit=5`),
-            fetch(`${apiBaseUrl}/api/companion/applications`),
+            fetch(`${apiBaseUrl}/admin/stats`),
+            fetch(`${apiBaseUrl}/bookings`),
+            fetch(`${apiBaseUrl}/users?limit=5`),
+            fetch(`${apiBaseUrl}/companion/applications`),
           ]);
 
           if (statsResponse.ok) {
@@ -397,7 +397,7 @@ export function AdminDashboardPage() {
                            <div className="col-span-5 pl-2 flex items-center gap-3 pr-2 truncate">
                               {item.profileImage ? (
                                  <img
-                                    src={`${apiBaseUrl}${item.profileImage}`}
+                                    src={`${BACKEND_CONFIG.SOCKET_URL}${item.profileImage}`}
                                     alt={item.name}
                                     className="w-9 h-9 rounded-full object-cover border border-[#B9EBD1]"
                                  />

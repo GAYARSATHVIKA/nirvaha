@@ -3,7 +3,7 @@ import BACKEND_CONFIG from "../config/backend";
 export const updatePathwayProgress = async (userId: string, pathwayId: string, lessonIndex: number) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/pathway-progress`, {
+    const response = await fetch(`${BACKEND_CONFIG.API_URL}/profile/pathway-progress`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const updatePathwayProgress = async (userId: string, pathwayId: string, l
 export const enrollPathway = async (userId: string, pathwayId: string) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/enroll-pathway`, {
+    const response = await fetch(`${BACKEND_CONFIG.API_URL}/profile/enroll-pathway`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

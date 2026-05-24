@@ -40,16 +40,16 @@ export function AnalyticsPage() {
     revenue: "₹0",
   });
 
-  const apiBaseUrl = BACKEND_CONFIG.API_BASE_URL;
+  const apiBaseUrl = BACKEND_CONFIG.API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const [statsRes, bookingsRes, usersRes] = await Promise.all([
-          fetch(`${apiBaseUrl}/api/admin/stats`),
-          fetch(`${apiBaseUrl}/api/bookings`),
-          fetch(`${apiBaseUrl}/api/users?limit=0`),
+          fetch(`${apiBaseUrl}/admin/stats`),
+          fetch(`${apiBaseUrl}/bookings`),
+          fetch(`${apiBaseUrl}/users?limit=0`),
         ]);
 
         const stats = await statsRes.json().catch(() => ({}));

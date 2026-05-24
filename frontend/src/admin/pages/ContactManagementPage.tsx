@@ -46,7 +46,7 @@ export function ContactManagementPage() {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/contact/admin`, {
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/contact/admin`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -78,7 +78,7 @@ export function ContactManagementPage() {
     if (!deleteConfirm) return;
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/contact/admin/${deleteConfirm._id}`, {
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/contact/admin/${deleteConfirm._id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

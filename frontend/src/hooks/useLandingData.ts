@@ -46,7 +46,7 @@ export const useLandingData = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/landing`);
       if (!response.ok) throw new Error('Failed to fetch landing data');
       const result = await response.json();
       setData(result);

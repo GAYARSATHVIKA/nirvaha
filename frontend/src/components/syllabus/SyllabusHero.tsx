@@ -17,7 +17,7 @@ const SyllabusHero: React.FC<SyllabusHeroProps> = ({ pathway, onStart, isEnrolle
     useEffect(() => {
         const fetchStudentCount = async () => {
             try {
-                const res = await axios.get(`${BACKEND_CONFIG.API_BASE_URL}/api/users/pathway/${pathway.id}/students`);
+                const res = await axios.get(`${BACKEND_CONFIG.API_URL}/users/pathway/${pathway.id}/students`);
                 setStudentCount(res.data.count);
             } catch (err) {
                 console.error("Failed to fetch student count", err);

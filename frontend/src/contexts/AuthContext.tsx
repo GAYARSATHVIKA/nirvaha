@@ -112,7 +112,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const token = localStorage.getItem("token");
     if (!token) return null;
     try {
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/auth/user`, {
+      const res = await fetch(`${BACKEND_CONFIG.API_URL}/auth/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -175,7 +175,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const token = localStorage.getItem("token");
       if (token) {
-        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/auth/logout`, {
+        await fetch(`${BACKEND_CONFIG.API_URL}/auth/logout`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -194,7 +194,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Helper to authenticate user ID token with the backend
   const authenticateWithBackend = async (idToken: string, name?: string) => {
-    const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/auth/firebase`, {
+    const res = await fetch(`${BACKEND_CONFIG.API_URL}/auth/firebase`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ idToken, name }),

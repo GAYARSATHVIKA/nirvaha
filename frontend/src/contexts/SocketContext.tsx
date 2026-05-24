@@ -129,7 +129,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const fetchContent = useCallback(async () => {
     try {
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content`);
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/content`);
       const data = await response.json();
       setContent(data);
     } catch (error) {

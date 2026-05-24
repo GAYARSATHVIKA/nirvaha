@@ -19,7 +19,7 @@ const DynamicImage: React.FC<DynamicImageProps> = ({
   const imageSrc = getContent(contentKey, defaultSrc);
   
   const fullSrc = imageSrc.startsWith('/uploads') 
-    ? `${BACKEND_CONFIG.API_BASE_URL}${imageSrc}`
+    ? `${BACKEND_CONFIG.SOCKET_URL}${imageSrc}`
     : imageSrc;
   
   return <img src={fullSrc} alt={alt} className={className} />;

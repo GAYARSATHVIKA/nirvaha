@@ -432,7 +432,7 @@ export function ProfilePage() {
   const fetchMySessions = useCallback(async () => {
     if (!user?.email) return;
     try {
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`);
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/bookings`);
       if (!response.ok) {
         console.warn('[PROFILE] Failed to fetch my sessions:', response.status);
         setUserBookings([]);
@@ -457,7 +457,7 @@ export function ProfilePage() {
     if (!user?.email && !user?.name) return;
     setCompanionBookingsLoading(true);
     try {
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`);
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/bookings`);
       if (!response.ok) {
         setCompanionBookings([]);
         return;
@@ -485,7 +485,7 @@ export function ProfilePage() {
     try {
       const idField = bookingId;
       const response = await fetch(
-        `${BACKEND_CONFIG.API_BASE_URL}/api/bookings/${idField}/status`,
+        `${BACKEND_CONFIG.API_URL}/bookings/${idField}/status`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -841,7 +841,7 @@ export function ProfilePage() {
     const loadProfile = async () => {
       const token = localStorage.getItem('token');
       try {
-        const profRes = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/users/profile?userId=${user.id}`, {
+        const profRes = await fetch(`${BACKEND_CONFIG.API_URL}/users/profile?userId=${user.id}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -863,7 +863,7 @@ export function ProfilePage() {
     const doDailyCheckin = async () => {
       const token = localStorage.getItem('token');
       try {
-        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/daily-checkin`, {
+        await fetch(`${BACKEND_CONFIG.API_URL}/profile/daily-checkin`, {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
           body: JSON.stringify({ userId: user.id })
@@ -882,7 +882,7 @@ export function ProfilePage() {
     const uid = user?.id;
     if (!uid) return;
     try {
-      await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/mood`, {
+      await fetch(`${BACKEND_CONFIG.API_URL}/profile/mood`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: JSON.stringify({ userId: uid, mood: mood.label })
@@ -917,7 +917,7 @@ export function ProfilePage() {
     reader.onloadend = async () => {
       const base64 = reader.result as string;
       try {
-        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/users/profile/update`, {
+        const res = await fetch(`${BACKEND_CONFIG.API_URL}/users/profile/update`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId: user?.id, avatar: base64 })

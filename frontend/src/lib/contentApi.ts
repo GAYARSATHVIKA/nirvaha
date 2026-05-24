@@ -7,8 +7,7 @@ type ApiError = {
   error?: string;
 };
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || BACKEND_CONFIG.API_BASE_URL;
+const API_BASE_URL = BACKEND_CONFIG.API_URL;
 
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -73,11 +72,11 @@ export type MeditationPayload = Omit<MeditationItem, "id" | "createdAt" | "updat
 export type SoundPayload = Omit<SoundItem, "id" | "createdAt" | "updatedAt">;
 
 export async function getMeditations(): Promise<MeditationItem[]> {
-  return requestJson<MeditationItem[]>("/api/meditations", { method: "GET" });
+  return requestJson<MeditationItem[]>("/meditations", { method: "GET" });
 }
 
 export async function createMeditation(payload: MeditationPayload): Promise<MeditationItem> {
-  return requestJson<MeditationItem>("/api/meditations", {
+  return requestJson<MeditationItem>("/meditations", {
     method: "POST",
     body: JSON.stringify(payload),
   });
@@ -87,34 +86,34 @@ export async function updateMeditation(
   id: string,
   payload: MeditationPayload
 ): Promise<MeditationItem> {
-  return requestJson<MeditationItem>(`/api/meditations/${id}`, {
+  return requestJson<MeditationItem>(`/meditations/${id}`, {
     method: "PUT",
     body: JSON.stringify(payload),
   });
 }
 
 export async function deleteMeditation(id: string): Promise<void> {
-  await requestJson<void>(`/api/meditations/${id}`, { method: "DELETE" });
+  await requestJson<void>(`/meditations/${id}`, { method: "DELETE" });
 }
 
 export async function getSounds(): Promise<SoundItem[]> {
-  return requestJson<SoundItem[]>("/api/sounds", { method: "GET" });
+  return requestJson<SoundItem[]>("/sounds", { method: "GET" });
 }
 
 export async function createSound(payload: SoundPayload): Promise<SoundItem> {
-  return requestJson<SoundItem>("/api/sounds", {
+  return requestJson<SoundItem>("/sounds", {
     method: "POST",
     body: JSON.stringify(payload),
   });
 }
 
 export async function updateSound(id: string, payload: SoundPayload): Promise<SoundItem> {
-  return requestJson<SoundItem>(`/api/sounds/${id}`, {
+  return requestJson<SoundItem>(`/sounds/${id}`, {
     method: "PUT",
     body: JSON.stringify(payload),
   });
 }
 
 export async function deleteSound(id: string): Promise<void> {
-  await requestJson<void>(`/api/sounds/${id}`, { method: "DELETE" });
+  await requestJson<void>(`/sounds/${id}`, { method: "DELETE" });
 }

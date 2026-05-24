@@ -623,7 +623,7 @@ export function SoundHealingPage() {
       const minutes = Math.max(1, Math.round(listenedSeconds / 60));
       
       try {
-        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-sound-session`, {
+        const res = await fetch(`${BACKEND_CONFIG.API_URL}/profile/log-sound-session`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -2097,7 +2097,7 @@ function DynamicSoundSessions({ onPlay, isTrackSaved, handleSaveToggle }: { onPl
   };
 
   useEffect(() => {
-    fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/sounds`)
+    fetch(`${BACKEND_CONFIG.API_URL}/sounds`)
       .then(res => res.json())
       .then(data => {
         setSessions(data);

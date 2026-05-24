@@ -47,7 +47,7 @@ export function SuccessStoriesManager() {
   const fetchStories = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/success-stories`);
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/success-stories`);
       
       if (!response.ok) {
         setStories([]);
@@ -83,7 +83,7 @@ export function SuccessStoriesManager() {
   const handleDeleteStory = async (id?: string) => {
     if (!id || !confirm('Are you sure you want to delete this story?')) return;
     try {
-      await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/success-stories/${id}`, { method: 'DELETE' });
+      await fetch(`${BACKEND_CONFIG.API_URL}/success-stories/${id}`, { method: 'DELETE' });
       fetchStories();
       setSaveMessage({ type: 'success', text: 'Story deleted successfully' });
       setTimeout(() => setSaveMessage(null), 3000);
@@ -130,7 +130,7 @@ export function SuccessStoriesManager() {
         const formData = new FormData();
         formData.append('file', imageFile);
 
-        const uploadRes = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/upload`, {
+        const uploadRes = await fetch(`${BACKEND_CONFIG.API_URL}/upload`, {
           method: 'POST',
           body: formData
         });
@@ -140,7 +140,7 @@ export function SuccessStoriesManager() {
         }
 
         const uploadData = await uploadRes.json();
-        finalImageUrl = `${BACKEND_CONFIG.API_BASE_URL}${uploadData.url}`;
+        finalImageUrl = `${BACKEND_CONFIG.SOCKET_URL}${uploadData.url}`;
       }
 
       // 2. Save the story data
@@ -150,7 +150,7 @@ export function SuccessStoriesManager() {
       };
 
       const method = storyToSave._id ? 'PUT' : 'POST';
-      const url = storyToSave._id ? `${BACKEND_CONFIG.API_BASE_URL}/api/success-stories/${storyToSave._id}` : `${BACKEND_CONFIG.API_BASE_URL}/api/success-stories`;
+      const url = storyToSave._id ? `${BACKEND_CONFIG.API_URL}/success-stories/${storyToSave._id}` : `${BACKEND_CONFIG.API_URL}/success-stories`;
       
       const response = await fetch(url, {
         method,
@@ -194,7 +194,7 @@ export function SuccessStoriesManager() {
 
     // Update order in backend
     try {
-      await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/success-stories/reorder`, {
+      await fetch(`${BACKEND_CONFIG.API_URL}/success-stories/reorder`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -76,7 +76,7 @@ export function BookingManagementPage() {
   const fetchBookings = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`);
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/bookings`);
       if (!response.ok) {
         throw new Error("Unable to load bookings");
       }
@@ -316,7 +316,7 @@ export function BookingManagementPage() {
         console.log("[ADMIN-BOOKING] Approving with companionId:", confirmAction.booking.companionId);
       }
       
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings/${confirmAction.booking.id}/status`, {
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/bookings/${confirmAction.booking.id}/status`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Navigation } from '../components/Navigation';
 import { DashboardFooter } from '../components/dashboard/DashboardFooter';
+import { CertificationHero } from '../components/academy/CertificationHero';
 
 // --- Programs Data ---
 const programs = [
@@ -41,17 +42,17 @@ const programs = [
 ];
 
 const programCardStyles = [
-    'bg-gradient-to-br from-[#f5f5f5] to-[#fffde4]',
-    'bg-gradient-to-br from-[#fceabb] to-[#f8b500]/30',
-    'bg-gradient-to-br from-[#f8ffae] to-[#888888]/30',
-    'bg-gradient-to-br from-[#e0c3fc] to-[#8ec5fc]/40',
+    'bg-white/[0.02] border-white/[0.06] hover:border-emerald-500/30 text-white shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300',
+    'bg-white/[0.02] border-white/[0.06] hover:border-teal-500/30 text-white shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300',
+    'bg-white/[0.02] border-white/[0.06] hover:border-emerald-500/30 text-white shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300',
+    'bg-white/[0.02] border-white/[0.06] hover:border-teal-500/30 text-white shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300',
 ];
 
 // --- Impact Skills ---
 const impactSkills = [
     {
         icon: (
-            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-[#333333]">
+            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-emerald-400">
                 <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5" />
                 <path d="M24 14l4 6h-8l4-6z M18 26h12 M20 30h8 M24 34v-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 <circle cx="16" cy="18" r="2" stroke="currentColor" strokeWidth="1" />
@@ -65,7 +66,7 @@ const impactSkills = [
     },
     {
         icon: (
-            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-[#333333]">
+            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-emerald-400">
                 <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5" />
                 <rect x="18" y="14" width="3" height="20" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
                 <rect x="23" y="18" width="3" height="16" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
@@ -77,7 +78,7 @@ const impactSkills = [
     },
     {
         icon: (
-            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-[#333333]">
+            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-emerald-400">
                 <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5" />
                 <circle cx="24" cy="20" r="6" stroke="currentColor" strokeWidth="1.5" />
                 <path d="M18 34c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -89,7 +90,7 @@ const impactSkills = [
     },
     {
         icon: (
-            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-[#333333]">
+            <svg viewBox="0 0 48 48" fill="none" className="w-12 h-12 text-emerald-400">
                 <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5" />
                 <path d="M14 28h6l2-4 4 8 4-12 3 8h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -99,100 +100,23 @@ const impactSkills = [
     },
 ];
 
-
 // --- Tags ---
 const tags = ['Skill-Focused', 'Assessment-Based', 'Industry Relevant', 'No Prior Expertise Needed'];
 
 const NirvahaAcademyPage: React.FC = () => {
-    
-
     return (
-        <div className="min-h-screen bg-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
-            <Navigation currentPage="academy" />
+        <div className="min-h-screen bg-[#050806] text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <Navigation currentPage="academy" theme="dark" />
 
             {/* ===== HERO SECTION ===== */}
-            <section className="relative overflow-hidden bg-white border-b border-gray-100">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-                    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-                        {/* Left */}
-                        <div className="flex-1">
-                            <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.7 }}
-                                className="text-4xl sm:text-5xl lg:text-[3.2rem] font-bold text-[#0F131A] mb-4 leading-tight"
-                                style={{ fontFamily: "'Cinzel', serif" }}
-                            >
-                                Nirvaha Academy
-                            </motion.h1>
-                            <motion.h2
-                                initial={{ opacity: 0, y: 16 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.7, delay: 0.1 }}
-                                className="text-xl sm:text-2xl font-semibold text-[#0F131A] mb-4"
-                            >
-                                Mental Performance & Reasoning Certifications
-                            </motion.h2>
-                            <motion.p
-                                initial={{ opacity: 0, y: 14 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.7, delay: 0.2 }}
-                                className="text-[#595e67] text-base sm:text-lg mb-8 leading-relaxed font-light"
-                            >
-                                Programs to enhance reasoning clarity, attention stability, and professional thinking for modern decision environments.
-                            </motion.p>
-                            <motion.div
-                                initial={{ opacity: 0, y: 12 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.7, delay: 0.3 }}
-                                className="flex flex-wrap gap-4"
-                            >
-                                <a
-                                    href="#programs"
-                                    className="px-7 py-3 rounded-lg bg-[#333333] text-white font-semibold text-sm shadow hover:bg-[#222222] transition-all"
-                                >
-                                    Explore Programs
-                                </a>
-                                <a
-                                    href="#impact"
-                                    className="px-7 py-3 rounded-lg bg-white text-[#0F131A] font-semibold text-sm border border-gray-300 hover:border-[#333333] hover:text-[#333333] transition-all"
-                                >
-                                    View Certification Framework
-                                </a>
-                            </motion.div>
-                        </div>
-                        {/* Right — Hero Image */}
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 1, delay: 0.3 }}
-                            className="flex-1 flex items-center justify-center"
-                        >
-                            <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-[#e2e8f0]">
-                                <motion.img
-                                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80"
-                                    alt="Nirvaha Academy - students collaborating"
-                                    className="w-full h-72 sm:h-96 object-cover"
-                                    whileHover={{ scale: 1.05 }}
-                                    transition={{ duration: 0.6, ease: "easeOut" }}
-                                    onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                                        (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Nirvaha+Academy&background=1a5d47&color=ffffff&bold=true&size=600';
-                                    }}
-                                />
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#333333]/30 to-transparent pointer-events-none" />
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
+            <CertificationHero />
 
             {/* ===== TAGS BAR ===== */}
-            <section className="border-b border-gray-100 bg-white">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
-                    <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+            <section className="border-b border-white/5 bg-[#050806]/85 backdrop-blur-md">
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
                         {tags.map((tag, i) => (
-                            <span key={i} className="text-sm text-[#595e67] font-medium tracking-wide">
+                            <span key={i} className="text-sm text-emerald-100/50 font-medium tracking-widest uppercase">
                                 {tag}
                             </span>
                         ))}
@@ -201,73 +125,77 @@ const NirvahaAcademyPage: React.FC = () => {
             </section>
 
             {/* ===== OUR PROGRAMS ===== */}
-            <section id="programs" className="bg-white py-16 lg:py-24">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            <section id="programs" className="bg-[#050806] py-20 lg:py-32 relative">
+                {/* Subtle background glow */}
+                <div className="absolute top-[20%] left-[-10%] w-[35vw] h-[35vw] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.06),transparent_70%)] pointer-events-none z-0" />
+                
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false }}
                         transition={{ duration: 0.7 }}
-                        className="text-3xl sm:text-4xl font-bold text-[#0F131A] mb-12"
+                        className="text-4xl sm:text-5xl font-extrabold text-white mb-16 tracking-wider"
                         style={{ fontFamily: "'Cinzel', serif" }}
                     >
                         Our Programs
                     </motion.h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                         {programs.map((program, idx) => (
-                                <motion.a
-                                    key={idx}
-                                    href={program.videoUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                    viewport={{ once: false, margin: "-50px" }}
-                                    transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-                                    whileHover={{ scale: 1.03, y: -4 }}
-                                    className={`relative group rounded-xl border border-[#e2e8f0] flex flex-col sm:flex-row items-stretch overflow-hidden shadow-lg cursor-pointer no-underline ${programCardStyles[idx % programCardStyles.length]}`}
-                                    style={{ minHeight: 200, display: 'flex' }}
-                                >
-                                    {/* Image holder */}
-                                    <div className="sm:w-2/5 w-full h-44 sm:h-auto flex items-center justify-center bg-white/30 overflow-hidden">
-                                        <motion.img
-                                            src={program.image}
-                                            alt={program.title}
-                                            className="object-cover w-full h-full"
-                                            whileHover={{ scale: 1.1 }}
-                                            transition={{ duration: 0.6, ease: "easeOut" }}
-                                            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                                                (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(program.title)}&background=ffffff&color=1a5d47&bold=true&size=300`;
-                                            }}
-                                        />
+                            <motion.a
+                                key={idx}
+                                href={program.videoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: false, margin: "-50px" }}
+                                transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+                                whileHover={{ scale: 1.02, y: -4 }}
+                                className={`relative group rounded-2xl border flex flex-col sm:flex-row items-stretch overflow-hidden cursor-pointer no-underline ${programCardStyles[idx % programCardStyles.length]}`}
+                                style={{ minHeight: 220 }}
+                            >
+                                {/* Image holder */}
+                                <div className="sm:w-2/5 w-full h-48 sm:h-auto flex items-center justify-center bg-white/[0.02] overflow-hidden relative">
+                                    <motion.img
+                                        src={program.image}
+                                        alt={program.title}
+                                        className="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition-all duration-700"
+                                        whileHover={{ scale: 1.08 }}
+                                        transition={{ duration: 0.6, ease: "easeOut" }}
+                                        onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(program.title)}&background=060a08&color=10b981&bold=true&size=300`;
+                                        }}
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#050806]/40 pointer-events-none" />
+                                </div>
+                                {/* Content */}
+                                <div className="flex-1 p-6 flex flex-col justify-between">
+                                    <div>
+                                        <h3 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors drop-shadow-sm">
+                                            {program.title}
+                                        </h3>
+                                        <p className="text-emerald-100/60 text-sm leading-relaxed mb-4">
+                                            {program.description}
+                                        </p>
                                     </div>
-                                    {/* Content */}
-                                    <div className="flex-1 p-5 flex flex-col justify-between">
-                                        <div>
-                                            <h3 className="text-xl md:text-2xl font-semibold text-[#333333] mb-2 drop-shadow-sm">
-                                                {program.title}
-                                            </h3>
-                                            <p className="text-gray-700 text-sm leading-relaxed mb-3">
-                                                {program.description}
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center gap-2 flex-wrap">
-                                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#f5f5f5] to-[#333333]/20 text-[#333333] border border-[#333333]/30">
-                                                <svg className="w-4 h-4 mr-1 text-[#333333]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
-                                                <span className="uppercase tracking-wide">Feel:</span>&nbsp;{program.feel}
-                                            </span>
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                        <span className="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-semibold bg-emerald-950/60 text-emerald-300 border border-emerald-800/30">
+                                            <svg className="w-4 h-4 mr-1 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l2 2" /></svg>
+                                            <span className="uppercase tracking-widest text-[9px] font-bold">FEEL:</span>&nbsp;{program.feel}
+                                        </span>
+                                    </div>
+                                </div>
+                                {/* Hover CTA overlay */}
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div className="opacity-0 group-hover:opacity-100 pointer-events-auto flex items-center justify-center transition-all duration-300 w-full h-full">
+                                        <div className="backdrop-blur-md bg-[#050806]/85 rounded-2xl flex items-center justify-center w-full h-full absolute z-0 transition-all duration-300" />
+                                        <div className="relative z-10 px-8 py-3.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-bold shadow-[0_0_20px_rgba(16,185,129,0.3)] border border-white/10 hover:scale-105 transition-all duration-300">
+                                            {program.cta} <ArrowRight className="w-4 h-4 inline ml-1" />
                                         </div>
                                     </div>
-                                    {/* Hover CTA overlay */}
-                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                        <div className="opacity-0 group-hover:opacity-100 pointer-events-auto flex items-center justify-center transition-all duration-300 w-full h-full">
-                                            <div className="backdrop-blur-md bg-white/60 rounded-2xl flex items-center justify-center w-full h-full absolute z-0 transition-all duration-300" />
-                                            <div className="relative z-10 px-8 py-3 rounded-full bg-white/80 backdrop-blur-lg text-[#333333] text-lg font-bold shadow-2xl border border-[#333333]/10 transition-all duration-300">
-                                                {program.cta} <ArrowRight className="w-4 h-4 inline ml-1" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </motion.a>
+                                </div>
+                            </motion.a>
                         ))}
                     </div>
                 </div>
@@ -275,13 +203,15 @@ const NirvahaAcademyPage: React.FC = () => {
 
             {/* ===== DIVIDER ===== */}
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                <hr className="border-gray-200" />
+                <hr className="border-white/5" />
             </div>
 
             {/* ===== WHY NIRVAHA ACADEMY EXISTS ===== */}
-            <section className="bg-white py-16 lg:py-20">
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+            <section className="bg-[#050806] py-20 lg:py-28 relative">
+                <div className="absolute bottom-[10%] right-[-10%] w-[30vw] h-[30vw] rounded-full bg-[radial-gradient(circle,rgba(20,184,166,0.05),transparent_70%)] pointer-events-none z-0" />
+                
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
                         {/* Left image */}
                         <motion.div
                             initial={{ opacity: 0, x: -40 }}
@@ -290,15 +220,15 @@ const NirvahaAcademyPage: React.FC = () => {
                             transition={{ duration: 0.7 }}
                             className="flex-1 w-full"
                         >
-                            <div className="rounded-2xl overflow-hidden shadow-xl border border-[#e2e8f0] bg-gradient-to-br from-[#f5f5f5]/40 to-[#f8ffae]/30">
+                            <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/5 bg-gradient-to-br from-white/[0.01] to-emerald-950/20">
                                 <motion.img
                                     src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80"
                                     alt="Professional thinking and reasoning"
-                                    className="w-full h-56 sm:h-72 object-cover"
+                                    className="w-full h-64 sm:h-80 object-cover opacity-80"
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 0.6, ease: "easeOut" }}
                                     onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                                        (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Why+Academy&background=1a5d47&color=ffffff&bold=true&size=500';
+                                        (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=Why+Academy&background=060a08&color=10b981&bold=true&size=500';
                                     }}
                                 />
                             </div>
@@ -310,7 +240,7 @@ const NirvahaAcademyPage: React.FC = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: false }}
                                 transition={{ duration: 0.7 }}
-                                className="text-3xl sm:text-4xl font-bold text-[#0F131A] mb-5"
+                                className="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-wide"
                                 style={{ fontFamily: "'Cinzel', serif" }}
                             >
                                 Why Nirvaha Academy Exists
@@ -320,7 +250,7 @@ const NirvahaAcademyPage: React.FC = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: false }}
                                 transition={{ duration: 0.7, delay: 0.15 }}
-                                className="text-[#595e67] text-base sm:text-lg font-light leading-relaxed"
+                                className="text-emerald-100/60 text-base sm:text-lg font-light leading-relaxed"
                             >
                                 Building the core thinking skills essential for navigating complexity, distraction, and uncertainty in today's work environment.
                             </motion.p>
@@ -331,18 +261,18 @@ const NirvahaAcademyPage: React.FC = () => {
 
             {/* ===== DIVIDER ===== */}
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                <hr className="border-gray-200" />
+                <hr className="border-white/5" />
             </div>
 
             {/* ===== DESIGNED FOR PROFESSIONAL IMPACT ===== */}
-            <section id="impact" className="bg-white py-16 lg:py-20">
+            <section id="impact" className="bg-[#050806] py-20 lg:py-28">
                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false }}
                         transition={{ duration: 0.7 }}
-                        className="text-3xl sm:text-4xl font-bold text-[#0F131A] mb-4"
+                        className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-wide"
                         style={{ fontFamily: "'Cinzel', serif" }}
                     >
                         Designed for Professional Impact
@@ -352,7 +282,7 @@ const NirvahaAcademyPage: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false }}
                         transition={{ duration: 0.7, delay: 0.1 }}
-                        className="text-[#595e67] text-base sm:text-lg max-w-3xl mx-auto mb-14 font-light leading-relaxed"
+                        className="text-emerald-100/60 text-base sm:text-lg max-w-3xl mx-auto mb-16 font-light leading-relaxed"
                     >
                         Certifications to enhance structured thinking, bias awareness, and communication precision.
                     </motion.p>
@@ -365,27 +295,27 @@ const NirvahaAcademyPage: React.FC = () => {
                                 viewport={{ once: false }}
                                 transition={{ duration: 0.5, delay: idx * 0.12 }}
                                 whileHover={{ y: -6, scale: 1.03 }}
-                                className="flex flex-col items-center gap-3 group"
+                                className="flex flex-col items-center gap-4 group"
                             >
-                                <div className="relative w-full rounded-xl overflow-hidden shadow-md border border-[#e2e8f0] bg-white">
+                                <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/5 bg-white/5">
                                     <motion.img
                                         src={skill.image}
                                         alt={skill.label}
-                                        className="w-full h-36 sm:h-44 object-cover"
-                                        whileHover={{ scale: 1.1 }}
+                                        className="w-full h-36 sm:h-44 object-cover opacity-75 group-hover:opacity-90 transition-all duration-700"
+                                        whileHover={{ scale: 1.08 }}
                                         transition={{ duration: 0.6, ease: "easeOut" }}
                                         onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(skill.label)}&background=1a5d47&color=ffffff&bold=true&size=300`;
+                                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(skill.label)}&background=060a08&color=10b981&bold=true&size=300`;
                                         }}
                                     />
                                     {/* Gradient overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F131A]/50 to-transparent pointer-events-none" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#050806]/80 to-transparent pointer-events-none" />
                                     {/* Icon badge */}
-                                    <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
+                                    <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm rounded-full p-2.5 shadow-lg border border-white/10 text-emerald-400">
                                         {skill.icon}
                                     </div>
                                 </div>
-                                <span className="text-sm text-[#0F131A] font-medium text-center leading-snug">
+                                <span className="text-sm text-emerald-100 font-semibold text-center leading-snug tracking-wide group-hover:text-emerald-400 transition-colors">
                                     {skill.label}
                                 </span>
                             </motion.div>
@@ -395,14 +325,16 @@ const NirvahaAcademyPage: React.FC = () => {
             </section>
 
             {/* ===== CONTACT / QUERIES ===== */}
-            <section className="bg-[#f7fafc] py-16 lg:py-20 border-t border-gray-100">
-                <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="bg-[#070b09] py-20 lg:py-28 border-t border-white/5 relative">
+                <div className="absolute top-0 left-[40%] w-[25vw] h-[25vw] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.04),transparent_70%)] pointer-events-none z-0" />
+                
+                <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false }}
                         transition={{ duration: 0.7 }}
-                        className="text-3xl sm:text-4xl font-bold text-[#0F131A] mb-4 text-center"
+                        className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center tracking-wide"
                         style={{ fontFamily: "'Cinzel', serif" }}
                     >
                         Questions or Queries?
@@ -412,35 +344,35 @@ const NirvahaAcademyPage: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: false }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-[#595e67] text-base sm:text-lg text-center max-w-2xl mx-auto font-light"
+                        className="text-emerald-100/60 text-base sm:text-lg text-center max-w-2xl mx-auto font-light leading-relaxed"
                     >
                         If you'd like to learn more about a program, have specific queries, or need help choosing the right certification, reach out — we're here to help.
                     </motion.p>
 
-                    <form className="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-4">
+                    <form className="mt-10 max-w-3xl mx-auto grid grid-cols-1 gap-5">
                         <input
                             type="text"
                             name="name"
                             placeholder="Your name"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#333333]/30 outline-none"
+                            className="w-full px-4 py-3.5 rounded-lg border border-white/5 bg-white/[0.02] text-white focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500/50 outline-none placeholder:text-emerald-100/30 transition-all"
                         />
                         <input
                             type="email"
                             name="email"
                             placeholder="Email address"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#333333]/30 outline-none"
+                            className="w-full px-4 py-3.5 rounded-lg border border-white/5 bg-white/[0.02] text-white focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500/50 outline-none placeholder:text-emerald-100/30 transition-all"
                         />
                         <textarea
                             name="message"
                             placeholder="How can we help?"
                             rows={5}
-                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#333333]/30 outline-none resize-none"
+                            className="w-full px-4 py-3.5 rounded-lg border border-white/5 bg-white/[0.02] text-white focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500/50 outline-none resize-none placeholder:text-emerald-100/30 transition-all"
                         />
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mt-4">
                             <button
                                 type="button"
                                 onClick={() => window.location.href = 'mailto:hello@nirvaha.org'}
-                                className="px-6 py-3 rounded-lg bg-[#333333] text-white font-semibold shadow hover:bg-[#222222] transition-all"
+                                className="px-8 py-3.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:scale-105"
                             >
                                 Contact Us
                             </button>

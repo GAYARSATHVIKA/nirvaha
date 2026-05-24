@@ -421,7 +421,7 @@ const MeditationVariant = ({ onClose, actionName }: { onClose: () => void, actio
         if (!hasLogged && user?.id) {
             setHasLogged(true);
             try {
-                await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-session`, {
+                await fetch(`${BACKEND_CONFIG.API_URL}/profile/log-session`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token')}` },
                     body: JSON.stringify({ userId: user.id, duration: 0, title: actionName, category: "Wellness" })
@@ -465,7 +465,7 @@ const MeditationVariant = ({ onClose, actionName }: { onClose: () => void, actio
         if (timeLeft === 0 && isActive) {
             setIsActive(false);
             if (user?.id) {
-                fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-session`, {
+                fetch(`${BACKEND_CONFIG.API_URL}/profile/log-session`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token')}` },
                     body: JSON.stringify({ userId: user.id, duration: 5, title: actionName, category: "Wellness" })
@@ -535,7 +535,7 @@ const HealingVariant = ({ onClose, isPlaying, setIsPlaying, actionName, audioSrc
     useEffect(() => {
         if (isPlaying && !hasLogged && user?.id) {
             setHasLogged(true);
-            fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-sound-session`, {
+            fetch(`${BACKEND_CONFIG.API_URL}/profile/log-sound-session`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token')}` },
                 body: JSON.stringify({ userId: user.id, duration: 0, title: actionName, category: "Wellness" })
@@ -561,7 +561,7 @@ const HealingVariant = ({ onClose, isPlaying, setIsPlaying, actionName, audioSrc
             sp(false);
             setProgress(0);
             if (u?.id) {
-                fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/log-sound-session`, {
+                fetch(`${BACKEND_CONFIG.API_URL}/profile/log-sound-session`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token')}` },
                     body: JSON.stringify({ userId: u.id, duration: Math.max(1, Math.round(audio.duration || 0) / 60), title: a, category: "Wellness" })

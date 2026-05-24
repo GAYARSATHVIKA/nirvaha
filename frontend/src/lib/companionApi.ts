@@ -5,8 +5,7 @@ type ApiError = {
   error?: string;
 };
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || BACKEND_CONFIG.API_BASE_URL;
+const API_BASE_URL = BACKEND_CONFIG.API_URL;
 
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -124,13 +123,13 @@ export async function getCompanionApplications(
   status?: "all" | "pending" | "approved" | "rejected"
 ): Promise<CompanionAdminItem[]> {
   const query = status && status !== "all" ? `?status=${status}` : "";
-  return requestJson<CompanionAdminItem[]>(`/api/companion/applications${query}`);
+  return requestJson<CompanionAdminItem[]>(`/companion/applications${query}`);
 }
 
 export async function getCompanionApplication(
   id: string
 ): Promise<CompanionApplication> {
-  return requestJson<CompanionApplication>(`/api/companion/applications/${id}`);
+  return requestJson<CompanionApplication>(`/companion/applications/${id}`);
 }
 
 export async function createCompanionApplication(
@@ -138,7 +137,7 @@ export async function createCompanionApplication(
 ): Promise<{ id: string; status: string; submittedAt?: string }>
 {
   return requestJson<{ id: string; status: string; submittedAt?: string }>(
-    "/api/companion/applications",
+    "/companion/applications",
     {
       method: "POST",
       body: JSON.stringify(payload),
@@ -150,7 +149,7 @@ export async function updateCompanionApplication(
   id: string,
   payload: Record<string, unknown>
 ): Promise<CompanionAdminItem> {
-  return requestJson<CompanionAdminItem>(`/api/companion/applications/${id}`,
+  return requestJson<CompanionAdminItem>(`/companion/applications/${id}`,
     {
       method: "PUT",
       body: JSON.stringify(payload),
@@ -162,7 +161,7 @@ export async function updateCompanionStatus(
   id: string,
   status: "pending" | "approved" | "rejected"
 ): Promise<CompanionAdminItem> {
-  return requestJson<CompanionAdminItem>(`/api/companion/applications/${id}/status`,
+  return requestJson<CompanionAdminItem>(`/companion/applications/${id}/status`,
     {
       method: "PATCH",
       body: JSON.stringify({ status }),
@@ -171,12 +170,12 @@ export async function updateCompanionStatus(
 }
 
 export async function deleteCompanionApplication(id: string): Promise<void> {
-  await requestJson<void>(`/api/companion/applications/${id}`, { method: "DELETE" });
+  await requestJson<void>(`/companion/applications/${id}`, { method: "DELETE" });
 }
 
 export async function getApprovedCompanions(): Promise<CompanionPublicItem[]> {
   const response = await requestJson<{ success: boolean; data: CompanionPublicItem[] }>(
-    "/api/companion"
+    "/companion"
   );
   return response.data || [];
 }
@@ -184,7 +183,7 @@ export async function getApprovedCompanions(): Promise<CompanionPublicItem[]> {
 export async function getCompanionSessions(status?: string): Promise<{ success: boolean; data: any[]; stats: any }> {
   const token = localStorage.getItem("token");
   const query = status ? `?status=${status}` : "";
-  return requestJson<{ success: boolean; data: any[]; stats: any }>(`/api/companion/sessions${query}`, {
+  return requestJson<{ success: boolean; data: any[]; stats: any }>(`/companion/sessions${query}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -197,7 +196,7 @@ export async function updateCompanionSessionStatus(
   sessionNotes?: string
 ): Promise<{ success: boolean; data: any }> {
   const token = localStorage.getItem("token");
-  return requestJson<{ success: boolean; data: any }>(`/api/companion/sessions/${bookingId}/status`, {
+  return requestJson<{ success: boolean; data: any }>(`/companion/sessions/${bookingId}/status`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,

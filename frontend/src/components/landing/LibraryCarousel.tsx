@@ -3,6 +3,63 @@ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import DecorativeShapes from './DecorativeShapes';
 
+const categoryThemes: Record<string, { accent: string; gradient: string; overlay: string; shadow: string }> = {
+    Transformation: {
+        accent: '#93d6ad',
+        gradient: 'linear-gradient(180deg, rgba(16, 62, 43, 0.85) 0%, rgba(12, 22, 15, 0.85) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 75%)',
+        shadow: '0 32px 90px rgba(32, 70, 51, 0.32)'
+    },
+    Purpose: {
+        accent: '#c8a8ff',
+        gradient: 'linear-gradient(180deg, rgba(44, 18, 72, 0.88) 0%, rgba(9, 10, 27, 0.88) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 80%)',
+        shadow: '0 32px 90px rgba(56, 24, 100, 0.32)'
+    },
+    Senses: {
+        accent: '#8fd6ff',
+        gradient: 'linear-gradient(180deg, rgba(11, 33, 45, 0.88) 0%, rgba(6, 13, 19, 0.88) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 75%)',
+        shadow: '0 32px 90px rgba(14, 49, 74, 0.32)'
+    },
+    Mind: {
+        accent: '#c8f1ff',
+        gradient: 'linear-gradient(180deg, rgba(13, 29, 44, 0.88) 0%, rgba(7, 13, 22, 0.88) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 70%)',
+        shadow: '0 32px 90px rgba(23, 63, 101, 0.3)'
+    },
+    Wisdom: {
+        accent: '#ffd38d',
+        gradient: 'linear-gradient(180deg, rgba(53, 38, 5, 0.92) 0%, rgba(8, 6, 3, 0.92) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.72) 70%)',
+        shadow: '0 32px 90px rgba(80, 56, 10, 0.28)'
+    },
+    Devotion: {
+        accent: '#ffb2d8',
+        gradient: 'linear-gradient(180deg, rgba(51, 8, 43, 0.9) 0%, rgba(9, 5, 18, 0.9) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 76%)',
+        shadow: '0 32px 90px rgba(85, 40, 76, 0.3)'
+    },
+    Ethics: {
+        accent: '#a8dcff',
+        gradient: 'linear-gradient(180deg, rgba(10, 27, 38, 0.9) 0%, rgba(6, 12, 18, 0.9) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 74%)',
+        shadow: '0 32px 90px rgba(19, 53, 86, 0.3)'
+    },
+    Guidance: {
+        accent: '#ffe294',
+        gradient: 'linear-gradient(180deg, rgba(59, 45, 9, 0.92) 0%, rgba(7, 6, 2, 0.92) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.68) 72%)',
+        shadow: '0 32px 90px rgba(94, 74, 15, 0.28)'
+    },
+    Discipline: {
+        accent: '#c4c8ff',
+        gradient: 'linear-gradient(180deg, rgba(11, 19, 41, 0.9) 0%, rgba(4, 8, 18, 0.9) 100%)',
+        overlay: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 74%)',
+        shadow: '0 32px 90px rgba(26, 38, 84, 0.28)'
+    }
+};
+
 const defaultLibraryItems = [
     { 
         id: "agni-the-sacred-fire",
@@ -79,9 +136,145 @@ const defaultLibraryItems = [
 ];
 
 
+type ItemPalette = {
+    accent: string;
+    accentRgb: string;
+    glow: string;
+    overlay: string;
+    border: string;
+    progress: string;
+    infoText: string;
+};
+
+function hexToRgb(hex: string) {
+    const clean = hex.replace('#', '');
+    const bigint = parseInt(clean, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r}, ${g}, ${b}`;
+}
+
+function rgbToHsl(r: number, g: number, b: number) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0, l = (max + min) / 2;
+    if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+    }
+    return { h, s, l };
+}
+
+function quantizeRgb(r: number, g: number, b: number) {
+    const step = 24;
+    return [Math.round(r / step) * step, Math.round(g / step) * step, Math.round(b / step) * step];
+}
+
+function isNeutralColor(r: number, g: number, b: number) {
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    return max - min < 30 || max > 240 && min > 220;
+}
+
+function derivePaletteFromColors(colors: Array<[number, number, number]>) {
+    if (!colors.length) {
+        return null;
+    }
+    const [primary, secondary] = colors;
+    const accentRgb = primary.join(', ');
+    return {
+        accent: `rgba(${accentRgb}, 0.86)`,
+        accentRgb,
+        glow: `rgba(${accentRgb}, 0.16)`,
+        overlay: `radial-gradient(circle at 15% 16%, rgba(${accentRgb},0.2), transparent 30%), linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.9))`,
+        border: `rgba(${accentRgb}, 0.24)`,
+        progress: `rgba(${accentRgb}, 0.72)`,
+        infoText: '#f8fafc',
+    } as ItemPalette;
+}
+
+async function extractPaletteFromImage(imageSrc: string): Promise<ItemPalette | null> {
+    return new Promise(resolve => {
+        const image = new Image();
+        image.crossOrigin = 'anonymous';
+        image.src = imageSrc;
+
+        image.onload = () => {
+            const width = 100;
+            const height = Math.round((image.height / image.width) * 100) || 100;
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                resolve(null);
+                return;
+            }
+            ctx.drawImage(image, 0, 0, width, height);
+            const data = ctx.getImageData(0, 0, width, height).data;
+            const buckets = new Map<string, { count: number; rgb: [number, number, number] }>();
+
+            for (let i = 0; i < data.length; i += 4) {
+                const alpha = data[i + 3];
+                if (alpha < 64) continue;
+                const [r, g, b] = quantizeRgb(data[i], data[i + 1], data[i + 2]);
+                if (isNeutralColor(r, g, b)) continue;
+                const key = `${r},${g},${b}`;
+                const bucket = buckets.get(key);
+                if (bucket) {
+                    bucket.count += 1;
+                } else {
+                    buckets.set(key, { count: 1, rgb: [r, g, b] });
+                }
+            }
+
+            const sorted = Array.from(buckets.values())
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 4);
+
+            if (!sorted.length) {
+                resolve(null);
+                return;
+            }
+
+            const colors = sorted.map(bucket => bucket.rgb);
+            const primary = colors[0];
+            const second = colors.find((rgb) => {
+                const hsl = rgbToHsl(...rgb);
+                return hsl.s > 0.14 && hsl.l > 0.13 && hsl.l < 0.88;
+            }) || colors[1] || colors[0];
+
+            resolve(derivePaletteFromColors([primary, second]));
+        };
+
+        image.onerror = () => resolve(null);
+    });
+}
+
+function fallbackPalette(theme: { accent: string; gradient: string; overlay: string; shadow: string }): ItemPalette {
+    const accentRgb = hexToRgb(theme.accent);
+    return {
+        accent: `rgba(${accentRgb}, 0.88)`,
+        accentRgb,
+        glow: `rgba(${accentRgb}, 0.16)`,
+        overlay: `linear-gradient(180deg, rgba(${accentRgb}, 0.12), rgba(0,0,0,0.88))`,
+        border: `rgba(${accentRgb}, 0.24)`,
+        progress: `rgba(${accentRgb}, 0.72)`,
+        infoText: '#f8fafc',
+    };
+}
+
 const LibraryCarousel: React.FC = () => {
     const navigate = useNavigate();
     const [libraryItems, setLibraryItems] = useState(defaultLibraryItems);
+    const [palettes, setPalettes] = useState<Record<string, ItemPalette>>({});
 
     // Load library items from localStorage
     useEffect(() => {
@@ -101,6 +294,30 @@ const LibraryCarousel: React.FC = () => {
             }
         }
     }, []);
+
+    // Generate palette values from each thumbnail image
+    useEffect(() => {
+        let active = true;
+
+        const loadPalettes = async () => {
+            const entries = await Promise.all(libraryItems.map(async (item) => {
+                const theme = categoryThemes[item.category] ?? categoryThemes.Mind;
+                const extracted = await extractPaletteFromImage(item.image);
+                const palette = extracted ?? fallbackPalette(theme);
+                return [item.id, palette] as const;
+            }));
+
+            if (!active) return;
+            setPalettes(Object.fromEntries(entries));
+        };
+
+        loadPalettes();
+        return () => { active = false; };
+    }, [libraryItems]);
+
+    // Alternate distribution for balanced, unique rows
+    const row1Items = libraryItems.filter((_, idx) => idx % 2 === 0);
+    const row2Items = libraryItems.filter((_, idx) => idx % 2 === 1);
 
     return (
         <section className="w-full pt-4 pb-12 bg-[#eaf5ef] overflow-hidden relative">
@@ -141,12 +358,16 @@ const LibraryCarousel: React.FC = () => {
             {/* Row 1 */}
             <div className="flex gap-6 mb-6 w-full overflow-hidden">
                 <div className="flex gap-6 pl-4 carousel-track-1 w-max">
-                    {[...libraryItems, ...libraryItems].map((item, idx) => (
+                    {[...row1Items, ...row1Items].map((item, idx) => {
+                        const theme = categoryThemes[item.category] ?? categoryThemes.Mind;
+                        const palette = palettes[item.id] ?? fallbackPalette(theme);
+                        return (
                         <motion.div
                             key={`r1-${idx}`}
                             whileHover={{ scale: 1.02, y: -5 }}
                             transition={{ duration: 0.3 }}
-                            className="relative flex-shrink-0 w-[425px] h-[225px] rounded-2xl overflow-hidden shadow-md cursor-pointer group"
+                            className="relative flex-shrink-0 w-[425px] h-[225px] rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
+                            style={{ boxShadow: `${theme.shadow}, 0 0 90px ${palette.glow}`, border: `1px solid ${palette.border}` }}
                             onClick={() => navigate(`/library/${item.id}`)}
                         >
                             <img
@@ -155,28 +376,40 @@ const LibraryCarousel: React.FC = () => {
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/e2e8f0/1a5d47?text=Nirvaha' }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <h3 className="text-white text-xl font-bold mb-1" style={{ fontFamily: "'Cinzel', serif" }}>{item.title}</h3>
-                                <div className="flex items-center gap-3">
-                                    <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">{item.category}</span>
-                                    <span className="w-1 h-1 bg-white/40 rounded-full" />
-                                    <span className="text-white/80 text-xs">{item.duration}</span>
+                            <div className="absolute inset-0" style={{ background: palette.overlay }} />
+                            <div className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-80" style={{ background: `radial-gradient(600px 400px at 14% 18%, rgba(${palette.accentRgb},0.18), rgba(0,0,0,0) 30%)` }} />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="mb-3 flex items-center justify-between gap-3">
+                                    <span className="inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] backdrop-blur-sm" style={{ background: `linear-gradient(90deg, rgba(${palette.accentRgb},0.18), rgba(${palette.accentRgb},0.06))`, border: `1px solid rgba(${palette.accentRgb},0.28)`, color: palette.infoText }}>
+                                        {item.category}
+                                    </span>
+                                    <span className="text-[11px] uppercase tracking-[0.35em] text-white/70" style={{ textShadow: `0 2px 8px rgba(${palette.accentRgb},0.2)` }}>{item.duration}</span>
                                 </div>
+                                <h3 className="text-white text-2xl font-bold leading-tight" style={{ fontFamily: "'Cinzel', serif" }}>{item.title}</h3>
+                            </div>
+                            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/80 to-transparent opacity-90" />
+                            <div className="absolute left-4 bottom-4 h-2 w-24 rounded-full overflow-hidden" aria-hidden>
+                                <div style={{ width: '36%', background: palette.progress }} className="h-full transition-all duration-500" />
                             </div>
                         </motion.div>
-                    ))}
+                    );
+                    })}
                 </div>
             </div>
 
             {/* Row 2 */}
             <div className="flex gap-6 w-full overflow-hidden">
                 <div className="flex gap-6 pl-4 carousel-track-2 w-max">
-                    {[...libraryItems].reverse().concat([...libraryItems].reverse()).map((item, idx) => (
+                    {[...row2Items].reverse().concat([...row2Items].reverse()).map((item, idx) => {
+                        const theme = categoryThemes[item.category] ?? categoryThemes.Mind;
+                        const palette = palettes[item.id] ?? fallbackPalette(theme);
+                        return (
                         <motion.div
                             key={`r2-${idx}`}
                             whileHover={{ scale: 1.02, y: -5 }}
                             transition={{ duration: 0.3 }}
-                            className="relative flex-shrink-0 w-[425px] h-[225px] rounded-2xl overflow-hidden shadow-md cursor-pointer group"
+                            className="relative flex-shrink-0 w-[425px] h-[225px] rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
+                            style={{ boxShadow: `${theme.shadow}, 0 0 90px ${palette.glow}`, border: `1px solid ${palette.border}` }}
                             onClick={() => navigate(`/library/${item.id}`)}
                         >
                             <img
@@ -185,16 +418,24 @@ const LibraryCarousel: React.FC = () => {
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/e2e8f0/1a5d47?text=Nirvaha' }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <h3 className="text-white text-xl font-bold mb-1" style={{ fontFamily: "'Cinzel', serif" }}>{item.title}</h3>
-                                <div className="flex items-center gap-3">
-                                    <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">{item.category}</span>
-                                    <span className="w-1 h-1 bg-white/40 rounded-full" />
-                                    <span className="text-white/80 text-xs">{item.duration}</span>
+                            <div className="absolute inset-0" style={{ background: palette.overlay }} />
+                            <div className="absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-80" style={{ background: `radial-gradient(600px 400px at 88% 86%, rgba(${palette.accentRgb},0.16), rgba(0,0,0,0) 28%)` }} />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent p-6 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="mb-3 flex items-center justify-between gap-3">
+                                    <span className="inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] backdrop-blur-sm" style={{ background: `linear-gradient(90deg, rgba(${palette.accentRgb},0.18), rgba(${palette.accentRgb},0.06))`, border: `1px solid rgba(${palette.accentRgb},0.28)`, color: palette.infoText }}>
+                                        {item.category}
+                                    </span>
+                                    <span className="text-[11px] uppercase tracking-[0.35em] text-white/70" style={{ textShadow: `0 2px 8px rgba(${palette.accentRgb},0.2)` }}>{item.duration}</span>
                                 </div>
+                                <h3 className="text-white text-2xl font-bold leading-tight" style={{ fontFamily: "'Cinzel', serif" }}>{item.title}</h3>
+                            </div>
+                            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/80 to-transparent opacity-90" />
+                            <div className="absolute left-4 bottom-4 h-2 w-24 rounded-full overflow-hidden" aria-hidden>
+                                <div style={{ width: '48%', background: palette.progress }} className="h-full transition-all duration-500" />
                             </div>
                         </motion.div>
-                    ))}
+                    );
+                    })}
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 import BACKEND_CONFIG from "@/config/backend";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || BACKEND_CONFIG.API_BASE_URL;
+const API_BASE_URL = BACKEND_CONFIG.API_URL;
 
 export interface BookingData {
   companionId?: string;
@@ -21,7 +21,7 @@ export interface BookingData {
 
 export const createBooking = async (bookingData: BookingData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/bookings`, {
+    const response = await fetch(`${API_BASE_URL}/bookings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export const createBooking = async (bookingData: BookingData) => {
 
 export const getBookings = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/bookings`);
+    const response = await fetch(`${API_BASE_URL}/bookings`);
     if (!response.ok) throw new Error('Failed to fetch bookings');
     return await response.json();
   } catch (error) {

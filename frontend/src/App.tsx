@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { SocketProvider } from './contexts/SocketContext';
 import BreathingPage from "./pages/BreathingPage";
 import LandingPage from './pages/LandingPage';
-import NirvahaAcademyPage from './pages/NirvahaAcademyPage';
 import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import StoriesPage from './pages/StoriesPage';
@@ -35,15 +34,10 @@ import PathwayJourney from './pages/PathwayJourney';
 import SyllabusPage from './pages/SyllabusPage';
 import LibraryDetailPage from './pages/LibraryDetailPage';
 import StoryDetailPage from './pages/StoryDetailPage';
+import CertificationsPage from './pages/CertificationsPage';
+import CoursesPage from './pages/CoursesPage';
+import CertificationDetailPage from './pages/CertificationDetailPage';
 
-import { FeaturesBentoGrid } from "./components/dashboard/FeaturesBentoGrid";
-import { CommonProblems } from "./components/dashboard/CommonProblems";
-import { CertificationsBanner } from "./components/dashboard/CertificationsBanner";
-import { WellnessOTT } from "./components/dashboard/WellnessOTT";
-import { GamingHubSection } from "./components/GamingHubSection";
-import { InspirationalQuotes } from "./components/dashboard/InspirationalQuotes";
-import { CaseStudies } from "./components/dashboard/CaseStudies";
-import { FAQSection } from "./components/dashboard/FAQSection";
 import { DashboardFooter } from "./components/dashboard/DashboardFooter";
 import { AdminLayout } from "./admin/layout/AdminLayout";
 import { AdminDashboardPage } from "./admin/pages/AdminDashboardPage";
@@ -62,6 +56,7 @@ import { ProductManagementPage } from "./admin/pages/ProductManagementPage";
 import { ContactManagementPage } from "./admin/pages/ContactManagementPage";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { SuccessStoriesManager } from "./components/admin/SuccessStoriesManager";
+import { EnrollmentManagementPage } from "./admin/pages/EnrollmentManagementPage";
 
 /**
  * Dashboard Routes Component
@@ -88,7 +83,9 @@ function AppInner() {
       <Routes>
         {/* Public Landing Page */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/academy" element={<NirvahaAcademyPage />} />
+        <Route path="/certifications" element={<CertificationsPage />} />
+        <Route path="/courses" element={<CoursesPage />} />
+        <Route path="/courses/:slug" element={<CertificationDetailPage />} />
         <Route path="/stories" element={<StoriesPage />} />
         <Route path="/success-story/:id" element={<SuccessStoryDetail />} />
         <Route path="/journey/:topicId" element={<JourneyPage />} />
@@ -143,6 +140,7 @@ function AppInner() {
           <Route path="settings" element={<SettingsPage />} />
           <Route path="users" element={<UserManagementPage />} />
           <Route path="success-stories" element={<SuccessStoriesManager />} />
+          <Route path="enrollments" element={<EnrollmentManagementPage />} />
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Route>
 

@@ -66,7 +66,7 @@ export function QuickAddButton() {
         }
       };
 
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items`, {
+      const res = await fetch(`${BACKEND_CONFIG.API_URL}/marketplace/items`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)

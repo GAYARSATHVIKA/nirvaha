@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Star, Quote } from 'lucide-react';
+import BACKEND_CONFIG from '@/config/backend';
 
 interface Story {
   _id: string;
@@ -29,7 +30,7 @@ export const CaseStudies = () => {
   const fetchStories = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/success-stories/display?limit=20', {
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/success-stories/display?limit=20`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       });

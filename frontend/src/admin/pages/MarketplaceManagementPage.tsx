@@ -346,9 +346,9 @@ export function MarketplaceManagementPage() {
   const load = async () => {
     try {
       const [bRes, mRes, iRes] = await Promise.allSettled([
-        fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`),
-        fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/requests`),
-        fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items?status=active`),
+        fetch(`${BACKEND_CONFIG.API_URL}/bookings`),
+        fetch(`${BACKEND_CONFIG.API_URL}/marketplace/requests`),
+        fetch(`${BACKEND_CONFIG.API_URL}/marketplace/items?status=active`),
       ]);
 
       let rawItems: any[] = [];
@@ -417,7 +417,7 @@ export function MarketplaceManagementPage() {
 
   useEffect(() => {
     load();
-    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL);
+    const socket = io(BACKEND_CONFIG.SOCKET_URL);
     socket.on("marketplace-new-request", load);
     socket.on("marketplace-request-approved", load);
     socket.on("booking-created", load);
@@ -462,14 +462,14 @@ export function MarketplaceManagementPage() {
       
       if (isBooking) {
         // Update booking status
-        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings/${id}`, {
+        await fetch(`${BACKEND_CONFIG.API_URL}/bookings/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ status: status === "approved" ? (reg.type === "retreat" ? "approved" : "upcoming") : status }),
         });
       } else {
         // Generic status update for other cases
-        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/requests/${id}`, {
+        await fetch(`${BACKEND_CONFIG.API_URL}/marketplace/requests/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ status }),

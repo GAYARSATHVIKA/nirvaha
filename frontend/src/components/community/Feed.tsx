@@ -42,7 +42,7 @@ export default function Feed({
     ));
 
     try {
-      await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/posts/${id}/like`, {
+      await fetch(`${BACKEND_CONFIG.API_URL}/posts/${id}/like`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ liked: isLiking })
@@ -70,7 +70,7 @@ export default function Feed({
     ));
 
     try {
-      await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/posts/${id}/comment`, {
+      await fetch(`${BACKEND_CONFIG.API_URL}/posts/${id}/comment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

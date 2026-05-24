@@ -66,7 +66,7 @@ export function ProductManagementPage() {
   const loadProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items/all`);
+      const res = await fetch(`${BACKEND_CONFIG.API_URL}/marketplace/items/all`);
       if (res.ok) {
         const data = await res.json();
         const prods = data.filter((i: any) => i.type === "product");
@@ -120,8 +120,8 @@ export function ProductManagementPage() {
   const handleSubmit = async () => {
     try {
       const url = editingProduct 
-        ? `${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items/${editingProduct.id || editingProduct._id}`
-        : `${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items`;
+        ? `${BACKEND_CONFIG.API_URL}/marketplace/items/${editingProduct.id || editingProduct._id}`
+        : `${BACKEND_CONFIG.API_URL}/marketplace/items`;
       
       const method = editingProduct ? "PUT" : "POST";
       
@@ -156,7 +156,7 @@ export function ProductManagementPage() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
     try {
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items/${id}`, {
+      const res = await fetch(`${BACKEND_CONFIG.API_URL}/marketplace/items/${id}`, {
         method: "DELETE"
       });
       if (res.ok) {

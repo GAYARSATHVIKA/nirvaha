@@ -174,7 +174,7 @@ export function ProfilePage() {
       if (!user?.id) return;
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile?userId=${user.id}`, {
+        const res = await fetch(`${BACKEND_CONFIG.API_URL}/users/profile?userId=${user.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -206,7 +206,7 @@ export function ProfilePage() {
     reader.onloadend = async () => {
       const base64 = reader.result as string;
       try {
-        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/profile/update`, {
+        const res = await fetch(`${BACKEND_CONFIG.API_URL}/users/profile/update`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId: user?.id, avatar: base64 })

@@ -11,6 +11,7 @@ import { InspirationalQuotes } from "../dashboard/InspirationalQuotes";
 import { CaseStudies } from "../dashboard/CaseStudies";
 import { FAQSection } from "../dashboard/FAQSection";
 import { DashboardFooter } from "../dashboard/DashboardFooter";
+import CertificationCoursesSection from "../landing/CertificationCoursesSection";
 
 export function DashboardPage() {
   const slides = [
@@ -97,6 +98,7 @@ export function DashboardPage() {
       <FeaturesBentoGrid />
       <CommonProblems />
       <WellnessOTT />
+      <CertificationCoursesSection />
       <InspirationalQuotes />
       <CaseStudies />
       <FAQSection />

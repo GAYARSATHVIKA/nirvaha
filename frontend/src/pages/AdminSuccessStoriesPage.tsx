@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, Save, X, Upload, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import BACKEND_CONFIG from '@/config/backend';
 
 interface Story {
   _id?: string;
@@ -50,7 +51,7 @@ export function AdminSuccessStoriesPage() {
     try {
       setLoading(true);
       // Replace with your backend API URL
-      const response = await fetch('/api/success-stories', {
+      const response = await fetch(`${BACKEND_CONFIG.API_URL}/success-stories`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -112,7 +113,7 @@ export function AdminSuccessStoriesPage() {
   const handleDeleteStory = async (id?: string) => {
     if (!id) return;
     try {
-      await fetch(`/api/success-stories/${id}`, { method: 'DELETE' });
+      await fetch(`${BACKEND_CONFIG.API_URL}/success-stories/${id}`, { method: 'DELETE' });
       fetchStories();
     } catch (error) {
       console.error('Error deleting story:', error);
@@ -139,7 +140,7 @@ export function AdminSuccessStoriesPage() {
     
     try {
       const method = editingStory._id ? 'PUT' : 'POST';
-      const url = editingStory._id ? `/api/success-stories/${editingStory._id}` : '/api/success-stories';
+      const url = editingStory._id ? `${BACKEND_CONFIG.API_URL}/success-stories/${editingStory._id}` : `${BACKEND_CONFIG.API_URL}/success-stories`;
       
       const response = await fetch(url, {
         method,

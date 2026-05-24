@@ -47,7 +47,7 @@ export function LandingManagementPage() {
   const fetchLandingData = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
+      const res = await fetch(`${BACKEND_CONFIG.API_URL}/landing`);
       if (res.ok) {
         const result = await res.json();
         setData(result);
@@ -64,7 +64,7 @@ export function LandingManagementPage() {
     try {
       setSaving(true);
       const token = localStorage.getItem('token');
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/admin/landing`, {
+      const res = await fetch(`${BACKEND_CONFIG.API_URL}/admin/landing`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

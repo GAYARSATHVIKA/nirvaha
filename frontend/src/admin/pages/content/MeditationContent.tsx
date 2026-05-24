@@ -173,7 +173,7 @@ export function MeditationContent() {
     }
     try {
       setIsUploading(true);
-      const base = BACKEND_CONFIG.API_BASE_URL;
+      const base = BACKEND_CONFIG.API_URL;
 
       let thumbnailUrl = formData.thumbnailUrl || "";
       let bannerUrl    = formData.bannerUrl    || "";
@@ -186,7 +186,7 @@ export function MeditationContent() {
         if (bannerFile)    fd.append("banner",    bannerFile);
         if (audioFile)     fd.append("audio",     audioFile);
 
-        const uploadRes = await fetch(`${base}/api/upload/media`, {
+        const uploadRes = await fetch(`${base}/upload/media`, {
           method: "POST",
           body: fd,
           // Do NOT set Content-Type — browser sets it with boundary automatically
