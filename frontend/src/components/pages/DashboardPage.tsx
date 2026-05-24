@@ -117,12 +117,9 @@ export function DashboardPage() {
       <CommonProblems />
       <WellnessRetreats />
       <WellnessOTT />
-<<<<<<< HEAD
       <CertificationCoursesSection />
-=======
       <ChakraSection />
       <HealingMusicSection />
->>>>>>> e818cd834e854a0163522278f3e2ed742c9574ec
       <InspirationalQuotes />
       <CaseStudies />
       <FAQSection />

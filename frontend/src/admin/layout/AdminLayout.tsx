@@ -17,11 +17,8 @@ import {
   FileText,
   Palette,
   MessageSquare,
-<<<<<<< HEAD
   GraduationCap,
-=======
   Compass,
->>>>>>> e818cd834e854a0163522278f3e2ed742c9574ec
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
