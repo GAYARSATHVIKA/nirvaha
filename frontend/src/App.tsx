@@ -34,9 +34,14 @@ import PathwayJourney from './pages/PathwayJourney';
 import SyllabusPage from './pages/SyllabusPage';
 import LibraryDetailPage from './pages/LibraryDetailPage';
 import StoryDetailPage from './pages/StoryDetailPage';
+<<<<<<< HEAD
 import CertificationsPage from './pages/CertificationsPage';
 import CoursesPage from './pages/CoursesPage';
 import CertificationDetailPage from './pages/CertificationDetailPage';
+=======
+import ChakraExperiencePage from './pages/ChakraExperiencePage';
+import HealingMusicPage from './pages/HealingMusicPage';
+>>>>>>> e818cd834e854a0163522278f3e2ed742c9574ec
 
 import { DashboardFooter } from "./components/dashboard/DashboardFooter";
 import { AdminLayout } from "./admin/layout/AdminLayout";
@@ -56,7 +61,11 @@ import { ProductManagementPage } from "./admin/pages/ProductManagementPage";
 import { ContactManagementPage } from "./admin/pages/ContactManagementPage";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { SuccessStoriesManager } from "./components/admin/SuccessStoriesManager";
+<<<<<<< HEAD
 import { EnrollmentManagementPage } from "./admin/pages/EnrollmentManagementPage";
+=======
+import { WellnessRetreatsManager } from "./components/admin/WellnessRetreatsManager";
+>>>>>>> e818cd834e854a0163522278f3e2ed742c9574ec
 
 /**
  * Dashboard Routes Component
@@ -95,6 +104,8 @@ function AppInner() {
         <Route path="/pathways/:id/syllabus" element={<SyllabusPage />} />
         <Route path="/library/:id" element={<LibraryDetailPage />} />
         <Route path="/story/:id" element={<StoryDetailPage />} />
+        <Route path="/chakra-experience" element={<ChakraExperiencePage />} />
+        <Route path="/healing-music" element={<HealingMusicPage />} />
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
@@ -140,7 +151,11 @@ function AppInner() {
           <Route path="settings" element={<SettingsPage />} />
           <Route path="users" element={<UserManagementPage />} />
           <Route path="success-stories" element={<SuccessStoriesManager />} />
+<<<<<<< HEAD
           <Route path="enrollments" element={<EnrollmentManagementPage />} />
+=======
+          <Route path="wellness-retreats" element={<WellnessRetreatsManager />} />
+>>>>>>> e818cd834e854a0163522278f3e2ed742c9574ec
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Route>
 

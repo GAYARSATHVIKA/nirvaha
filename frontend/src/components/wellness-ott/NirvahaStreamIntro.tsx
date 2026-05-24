@@ -47,7 +47,7 @@ export default function NirvahaStreamIntro() {
       <div className="relative z-10 flex flex-col items-center justify-center gap-6">
         {/* Nirvaha Logo / Icon */}
         <motion.div
-          className="w-32 h-32 rounded-full bg-gradient-to-br from-[#2ed899] to-[#1ab87e] flex items-center justify-center shadow-2xl"
+          className="w-32 h-32 flex items-center justify-center"
           initial={{ scale: 0, opacity: 0, rotate: -180 }}
           animate={{ scale: 1, opacity: 1, rotate: 0 }}
           transition={{
@@ -57,17 +57,24 @@ export default function NirvahaStreamIntro() {
           }}
         >
           <motion.div
-            className="text-5xl font-black text-black"
+            className="flex items-center justify-center w-full h-full"
             animate={{
-              scale: [1, 1.1, 1],
+              scale: [1, 1.08, 1],
             }}
             transition={{
-              duration: 2,
+              duration: 3,
               repeat: Infinity,
               repeatType: 'loop',
+              ease: 'easeInOut',
             }}
+            style={{ filter: 'drop-shadow(0 0 10px rgba(46,216,153,0.6))' }}
           >
-            ॐ
+            {/* Meditation logo image — clean, transparent background */}
+            <img
+              src="/images/meditation-logo.png"
+              alt="Nirvaha Stream Logo"
+              className="w-full h-full object-contain"
+            />
           </motion.div>
         </motion.div>
 

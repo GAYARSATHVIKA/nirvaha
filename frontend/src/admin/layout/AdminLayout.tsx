@@ -17,7 +17,11 @@ import {
   FileText,
   Palette,
   MessageSquare,
+<<<<<<< HEAD
   GraduationCap,
+=======
+  Compass,
+>>>>>>> e818cd834e854a0163522278f3e2ed742c9574ec
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -120,6 +124,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           title: "Inquiries & Leads",
           icon: MessageSquare,
           path: "/admin/inquiries",
+        },
+        {
+          title: "Wellness Retreats",
+          icon: Compass,
+          path: "/admin/wellness-retreats",
         },
         {
           title: "Content Management",
@@ -337,17 +346,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             {/* Right: User Info and Logout */}
             <div className="flex items-center gap-4 ml-8">
               <div className="flex items-center gap-3">
-                <Avatar className="w-8 h-8">
-                  <AvatarImage src={user?.avatar} />
-                  <AvatarFallback className="bg-gradient-to-br from-gray-500 to-green-600 text-white">
-                    {user?.name?.charAt(0) || "A"}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="hidden md:block">
-                  <p className="text-gray-900 text-sm font-medium">
+                <div className="block text-right">
+                  <p className="text-gray-900 text-sm font-semibold">
                     {user?.name || "Admin"}
                   </p>
-                  <p className="text-gray-600 text-xs">
+                  <p className="text-gray-600 text-xs font-medium">
                     {user?.email || "admin@nirvaha.com"}
                   </p>
                 </div>

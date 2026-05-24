@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import heroBg from "../../assets/meditation/hero-bg1.jpg";
 import heroBg1 from "../../assets/meditation/hero-bg.jpg";
@@ -6,7 +7,10 @@ import heroBg2 from "../../assets/meditation/hero-bg2.jpg";
 
 import { FeaturesBentoGrid } from "../dashboard/FeaturesBentoGrid";
 import { CommonProblems } from "../dashboard/CommonProblems";
+import { WellnessRetreats } from "../dashboard/WellnessRetreats";
 import { WellnessOTT } from "../dashboard/WellnessOTT";
+import { ChakraSection } from "../dashboard/ChakraSection";
+import { HealingMusicSection } from "../dashboard/HealingMusicSection";
 import { InspirationalQuotes } from "../dashboard/InspirationalQuotes";
 import { CaseStudies } from "../dashboard/CaseStudies";
 import { FAQSection } from "../dashboard/FAQSection";
@@ -14,6 +18,7 @@ import { DashboardFooter } from "../dashboard/DashboardFooter";
 import CertificationCoursesSection from "../landing/CertificationCoursesSection";
 
 export function DashboardPage() {
+  const location = useLocation();
   const slides = [
     {
       image: heroBg,
@@ -44,6 +49,19 @@ export function DashboardPage() {
 
     return () => clearInterval(timer);
   }, [slides.length]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("scrollTo") === "chakra-section") {
+      const timer = setTimeout(() => {
+        const element = document.getElementById("chakra-section");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.search]);
 
   return (
     <div className="w-full overflow-x-hidden bg-[#EEF6F2]">
@@ -97,8 +115,14 @@ export function DashboardPage() {
 
       <FeaturesBentoGrid />
       <CommonProblems />
+      <WellnessRetreats />
       <WellnessOTT />
+<<<<<<< HEAD
       <CertificationCoursesSection />
+=======
+      <ChakraSection />
+      <HealingMusicSection />
+>>>>>>> e818cd834e854a0163522278f3e2ed742c9574ec
       <InspirationalQuotes />
       <CaseStudies />
       <FAQSection />
