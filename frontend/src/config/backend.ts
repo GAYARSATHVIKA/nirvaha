@@ -1,7 +1,7 @@
 // Backend configuration
 const API_URL =
   import.meta.env.VITE_API_BASE_URL ||
-  "https://nirvaha-5cqj.onrender.com/api";
+  (import.meta.env.DEV ? "http://localhost:5001/api" : "https://nirvaha-5cqj.onrender.com/api");
 
 export const BACKEND_CONFIG = {
   API_URL,

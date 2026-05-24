@@ -43,8 +43,19 @@ const RegistrationModal: React.FC<{
         }),
       });
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Registration failed');
+        let msg = `Registration failed (${res.status})`;
+        try {
+          const data = await res.json();
+          msg = data?.error || msg;
+        } catch (parseErr) {
+          try {
+            const text = await res.text();
+            if (text) msg = text;
+          } catch (_) {
+            // ignore
+          }
+        }
+        throw new Error(msg);
       }
       setStep('success');
       onSuccess();

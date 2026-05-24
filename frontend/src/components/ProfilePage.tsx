@@ -386,10 +386,8 @@ export function ProfilePage() {
   const [sessionsLoading, setSessionsLoading] = useState(true);
   const [userBookings, setUserBookings] = useState<any[]>([]);
 
-  // ── Companion Mode Switch (TEMPORARY OVERRIDE FOR VERIFICATION) ───
-
-  // Force-enable companion UI to verify runtime user object
-  const canAccessCompanionMode = true;
+  // Companion Mode access is granted only to approved companions and not to admins
+  const canAccessCompanionMode = Boolean(user?.isApprovedCompanion) && user?.role !== "admin";
 
   const isUserApprovedCompanion = canAccessCompanionMode;
 
@@ -1021,8 +1019,8 @@ export function ProfilePage() {
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center gap-3">
-                      {/* As a Companion toggle — TEMPORARILY rendered unconditionally for verification */}
-                      <CompanionModeSwitch />
+                      {/* As a Companion toggle — hide for admins and for non-approved users */}
+                      {canAccessCompanionMode && <CompanionModeSwitch />}
 
                     <div className="relative">
                       {/* Burst rings on click */}

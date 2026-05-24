@@ -349,6 +349,7 @@ function CompanionVideoSimulationModal({ session, onClose, onComplete }: VideoSi
 
 export function CompanionPage() {
   const { user, refreshProfile } = useAuth();
+  const isAdmin = user?.role === "admin";
   const { socket } = useSocket();
 
   // Dashboard states
@@ -1531,12 +1532,14 @@ export function CompanionPage() {
                       >
                         Clear Status
                       </button>
-                      <button
-                        onClick={() => setIsApplicationModalOpen(true)}
-                        className="px-5 py-3 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-2xl text-xs tracking-wide uppercase shadow-lg shadow-rose-600/10 transition-colors"
-                      >
-                        Re-apply Now
-                      </button>
+                      {!isAdmin && (
+                        <button
+                          onClick={() => setIsApplicationModalOpen(true)}
+                          className="px-5 py-3 bg-rose-600 hover:bg-rose-500 text-white font-extrabold rounded-2xl text-xs tracking-wide uppercase shadow-lg shadow-rose-600/10 transition-colors"
+                        >
+                          Re-apply Now
+                        </button>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -1593,31 +1596,33 @@ export function CompanionPage() {
                     </motion.div>
 
                     {/* Secondary CTA: Apply as a Companion */}
-                    <motion.div
-                      whileHover={{ y: -5, scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => setIsApplicationModalOpen(true)}
-                      className="bg-white/70 backdrop-blur-xl border border-white rounded-[32px] p-8 cursor-pointer shadow-xl shadow-emerald-900/5 relative overflow-hidden group text-left"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute top-0 right-0 w-40 h-40 bg-teal-100/40 rounded-full blur-3xl group-hover:bg-teal-200/40 transition-colors duration-500 pointer-events-none" />
-                      
-                      <div className="relative z-10 flex flex-col h-full justify-between">
-                        <div className="flex items-start justify-between mb-8">
-                          <div className="w-14 h-14 bg-emerald-50 text-emerald-700 rounded-2xl flex items-center justify-center">
-                            <Users className="w-7 h-7" />
+                    {!isAdmin && (
+                      <motion.div
+                        whileHover={{ y: -5, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => setIsApplicationModalOpen(true)}
+                        className="bg-white/70 backdrop-blur-xl border border-white rounded-[32px] p-8 cursor-pointer shadow-xl shadow-emerald-900/5 relative overflow-hidden group text-left"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute top-0 right-0 w-40 h-40 bg-teal-100/40 rounded-full blur-3xl group-hover:bg-teal-200/40 transition-colors duration-500 pointer-events-none" />
+                        
+                        <div className="relative z-10 flex flex-col h-full justify-between">
+                          <div className="flex items-start justify-between mb-8">
+                            <div className="w-14 h-14 bg-emerald-50 text-emerald-700 rounded-2xl flex items-center justify-center">
+                              <Users className="w-7 h-7" />
+                            </div>
+                            <TrendingUp className="w-6 h-6 text-emerald-500/30 group-hover:text-emerald-500 animate-pulse" />
                           </div>
-                          <TrendingUp className="w-6 h-6 text-emerald-500/30 group-hover:text-emerald-500 animate-pulse" />
-                        </div>
-                        <div>
-                          <h3 className="text-2xl font-black text-emerald-950 mb-2 tracking-tight">Apply as a Companion</h3>
-                          <p className="text-emerald-800/60 font-medium line-clamp-2">Share your spiritual wisdom, lead guided sessions, and earn on Nirvaha.</p>
-                          <div className="mt-6 flex items-center text-emerald-700 font-bold group-hover:text-emerald-900 transition-colors gap-2 text-sm uppercase tracking-wider">
-                            Apply Now <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <div>
+                            <h3 className="text-2xl font-black text-emerald-950 mb-2 tracking-tight">Apply as a Companion</h3>
+                            <p className="text-emerald-800/60 font-medium line-clamp-2">Share your spiritual wisdom, lead guided sessions, and earn on Nirvaha.</p>
+                            <div className="mt-6 flex items-center text-emerald-700 font-bold group-hover:text-emerald-900 transition-colors gap-2 text-sm uppercase tracking-wider">
+                              Apply Now <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
+                      </motion.div>
+                    )}
                   </div>
 
                   <div className="mt-4 flex flex-col items-center">
