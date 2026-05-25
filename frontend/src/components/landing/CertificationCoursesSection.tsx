@@ -68,7 +68,7 @@ const CertificationCoursesSection: React.FC = () => {
   const navigate = useNavigate();
 
   const handleExplore = () => {
-    navigate('/certifications');
+    navigate('/courses');
   };
 
   return (

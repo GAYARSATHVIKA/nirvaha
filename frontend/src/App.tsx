@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Toaster } from './components/ui/toaster';
 import { Toaster as Sonner } from './components/ui/sonner';
 import { ToastContainer } from 'react-toastify';
@@ -62,6 +63,17 @@ import { EnrollmentManagementPage } from "./admin/pages/EnrollmentManagementPage
 import { WellnessRetreatsManager } from "./components/admin/WellnessRetreatsManager";
 
 /**
+ * Scroll to top on every route change
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+}
+
+/**
  * Dashboard Routes Component
  */
 const DashboardRoutes = () => (
@@ -82,7 +94,7 @@ const DashboardRoutes = () => (
 function AppInner() {
   return (
     <div className="min-h-screen spiritual-page-bg relative overflow-hidden">
-
+      <ScrollToTop />
       <Routes>
         {/* Public Landing Page */}
         <Route path="/" element={<LandingPage />} />

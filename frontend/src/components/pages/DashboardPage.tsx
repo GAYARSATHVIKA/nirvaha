@@ -15,7 +15,7 @@ import { InspirationalQuotes } from "../dashboard/InspirationalQuotes";
 import { CaseStudies } from "../dashboard/CaseStudies";
 import { FAQSection } from "../dashboard/FAQSection";
 import { DashboardFooter } from "../dashboard/DashboardFooter";
-import CertificationCoursesSection from "../landing/CertificationCoursesSection";
+import AcademyCertificationSection from "../landing/AcademyCertificationSection";
 
 export function DashboardPage() {
   const location = useLocation();
@@ -117,7 +117,7 @@ export function DashboardPage() {
       <CommonProblems />
       <WellnessRetreats />
       <WellnessOTT />
-      <CertificationCoursesSection />
+      <AcademyCertificationSection />
       <ChakraSection />
       <HealingMusicSection />
       <InspirationalQuotes />

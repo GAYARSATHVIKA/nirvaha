@@ -1,4 +1,4 @@
-export interface CourseData {
+﻿export interface CourseData {
   id: number;
   slug: string;
   title: string;
@@ -16,6 +16,7 @@ export interface CourseData {
   whatYouLearn: string[];
   journey: { week: string; title: string; desc: string }[];
   faqs: { q: string; a: string }[];
+  galleryImages: string[];
 }
 
 export const coursesData: CourseData[] = [
@@ -55,6 +56,7 @@ export const coursesData: CourseData[] = [
       { q: 'Will I receive a certificate?', a: 'Yes. Upon completion you receive a globally recognised Nirvaha Certification.' },
       { q: 'How much time per week?', a: 'We recommend 3–5 hours per week for the best experience.' },
     ],
+    galleryImages: ['/CS1.png', '/CS2.png', '/CS3.png'],
   },
   {
     id: 2,
@@ -92,6 +94,7 @@ export const coursesData: CourseData[] = [
       { q: 'Can I use this to coach others?', a: 'Yes. The certification includes frameworks for guiding clients through reflective wellness processes.' },
       { q: 'How long is lifetime access?', a: 'Truly lifetime — you keep access to all materials indefinitely, including future updates.' },
     ],
+    galleryImages: ['/CS4.png', '/CS5.png', '/CS6.png'],
   },
   {
     id: 3,
@@ -129,6 +132,7 @@ export const coursesData: CourseData[] = [
       { q: 'Will I be able to teach after this?', a: 'Yes. The certification includes comprehensive teaching methodology and practicum components.' },
       { q: 'Is there a community component?', a: 'Yes. You will have access to a global community of fellow practitioners and live group sessions.' },
     ],
+    galleryImages: ['/CS7.png', '/CS8.png', '/CS9.png'],
   },
   {
     id: 4,
@@ -166,6 +170,7 @@ export const coursesData: CourseData[] = [
       { q: 'How quickly will I notice results?', a: 'Most participants report noticeable shifts in mental clarity within the first two weeks of practice.' },
       { q: 'Can I apply this in a corporate context?', a: 'Yes. Inner clarity is one of the most sought-after leadership qualities, and this certification is highly applicable in professional settings.' },
     ],
+    galleryImages: ['/CS10.png', '/CS11.png', '/CS12.png', '/CS13.png'],
   },
   {
     id: 5,
@@ -203,6 +208,7 @@ export const coursesData: CourseData[] = [
       { q: 'Is this useful for leaders and managers?', a: 'Extremely. EQ is the defining quality of exceptional leadership, and this certification is widely valued in professional contexts.' },
       { q: 'Will I receive coaching tools?', a: 'Yes. The certification includes a comprehensive toolkit for coaching others in emotional intelligence development.' },
     ],
+    galleryImages: ['/CS14.png', '/CS15.png', '/CS16.png'],
   },
   {
     id: 6,
@@ -240,6 +246,7 @@ export const coursesData: CourseData[] = [
       { q: 'Is this applicable in professional settings?', a: 'Absolutely. Conscious communication is one of the most valued skills in leadership, coaching, and team dynamics.' },
       { q: 'Will I practice with others?', a: 'Yes. The program includes live practice sessions and a community of fellow practitioners.' },
     ],
+    galleryImages: ['/CS17.png', '/CS18.png', '/CS19.png'],
   },
   {
     id: 7,
@@ -277,6 +284,7 @@ export const coursesData: CourseData[] = [
       { q: 'Can I use this to run workshops?', a: 'Yes. The certification includes everything you need to design and facilitate journaling workshops.' },
       { q: 'Is digital journaling covered?', a: 'Yes. The program covers both traditional and digital journaling approaches.' },
     ],
+    galleryImages: ['/CS20.png', '/CS21.png', '/CS22.png'],
   },
   {
     id: 8,
@@ -314,6 +322,7 @@ export const coursesData: CourseData[] = [
       { q: 'What if I have tried personal development before without lasting results?', a: 'This program addresses the root causes of why change does not stick — and gives you the tools to make it permanent.' },
       { q: 'Is there ongoing support after completion?', a: 'Yes. You join a global community of Nirvaha-certified practitioners with ongoing access to resources and events.' },
     ],
+    galleryImages: ['/CS23.png', '/CS24.png', '/CS25.png'],
   },
   {
     id: 9,
@@ -351,6 +360,7 @@ export const coursesData: CourseData[] = [
       { q: 'Is this ICF-aligned?', a: 'The program is aligned with international coaching competency standards and prepares you for further professional accreditation.' },
       { q: 'How many practice sessions are included?', a: 'The program includes supervised practice sessions with real clients and peer coaching exchanges.' },
     ],
+    galleryImages: ['/CS26.png', '/CS27.png', '/CS28.png'],
   },
   {
     id: 10,
@@ -388,5 +398,6 @@ export const coursesData: CourseData[] = [
       { q: 'How quickly will I notice results?', a: 'Most participants report significant reductions in stress and anxiety within the first two weeks of consistent practice.' },
       { q: 'Can I use this to run corporate wellness programs?', a: 'Yes. The certification includes specific applications for workplace wellness and stress management programs.' },
     ],
+    galleryImages: ['/CS29.png', '/CS30.png', '/CS31.png'],
   },
 ];

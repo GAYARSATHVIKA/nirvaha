@@ -119,15 +119,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const data = await res.json();
         if (data?.user) {
           const serverUser = data.user as User;
+          // Save fresh token if backend issued one
+          if (data.token) {
+            localStorage.setItem("token", data.token);
+          }
           return applyServerUser(serverUser);
         }
       } else if (res.status === 401) {
+        // Only clear session on hard 401 — not on network errors
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         setUser(null);
       }
     } catch (e) {
-      console.error("Failed to sync user from server:", e);
+      // Network error — keep existing session, don't log out
+      console.warn("Could not sync user from server (network error). Keeping existing session.");
+      const cached = localStorage.getItem("user");
+      if (cached) {
+        try {
+          const cachedUser = JSON.parse(cached) as User;
+          setUser(cachedUser);
+          return cachedUser;
+        } catch {}
+      }
     }
     return null;
   }, [applyServerUser]);
@@ -136,6 +150,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
       if (token) {
+        // Immediately restore from cache so UI doesn't flash to login
+        const cached = localStorage.getItem("user");
+        if (cached) {
+          try {
+            setUser(JSON.parse(cached) as User);
+          } catch {}
+        }
+        // Then sync from server in background
         await syncUserFromServer();
       } else {
         localStorage.removeItem("user");

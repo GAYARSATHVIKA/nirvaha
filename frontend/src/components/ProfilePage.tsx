@@ -450,7 +450,7 @@ export function ProfilePage() {
     }
   }, [user?.email]);
 
-  // Fetch approved bookings where logged-in companion is assigned
+  // Fetch sessions — both as a user who booked AND as an approved companion
   const fetchCompanionBookings = useCallback(async () => {
     if (!user?.email && !user?.name) return;
     setCompanionBookingsLoading(true);
@@ -462,15 +462,15 @@ export function ProfilePage() {
       }
       const data = await response.json();
       const allBookings = Array.isArray(data) ? data : [];
-      const approved = allBookings.filter((b: any) => {
-        return (
-          b.status === "Session Confirmed" &&
-          (b.companionName === user?.name || b.companionEmail === user?.email)
-        );
+      // Show sessions where user is the client OR the companion
+      const userSessions = allBookings.filter((b: any) => {
+        const isClient = b.userEmail === user?.email || b.userName === user?.name;
+        const isCompanion = b.companionName === user?.name || b.companionEmail === user?.email;
+        return isClient || isCompanion;
       });
-      setCompanionBookings(approved);
+      setCompanionBookings(userSessions);
     } catch (err) {
-      console.error('[PROFILE] Error fetching companion bookings:', err);
+      console.error('[PROFILE] Error fetching sessions:', err);
       setCompanionBookings([]);
     } finally {
       setCompanionBookingsLoading(false);
@@ -506,11 +506,11 @@ export function ProfilePage() {
     }
   };
 
-  // Toggle companion mode: fetch bookings when switching on
+  // Toggle companion mode: fetch sessions when switching on
   const handleCompanionToggle = () => {
     const next = !isCompanionModeEnabled;
     setIsCompanionModeEnabled(next);
-    if (next && isUserApprovedCompanion) {
+    if (next) {
       fetchCompanionBookings();
     }
   };
@@ -1019,8 +1019,8 @@ export function ProfilePage() {
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center gap-3">
-                      {/* As a Companion toggle — hide for admins and for non-approved users */}
-                      {canAccessCompanionMode && <CompanionModeSwitch />}
+                      {/* As a Companion toggle — always visible for logged-in users */}
+                      <CompanionModeSwitch />
 
                     <div className="relative">
                       {/* Burst rings on click */}
@@ -1654,9 +1654,9 @@ export function ProfilePage() {
           </motion.div>
         </div>
 
-        {/* ── Approved Companion Bookings Section ── */}
+        {/* ── My Sessions Section ── */}
         <AnimatePresence>
-          {isCompanionModeEnabled && isUserApprovedCompanion && (
+          {isCompanionModeEnabled && (
             <motion.section
               key="companion-bookings"
               initial={{ opacity: 0, y: 28 }}
@@ -1671,15 +1671,15 @@ export function ProfilePage() {
                   <CalendarIcon className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-[#1B4332] font-black text-xl tracking-tight">Your Approved Bookings</h3>
-                  <p className="text-[#2D6A4F]/70 text-sm font-medium">Sessions confirmed by admin for you to host</p>
+                  <h3 className="text-[#1B4332] font-black text-xl tracking-tight">My Sessions</h3>
+                  <p className="text-[#2D6A4F]/70 text-sm font-medium">Your booked and approved companion sessions</p>
                 </div>
                 <motion.button
                   whileHover={{ rotate: 180 }}
                   transition={{ duration: 0.35 }}
                   onClick={fetchCompanionBookings}
                   className="ml-auto p-2 rounded-xl bg-[#f0fdf4] border border-emerald-100 text-[#2D6A4F] hover:bg-emerald-50 transition-colors"
-                  title="Refresh bookings"
+                  title="Refresh sessions"
                 >
                   <Loader2
                     className={`w-4 h-4 ${
@@ -1693,7 +1693,7 @@ export function ProfilePage() {
               {companionBookingsLoading && (
                 <div className="flex items-center justify-center py-12">
                   <Loader2 className="w-8 h-8 text-[#52B788] animate-spin" />
-                  <span className="ml-3 text-[#2D6A4F] font-medium">Loading your bookings…</span>
+                  <span className="ml-3 text-[#2D6A4F] font-medium">Loading your sessions…</span>
                 </div>
               )}
 
@@ -1705,9 +1705,9 @@ export function ProfilePage() {
                   className="rounded-[28px] border border-emerald-100/80 bg-gradient-to-br from-[#f9fdfb] via-[#f0fdf4] to-[#ecfdf5] px-8 py-12 text-center shadow-sm"
                 >
                   <CalendarIcon className="w-12 h-12 text-[#52B788]/50 mx-auto mb-4" />
-                  <p className="text-[#1B4332] font-bold text-lg mb-1">No approved sessions yet.</p>
+                  <p className="text-[#1B4332] font-bold text-lg mb-1">No sessions yet.</p>
                   <p className="text-[#2D6A4F]/60 text-sm">
-                    Once a user books a session and admin confirms it for you, it will appear here.
+                    Once you book a companion session and it gets confirmed, it will appear here.
                   </p>
                 </motion.div>
               )}

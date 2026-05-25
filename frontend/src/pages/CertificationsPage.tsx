@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Sparkles, ChevronDown, ChevronUp, X } from 'lucide-react';
 import SEOHead from '../components/common/SEOHead';
+import CertificationCoursesSection from '../components/landing/CertificationCoursesSection';
 
 const allCertifications = [
   {
@@ -137,7 +138,7 @@ const CertificationsPage: React.FC = () => {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, []);
 
   // Lock body scroll when panel is open
@@ -168,115 +169,198 @@ const CertificationsPage: React.FC = () => {
         description="Immersive wellness certifications designed for emotional balance, mindful living, and conscious growth."
       />
 
-      {/* ── Hero — always visible ── */}
-      <div className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/healing.jpg"
-            alt="Wellness background"
-            className="h-full w-full object-cover object-center blur-md scale-[1.04]"
-          />
-          <div className="absolute inset-0 bg-slate-950/40" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/60" />
+      {/* ── Back to Home — fixed top-left ── */}
+      <motion.button
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        type="button"
+        onClick={() => navigate('/')}
+        className="fixed top-5 left-5 z-50 inline-flex items-center gap-2 rounded-full border border-emerald-200/40 bg-white/80 backdrop-blur-sm px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#065f46] shadow-[0_2px_16px_rgba(16,185,129,0.12)] transition-all duration-300 hover:border-emerald-400 hover:bg-white hover:shadow-md"
+      >
+        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back to Home
+      </motion.button>
+
+      {/* ── Cinematic Hero — CERTIFIED FOR INNER GROWTH ── */}
+      <CertificationCoursesSection />
+
+      {/* ── FUTURISTIC EMOTIONAL WELLNESS HERO ── */}
+      <div className="relative min-h-screen flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg, #f0fdf8 0%, #ecfdf5 40%, #f0fdfa 70%, #f7fffe 100%)' }}>
+
+        {/* Dynamic grid background */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(16,185,129,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.07) 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+          }}
+        />
+        {/* Grid fade vignette */}
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(240,253,248,0.95) 100%)' }}
+        />
+
+        {/* Floating emotional keywords */}
+        {['Clarity', 'Balance', 'Growth', 'Awareness', 'Presence', 'Healing', 'Purpose', 'Calm', 'Wisdom', 'Flow'].map((word, i) => (
+          <motion.span
+            key={word}
+            className="absolute text-emerald-600/[0.07] font-black uppercase select-none pointer-events-none"
+            style={{
+              fontSize: `${1.2 + (i % 3) * 0.6}rem`,
+              left: `${5 + (i * 9.3) % 85}%`,
+              top: `${8 + (i * 13.7) % 80}%`,
+              fontFamily: "'Cinzel', serif",
+              letterSpacing: '0.15em',
+            }}
+            animate={{ y: [0, i % 2 === 0 ? -12 : 12, 0], opacity: [0.06, 0.12, 0.06] }}
+            transition={{ duration: 6 + i * 0.8, repeat: Infinity, ease: 'easeInOut', delay: i * 0.4 }}
+          >
+            {word}
+          </motion.span>
+        ))}
+
+        {/* Ambient particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(18)].map((_, i) => (
+            <motion.div key={i}
+              className="absolute rounded-full"
+              style={{
+                width: `${Math.random() * 5 + 2}px`,
+                height: `${Math.random() * 5 + 2}px`,
+                background: i % 3 === 0 ? 'rgba(16,185,129,0.5)' : i % 3 === 1 ? 'rgba(52,211,153,0.4)' : 'rgba(110,231,183,0.35)',
+                left: `${Math.random() * 100}%`,
+                top: '100%',
+                filter: 'blur(0.5px)',
+              }}
+              animate={{ y: ['0vh', '-110vh'], x: [0, (Math.random() - 0.5) * 100], opacity: [0, 0.8, 0] }}
+              transition={{ duration: Math.random() * 14 + 10, repeat: Infinity, ease: 'linear', delay: Math.random() * 10 }}
+            />
+          ))}
         </div>
 
-        {/* Ambient glows */}
-        <div className="absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top,rgba(209,250,229,0.5),transparent_70%)] blur-3xl pointer-events-none" />
-        <div className="absolute left-0 top-[30%] h-[420px] w-[420px] rounded-full bg-[#c7f3d7]/30 blur-3xl pointer-events-none" />
-        <div className="absolute right-0 bottom-0 h-[520px] w-[520px] rounded-full bg-[#d9f7e5]/30 blur-3xl pointer-events-none" />
+        {/* Main layout */}
+        <div className="relative z-10 w-full px-6 lg:px-20 py-24 lg:py-0 min-h-screen flex items-center">
+          <div className="mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
 
-        <div className="relative z-10 w-full px-6 py-24 lg:py-32 flex items-center justify-center min-h-screen">
-          <div className="mx-auto max-w-5xl w-full">
+            {/* ── LEFT: Typography ── */}
             <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: 'easeOut' }}
-              className="rounded-[28px] border border-white/10 bg-black/30 backdrop-blur-2xl shadow-[0_40px_100px_rgba(0,0,0,0.45)] px-8 py-10 sm:px-12 sm:py-14 space-y-8"
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-7"
             >
               {/* Badge */}
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="inline-flex items-center gap-3 rounded-full border border-emerald-300/25 bg-white/10 px-5 py-2.5 backdrop-blur-xl shadow-lg"
+                className="inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-white/70 backdrop-blur-sm px-5 py-2.5 shadow-[0_2px_16px_rgba(16,185,129,0.12)]"
               >
-                <Sparkles className="h-4 w-4 text-emerald-300" />
-                <span className="text-[11px] uppercase tracking-[0.32em] text-emerald-200 font-bold">
+                <motion.span
+                  animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"
+                />
+                <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+                <span className="text-[10px] uppercase tracking-[0.34em] text-emerald-700 font-black">
                   Signature Certification Collection
                 </span>
               </motion.div>
 
-              {/* Headline */}
-              <div className="space-y-1">
-                <motion.p
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.9, delay: 0.2 }}
-                  className="text-base sm:text-lg font-light text-white/60 tracking-[0.14em] uppercase"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                >
-                  Immersive wellness certifications
-                </motion.p>
-
+              {/* 3-line headline */}
+              <div className="space-y-0">
                 <motion.h1
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1.1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="font-black leading-[1.05] tracking-[-0.03em] text-white"
-                  style={{
-                    fontSize: 'clamp(2.2rem, 5vw, 4.2rem)',
-                    fontFamily: "'Cinzel', serif",
-                  }}
+                  initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-black leading-[1.05] tracking-[-0.04em] text-[#0a1a12]"
+                  style={{ fontSize: 'clamp(2.4rem, 4.2vw, 4.5rem)', fontFamily: "'Cinzel', serif" }}
                 >
-                  designed for
+                  Designed for Emotional Balance
                 </motion.h1>
 
-                {['emotional balance,', 'mindful living,', 'and conscious growth.'].map((line, i) => (
-                  <motion.h1
-                    key={line}
-                    initial={{ opacity: 0, y: 28 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.1, delay: 0.42 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-black leading-[1.08] tracking-[-0.02em]"
-                    style={{
-                      fontSize: 'clamp(2rem, 4.5vw, 3.8rem)',
-                      fontFamily: "'Cinzel', serif",
-                      background: 'linear-gradient(135deg, #6ee7b7 0%, #34d399 45%, #10b981 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    {line}
-                  </motion.h1>
-                ))}
+                <motion.h1
+                  initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1.2, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-black leading-[1.05] tracking-[-0.04em]"
+                  style={{
+                    fontSize: 'clamp(2.4rem, 4.2vw, 4.5rem)',
+                    fontFamily: "'Cinzel', serif",
+                    background: 'linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  &amp; Conscious Growth.
+                </motion.h1>
               </div>
 
-              {/* Buttons */}
-              <motion.div
+              {/* Subtext */}
+              <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.82 }}
-                className="flex flex-col gap-4 sm:flex-row sm:items-center pt-2"
+                transition={{ duration: 0.9, delay: 0.72 }}
+                className="text-[#4a6b5a] text-base sm:text-lg font-light leading-relaxed max-w-lg"
               >
-                <button
-                  type="button"
-                  onClick={handleViewCertifications}
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-emerald-500 px-9 py-4 text-sm font-bold uppercase tracking-[0.24em] text-white shadow-[0_20px_60px_rgba(16,185,129,0.4)] transition-all duration-300 hover:bg-emerald-400 hover:scale-105"
-                >
-                  View Certifications
-                  <ChevronDown className="h-4 w-4 group-hover:translate-y-0.5 transition-transform duration-200" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => navigate('/')}
-                  className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-9 py-4 text-sm font-semibold uppercase tracking-[0.24em] text-white backdrop-blur-sm transition-all duration-300 hover:border-emerald-300/50 hover:bg-white/15"
-                >
-                  Back to home
-                </button>
+                Discover emotionally grounded certification pathways designed to nurture clarity, reflection, awareness, and meaningful personal transformation.
+              </motion.p>
+
+              {/* Glassmorphism stat pills */}
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.85 }}
+                className="flex flex-wrap gap-3"
+              >
+                {[
+                  { value: '10', label: 'Certifications' },
+                  { value: '6–10 wks', label: 'Duration' },
+                  { value: '∞', label: 'Lifetime Access' },
+                ].map((s, i) => (
+                  <div key={i}
+                    className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-emerald-200/60 bg-white/60 backdrop-blur-sm shadow-[0_2px_12px_rgba(16,185,129,0.1)]"
+                  >
+                    <span className="text-base font-black text-emerald-700">{s.value}</span>
+                    <span className="text-[10px] uppercase tracking-[0.18em] text-[#6b9e85] font-bold">{s.label}</span>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* No buttons here — Back to Home is top-left, View Certifications removed */}
+            </motion.div>
+
+            {/* ── RIGHT: pic.png ── */}
+            <motion.div
+              initial={{ opacity: 0, x: 50, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="hidden lg:flex items-center justify-end"
+            >
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                className="relative"
+              >
+                {/* Glow behind image */}
+                <div className="absolute inset-0 rounded-3xl blur-2xl scale-105"
+                  style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.2) 0%, transparent 70%)' }}
+                />
+                {/* Image — no white bg, bigger */}
+                <div className="relative rounded-3xl overflow-hidden border border-emerald-200/30 shadow-[0_24px_64px_rgba(16,185,129,0.15)]">
+                  <img
+                    src="/pic.png"
+                    alt="Wellness certification"
+                    className="w-full h-auto object-contain"
+                    onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                  />
+                </div>
               </motion.div>
             </motion.div>
+
           </div>
         </div>
       </div>

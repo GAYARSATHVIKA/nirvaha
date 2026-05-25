@@ -1,49 +1,49 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import DecorativeShapes from './DecorativeShapes';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const allCertificationCourses = [
     {
         title: 'Mindfulness Meditation Certification',
         description: 'Learn the art and science of mindfulness meditation and become a certified instructor.',
-        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+        image: '/home1.png',
         feel: 'Calm & Focused',
         cta: 'Begin Your Calm Journey'
     },
     {
         title: 'Emotional Intelligence Mastery',
         description: 'Deep dive into emotional intelligence with practical tools and certification.',
-        image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80',
+        image: '/home2.png',
         feel: 'Empowered & Aware',
         cta: 'Unlock Your Inner Strength'
     },
     {
         title: 'Holistic Wellness Coach',
         description: 'Comprehensive training to guide others on their holistic wellness journey.',
-        image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80',
+        image: '/home3.png',
         feel: 'Balanced & Inspired',
         cta: 'Become a Wellness Guide'
     },
     {
         title: 'Spiritual Counseling Program',
         description: 'Integrate ancient wisdom and modern psychology for spiritual counseling.',
-        image: 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=600&q=80',
+        image: '/home4.png',
         feel: 'Connected & Uplifted',
         cta: 'Start Your Spiritual Path'
     },
     {
         title: 'Breathwork Healing Practitioner',
         description: 'Master transformative breathwork techniques to facilitate deep healing and emotional release.',
-        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+        image: '/home5.png',
         feel: 'Grounded & Free',
         cta: 'Begin Your Breathwork Journey'
     },
     {
         title: 'Inner Leadership Certification',
         description: 'Develop soulful leadership skills rooted in self-awareness, purpose, and compassionate action.',
-        image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
+        image: '/home6.png',
         feel: 'Purposeful & Clear',
         cta: 'Lead From Within'
     },
@@ -62,11 +62,8 @@ const INITIAL_COUNT = 4;
 
 const AcademyCertificationSection: React.FC = () => {
     const navigate = useNavigate();
-    const [showAll, setShowAll] = useState(false);
 
-    const visibleCourses = showAll
-        ? allCertificationCourses
-        : allCertificationCourses.slice(0, INITIAL_COUNT);
+    const visibleCourses = allCertificationCourses.slice(0, 4);
 
     // Animation state for each card heading
     const headingRefs = useRef<(HTMLHeadingElement | null)[]>([]);
@@ -162,37 +159,20 @@ const AcademyCertificationSection: React.FC = () => {
                     ))}
                 </div>
 
-                {/* View More / Show Less button */}
-                {allCertificationCourses.length > INITIAL_COUNT && (
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={showAll ? 'less' : 'more'}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.3 }}
-                            className="flex justify-center mt-10"
-                        >
-                            <button
-                                type="button"
-                                onClick={() => setShowAll((prev) => !prev)}
-                                className="inline-flex items-center gap-3 px-8 py-3 rounded-xl bg-[#333333] text-white text-lg font-bold shadow-lg hover:bg-[#222222] transition-all duration-200"
-                            >
-                                {showAll ? (
-                                    <>
-                                        Show Less
-                                        <ChevronUp className="w-5 h-5" />
-                                    </>
-                                ) : (
-                                    <>
-                                        View More Certifications
-                                        <ChevronDown className="w-5 h-5" />
-                                    </>
-                                )}
-                            </button>
-                        </motion.div>
-                    </AnimatePresence>
-                )}
+                {/* Explore More button — always visible, navigates to /certifications */}
+                <div className="flex justify-center mt-10">
+                    <button
+                        type="button"
+                        onClick={() => {
+                            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                            navigate('/certifications');
+                        }}
+                        className="inline-flex items-center gap-3 px-8 py-3 rounded-xl bg-[#333333] text-white text-lg font-bold shadow-lg hover:bg-[#222222] transition-all duration-200"
+                    >
+                        Explore More
+                        <ChevronDown className="w-5 h-5" />
+                    </button>
+                </div>
             </div>
         </section>
     );
