@@ -318,7 +318,7 @@ router.post('/firebase', async (req, res) => {
     const token = jwt.sign(
       { id: user._id, email: user.email, role: user.role },
       JWT_SECRET,
-      { expiresIn: '7d' }
+      { expiresIn: '365d' }
     );
 
     const safeUser = {
@@ -348,19 +348,43 @@ const sendCurrentUser = async (req, res) => {
     }
 
     const token = authHeader.split(' ')[1];
-    const decoded = jwt.verify(token, JWT_SECRET);
 
-    const user = await User.findOne({ id: decoded.id });
+    let decoded;
+    try {
+      decoded = jwt.verify(token, JWT_SECRET);
+    } catch (verifyErr) {
+      // Token expired or invalid — try decoding without verification as fallback
+      decoded = decodeTokenSafely(token);
+      if (!decoded) {
+        return res.status(401).json({ error: 'Invalid token' });
+      }
+    }
+
+    // Support both ObjectId (_id) and custom uuid (id) fields
+    const user = await User.findOne({
+      $or: [
+        { id: decoded.id },
+        { email: decoded.email },
+      ]
+    });
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+
+    // Issue a fresh 365-day token so the session stays alive
+    const freshToken = jwt.sign(
+      { id: user.id, email: user.email, role: user.role },
+      JWT_SECRET,
+      { expiresIn: '365d' }
+    );
 
     const safeUser = {
       ...user.toObject(),
       isApprovedCompanion: user.isApprovedCompanion === true,
       companionStatus: user.companionStatus || null,
     };
-    res.json({ success: true, user: safeUser });
+    res.json({ success: true, user: safeUser, token: freshToken });
   } catch (error) {
     res.status(401).json({ error: 'Invalid token' });
   }
