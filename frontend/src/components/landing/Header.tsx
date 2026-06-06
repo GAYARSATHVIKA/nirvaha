@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 import { HeaderNirvahaRectContext } from '../../contexts/HeaderContext';
-import { pathwaysData } from '../../data/pathwaysData';
+
 
 interface HeaderProps {
   onNirvahaClick?: () => void;
@@ -37,7 +37,6 @@ const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/logo.png', 
 
   const searchablePages = [
     { name: "Home / Landing", path: "/" },
-    { name: "Nirvaha Academy / Pathways", path: "/pathways" },
     { name: "Stories & Testimonials", path: "/stories" },
     { name: "Breathing Exercise", path: "/breathing" },
     { name: "Chakra Experience", path: "/chakra-experience" },
@@ -53,11 +52,6 @@ const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/logo.png', 
   const filteredPages = searchQuery.trim() === "" ? [] : searchablePages.filter(page =>
     page.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const filteredPathways = searchQuery.trim() === "" ? [] : pathwaysData.filter(pathway =>
-    pathway.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    pathway.desc.toLowerCase().includes(searchQuery.toLowerCase())
-  ).slice(0, 5);
 
   useEffect(() => {
     const updateRect = () => {
@@ -154,6 +148,8 @@ const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/logo.png', 
               >
                 <span className="text-lg font-bold uppercase tracking-wider">Home</span>
               </motion.button>
+
+
 
               {/* Features Dropdown */}
               <div className="relative">
@@ -276,6 +272,8 @@ const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/logo.png', 
                 >
                   <span className="font-semibold drop-shadow-sm">Home</span>
                 </button>
+
+
 
                 <div className="space-y-2">
                   <div className="px-4 text-xs font-semibold text-emerald-200/50 uppercase tracking-wider">Features</div>

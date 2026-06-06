@@ -8,8 +8,8 @@ import GoldenShowcase from '../components/landing/GoldenShowcase';
 import WhatIsNirvaha from '../components/landing/WhatIsNirvaha';
 import AncientWisdomSection from '../components/landing/AncientWisdomSection';
 import LeadershipHeroSection from '../components/landing/LeadershipHeroSection';
-import DifferentPathsSection from '../components/landing/DifferentPathsSection';
 import CollaboratorsSection from '../components/landing/CollaboratorsSection';
+import CertificationCoursesSection from '../components/landing/CertificationCoursesSection';
 import Contact from '../components/landing/Contact';
 import ClosingSection from '../components/landing/ClosingSection';
 import Header from '../components/landing/Header';
@@ -24,7 +24,7 @@ const SECTION_COMPONENTS: Record<string, React.FC<any>> = {
   LibraryCarousel,
   AncientWisdomSection,
   LeadershipHeroSection,
-  DifferentPathsSection,
+  CertificationCoursesSection,
   CollaboratorsSection,
   Contact,
   ClosingSection
@@ -38,7 +38,7 @@ const DEFAULT_SECTIONS = [
   { id: 'LibraryCarousel', visible: true },
   { id: 'AncientWisdomSection', visible: true },
   { id: 'LeadershipHeroSection', visible: true },
-  { id: 'DifferentPathsSection', visible: true },
+  { id: 'CertificationCoursesSection', visible: true },
   { id: 'CollaboratorsSection', visible: true },
   { id: 'Contact', visible: true },
   { id: 'ClosingSection', visible: true }

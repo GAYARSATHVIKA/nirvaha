@@ -225,28 +225,56 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       picture: "https://api.dicebear.com/7.x/adventurer/svg?seed=" + encodeURIComponent(mockName)
     }));
     const mockToken = `${dummyHeader}.${dummyPayload}.dummy-signature`;
+    // Send mock token to backend
+    await authenticateWithBackend(mockToken, mockName);
+  };
 
-    return await authenticateWithBackend(mockToken, mockName);
+  const loginWithBackendDirectly = async (email: string, password: string) => {
+    const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.message || data.error || "Invalid email or password");
+    }
+    login(data.user, data.token);
+    return data;
+  };
+
+  const signupWithBackendDirectly = async (name: string, email: string, password: string) => {
+    const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.message || data.error || "Registration failed");
+    }
+    login(data.user, data.token);
+    return data;
   };
 
   const loginWithEmail = async (email: string, password: string) => {
     try {
       const isFirebaseConfigured = !!import.meta.env.VITE_FIREBASE_API_KEY;
       if (!isFirebaseConfigured) {
-        await performMockDeveloperLogin(email, email.split("@")[0]);
+        await loginWithBackendDirectly(email, password);
         return;
       }
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const idToken = await userCredential.user.getIdToken();
-      await authenticateWithBackend(idToken);
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const idToken = await userCredential.user.getIdToken();
+        await authenticateWithBackend(idToken);
+      } catch (fbError: any) {
+        console.warn("Firebase sign in failed, trying backend directly:", fbError);
+        await loginWithBackendDirectly(email, password);
+      }
     } catch (error: any) {
       console.error("loginWithEmail error:", error);
-      if (error.code === "auth/invalid-api-key" || error.code === "auth/invalid-config") {
-        console.warn("Config error caught. Bypassing Firebase for local testing.");
-        await performMockDeveloperLogin(email, email.split("@")[0]);
-      } else {
-        throw error;
-      }
+      throw error;
     }
   };
 
@@ -254,21 +282,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const isFirebaseConfigured = !!import.meta.env.VITE_FIREBASE_API_KEY;
       if (!isFirebaseConfigured) {
-        await performMockDeveloperLogin(email, name);
+        await signupWithBackendDirectly(name, email, password);
         return;
       }
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateFirebaseProfile(userCredential.user, { displayName: name });
-      const idToken = await userCredential.user.getIdToken();
-      await authenticateWithBackend(idToken, name);
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateFirebaseProfile(userCredential.user, { displayName: name });
+        const idToken = await userCredential.user.getIdToken();
+        await authenticateWithBackend(idToken, name);
+      } catch (fbError: any) {
+        console.warn("Firebase sign up failed, trying backend directly:", fbError);
+        await signupWithBackendDirectly(name, email, password);
+      }
     } catch (error: any) {
       console.error("signupWithEmail error:", error);
-      if (error.code === "auth/invalid-api-key" || error.code === "auth/invalid-config") {
-        console.warn("Config error caught. Bypassing Firebase for local testing.");
-        await performMockDeveloperLogin(email, name);
-      } else {
-        throw error;
-      }
+      throw error;
     }
   };
 
