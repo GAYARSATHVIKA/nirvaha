@@ -135,7 +135,7 @@ const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/nirvaha-med
                 aria-label="Go to home page"
               >
                 <img
-                  src="/logo.png"
+                  src="/logonew.png"
                   alt={logoAlt}
                   className="w-auto object-contain"
                   style={{
