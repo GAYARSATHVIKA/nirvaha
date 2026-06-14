@@ -1689,7 +1689,6 @@ const CoursePlayerPage: React.FC = () => {
           {/* XP */}
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full flex-shrink-0"
             style={{ background: '#ecfdf5', border: '1px solid #a7f3d0' }}>
-            <Sparkles className="w-3.5 h-3.5 text-[#0f7a55]" />
             <span className="text-xs font-bold text-[#0f7a55]">{totalXP} XP</span>
           </div>
 
@@ -1730,7 +1729,6 @@ const CoursePlayerPage: React.FC = () => {
                   {currentUnit?.duration}
                 </span>
                 <span className="flex items-center gap-1.5 text-xs ml-auto font-semibold" style={{ color: '#0f7a55' }}>
-                  <Sparkles className="w-3.5 h-3.5" />
                   {currentUnit?.xp} XP
                 </span>
               </div>
@@ -1946,7 +1944,6 @@ const CoursePlayerPage: React.FC = () => {
                 <div className="mb-10 p-6 rounded-[16px]"
                   style={{ background: '#f0fdf7', border: '1px solid #a7f3d0' }}>
                   <div className="flex items-center gap-2 mb-2">
-                    <Sparkles className="w-4 h-4 text-[#0f7a55]" />
                     <span className="text-sm font-bold text-[#0f7a55] uppercase tracking-wider">Summary</span>
                   </div>
                   <p className="text-[18px] text-[#374151] leading-relaxed italic">{currentContent.summary}</p>
@@ -2104,8 +2101,11 @@ const CoursePlayerPage: React.FC = () => {
       <CertificateModal
         isOpen={certModalOpen}
         onClose={() => setCertModalOpen(false)}
-        certificateImage={PATH_CERTIFICATES[pathId ?? ''] ?? '/CERTIFICATE1.png'}
         courseTitle={path.title}
+        userName={user?.name || 'Dedicated Learner'}
+        completionDate={new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        duration={path.duration}
+        certificateId={`NVH-${(pathId || 'CRS').substring(0, 4).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`}
       />
     </div>
   );

@@ -18,7 +18,7 @@ interface HeaderProps {
   logoAlt?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/logo.png', logoAlt = 'Nirvaha Logo' }) => {
+const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/nirvaha-meditation-logo.png', logoAlt = 'Nirvaha Logo' }) => {
   const [nirvahaRect, setNirvahaRect] = useState<DOMRect | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   // We'll attach this ref to the logo text container to calculate rect if needed by other components
@@ -120,7 +120,7 @@ const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/logo.png', 
         ref={headerRef}
         className="absolute top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-emerald-100/20"
         style={{ 
-          backgroundColor: 'rgba(234, 247, 240, 0.75)', 
+          background: 'linear-gradient(90deg, #d8f3e6 0%, #eaf7ef 50%, #e6f6e9 100%)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)'
         }}
@@ -135,12 +135,15 @@ const Header: React.FC<HeaderProps> = ({ onNirvahaClick, logoSrc = '/logo.png', 
                 aria-label="Go to home page"
               >
                 <img
-                  src={logoSrc}
+                  src="/logo.png"
                   alt={logoAlt}
-                  className="h-10 w-auto sm:h-12 sm:w-auto object-contain"
+                  className="w-auto object-contain"
                   style={{
-                    filter: 'drop-shadow(0px 4px 12px rgba(16, 185, 129, 0.22))'
+                    height: '110px',
+                    marginLeft: '-28px',
+                    filter: 'drop-shadow(0px 8px 28px rgba(16, 185, 129, 0.25))'
                   }}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/nirvaha-meditation-logo.png' }}
                 />
                 {/* Text removed as requested */}
               </button>

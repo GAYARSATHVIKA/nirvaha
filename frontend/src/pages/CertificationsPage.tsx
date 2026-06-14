@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ChevronLeft, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { PrivacyPolicyModal, TermsOfServiceModal } from '../components/common/LegalModals';
 
 /* ── Floating cards ── */
 const CARDS = [
@@ -86,6 +87,8 @@ const CertificationsPage: React.FC = () => {
 
     const navigate = useNavigate();
     const [activeFaq, setActiveFaq] = useState<number | null>(null);
+    const [privacyOpen, setPrivacyOpen] = useState(false);
+    const [termsOpen, setTermsOpen] = useState(false);
 
     const rawX = useMotionValue(0);
     const rawY = useMotionValue(0);
@@ -488,9 +491,13 @@ Discover emotionally grounded certifications designed to nurture
                 <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
                     {/* Brand Section */}
                     <div className="lg:col-span-2 flex flex-col items-start pr-0 lg:pr-8">
-                        <div className="flex items-center gap-2 mb-6">
-                            <span className="text-2xl">🌿</span>
-                            <span className="text-lg font-black text-white uppercase tracking-wider font-sans">Nirvaha</span>
+                        <div className="mb-6">
+                            <img
+                                src="/logo.png"
+                                alt="Nirvaha Logo"
+                                className="h-14 w-auto object-contain"
+                                onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/nirvaha-meditation-logo.png' }}
+                            />
                         </div>
                         <h3 className="text-xl font-bold text-white mb-4 leading-tight font-sans">
                             Continue Your Transformation Journey
@@ -603,12 +610,15 @@ Discover emotionally grounded certifications designed to nurture
                         © 2026 Nirvaha • Cultivating Clarity • Inspiring Growth • Enabling Transformation
                     </p>
                     <div className="flex gap-6 text-[12px] text-emerald-300/40 font-medium">
-                        <a href="#privacy" className="hover:text-emerald-300 transition-colors">Privacy Policy</a>
-                        <a href="#terms" className="hover:text-emerald-300 transition-colors">Terms of Service</a>
+                        <button onClick={() => setPrivacyOpen(true)} className="hover:text-emerald-300 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-300/40">Privacy Policy</button>
+                        <button onClick={() => setTermsOpen(true)} className="hover:text-emerald-300 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-300/40">Terms of Service</button>
                     </div>
                 </div>
             </footer>
 
+            {/* Legal Modals */}
+            <PrivacyPolicyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+            <TermsOfServiceModal isOpen={termsOpen} onClose={() => setTermsOpen(false)} />
         </div>
     );
 };

@@ -86,14 +86,6 @@ const defaultLibraryItems = [
         story: "Our ancient civilization holds profound truths.\nPassed down through generations of seekers.\nDiscover the timeless wisdom that shapes our world.\nEmbracing our roots gives wings to our future."
     },
     { 
-        id: "nidra-conscious-sleep",
-        title: "Nidra - Conscious Sleep", 
-        category: "Rest", 
-        image: "/nidra.jpg", 
-        duration: "30 min",
-        story: "Nidra is not just rest, it is deep restoration.\nIn the silence of sleep, the soul is renewed.\nConscious relaxation heals the nervous system.\nAwaken refreshed and aligned with your true self."
-    },
-    { 
         id: "ritucharya-seasonal-harmony",
         title: "Ritucharya - Seasonal Harmony", 
         category: "Nature", 

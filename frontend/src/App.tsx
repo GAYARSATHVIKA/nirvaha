@@ -44,6 +44,7 @@ import LifeQuizPage from './pages/LifeQuizPage';
 import AncientCharacterPage from './pages/AncientCharacterPage';
 import TempleOfBalancePage from './pages/TempleOfBalancePage';
 import AutographPage from './pages/AutographPage';
+import AboutPage from './pages/AboutPage';
 
 import { FeaturesBentoGrid } from "./components/dashboard/FeaturesBentoGrid";
 import { CommonProblems } from "./components/dashboard/CommonProblems";
@@ -121,6 +122,7 @@ function AppInner() {
         <Route path="/ancient-character" element={<AncientCharacterPage />} />
         <Route path="/temple-of-balance" element={<TempleOfBalancePage />} />
         <Route path="/add-your-autograph" element={<AutographPage />} />
+        <Route path="/about" element={<AboutPage />} />
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />

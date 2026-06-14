@@ -1,8 +1,9 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useEnrollment } from '../hooks/useEnrollment';
+import { PrivacyPolicyModal, TermsOfServiceModal } from '../components/common/LegalModals';
 import {
   ChevronLeft, BookOpen, Clock, CheckCircle2, Lock, ChevronDown,
   Sparkles, Brain, Heart, Users, Zap, Award, Quote,
@@ -212,6 +213,8 @@ const LearningPathPage: React.FC = () => {
   const [openModules, setOpenModules] = useState<Set<string>>(new Set());
   const [completedUnits, setCompletedUnits] = useState<Set<string>>(new Set());
   const [certModalOpen, setCertModalOpen] = useState(false);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
 
   const currentStreak = user?.stats?.streak ?? 0;
 
@@ -374,7 +377,7 @@ const LearningPathPage: React.FC = () => {
                 </span>
                 <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium"
                   style={{ background: 'rgba(255,255,255,0.75)', color: '#2d6a4f', border: '1px solid rgba(16,185,129,0.15)' }}>
-                  <Sparkles className="w-3 h-3" /> {totalXP} XP
+                  {totalXP} XP
                 </span>
               </div>
 
@@ -444,7 +447,6 @@ const LearningPathPage: React.FC = () => {
                       letterSpacing: '0.06em',
                     }}
                   >
-                    <Sparkles className="w-4 h-4" />
                     Continue Learning
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
@@ -460,7 +462,6 @@ const LearningPathPage: React.FC = () => {
                       letterSpacing: '0.06em',
                     }}
                   >
-                    <Sparkles className="w-4 h-4" />
                     Enroll Now
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
@@ -535,10 +536,6 @@ const LearningPathPage: React.FC = () => {
               className="rounded-[28px] p-8" style={glass}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(15,122,85,0.15)', border: '1px solid rgba(15,122,85,0.3)' }}>
-                  <Sparkles className="w-5 h-5" style={{ color: '#0f7a55' }} />
-                </div>
                 <div>
                   <p className="text-[10px] font-bold tracking-widest uppercase" style={{ color: '#2e5040' }}>XP Earned</p>
                   <p className="font-black text-2xl" style={{ color: '#0a1a12' }}>
@@ -661,7 +658,6 @@ const LearningPathPage: React.FC = () => {
             className="mb-16 rounded-[32px] p-8 lg:p-12" style={glass}
           >
             <h2 className="text-2xl font-black mb-8 flex items-center gap-3" style={{ color: '#0a1a12', fontFamily: "'Poppins', sans-serif" }}>
-              <Sparkles className="w-6 h-6" style={{ color: '#0f7a55' }} />
               What you'll cultivate
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -852,7 +848,6 @@ const LearningPathPage: React.FC = () => {
                                       {/* XP */}
                                       <span className="flex items-center gap-1 text-xs flex-shrink-0 font-semibold"
                                         style={{ color: '#2e5040' }}>
-                                        <Sparkles className="w-3 h-3" style={{ color: '#0f7a55' }} />
                                         {unit.xp} XP
                                       </span>
                                     </motion.div>
@@ -1000,9 +995,13 @@ const LearningPathPage: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Brand Section */}
           <div className="lg:col-span-2 flex flex-col items-start pr-0 lg:pr-8">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="text-2xl">ðŸŒ¿</span>
-              <span className="text-lg font-black text-white uppercase tracking-wider font-sans">Nirvaha Academy</span>
+            <div className="mb-6">
+              <img
+                src="/logo.png"
+                alt="Nirvaha Logo"
+                className="h-14 w-auto object-contain"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/nirvaha-meditation-logo.png' }}
+              />
             </div>
             <h3 className="text-xl font-bold text-white mb-4 leading-tight font-sans">
               Keep Learning. Keep Growing.
@@ -1118,8 +1117,8 @@ const LearningPathPage: React.FC = () => {
             Â© 2026 Nirvaha Academy â€¢ Learn with Clarity â€¢ Grow with Purpose
           </p>
           <div className="flex gap-6 text-[12px] text-emerald-100/30 font-medium">
-            <a href="#privacy" className="hover:text-emerald-100/60 transition-colors">Privacy Policy</a>
-            <a href="#terms"   className="hover:text-emerald-100/60 transition-colors">Terms of Service</a>
+            <button onClick={() => setPrivacyOpen(true)} className="hover:text-emerald-100/60 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-100/30">Privacy Policy</button>
+            <button onClick={() => setTermsOpen(true)} className="hover:text-emerald-100/60 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-100/30">Terms of Service</button>
           </div>
         </div>
       </footer>
@@ -1128,8 +1127,11 @@ const LearningPathPage: React.FC = () => {
       <CertificateModal
         isOpen={certModalOpen}
         onClose={() => setCertModalOpen(false)}
-        certificateImage={PATH_CERTIFICATES[path.id] ?? '/CERTIFICATE1.png'}
         courseTitle={path.title}
+        userName={user?.name || 'Dedicated Learner'}
+        completionDate={new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        duration={path.duration}
+        certificateId={`NVH-${path.id.substring(0, 4).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`}
       />
 
       {/* Enrollment Form Modal */}
@@ -1144,6 +1146,10 @@ const LearningPathPage: React.FC = () => {
           setTimeout(() => navigate(`/learn/${pathId}/play`), 300);
         }}
       />
+
+      {/* Legal Modals */}
+      <PrivacyPolicyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+      <TermsOfServiceModal isOpen={termsOpen} onClose={() => setTermsOpen(false)} />
     </div>
   );
 };

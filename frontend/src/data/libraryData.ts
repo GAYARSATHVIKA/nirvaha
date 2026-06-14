@@ -343,31 +343,7 @@ export const defaultLibraryItems: LibraryItem[] = [
             { title: "The Transmission of Vedic Knowledge", url: "#" }
         ]
     },
-    { 
-        id: "nidra-conscious-sleep",
-        title: "Nidra - Conscious Sleep", 
-        category: "Rest", 
-        image: "/nidra.jpg", 
-        duration: "30 min",
-        story: "Nidra is not just rest, it is deep restoration.\nIn the silence of sleep, the soul is renewed.\nConscious relaxation heals the nervous system.\nAwaken refreshed and aligned with your true self.",
-        description: "Yoga Nidra, or yogic sleep, is a state of consciousness between waking and sleeping. It is a powerful technique in which the practitioner learns to relax consciously. While the physical body rests deeply, the inner awareness remains awake, allowing for profound psychological, physical, and energetic healing at the deepest subconscious levels.",
-        whyTheyMatter: "Chronic exhaustion is the epidemic of our era. Nidra is crucial because true rest is rarely achieved through ordinary sleep alone. Conscious rest unwinds deep-seated tensions, resets the nervous system, and provides an unparalleled sanctuary of peace in a hyper-stimulated world.",
-        quotes: [
-            "In the depths of stillness, the body remembers how to heal.",
-            "True rest is not the absence of activity, but the presence of peace.",
-            "Awake in the dream of life, asleep in the peace of the soul."
-        ],
-        impact: [
-            "Dramatically reduces stress, anxiety, and PTSD symptoms.",
-            "Improves the quality of natural sleep and combats insomnia.",
-            "Enhances cognitive function and creative problem-solving.",
-            "Facilitates deep emotional healing and subconscious reprogramming."
-        ],
-        referenceLinks: [
-            { title: "The Science of Yoga Nidra", url: "#" },
-            { title: "Deep Rest for the Modern Nervous System", url: "#" }
-        ]
-    },
+    
     { 
         id: "ritucharya-seasonal-harmony",
         title: "Ritucharya - Seasonal Harmony", 
