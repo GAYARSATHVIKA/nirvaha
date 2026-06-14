@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, BookOpen, ShieldCheck, Award, BatteryCharging, ArrowRight } from 'lucide-react';
+import { PrivacyPolicyModal, TermsOfServiceModal } from '../components/common/LegalModals';
 import learningPathsData from '../data/learningPaths.json';
 import { useAuth } from '../contexts/AuthContext';
 import { useEnrollment } from '../hooks/useEnrollment';
@@ -18,6 +19,8 @@ const PATH_IMAGES: Record<string, string> = {
 const LearningCatalogPage: React.FC = () => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState<string | null>(null);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
   const { user } = useAuth();
   const { enroll, isEnrolled } = useEnrollment();
   const [enrollingPathId, setEnrollingPathId] = useState<string | null>(null);
@@ -234,9 +237,13 @@ const LearningCatalogPage: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Brand Section */}
           <div className="lg:col-span-2 flex flex-col items-start pr-0 lg:pr-8">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="text-2xl">🌿</span>
-              <span className="text-lg font-black text-white uppercase tracking-wider font-sans">Nirvaha Academy</span>
+            <div className="mb-6">
+              <img
+                src="/logo.png"
+                alt="Nirvaha Logo"
+                className="h-14 w-auto object-contain"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/nirvaha-meditation-logo.png' }}
+              />
             </div>
             <h3 className="text-xl font-bold text-white mb-4 leading-tight font-sans">
               Keep Learning. Keep Growing.
@@ -352,8 +359,8 @@ const LearningCatalogPage: React.FC = () => {
             © 2026 Nirvaha Academy • Learn with Clarity • Grow with Purpose
           </p>
           <div className="flex gap-6 text-[12px] text-emerald-100/30 font-medium">
-            <a href="#privacy" className="hover:text-emerald-100/60 transition-colors">Privacy Policy</a>
-            <a href="#terms" className="hover:text-emerald-100/60 transition-colors">Terms of Service</a>
+            <button onClick={() => setPrivacyOpen(true)} className="hover:text-emerald-100/60 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-100/30">Privacy Policy</button>
+            <button onClick={() => setTermsOpen(true)} className="hover:text-emerald-100/60 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-100/30">Terms of Service</button>
           </div>
         </div>
       </footer>
@@ -370,6 +377,10 @@ const LearningCatalogPage: React.FC = () => {
           setTimeout(() => navigate(`/learn/${enrollModal.pathId}`), 300);
         }}
       />
+
+      {/* Legal Modals */}
+      <PrivacyPolicyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+      <TermsOfServiceModal isOpen={termsOpen} onClose={() => setTermsOpen(false)} />
     </div>
   );
 };

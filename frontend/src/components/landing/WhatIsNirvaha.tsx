@@ -75,7 +75,7 @@ const WhatIsNirvaha: React.FC = () => {
     }, []);
 
     return (
-        <section className="relative w-full py-16 lg:py-24 bg-[#eaf5ef] overflow-hidden">
+        <section id="what-is-nirvaha" className="relative w-full py-16 lg:py-24 bg-[#eaf5ef] overflow-hidden">
 
             {/* Decorative Background Shapes */}
             <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">

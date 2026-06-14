@@ -15,7 +15,6 @@ const curatedImageSets: Record<string, string[]> = {
     'civilizational-wisdom': ['/BR1.png', '/BR2.png', '/BR3.png', '/BR4.png'],
     'ritucharya-seasonal-harmony': ['/sundar1.png', '/sundar2.png', '/sundar3.png', '/sundar4.png'],
     'satmya-holistic-adaptability': ['/tata1.png', '/tata2.png', '/tata3.png', '/tata4.png'],
-    'nidra-conscious-sleep': ['/nidra1.png', '/nidra2.png', '/nidra3.png', '/nidra4.png'],
     'sadvritta-ethical-living': ['/sadvritta1.png', '/sadvritta2.png', '/sadvritta3.png', '/sadvritta4.png'],
     'lal-bahadur-shastri': ['/lal1.png', '/lal2.png', '/lal3.png', '/lal4.png'],
     'ratan-tata': ['/tata1.png', '/tata2.png', '/tata3.png', '/tata4.png'],

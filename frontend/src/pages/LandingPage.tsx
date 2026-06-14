@@ -105,7 +105,7 @@ const LandingPage: React.FC = () => {
   const footerSections = sections.filter(s => s.id === 'Contact' || s.id === 'ClosingSection');
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative overflow-x-hidden">
       <SEOHead
         title="Nirvaha"
         description="Transform your mental wellness with Nirvaha's AI-powered emotional healing platform. Combining ancient spiritual wisdom with modern therapy, meditation, and professional counseling services for complete holistic healing."
