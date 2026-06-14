@@ -172,7 +172,7 @@ RULES:
 - Do NOT use markdown symbols such as *, **, #, or bullet points (- or •).
 - Do NOT add wellness or emotional support content.
 - Keep the tone clear, direct, and conversational.`;
-        maxTokens = 340;
+        maxTokens = 120;
       } else {
         systemPrompt = `You are Nirvaha AI, a knowledgeable and friendly assistant.
 
@@ -186,7 +186,7 @@ RULES:
 - Do NOT add background history, extra context, or tangents.
 - Do NOT add wellness or emotional support content.
 - End with one short follow-up: "Want me to go deeper?" or "Would you like an example?"`;
-        maxTokens = 150;
+        maxTokens = 80;
       }
     } else {
       systemPrompt = `You are Nirvaha AI, a warm and grounded wellness companion.
@@ -204,7 +204,7 @@ RULES:
 - Naturally mention relevant Nirvaha features (Meditation, Sound Healing, Companions, Journaling) only when it fits the context — not in every response.
 - CRITICAL — YOUR FINAL SENTENCE MUST NEVER BE A QUESTION. Do not end with any sentence that ends in a question mark. Do not use patterns like "Have you tried...", "Would that help?", "Does that sound like something you'd be willing to try?", "Can you...", "What do you think?", "How does that feel?", or any similar phrasing. End every response with a statement: a calming observation, a practical next step, an encouraging thought, or a mindfulness tip.
 - Never use generic filler like "That is a great question", "As an AI", or "I completely understand."${personaInstruction}${problemSpecificGuide}`;
-      maxTokens = 320;
+      maxTokens = 100;
     }
 
     // ── Conversation history for memory ───────────────────────────────────
