@@ -21,7 +21,7 @@ const JourneyPage: React.FC = () => {
                 <div className="text-center">
                     <h1 className="text-2xl font-bold text-gray-800 mb-4">Topic Not Found</h1>
                     <button 
-                        onClick={() => navigate('/')}
+                        onClick={() => navigate('/dashboard/overview')}
                         className="text-emerald-600 font-medium hover:underline flex items-center gap-2 justify-center"
                     >
                         <ArrowLeft size={18} /> Back to Library

@@ -78,6 +78,7 @@ export function ChatbotPage() {
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profileEmail, setProfileEmail] = useState("");
+  const [profileQuote, setProfileQuote] = useState("");
 
   const [isPreferencesModalOpen, setIsPreferencesModalOpen] = useState(false);
   const [isClearingHistory, setIsClearingHistory] = useState(false);
@@ -319,6 +320,7 @@ export function ChatbotPage() {
     }
     setProfileName(user.name || "");
     setProfileEmail(user.email || "");
+    setProfileQuote(user.bio || "");
     setIsProfileModalOpen(true);
   };
 
@@ -336,6 +338,7 @@ export function ChatbotPage() {
           userId: user?.id,
           name: profileName.trim(),
           email: profileEmail.trim(),
+          bio: profileQuote.trim(),
         }),
       });
 
@@ -1199,7 +1202,7 @@ export function ChatbotPage() {
                     value={profileName}
                     onChange={(e) => setProfileName(e.target.value)}
                     placeholder="Enter display name"
-                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all text-[#1A2E2A]"
+                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-white text-black text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all"
                   />
                 </div>
 
@@ -1210,7 +1213,18 @@ export function ChatbotPage() {
                     value={profileEmail}
                     onChange={(e) => setProfileEmail(e.target.value)}
                     placeholder="Enter username or email"
-                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all text-[#1A2E2A]"
+                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-white text-black text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-[#0C3B2E]/60 uppercase tracking-wider mb-1.5 px-1">Daily Quote</label>
+                  <input
+                    type="text"
+                    value={profileQuote}
+                    onChange={(e) => setProfileQuote(e.target.value)}
+                    placeholder="Enter your daily quote"
+                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-white text-black text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all"
                   />
                 </div>
               </div>

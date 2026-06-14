@@ -480,6 +480,75 @@ export function ProfilePage() {
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [passwordStatus, setPasswordStatus] = useState<{ success: boolean; message: string } | null>(null);
 
+  const [isEditingQuote, setIsEditingQuote] = useState(false);
+  const [quoteInputValue, setQuoteInputValue] = useState("");
+  const [isSavingQuote, setIsSavingQuote] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user?.id) return;
+    
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Image size should be less than 5MB");
+      return;
+    }
+    
+    setIsUploadingAvatar(true);
+    try {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64String = reader.result as string;
+        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/users/profile/update`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: user.id, avatar: base64String })
+        });
+        
+        if (res.ok) {
+          toast.success("Profile picture updated!");
+          refreshProfile();
+        } else {
+          toast.error("Failed to update profile picture");
+        }
+        setIsUploadingAvatar(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (e) {
+      toast.error("Error updating profile picture");
+      setIsUploadingAvatar(false);
+    }
+  };
+
+  const currentDisplayedQuote = useMemo(() => {
+    return user?.bio || profileData?.bio;
+  }, [user?.bio, profileData?.bio]);
+
+  const handleSaveQuote = async () => {
+    if (!user?.id) return;
+    setIsSavingQuote(true);
+    try {
+      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/users/profile/update`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id, bio: quoteInputValue.trim() })
+      });
+      if (res.ok) {
+         toast.success("Quote updated!");
+         setIsEditingQuote(false);
+         refreshProfile();
+      } else {
+         toast.error("Failed to update quote");
+      }
+    } catch (e) {
+      toast.error("Error updating quote");
+    } finally {
+      setIsSavingQuote(false);
+    }
+  };
+
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setPasswordStatus(null);
@@ -1243,11 +1312,34 @@ export function ProfilePage() {
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#2D6A4F]/5 rounded-full blur-2xl -ml-24 -mb-24" />
             
             <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-10">
-              <motion.div whileHover={{ scale: 1.05 }} style={{ boxShadow: "0 20px 60px rgba(45, 106, 79, 0.35)" }}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                style={{ boxShadow: "0 20px 60px rgba(45, 106, 79, 0.35)" }}
+                className="relative group cursor-pointer rounded-[32px] overflow-hidden"
+                onClick={() => fileInputRef.current?.click()}
+              >
                 <InitialsAvatar
                   name={user?.name || profileData?.name || "Guest"}
                   size="profile"
                   className="shadow-2xl"
+                  imageUrl={user?.avatar || profileData?.avatar}
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  {isUploadingAvatar ? (
+                    <Loader2 className="w-8 h-8 text-white animate-spin" />
+                  ) : (
+                    <div className="flex flex-col items-center text-white">
+                      <Edit2 className="w-8 h-8 mb-2" />
+                      <span className="text-xs font-bold shadow-sm">Change Photo</span>
+                    </div>
+                  )}
+                </div>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleAvatarChange}
+                  accept="image/png, image/jpeg, image/jpg"
+                  className="hidden"
                 />
               </motion.div>
 
@@ -1256,7 +1348,7 @@ export function ProfilePage() {
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h1 className="text-[#1B4332] mb-2 font-black tracking-tight">{user?.name || profileData?.name || "Gayar Sathvika"}</h1>
-                    <p className="text-[#2D6A4F] font-medium mb-4 italic">🌿 “You’re building consistency — keep going.”</p>
+                    <p className="text-[#2D6A4F] font-medium mb-4 italic">🌿 “{currentDisplayedQuote || dailyQuote.quote}”</p>
                     <div className="flex flex-wrap gap-4">
                       <div className="flex items-center gap-2 text-sm text-[#1B4332]/70 font-semibold bg-white/40 px-3 py-1.5 rounded-full border border-white/50">
                         <Mail className="w-4 h-4" />
@@ -1743,29 +1835,80 @@ export function ProfilePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 1.15, ease: "easeOut" }}
-          className="mt-8 mb-8 rounded-[28px] border border-emerald-100/90 bg-gradient-to-br from-[#f9fdfb] via-[#f0fdf4] to-[#ecfdf5] px-6 py-6 md:px-8 md:py-7 shadow-[0_14px_44px_rgba(27,67,50,0.07)]"
+          className="mt-8 mb-8 rounded-[28px] border border-emerald-100/90 bg-gradient-to-br from-[#f9fdfb] via-[#f0fdf4] to-[#ecfdf5] px-6 py-6 md:px-8 md:py-7 shadow-[0_14px_44px_rgba(27,67,50,0.07)] relative group"
         >
-          <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-[#2D6A4F]/65 mb-2">
-            Daily mindfulness reflection
-          </p>
-          <h3 className="text-[#1B4332] font-black text-lg md:text-xl tracking-tight mb-4">
-            Quote of the Day
-          </h3>
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-[#2D6A4F]/65 mb-2">
+                Daily mindfulness reflection
+              </p>
+              <h3 className="text-[#1B4332] font-black text-lg md:text-xl tracking-tight">
+                Quote of the Day
+              </h3>
+            </div>
+            {!isEditingQuote && (
+              <button
+                onClick={() => { setQuoteInputValue(currentDisplayedQuote || dailyQuote.quote); setIsEditingQuote(true); }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity p-2 bg-white/50 hover:bg-white rounded-full text-[#2D6A4F] shadow-sm border border-emerald-100"
+                title="Edit Quote"
+              >
+                <Edit2 className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+
           <AnimatePresence mode="wait">
-            <motion.blockquote
-              key={dailyQuote.key}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="m-0 pl-4 border-l-2 border-[#52B788]/45 text-[#234e3c] text-base md:text-lg font-medium leading-relaxed"
-            >
-              <span className="italic">&ldquo;{dailyQuote.quote}&rdquo;</span>
-            </motion.blockquote>
+            {isEditingQuote ? (
+              <motion.div
+                key="edit-quote"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="w-full"
+              >
+                <textarea
+                  value={quoteInputValue}
+                  onChange={(e) => setQuoteInputValue(e.target.value)}
+                  className="w-full p-4 rounded-2xl border border-emerald-200 bg-white text-[#234e3c] font-medium outline-none focus:border-[#52B788] focus:ring-4 focus:ring-[#52B788]/20 transition-all resize-none mb-3 shadow-inner"
+                  rows={3}
+                  placeholder="Enter your personal quote..."
+                />
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={() => setIsEditingQuote(false)}
+                    disabled={isSavingQuote}
+                    className="px-4 py-2 rounded-xl text-sm font-bold text-gray-500 hover:bg-gray-100 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSaveQuote}
+                    disabled={isSavingQuote}
+                    className="px-4 py-2 rounded-xl bg-[#2D6A4F] text-white text-sm font-bold hover:bg-[#1B4332] transition-colors shadow-md flex items-center gap-2"
+                  >
+                    {isSavingQuote ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
+                    Save Quote
+                  </button>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.blockquote
+                key={currentDisplayedQuote || dailyQuote.key}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="m-0 pl-4 border-l-2 border-[#52B788]/45 text-[#234e3c] text-base md:text-lg font-medium leading-relaxed"
+              >
+                <span className="italic">&ldquo;{currentDisplayedQuote || dailyQuote.quote}&rdquo;</span>
+              </motion.blockquote>
+            )}
           </AnimatePresence>
-          <p className="mt-4 text-xs text-[#2D6A4F]/55 font-medium">
-            Today&apos;s calm thought
-          </p>
+          {!isEditingQuote && (
+            <p className="mt-4 text-xs text-[#2D6A4F]/55 font-medium">
+              Today&apos;s calm thought
+            </p>
+          )}
           {/* My Sessions section removed: functionality moved to CompanionPage */}
         </motion.section>
 

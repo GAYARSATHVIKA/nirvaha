@@ -112,7 +112,7 @@ const CertificationsPage: React.FC = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/dashboard/overview')}
                 className="fixed top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-emerald-100 shadow-md hover:shadow-lg hover:bg-emerald-50 transition-all group"
             >
                 <ChevronLeft className="w-4 h-4 text-emerald-700 group-hover:-translate-x-0.5 transition-transform" />

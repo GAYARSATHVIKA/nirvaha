@@ -80,8 +80,8 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
     { name: "Settings", path: "/dashboard/profile?open=settings", category: "Account" as const },
     { name: "Chakra Experience", path: "/chakra-experience", category: "Academy" as const },
     { name: "Healing Music", path: "/healing-music", category: "Academy" as const },
-    { name: "Wellness OTT", path: "/wellness-ott", category: "Features" as const, desc: "Watch wellness experiences on-demand." },
-    { name: "OTT Wellness", path: "/wellness-ott", category: "Features" as const, desc: "Netflix-style wellness series and films." },
+    { name: "Wellness OTT", path: "/wellness-ott-intro", category: "Features" as const, desc: "Watch wellness experiences on-demand." },
+    { name: "OTT Wellness", path: "/wellness-ott-intro", category: "Features" as const, desc: "Netflix-style wellness series and films." },
     { name: "Gaming Wellness Hub", path: "/dashboard/overview?scrollTo=gaming-hub", category: "Features" as const, desc: "Gamified wellness and interactive sessions." },
     { name: "Breathing", path: "/breathing", category: "Academy" as const },
     ...wellnessSessions.map((s) => ({
@@ -437,7 +437,7 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
                   className="flex items-center gap-3 px-4 py-2 rounded-2xl hover:shadow-lg transition-all"
                   style={{ background: 'rgba(255,255,255,0.1)' }}
                 >
-                  <InitialsAvatar name={user?.name || "Guest"} size="sm" className="shadow-md" />
+                  <InitialsAvatar name={user?.name || "Guest"} size="sm" className="shadow-md" imageUrl={user?.avatar} />
                   <ChevronDown className="w-4 h-4 text-white/60" />
                 </motion.button>
 
@@ -578,7 +578,7 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
             {/* Profile Section */}
             <div className="mb-4 p-4 rounded-2xl" style={{ background: 'rgba(255,255,255,0.08)' }}>
               <div className="flex items-center gap-3 mb-3">
-                <InitialsAvatar name={user?.name || "Guest"} size="lg" className="shadow-md" />
+                <InitialsAvatar name={user?.name || "Guest"} size="lg" className="shadow-md" imageUrl={user?.avatar} />
                 <div>
                   <p className="text-white">{user?.name || 'Guest User'}</p>
                   <p className="text-sm text-white/50">View Profile</p>

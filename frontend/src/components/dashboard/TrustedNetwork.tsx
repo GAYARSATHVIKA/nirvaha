@@ -35,7 +35,7 @@ const ADS_DATA = [
         label: "Shanti Sukta",
         icon: "🕊️",
         description: "Powerful Sanskrit chants for universal peace",
-        url: "/audio/anxiety-crystal-bowl.mp3",
+        url: "/audio/meditation/Tibetan-Bowl-Journey.mp3",
       },
       {
         id: "v4",
@@ -77,7 +77,7 @@ const ADS_DATA = [
         label: "Sacred Sound Bath",
         icon: "🥣",
         description: "Deep resonance healing bowl soundscape",
-        url: "/audio/burnout-432hz.mp3",
+        url: "/audio/focus/Clear-Mind-Frequencies.mp3",
       },
     ],
     delay: 0,

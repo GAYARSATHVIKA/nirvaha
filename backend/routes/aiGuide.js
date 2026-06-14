@@ -13,11 +13,11 @@ router.post('/chat', async (req, res) => {
     }
 
     const completion = await groq.chat.completions.create({
-      model: 'llama3-8b-8192',
+      model: 'llama-3.3-70b-versatile',
       messages: [
         {
           role: 'system',
-          content: systemPrompt || 'You are Nirvaha AI, a warm wellness assistant.',
+          content: systemPrompt || 'You are Nirvaha AI, a warm wellness assistant. CRITICAL RESTRICTION: You MUST ONLY answer questions related to mental health, physical health, wellness, the Nirvaha website, or the Nirvaha company. If the user asks about ANY other topic, politely decline to answer and redirect them to health, wellness, or Nirvaha-related topics.',
         },
         {
           role: 'user',

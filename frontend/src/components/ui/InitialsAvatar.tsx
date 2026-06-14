@@ -18,6 +18,7 @@ type InitialsAvatarProps = {
   size?: InitialsAvatarSize;
   className?: string;
   backgroundColor?: string;
+  imageUrl?: string | null;
 };
 
 export function InitialsAvatar({
@@ -25,8 +26,23 @@ export function InitialsAvatar({
   size = 'md',
   className,
   backgroundColor,
+  imageUrl,
 }: InitialsAvatarProps) {
   const initials = getInitials(name);
+
+  if (imageUrl) {
+    return (
+      <div
+        className={cn(
+          'flex items-center justify-center shrink-0 overflow-hidden',
+          sizeClasses[size],
+          className
+        )}
+      >
+        <img src={imageUrl} alt={name || 'Avatar'} className="w-full h-full object-cover" />
+      </div>
+    );
+  }
 
   return (
     <div
