@@ -70,7 +70,7 @@ const StoriesPage: React.FC = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     whileHover={{ scale: 1.05, x: -5 }}
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/dashboard/overview')}
                     className="flex items-center gap-2 text-[#1a5d47] font-bold mb-12 hover:text-[#2c8d6d] transition-colors"
                 >
                     <ArrowLeft size={24} />

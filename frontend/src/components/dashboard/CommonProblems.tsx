@@ -235,14 +235,18 @@ export const CommonProblems = () => {
                     const data = await res.json();
                     if (data.success && data.problems?.length > 0) {
                         // Map DB data to component-compatible format
-                        const mapped = data.problems.map((p: any) => ({
-                            ...p,
-                            icon: resolveIcon(p.icon),
-                            recommendations: (p.recommendations || []).map((rec: any) => ({
-                                ...rec,
-                                icon: resolveIcon(rec.icon)
-                            }))
-                        }));
+                        const mapped = data.problems.map((p: any) => {
+                            const staticProblem = STATIC_PROBLEMS.find(sp => sp.title === p.title);
+                            return {
+                                ...p,
+                                image: (p.image && !p.image.includes('unsplash.com')) ? p.image : (staticProblem ? staticProblem.image : p.image),
+                                icon: resolveIcon(p.icon),
+                                recommendations: (p.recommendations || []).map((rec: any) => ({
+                                    ...rec,
+                                    icon: resolveIcon(rec.icon)
+                                }))
+                            };
+                        });
                         setProblems(mapped);
                     }
                 }

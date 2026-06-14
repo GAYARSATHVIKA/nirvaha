@@ -12,11 +12,15 @@ const { Server } = require('socket.io');
 const bcrypt = require('bcryptjs');
 const { cacheMiddleware, initCache } = require('./utils/cache');
 const { startRetentionJobs, ensureBackupDir } = require('./utils/retention');
-const allowedOrigins = [
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
+  'http://localhost:5173',
+  'https://nirvaha-git-railway-code-chang-0161fa-dtarun2202-6431s-projects.vercel.app',
+  'https://nirvaha.vercel.app',
+  'https://nirvaha-three.vercel.app',
+  'https://nirvaha-production.up.railway.app',
   'https://nirvaha-wellnessllp.vercel.app',
   'http://localhost:3000',
   'http://localhost:3001',
-  'http://localhost:5173',
   'http://localhost:5000',
   'http://localhost:5001'
 ];
@@ -35,6 +39,7 @@ const contentRoutes = require('./routes/contentRoutes');
 const marketplaceRoutes = require('./routes/marketplaceRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const utilityRoutes = require('./routes/utilityRoutes');
+const aiGuideRoutes = require('./routes/aiGuide');
 const postRoutes = require('./routes/postRoutes');
 const landingRoutes = require('./modules/landing/landing.routes');
 const contactRoutes = require('./modules/contact/contact.routes');
@@ -65,18 +70,14 @@ app.disable('x-powered-by');
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    credentials: true,
-  },
+    origin: [
+      'https://nirvaha-three.vercel.app',
+      'http://localhost:5173',
+      'http://localhost:3000'
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
 });
 
 const PORT = process.env.PORT || 5000;
@@ -225,7 +226,36 @@ async function initLocalAdminUser() {
   }
 }
 
+function getPublicIp() {
+  const https = require('https');
+  return new Promise((resolve) => {
+    const options = {
+      hostname: 'api.ipify.org',
+      port: 443,
+      path: '/',
+      method: 'GET',
+      timeout: 2000
+    };
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => { data += chunk; });
+      res.on('end', () => { resolve(data.trim()); });
+    });
+    req.on('error', () => { resolve(null); });
+    req.on('timeout', () => { req.destroy(); resolve(null); });
+    req.end();
+  });
+}
+
+let isConnecting = false;
+
 async function connectMongo() {
+  if (isConnecting) return;
+  if (mongoose.connection.readyState === 1) {
+    mongoConnected = true;
+    return;
+  }
+
   if (!MONGODB_URI) {
     console.warn('⚠️  MONGODB_URI not set. Using local JSON database for development.');
     console.warn('⚠️  To use MongoDB, add your IP (106.214.2.149) to MongoDB Atlas IP whitelist.');
@@ -233,9 +263,11 @@ async function connectMongo() {
     return;
   }
 
+  isConnecting = true;
   mongoose.set('strictQuery', false);
 
   try {
+    console.log('Connecting to MongoDB Atlas...');
     await mongoose.connect(MONGODB_URI, {
       autoIndex: false,
       maxPoolSize: Number(process.env.MONGO_MAX_POOL_SIZE) || 30,
@@ -246,15 +278,46 @@ async function connectMongo() {
     });
     console.log('✓ Connected to MongoDB Atlas');
     mongoConnected = true;
+    isConnecting = false;
     try {
+      await seedMongo();
       await syncAllApprovedCompanionsToUsers();
     } catch (syncErr) {
       console.error('[companion-sync] Startup backfill failed:', syncErr.message);
     }
   } catch (error) {
-    console.error('MongoDB connection error:', error.message);
-    console.warn('⚠️  Falling back to local JSON database for development...');
-    mongoConnected = false;
+    console.error('MongoDB Atlas connection error:', error.message);
+    
+    console.log('Trying local MongoDB fallback (mongodb://127.0.0.1:27017/nirvaha)...');
+    try {
+      await mongoose.disconnect();
+      await mongoose.connect('mongodb://127.0.0.1:27017/nirvaha', {
+        serverSelectionTimeoutMS: 3000,
+      });
+      console.log('✓ Connected to local MongoDB');
+      mongoConnected = true;
+      isConnecting = false;
+      try {
+        await seedMongo();
+        await syncAllApprovedCompanionsToUsers();
+      } catch (syncErr) {
+        console.error('[companion-sync] Local startup backfill failed:', syncErr.message);
+      }
+    } catch (localError) {
+      console.error('Local MongoDB fallback failed:', localError.message);
+      mongoConnected = false;
+      isConnecting = false;
+      
+      const publicIp = await getPublicIp().catch(() => null);
+      if (publicIp) {
+        console.warn(`⚠️  To use MongoDB, add your current IP (${publicIp}) to MongoDB Atlas IP whitelist.`);
+      } else {
+        console.warn('⚠️  To use MongoDB, add your IP to MongoDB Atlas IP whitelist.');
+      }
+      
+      console.log('Will retry connecting to MongoDB in 10 seconds...');
+      setTimeout(connectMongo, 10000);
+    }
   }
 }
 
@@ -1070,20 +1133,16 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(compression());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: [
+    'https://nirvaha-three.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -1124,6 +1183,7 @@ app.use('/api/essential-guidance', essentialGuidanceRoutes);
 app.use('/api/healing-frequencies', healingFrequenciesRoutes);
 app.use('/api/enrollments', enrollmentRoutes);
 app.use('/api', utilityRoutes);
+app.use('/api/ai-guide', aiGuideRoutes);
 
 // Legacy route compatibility (for existing frontend code)
 app.post('/api/upload', upload.single('file'), (req, res) => {

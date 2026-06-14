@@ -20,7 +20,7 @@ import {
 import { useEffect, useMemo, useState, useRef } from "react";
 
 import TextType from "../TextType";
-import { BACKEND_CONFIG } from "@/config/backend";
+import BACKEND_CONFIG from "@/config/backend";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSettings } from "@/contexts/SettingsContext";
 import { InitialsAvatar } from "@/components/ui/InitialsAvatar";
@@ -78,6 +78,7 @@ export function ChatbotPage() {
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profileEmail, setProfileEmail] = useState("");
+  const [profileQuote, setProfileQuote] = useState("");
 
   const [isPreferencesModalOpen, setIsPreferencesModalOpen] = useState(false);
   const [isClearingHistory, setIsClearingHistory] = useState(false);
@@ -293,31 +294,20 @@ export function ChatbotPage() {
     }
   };
 
-  const handleExportHistory = async () => {
-    if (!user?.id || user.id === 'anonymous') {
-      toast.warning('Please log in to export your reflection history.');
-      return;
-    }
-
+  const handleExportHistory = () => {
     setIsExportingHistory(true);
     try {
-      const response = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/reflect/export?userId=${encodeURIComponent(user.id)}`);
-      const data = await response.json();
-      if (!response.ok || !data.url) {
-        throw new Error(data.error || 'Export request failed');
-      }
-
-      const downloadUrl = `${BACKEND_CONFIG.API_BASE_URL}${data.url}`;
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(sessions, null, 2));
       const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = data.filename || `nirvaha-chat-backup-${Date.now()}.json`;
+      link.href = dataStr;
+      link.download = `nirvaha-chat-backup-${Date.now()}.json`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast.success('Chat export downloaded');
+      toast.success('Chat export downloaded successfully');
     } catch (error) {
       console.error('Export history failed:', error);
-      toast.error((error as Error).message || 'Unable to export history');
+      toast.error('Unable to export history');
     } finally {
       setIsExportingHistory(false);
     }
@@ -330,6 +320,7 @@ export function ChatbotPage() {
     }
     setProfileName(user.name || "");
     setProfileEmail(user.email || "");
+    setProfileQuote(user.bio || "");
     setIsProfileModalOpen(true);
   };
 
@@ -347,6 +338,7 @@ export function ChatbotPage() {
           userId: user?.id,
           name: profileName.trim(),
           email: profileEmail.trim(),
+          bio: profileQuote.trim(),
         }),
       });
 
@@ -1210,7 +1202,7 @@ export function ChatbotPage() {
                     value={profileName}
                     onChange={(e) => setProfileName(e.target.value)}
                     placeholder="Enter display name"
-                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all text-[#1A2E2A]"
+                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-white text-black text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all"
                   />
                 </div>
 
@@ -1221,7 +1213,18 @@ export function ChatbotPage() {
                     value={profileEmail}
                     onChange={(e) => setProfileEmail(e.target.value)}
                     placeholder="Enter username or email"
-                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all text-[#1A2E2A]"
+                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-white text-black text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-[#0C3B2E]/60 uppercase tracking-wider mb-1.5 px-1">Daily Quote</label>
+                  <input
+                    type="text"
+                    value={profileQuote}
+                    onChange={(e) => setProfileQuote(e.target.value)}
+                    placeholder="Enter your daily quote"
+                    className="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-white text-black text-sm font-semibold outline-none focus:border-[#2D6A4F] focus:ring-4 focus:ring-[#2D6A4F]/5 transition-all"
                   />
                 </div>
               </div>

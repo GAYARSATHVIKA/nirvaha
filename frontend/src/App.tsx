@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { Toaster } from './components/ui/toaster';
 import LearningCatalogPage from './pages/LearningCatalogPage';
 import LearningPathPage from './pages/LearningPathPage';
@@ -103,31 +103,45 @@ function AppInner() {
     <div className="min-h-screen spiritual-page-bg relative overflow-hidden">
 
       <Routes>
-        {/* Public Landing Page */}
+        {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/certifications" element={<CertificationsPage />} />
-        <Route path="/academy" element={<NirvahaAcademyPage />} />
-        <Route path="/learn" element={<LearningCatalogPage />} />
-        <Route path="/learn/:pathId" element={<LearningPathPage />} />
-        <Route path="/learn/:pathId/play" element={<CoursePlayerPage />} />
-        <Route path="/stories" element={<StoriesPage />} />
-        <Route path="/success-story/:id" element={<SuccessStoryDetail />} />
-        <Route path="/journey/:topicId" element={<JourneyPage />} />
-        <Route path="/library/:id" element={<LibraryDetailPage />} />
-        <Route path="/story/:id" element={<StoryDetailPage />} />
-        <Route path="/chakra-experience" element={<ChakraExperiencePage />} />
-        <Route path="/healing-music" element={<HealingMusicPage />} />
-        <Route path="/inspiration-story/:id" element={<InspirationStoryPage />} />
-        <Route path="/life-quiz" element={<LifeQuizPage />} />
-        <Route path="/ancient-character" element={<AncientCharacterPage />} />
-        <Route path="/temple-of-balance" element={<TempleOfBalancePage />} />
-        <Route path="/add-your-autograph" element={<AutographPage />} />
         <Route path="/about" element={<AboutPage />} />
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/breathing" element={<BreathingPage />} />
+
+        {/* Protected Feature Routes */}
+        <Route element={<ProtectedRoute allowedRoles={['user', 'admin', 'hr', 'doctor']}><Outlet /></ProtectedRoute>}>
+          <Route path="/certifications" element={<CertificationsPage />} />
+          <Route path="/academy" element={<NirvahaAcademyPage />} />
+          <Route path="/learn" element={<LearningCatalogPage />} />
+          <Route path="/learn/:pathId" element={<LearningPathPage />} />
+          <Route path="/learn/:pathId/play" element={<CoursePlayerPage />} />
+          <Route path="/stories" element={<StoriesPage />} />
+          <Route path="/success-story/:id" element={<SuccessStoryDetail />} />
+          <Route path="/journey/:topicId" element={<JourneyPage />} />
+          <Route path="/library/:id" element={<LibraryDetailPage />} />
+          <Route path="/story/:id" element={<StoryDetailPage />} />
+          <Route path="/chakra-experience" element={<ChakraExperiencePage />} />
+          <Route path="/healing-music" element={<HealingMusicPage />} />
+          <Route path="/inspiration-story/:id" element={<InspirationStoryPage />} />
+          <Route path="/life-quiz" element={<LifeQuizPage />} />
+          <Route path="/ancient-character" element={<AncientCharacterPage />} />
+          <Route path="/temple-of-balance" element={<TempleOfBalancePage />} />
+          <Route path="/add-your-autograph" element={<AutographPage />} />
+          <Route path="/breathing" element={<BreathingPage />} />
+          
+          {/* Wellness OTT Routes */}
+          <Route path="/wellness-ott-intro" element={<NirvahaStreamIntro />} />
+          <Route path="/wellness-ott" element={<WellnessOTTHome />} />
+          <Route path="/wellness-ott/home" element={<WellnessOTTHome />} />
+          <Route path="/wellness-ott/series/:seriesId" element={<WellnessOTTSeriesDetails />} />
+          <Route path="/wellness-ott/player/:seriesId/:episodeId" element={<WellnessOTTAudioPlayer />} />
+          <Route path="/wellness-ott/library" element={<WellnessOTTLibrary />} />
+          <Route path="/wellness-ott/browsing" element={<WellnessOTTBrowsing />} />
+          <Route path="/watch/:seriesId/:episodeId" element={<WellnessOTTAudioPlayer />} />
+        </Route>
 
         {/* Dashboard Routes - Protected */}
         <Route
@@ -176,16 +190,6 @@ function AppInner() {
           <Route path="common-problems" element={<CommonProblemsManagementPage />} />
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Route>
-
-        {/* Wellness OTT Routes */}
-        <Route path="/wellness-ott-intro" element={<NirvahaStreamIntro />} />
-        <Route path="/wellness-ott" element={<WellnessOTTHome />} />
-        <Route path="/wellness-ott/home" element={<WellnessOTTHome />} />
-        <Route path="/wellness-ott/series/:seriesId" element={<WellnessOTTSeriesDetails />} />
-        <Route path="/wellness-ott/player/:seriesId/:episodeId" element={<WellnessOTTAudioPlayer />} />
-        <Route path="/wellness-ott/library" element={<WellnessOTTLibrary />} />
-        <Route path="/wellness-ott/browsing" element={<WellnessOTTBrowsing />} />
-        <Route path="/watch/:seriesId/:episodeId" element={<WellnessOTTAudioPlayer />} />
 
         {/* Catch-all redirect to landing */}
         <Route path="*" element={<Navigate to="/" replace />} />
