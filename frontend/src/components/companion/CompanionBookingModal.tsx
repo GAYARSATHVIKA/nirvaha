@@ -37,60 +37,7 @@ interface Companion {
   color: string;
 }
 
-const mentors: Companion[] = [
-  {
-    id: "c1",
-    name: "Aisha Mehta",
-    category: "Meditation",
-    title: "Meditation Guide",
-    bio: "Helping you find calm through guided meditation.",
-    rating: 4.8,
-    sessions: 120,
-    price: "₹800",
-    avatar: "/aisha mehta.png",
-    energyTags: ["Calm", "Focus", "Balance"],
-    color: "from-emerald-400 to-teal-400"
-  },
-  {
-    id: "c2",
-    name: "Arjun Verma",
-    category: "Counseling",
-    title: "Counseling Expert",
-    bio: "Navigating life's complexities with compassion.",
-    rating: 4.9,
-    sessions: 210,
-    price: "₹1200",
-    avatar: "/arjun verma.png",
-    energyTags: ["Clarity", "Support", "Growth"],
-    color: "from-blue-400 to-indigo-400"
-  },
-  {
-    id: "c3",
-    name: "Kavya Nair",
-    category: "Healing",
-    title: "Energy Healer",
-    bio: "Restoring balance through ancient healing arts.",
-    rating: 4.7,
-    sessions: 95,
-    price: "₹1500",
-    avatar: "/kavya.png",
-    energyTags: ["Restoration", "Peace", "Aura"],
-    color: "from-amber-400 to-orange-400"
-  },
-  {
-    id: "c4",
-    name: "Swami Aarav",
-    category: "Spiritual",
-    title: "Spiritual Guide",
-    bio: "Guiding seekers on the path of awakening.",
-    rating: 5.0,
-    sessions: 500,
-    price: "₹2000",
-    avatar: "/swami.png",
-    energyTags: ["Awakening", "Wisdom", "Zen"],
-    color: "from-purple-400 to-pink-400"
-  }
-];
+const mentors: Companion[] = [];
 
 const sessionTypes = [
   { id: '30min', title: '30-Minute Session', description: 'Quick check-in & guidance', icon: MessageCircle, price: '₹500' },

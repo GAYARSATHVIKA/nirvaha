@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Instagram, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { PrivacyPolicyModal, TermsOfServiceModal } from '../common/LegalModals';
 
 const WhatsAppIcon = () => (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -25,6 +26,9 @@ const companyLinks: { label: string; to: string }[] = [
 ];
 
 export const DashboardFooter = () => {
+    const [privacyOpen, setPrivacyOpen] = useState(false);
+    const [termsOpen, setTermsOpen] = useState(false);
+
     return (
         <footer className="bg-[#0B2E24] pt-8 pb-10 overflow-hidden relative">
             <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
@@ -97,12 +101,15 @@ export const DashboardFooter = () => {
                         © 2026 Nirvaha Inc. Crafted with Peace.
                     </p>
                     <div className="flex gap-8 text-[10px] font-bold tracking-[0.2em] text-emerald-100/30 uppercase">
-                        <Link to="/" className="hover:text-white transition-colors no-underline">Privacy Policy</Link>
-                        <Link to="/"   className="hover:text-white transition-colors no-underline">Terms of Service</Link>
+                        <button onClick={() => setPrivacyOpen(true)} className="hover:text-white transition-colors cursor-pointer bg-transparent border-none p-0 font-bold uppercase tracking-[0.2em] text-inherit text-[10px]">Privacy Policy</button>
+                        <button onClick={() => setTermsOpen(true)} className="hover:text-white transition-colors cursor-pointer bg-transparent border-none p-0 font-bold uppercase tracking-[0.2em] text-inherit text-[10px]">Terms of Service</button>
                         <span className="hover:text-white transition-colors cursor-pointer">Cookie Settings</span>
                     </div>
                 </div>
             </div>
+
+            <PrivacyPolicyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+            <TermsOfServiceModal isOpen={termsOpen} onClose={() => setTermsOpen(false)} />
         </footer>
     );
 };
