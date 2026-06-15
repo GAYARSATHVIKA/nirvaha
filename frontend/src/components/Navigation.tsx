@@ -243,18 +243,6 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-2">
-              {/* Home */}
-              <motion.button
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavigate("home")}
-                className={`flex items-center gap-2 px-4 py-2 transition-all ${
-                  currentPage === "home" ? "text-white" : "text-white/70 hover:text-white"
-                }`}
-              >
-                <span className="text-sm font-bold uppercase tracking-wider">Home</span>
-              </motion.button>
-
               {/* Features Dropdown */}
               <div className="relative">
                 <motion.button
@@ -593,21 +581,6 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
                 Go to Profile
               </motion.button>
             </div>
-
-            {/* Home */}
-            <motion.button
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => { handleNavigate("home"); setMobileMenuOpen(false); }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl transition-all ${
-                currentPage === "home"
-                  ? "bg-emerald-500/30 text-white"
-                  : "text-white/70 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <span>Home</span>
-            </motion.button>
 
             {/* Features */}
             <div className="space-y-2">
