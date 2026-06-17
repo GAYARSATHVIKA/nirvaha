@@ -325,8 +325,8 @@ export function AdminDashboardPage() {
         {/* Header */}
         <div className="flex items-center justify-between bg-white border border-[#D5EEDD] rounded-2xl p-6 shadow-sm mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-[#1F4131] mb-1">Dashboard Overview</h1>
-            <p className="text-[#64C08E] font-medium">Welcome back, {user?.name || "Admin"}</p>
+            <h1 className="text-3xl font-bold text-[#1F4131] mb-1 uppercase">Dashboard Overview</h1>
+            <p className="text-[#64C08E] font-medium uppercase">Welcome back, {user?.name || "Admin"}</p>
           </div>
         </div>
 
@@ -349,7 +349,7 @@ export function AdminDashboardPage() {
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-[#2A4939] text-sm font-bold">{stat.title}</h3>
+                    <h3 className="text-[#2A4939] text-sm font-bold uppercase">{stat.title}</h3>
                     <div
                       className={`w-10 h-10 rounded-xl bg-gradient-to-br ${colorClass} flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm`}
                     >
@@ -372,7 +372,7 @@ export function AdminDashboardPage() {
           {/* Recent Companion Applications */}
           <Card className="bg-white border-[#D5EEDD] rounded-2xl shadow-sm overflow-hidden flex flex-col">
             <div className="p-6 border-b border-[#EAFBF0] flex items-center justify-between bg-white">
-              <h2 className="text-xl font-bold text-[#1F4131]">Recent Companions</h2>
+              <h2 className="text-xl font-bold text-[#1F4131] uppercase">Recent Companions</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -438,7 +438,7 @@ export function AdminDashboardPage() {
            {/* Recent Bookings */}
           <Card className="bg-white border-[#D5EEDD] rounded-2xl shadow-sm overflow-hidden flex flex-col">
             <div className="p-6 border-b border-[#EAFBF0] flex items-center justify-between bg-white">
-              <h2 className="text-xl font-bold text-[#1F4131]">Recent Bookings</h2>
+              <h2 className="text-xl font-bold text-[#1F4131] uppercase">Recent Bookings</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -492,7 +492,7 @@ export function AdminDashboardPage() {
           {/* Recent Registrations */}
           <Card className="bg-white border-[#D5EEDD] rounded-2xl shadow-sm overflow-hidden flex flex-col md:col-span-2 lg:col-span-1">
             <div className="p-6 border-b border-[#EAFBF0] flex items-center justify-between bg-white">
-              <h2 className="text-xl font-bold text-[#1F4131]">Recent Registrations</h2>
+              <h2 className="text-xl font-bold text-[#1F4131] uppercase">Recent Registrations</h2>
               <Button
                 variant="ghost"
                 size="sm"
@@ -531,7 +531,7 @@ export function AdminDashboardPage() {
             <div className="p-6 w-full">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-bold text-[#1F4131] mb-2">Landing Page Updates</h2>
+                  <h2 className="text-xl font-bold text-[#1F4131] mb-2 uppercase">Landing Page Updates</h2>
                   <p className="text-[#329D66] text-sm font-medium">
                     Easily update images and information for "What is Nirvaha" and "Explore Our Learning" sections
                   </p>

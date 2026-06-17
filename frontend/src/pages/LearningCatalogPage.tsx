@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, BookOpen, ShieldCheck, Award, BatteryCharging, ArrowRight } from 'lucide-react';
 import { PrivacyPolicyModal, TermsOfServiceModal } from '../components/common/LegalModals';
-import learningPathsData from '../data/learningPaths.json';
+import BACKEND_CONFIG from '../config/backend';
 import { useAuth } from '../contexts/AuthContext';
 import { useEnrollment } from '../hooks/useEnrollment';
 import { EnrollmentFormModal } from '../components/EnrollmentFormModal';
-
-const { learningPaths } = learningPathsData;
 
 const PATH_IMAGES: Record<string, string> = {
   'foundations-of-clear-communication': '/CERTIFICATE4.png',
@@ -30,10 +28,25 @@ const LearningCatalogPage: React.FC = () => {
     title: '',
   });
 
+  const [learningPaths, setLearningPaths] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const isLoggedIn = !!user;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    
+    // Fetch certifications from backend
+    fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/admin/certifications`)
+      .then(res => res.json())
+      .then(data => {
+        setLearningPaths(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error fetching certifications:', err);
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -75,9 +88,14 @@ const LearningCatalogPage: React.FC = () => {
 
       {/* ── Course List ── */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 space-y-6 pb-24 lg:pb-32">
-        <AnimatePresence mode="popLayout">
-          {learningPaths.map((path, index) => {
-            const pathImage = PATH_IMAGES[path.id] || '/learn1.png';
+        {loading ? (
+          <div className="text-center py-24 text-emerald-800/60 font-sans">
+            <p className="font-bold">Loading programs...</p>
+          </div>
+        ) : (
+          <AnimatePresence mode="popLayout">
+            {learningPaths.map((path, index) => {
+              const pathImage = path.image || PATH_IMAGES[path.id] || '/learn1.png';
             const isHov = hovered === path.id;
             const enrolled = isEnrolled(path.id);
 
@@ -185,18 +203,7 @@ const LearningCatalogPage: React.FC = () => {
                         disabled={enrollingPathId === path.id}
                         onClick={async (e) => {
                           e.stopPropagation();
-                          if (!isLoggedIn) {
-                            setEnrollModal({ open: true, pathId: path.id, title: path.title });
-                          } else {
-                            try {
-                              setEnrollingPathId(path.id);
-                              await enroll(path.id);
-                            } catch (err) {
-                              console.error(err);
-                            } finally {
-                              setEnrollingPathId(null);
-                            }
-                          }
+                          setEnrollModal({ open: true, pathId: path.id, title: path.title });
                         }}
                         className="bg-[#0f7a55] text-white hover:bg-[#0b5e41] text-xs font-black uppercase py-3 px-6 rounded-full shadow-[0_4px_14px_rgba(15,122,85,0.30)] flex items-center justify-center gap-2 transition-all font-sans disabled:opacity-50"
                       >
@@ -213,8 +220,9 @@ const LearningCatalogPage: React.FC = () => {
             );
           })}
         </AnimatePresence>
+        )}
 
-        {learningPaths.length === 0 && (
+        {!loading && learningPaths.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

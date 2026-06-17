@@ -88,6 +88,7 @@ const Signup: React.FC = () => {
 
   const [showConsent, setShowConsent] = useState(false);
   const [consentAgreed, setConsentAgreed] = useState(false);
+  const [termsAgreed, setTermsAgreed] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -139,7 +140,7 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validations.name || !validations.email || !validations.password || !validations.match) {
+    if (!validations.name || !validations.email || !validations.password || !validations.match || !termsAgreed) {
       return;
     }
 
@@ -368,12 +369,30 @@ const Signup: React.FC = () => {
                   </div>
                 </motion.div>
 
+                {/* Terms Agreement Checkbox */}
+                <motion.div variants={itemVariants} className="flex items-start gap-2 mt-1">
+                  <input
+                    type="checkbox"
+                    id="terms-agree"
+                    checked={termsAgreed}
+                    onChange={(e) => setTermsAgreed(e.target.checked)}
+                    className="w-4 h-4 mt-0.5 accent-emerald-600 rounded border-zinc-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                    required
+                  />
+                  <label htmlFor="terms-agree" className="text-xs text-zinc-500 leading-relaxed cursor-pointer select-none">
+                    I agree to the{" "}
+                    <a href="#" className="text-emerald-600 hover:text-emerald-700 underline underline-offset-2">Terms of Service</a>{" "}
+                    and{" "}
+                    <a href="#" className="text-emerald-600 hover:text-emerald-700 underline underline-offset-2">Privacy Policy</a>
+                  </label>
+                </motion.div>
+
                 {/* Submit CTA Button */}
                 <motion.div variants={itemVariants} className="mt-3.5">
                   <button 
                     type="submit" 
                     className="w-full py-3.5 px-6 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-semibold text-sm rounded-xl shadow-[0_4px_25px_rgba(16,185,129,0.2)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.35)] transition-all duration-300 active:scale-[0.99] disabled:opacity-60 disabled:pointer-events-none"
-                    disabled={loading}
+                    disabled={loading || !termsAgreed}
                   >
                     {loading ? "Creating Account..." : "Create My Free Account"}
                   </button>

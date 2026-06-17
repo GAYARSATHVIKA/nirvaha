@@ -57,6 +57,7 @@ const userSchema = new mongoose.Schema(
         {
           courseId: { type: String, required: true },
           enrolledAt: { type: Date, default: Date.now },
+          completedUnits: { type: [String], default: [] },
         }
       ],
       default: [],

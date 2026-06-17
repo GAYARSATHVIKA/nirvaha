@@ -6,7 +6,6 @@ import { StatusBadge } from "@/admin/components/StatusBadge";
 import { ActionMenu } from "@/admin/components/ActionMenu";
 import { ConfirmModal } from "@/admin/components/ConfirmModal";
 import BACKEND_CONFIG from "@/config/backend";
-import learningPathsData from "@/data/learningPaths.json";
 import {
   Dialog,
   DialogContent,
@@ -53,14 +52,28 @@ export function UserManagementPage() {
 
   const apiBaseUrl = BACKEND_CONFIG.API_BASE_URL;
 
+  const [certifications, setCertifications] = useState<any[]>([]);
+
   // Map course IDs to titles
   const courseMap = useMemo(() => {
     const map: Record<string, string> = {};
-    learningPathsData.learningPaths.forEach((path: any) => {
+    certifications.forEach((path: any) => {
       map[path.id] = path.title;
     });
     return map;
-  }, []);
+  }, [certifications]);
+
+  const fetchCertifications = async () => {
+    try {
+      const res = await fetch(`${apiBaseUrl}/api/admin/certifications`);
+      if (res.ok) {
+        const data = await res.json();
+        setCertifications(Array.isArray(data) ? data : []);
+      }
+    } catch (err) {
+      console.error("Failed to fetch certifications:", err);
+    }
+  };
 
   const fetchUsers = async () => {
     try {
@@ -89,6 +102,7 @@ export function UserManagementPage() {
 
   useEffect(() => {
     fetchUsers();
+    fetchCertifications();
   }, []);
 
   const filteredUsers = useMemo(

@@ -797,7 +797,7 @@ export function CommonProblemsManagementPage() {
                   <h3 className="text-lg font-bold border-b pb-2 mb-4 text-[#1a5d47]">Solutions (How We Help)</h3>
                   <div className="space-y-2 mb-3">
                     {editingProblem.solutions?.map((sol, idx) => (
-                      <div key={idx} className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2">
+                      <div key={idx} className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-2">
                         <span className="flex-1 text-sm font-medium text-gray-700">{sol}</span>
                         <button onClick={() => removeSolution(idx)} className="text-red-400 hover:text-red-600">
                           <X className="w-4 h-4" />
@@ -830,7 +830,7 @@ export function CommonProblemsManagementPage() {
                   </div>
                   <div className="space-y-3">
                     {editingProblem.recommendations?.map((rec, idx) => (
-                      <div key={idx} className="flex items-center gap-2 bg-gray-50 rounded-lg p-3">
+                      <div key={idx} className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg p-3">
                         <select
                           value={rec.icon}
                           onChange={(e) => updateRecommendation(idx, 'icon', e.target.value)}
@@ -875,7 +875,7 @@ export function CommonProblemsManagementPage() {
                   </div>
                   <div className="space-y-3">
                     {editingProblem.dropdowns?.map((dd, idx) => (
-                      <div key={idx} className="bg-gray-50 rounded-lg p-3 space-y-2 relative">
+                      <div key={idx} className="bg-white border border-gray-200 rounded-lg p-3 space-y-2 relative">
                         <button onClick={() => removeDropdown(idx)} className="absolute top-2 right-2 text-red-400 hover:text-red-600">
                           <X className="w-4 h-4" />
                         </button>
@@ -925,7 +925,7 @@ export function CommonProblemsManagementPage() {
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setShowModal(false)}
                     disabled={isSaving}
-                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-bold transition-all shadow"
+                    className="flex-1 bg-white hover:bg-gray-50 text-black border border-gray-300 py-3 rounded-lg font-bold transition-all shadow"
                   >
                     Cancel
                   </motion.button>

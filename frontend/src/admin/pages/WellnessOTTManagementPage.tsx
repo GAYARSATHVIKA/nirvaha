@@ -876,7 +876,7 @@ export function WellnessOTTManagementPage() {
                       {editingSession.seasons?.map((season, sIdx) => (
                         <div key={sIdx} className="border border-gray-200 rounded-xl overflow-hidden">
                           <div
-                            className="flex items-center justify-between bg-gray-50 px-4 py-3 cursor-pointer"
+                            className="flex items-center justify-between bg-white border border-gray-200 px-4 py-3 cursor-pointer"
                             onClick={() => setExpandedSeasons({ ...expandedSeasons, [sIdx]: !expandedSeasons[sIdx] })}
                           >
                             <div className="flex items-center gap-2">
@@ -918,7 +918,7 @@ export function WellnessOTTManagementPage() {
                               {/* Episodes list */}
                               <div className="space-y-3">
                                 {season.episodes?.map((ep, epIdx) => (
-                                  <div key={epIdx} className="bg-gray-50 rounded-lg p-3 space-y-2 relative">
+                                  <div key={epIdx} className="bg-white border border-gray-200 rounded-lg p-3 space-y-2 relative">
                                     <button
                                       onClick={() => removeEpisode(sIdx, epIdx)}
                                       className="absolute top-2 right-2 text-red-400 hover:text-red-600"
@@ -1014,7 +1014,7 @@ export function WellnessOTTManagementPage() {
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setShowModal(false)}
                     disabled={isSaving}
-                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg font-bold transition-all shadow"
+                    className="flex-1 bg-white hover:bg-gray-50 text-black border border-gray-300 py-3 rounded-lg font-bold transition-all shadow"
                   >
                     Cancel
                   </motion.button>

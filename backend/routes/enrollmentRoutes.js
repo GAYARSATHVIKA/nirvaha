@@ -82,4 +82,102 @@ router.get('/status/:courseId', authenticateJWT, async (req, res) => {
   }
 });
 
+/**
+ * POST /api/enrollments/apply
+ * Submits an enrollment application for a course (Certification)
+ */
+router.post('/apply', async (req, res) => {
+  try {
+    const { courseId, courseTitle, name, email, phone, reason } = req.body;
+
+    if (!courseId || !courseTitle || !name || !email || !phone) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Since authenticateJWT is not enforced here, check if user sent a token manually
+    let userId = null;
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      try {
+        const jwt = require('jsonwebtoken');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
+        userId = decoded.id;
+      } catch (e) {
+        // Ignore invalid token for application
+      }
+    }
+
+    const Certification = require('../models/Certification');
+    const course = await Certification.findOne({ id: courseId });
+    const isFree = course ? course.isFree : false;
+
+    let initialStatus = 'pending';
+    if (isFree && userId) {
+      initialStatus = 'approved';
+      // Auto enroll the user
+      await User.findOneAndUpdate(
+        { id: userId },
+        { $addToSet: { enrolledCourses: { courseId, enrolledAt: new Date(), completedUnits: [] } } }
+      );
+    }
+
+    const EnrollmentApplication = require('../models/EnrollmentApplication');
+    const application = new EnrollmentApplication({
+      userId,
+      courseId,
+      courseTitle,
+      name,
+      email,
+      phone,
+      reason,
+      status: initialStatus
+    });
+
+    await application.save();
+
+    res.status(201).json({ success: true, message: 'Application submitted successfully', isFree, status: initialStatus });
+  } catch (err) {
+    console.error('Enrollment application error:', err);
+    res.status(500).json({ error: 'Server error saving application' });
+  }
+});
+
+/**
+ * POST /api/enrollments/progress
+ * Update progress (completed units) for an enrolled course
+ */
+router.post('/progress', authenticateJWT, async (req, res) => {
+  try {
+    const { courseId, unitId } = req.body;
+    if (!courseId || !unitId) {
+      return res.status(400).json({ error: 'courseId and unitId are required' });
+    }
+
+    const userId = req.user.id;
+    
+    // Find the user and update the specific enrolled course's completedUnits array
+    const result = await User.findOneAndUpdate(
+      { 
+        id: userId, 
+        'enrolledCourses.courseId': courseId 
+      },
+      { 
+        $addToSet: { 'enrolledCourses.$.completedUnits': unitId } 
+      },
+      { new: true }
+    );
+
+    if (!result) {
+      return res.status(404).json({ error: 'Enrollment not found for this user' });
+    }
+
+    res.json({ success: true, message: 'Progress updated' });
+  } catch (err) {
+    console.error('Progress update error:', err);
+    res.status(500).json({ error: 'Server error updating progress' });
+  }
+});
+
 module.exports = router;
+

@@ -10,10 +10,8 @@ import {
   NotebookPen, ListChecks, Leaf
 } from 'lucide-react';
 import { toast } from 'sonner';
-import learningPathsData from '../data/learningPaths.json';
 import { CertificateModal } from '../components/CertificateModal';
-
-const { learningPaths } = learningPathsData;
+import BACKEND_CONFIG from '../config/backend';
 
 /* ──────────────────────────────────────────
    LESSON CONTENT — All 3 courses, all 15 lessons each
@@ -1384,27 +1382,69 @@ const CoursePlayerPage: React.FC = () => {
     }
   }, [user, loading, pathId, navigate]);
 
-  const path = learningPaths.find(p => p.id === pathId);
+  const [path, setPath] = useState<any>(null);
+  const [loadingPath, setLoadingPath] = useState(true);
+
+  useEffect(() => {
+    fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/admin/certifications`)
+      .then(res => res.json())
+      .then(data => {
+        const found = (Array.isArray(data) ? data : []).find(p => p.id === pathId);
+        if (found && !found.modules) {
+          found.modules = [
+            {
+              id: 'm1',
+              title: 'Module 1: Introduction',
+              description: 'Welcome to this certification.',
+              units: [
+                { id: 'u1', title: 'Getting Started', type: 'reading', xp: 50, locked: false }
+              ]
+            }
+          ];
+        }
+        setPath(found);
+        setLoadingPath(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoadingPath(false);
+      });
+  }, [pathId]);
 
   // Build modules from JSON data
   const MODULES = (path?.modules ?? []) as Array<{
     id: string;
     title: string;
     description: string;
-    units: Array<{ id: string; title: string; type: string; xp: number; locked: boolean }>;
+    units: Array<{ id: string; title: string; type: string; xp: number; locked: boolean; duration?: string; content?: any }>;
   }>;
 
   const MODULES_WITH_DURATION = MODULES.map(mod => ({
     ...mod,
     shortTitle: mod.title.replace(/^Module \d+:\s*/, ''),
-    units: mod.units.map(u => ({ ...u, duration: u.type === 'quiz' ? '5 min' : u.type === 'mindfulness' ? '10 min' : '8 min' })),
+    units: mod.units.map(u => ({ ...u, duration: u.duration || '5 min' })),
   }));
 
   const allUnits = MODULES_WITH_DURATION.flatMap(m => m.units);
   const firstUnitId = allUnits[0]?.id ?? '';
 
   const [activeUnitId, setActiveUnitId]     = useState(firstUnitId);
+  useEffect(() => {
+    if (firstUnitId && !activeUnitId) {
+      setActiveUnitId(firstUnitId);
+    }
+  }, [firstUnitId]);
+
   const [completedUnits, setCompletedUnits] = useState<Set<string>>(new Set());
+  
+  useEffect(() => {
+    if (user && user.enrolledCourses) {
+      const enrollment = user.enrolledCourses.find((e: any) => e.courseId === pathId);
+      if (enrollment && enrollment.completedUnits) {
+        setCompletedUnits(new Set(enrollment.completedUnits));
+      }
+    }
+  }, [user, pathId]);
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set([MODULES_WITH_DURATION[0]?.id ?? '']));
   const [rightTab, setRightTab]             = useState<'notes' | 'journal'>('notes');
   const [notes, setNotes]                   = useState<Record<string, string>>({});
@@ -1421,22 +1461,22 @@ const CoursePlayerPage: React.FC = () => {
   const streak = user?.stats?.streak ?? 0;
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const totalUnits     = allUnits.length;
-  const progressPct    = totalUnits > 0 ? Math.round((completedUnits.size / totalUnits) * 100) : 0;
-  const currentUnitIdx = allUnits.findIndex(u => u.id === activeUnitId);
-  const currentUnit    = allUnits[currentUnitIdx];
-  const prevUnit       = currentUnitIdx > 0 ? allUnits[currentUnitIdx - 1] : null;
-  const nextUnit       = currentUnitIdx < allUnits.length - 1 ? allUnits[currentUnitIdx + 1] : null;
-  const currentContent = ALL_LESSON_CONTENT[activeUnitId] ?? { objectives: [], body: ['Content coming soon.'], summary: '' };
-  const typeConf       = currentUnit ? (TYPE_CONFIG[currentUnit.type] ?? TYPE_CONFIG['reading']) : TYPE_CONFIG['reading'];
-  const currentModId   = MODULES_WITH_DURATION.find(m => m.units.some(u => u.id === activeUnitId))?.id ?? '';
-
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, []);
   useEffect(() => {
     contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
     setQuizAnswers({});
     setQuizSubmitted(false);
   }, [activeUnitId]);
+
+  const totalUnits     = allUnits.length;
+  const progressPct    = totalUnits > 0 ? Math.round((completedUnits.size / totalUnits) * 100) : 0;
+  const currentUnitIdx = allUnits.findIndex(u => u.id === activeUnitId);
+  const currentUnit    = allUnits[currentUnitIdx];
+  const prevUnit       = currentUnitIdx > 0 ? allUnits[currentUnitIdx - 1] : null;
+  const nextUnit       = currentUnitIdx < allUnits.length - 1 ? allUnits[currentUnitIdx + 1] : null;
+
+  const typeConf       = currentUnit ? (TYPE_CONFIG[currentUnit.type] ?? TYPE_CONFIG['reading']) : TYPE_CONFIG['reading'];
+  const currentModId   = MODULES_WITH_DURATION.find(m => m.units.some(u => u.id === activeUnitId))?.id ?? '';
 
   const markComplete = useCallback(() => {
     if (completedUnits.has(activeUnitId)) return;
@@ -1447,6 +1487,16 @@ const CoursePlayerPage: React.FC = () => {
     setCompletedUnits(newCompleted);
     setTotalXP(prev => prev + unit.xp);
     setXpBurst({ xp: unit.xp, key: Date.now() });
+
+    // API Call to save progress
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/enrollments/progress`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ courseId: pathId, unitId: activeUnitId })
+      }).catch(err => console.error('Error saving progress:', err));
+    }
 
     const isNowAllComplete = allUnits.every(u => newCompleted.has(u.id));
 
@@ -1461,6 +1511,26 @@ const CoursePlayerPage: React.FC = () => {
     }, 800);
   }, [activeUnitId, completedUnits, allUnits, nextUnit]);
 
+  if (loading || loadingPath) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-gray-500 font-medium">Loading Course Environment...</p>
+      </div>
+    );
+  }
+
+  if (!path) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <p className="text-gray-400 mb-4">Path not found.</p>
+          <button onClick={() => navigate('/learn')} className="text-[#0f7a55] hover:underline">← Back to catalog</button>
+        </div>
+      </div>
+    );
+  }
+
+  const currentContent = currentUnit?.content ?? { objectives: [], body: ['Content coming soon.'], summary: '' };
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -1631,7 +1701,7 @@ const CoursePlayerPage: React.FC = () => {
 
             {/* Certificate badge */}
             <div className="p-4" style={{ borderTop: '1px solid #e5ede9' }}>
-              {progressPct === 100 ? (
+              {progressPct === 100 || user?.role === 'admin' ? (
                 <button
                   onClick={() => setCertModalOpen(true)}
                   className="w-full flex items-center gap-3 px-4 py-3.5 rounded-[12px] text-left transition-all hover:scale-[1.02]"

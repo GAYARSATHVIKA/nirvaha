@@ -1,7 +1,14 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Clock, Users, Star, Play, Award, TrendingUp, ChevronRight } from "lucide-react";
+import { EnrollmentFormModal } from "../EnrollmentFormModal";
 
 export function CoursesPage() {
+  const [enrollModal, setEnrollModal] = useState<{ open: boolean; courseId: string; title: string }>({
+    open: false,
+    courseId: '',
+    title: '',
+  });
   const courses = [
     {
       title: "Mindfulness Meditation Mastery",
@@ -279,6 +286,7 @@ export function CoursesPage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => setEnrollModal({ open: true, courseId: course.title.toLowerCase().replace(/\s+/g, '-'), title: course.title })}
                     className={`mt-6 w-full py-3 bg-gradient-to-r ${course.color} text-white rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2`}
                   >
                     Enroll Now
@@ -312,6 +320,18 @@ export function CoursesPage() {
           </motion.button>
         </motion.div>
       </div>
+
+      <EnrollmentFormModal
+        open={enrollModal.open}
+        onClose={() => setEnrollModal(m => ({ ...m, open: false }))}
+        courseId={enrollModal.courseId}
+        courseTitle={enrollModal.title}
+        onEnrolled={() => {
+          setEnrollModal(m => ({ ...m, open: false }));
+          // Just alert or handle next steps for this dummy course
+          alert(`Successfully enrolled in ${enrollModal.title}!`);
+        }}
+      />
     </div>
   );
 }

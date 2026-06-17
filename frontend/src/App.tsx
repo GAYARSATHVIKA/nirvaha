@@ -79,6 +79,7 @@ import { WellnessRetreatsManager } from "./components/admin/WellnessRetreatsMana
 import { WellnessOTTProvider } from "./contexts/WellnessOTTContext";
 import { WellnessOTTManagementPage } from "./admin/pages/WellnessOTTManagementPage";
 import { CommonProblemsManagementPage } from "./admin/pages/CommonProblemsManagementPage";
+import { CertificationsManager } from "./components/admin/CertificationsManager";
 
 /**
  * Dashboard Routes Component
@@ -188,6 +189,7 @@ function AppInner() {
           <Route path="wellness-retreats" element={<WellnessRetreatsManager />} />
           <Route path="wellness-ott" element={<WellnessOTTManagementPage />} />
           <Route path="common-problems" element={<CommonProblemsManagementPage />} />
+          <Route path="certifications" element={<CertificationsManager />} />
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Route>
 

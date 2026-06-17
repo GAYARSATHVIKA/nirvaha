@@ -11,7 +11,7 @@ const CommunityHero = () => {
 
   // Dynamic CMS States
   const [heroData, setHeroData] = useState({
-    title: "FIND YOUR",
+    title: "Find your",
     subtitle: "Experience the convergence of ancient wisdom and modern technology for your complete holistic healing journey.",
     buttonText: "Start Your Journey",
     imageUrl: "/LP.png"
@@ -33,7 +33,7 @@ const CommunityHero = () => {
           if (data && data.value) {
             const parsed = JSON.parse(data.value);
             setHeroData({
-              title: parsed.title || "FIND YOUR",
+              title: parsed.title || "Find your",
               subtitle: parsed.subtitle || "Experience the convergence of ancient wisdom and modern technology for your complete holistic healing journey.",
               buttonText: parsed.buttonText || "Start Your Journey",
               imageUrl: parsed.imageUrl || "/LP.png"
@@ -48,7 +48,7 @@ const CommunityHero = () => {
           const data = await fallbackRes.json();
           if (data && data.hero) {
             setHeroData({
-              title: data.hero.title || "FIND YOUR",
+              title: data.hero.title || "Find your",
               subtitle: data.hero.subtitle || "Experience the convergence of ancient wisdom and modern technology for your complete holistic healing journey.",
               buttonText: data.hero.buttonText || "Start Your Journey",
               imageUrl: data.hero.imageUrl || "/LP.png"
@@ -215,11 +215,13 @@ const CommunityHero = () => {
           className="w-full flex flex-col items-center justify-center max-w-5xl"
         >
           <h1 
-            className="text-3xl sm:text-[4.5vw] md:text-[5vw] lg:text-[5.2vw] xl:text-[5.5vw] font-black text-[#123c24] drop-shadow-[0_2px_10px_rgba(18,60,36,0.12)] tracking-tighter leading-tight w-full text-center uppercase whitespace-nowrap select-none flex flex-nowrap items-center justify-center gap-x-2 sm:gap-x-4"
+            className="text-5xl md:text-7xl font-light text-[#5A7165] tracking-wide text-center flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto uppercase"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
-            <span>{heroData.title || "FIND YOUR"}</span>
-            <span className="text-[#123c24] inline-block relative">
+            <span className="whitespace-nowrap md:w-1/2 md:text-right md:pr-4">
+              {heroData.title || "Find your"}
+            </span>
+            <span className="text-[#3A5145] inline-flex justify-center md:justify-start md:w-1/2 md:pl-4 mt-2 md:mt-0 relative">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={phraseIndex}

@@ -429,13 +429,13 @@ export function CompanionManagementPage() {
 
               {/* Qualifications */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <div className="bg-white p-4 rounded-xl border border-gray-100">
                   <h3 className="font-semibold text-emerald-950 mb-1">Professional Experience</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     {selectedCompanion.experience || "No experience details provided."}
                   </p>
                 </div>
-                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <div className="bg-white p-4 rounded-xl border border-gray-100">
                   <h3 className="font-semibold text-emerald-950 mb-1">Certifications</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     {selectedCompanion.certifications || "No certifications listed."}

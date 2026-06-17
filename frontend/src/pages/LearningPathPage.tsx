@@ -10,11 +10,9 @@ import {
   PlayCircle, PenLine, Trophy, ArrowRight, Star,
   Headphones, Leaf, Target,
 } from 'lucide-react';
-import learningPathsData from '../data/learningPaths.json';
 import { CertificateModal } from '../components/CertificateModal';
 import { EnrollmentFormModal } from '../components/EnrollmentFormModal';
-
-const { learningPaths } = learningPathsData;
+import BACKEND_CONFIG from '../config/backend';
 
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ constants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
@@ -210,6 +208,30 @@ const LearningPathPage: React.FC = () => {
   const enrolled = isEnrolled(pathId || '');
   const isLoggedIn = !!user;
 
+  const [path, setPath] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/admin/certifications`)
+      .then(res => res.json())
+      .then(data => {
+        const found = (Array.isArray(data) ? data : []).find(p => p.id === pathId);
+        if (found && !found.modules) {
+          // Provide default modules for dynamically created certifications
+          found.modules = [
+            { id: 'm1', title: 'Introduction', description: 'Welcome to the certification program.', units: [{ id: 'u1', type: 'reading', title: 'Getting Started', duration: '5 min' }] }
+          ];
+        }
+        setPath(found);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [pathId]);
+
   const [openModules, setOpenModules] = useState<Set<string>>(new Set());
   const [completedUnits, setCompletedUnits] = useState<Set<string>>(new Set());
   const [certModalOpen, setCertModalOpen] = useState(false);
@@ -225,7 +247,7 @@ const LearningPathPage: React.FC = () => {
     const distanceToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
     const monday = new Date(today);
     monday.setDate(today.getDate() + distanceToMonday);
-    const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     return daysOfWeek.map((dayName, idx) => {
       const d = new Date(monday);
       d.setDate(monday.getDate() + idx);
@@ -235,9 +257,20 @@ const LearningPathPage: React.FC = () => {
     });
   };
 
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, []);
+  // Set first module open initially
+  useEffect(() => {
+    if (path && path.modules && path.modules.length > 0) {
+      setOpenModules(new Set([path.modules[0].id]));
+    }
+  }, [path]);
 
-  const path = learningPaths.find((p) => p.id === pathId);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ background: '#f0fdf8', color: '#0a1a12' }}>
+        <p className="text-emerald-800">Loading certification details...</p>
+      </div>
+    );
+  }
 
   if (!path) {
     return (
@@ -261,13 +294,6 @@ const LearningPathPage: React.FC = () => {
     description: string;
     units: Array<{ id: string; title: string; type: string; xp: number; locked: boolean }>;
   }>;
-
-  // Set first module open initially
-  useEffect(() => {
-    if (modules.length > 0) {
-      setOpenModules(new Set([modules[0].id]));
-    }
-  }, [pathId]);
 
   const icon       = PATH_ICONS[path.id] ?? <BookOpen className="w-7 h-7" />;
   const outcomes   = OUTCOMES[path.id] ?? [];

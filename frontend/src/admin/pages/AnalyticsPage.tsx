@@ -60,53 +60,15 @@ export function AnalyticsPage() {
         const normalizedBookings = Array.isArray(bookings) ? bookings : [];
         const normalizedUsers = Array.isArray(users) ? users : [];
 
-        // Generate beautiful dynamic mock data if actual data is empty or too sparse
-        const useMockData = normalizedBookings.length < 5 || normalizedUsers.length < 5;
+        // Disable mock data for real admin dashboard
+        const useMockData = false;
 
-        if (useMockData) {
-          setMetrics({
-            totalUsers: "1,248",
-            activeSessions: "42",
-            totalBookings: "856",
-            revenue: "₹2,45,930",
-          });
+        // Key Metrics
+        const activeSessionsCount = normalizedBookings.filter(
+          (b: any) => ["in-progress", "In Progress", "in progress", "upcoming", "pending"].includes(b.status)
+        ).length;
 
-          // Generate a realistic 7-day user growth curve
-          const mockGrowth = [];
-          let currentUsers = 1100;
-          for (let i = 6; i >= 0; i--) {
-            const d = new Date();
-            d.setDate(d.getDate() - i);
-            currentUsers += Math.floor(Math.random() * 25) + 5;
-            mockGrowth.push({
-              date: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-              users: currentUsers
-            });
-          }
-          setUserGrowthData(mockGrowth);
-
-          // Generate realistic bookings per day
-          const orderedDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-          const mockBookingsData = orderedDays.map(day => ({
-            day,
-            bookings: Math.floor(Math.random() * 40) + 15
-          }));
-          setBookingsData(mockBookingsData);
-
-          // Generate realistic revenue breakdown
-          setRevenueData([
-            { name: "Courses", value: 125000, color: "#10b981" },
-            { name: "Products", value: 45930, color: "#14b8a6" },
-            { name: "Video Sessions", value: 35000, color: "#06b6d4" },
-            { name: "Chat Sessions", value: 40000, color: "#3b82f6" },
-          ]);
-        } else {
-          // Key Metrics
-          const activeSessionsCount = normalizedBookings.filter(
-            (b: any) => ["in-progress", "In Progress", "in progress", "upcoming", "pending"].includes(b.status)
-          ).length;
-
-          setMetrics({
+        setMetrics({
             totalUsers: stats.totalUsers?.toString() || normalizedUsers.length.toString(),
             activeSessions: activeSessionsCount.toString(),
             totalBookings: stats.totalBookings?.toString() || normalizedBookings.length.toString(),
@@ -155,12 +117,20 @@ export function AnalyticsPage() {
           };
           
           normalizedBookings.forEach((b: any) => {
-            const price = Number(b.price || 0);
-            if (b.type === "chat") revenueMap["Chat Sessions"] += price;
-            else if (b.type === "video") revenueMap["Video Sessions"] += price;
-            else if (b.type === "product") revenueMap["Products"] += price;
-            else if (b.type === "retreat" || b.type === "course") revenueMap["Courses"] += price;
-            else revenueMap["Chat Sessions"] += price; // fallback
+            const statusLower = String(b.status || '').toLowerCase();
+            const paymentStatusLower = String(b.paymentStatus || '').toLowerCase();
+            
+            const isApproved = ['approved', 'session confirmed', 'completed'].includes(statusLower);
+            const isPaid = ['paid', 'completed', 'done', 'success'].includes(paymentStatusLower);
+
+            if (isApproved || isPaid) {
+              const price = Number(b.price || 0) * Number(b.quantity || 1);
+              if (b.type === "chat") revenueMap["Chat Sessions"] += price;
+              else if (b.type === "video") revenueMap["Video Sessions"] += price;
+              else if (b.type === "product") revenueMap["Products"] += price;
+              else if (b.type === "retreat" || b.type === "course" || b.type === "certification") revenueMap["Courses"] += price;
+              else revenueMap["Chat Sessions"] += price; // fallback
+            }
           });
 
           const revData = [
@@ -173,8 +143,6 @@ export function AnalyticsPage() {
           setRevenueData(revData.filter(item => item.value > 0).length > 0 ? revData : [
             { name: "No Data", value: 1, color: "#cbd5e1" }
           ]);
-        }
-
       } catch (err) {
         console.error("Failed to load analytics data", err);
       } finally {
@@ -247,28 +215,26 @@ export function AnalyticsPage() {
           </div>
           <div className="flex items-center gap-3 print-hide">
             <Select value={dateRange} onValueChange={setDateRange}>
-              <SelectTrigger className="w-[180px] bg-white border-[#BEE4CD] text-[#295641] font-bold rounded-xl h-10 focus-visible:ring-[#5ABF88]">
+              <SelectTrigger className="w-[180px] !bg-white border-[#BEE4CD] !text-black font-bold rounded-xl h-10 focus-visible:ring-[#5ABF88]">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-white border-[#BEE4CD]">
-                <SelectItem value="7d">Last 7 days</SelectItem>
-                <SelectItem value="30d">Last 30 days</SelectItem>
-                <SelectItem value="90d">Last 90 days</SelectItem>
-                <SelectItem value="1y">Last year</SelectItem>
+              <SelectContent className="bg-white border-[#BEE4CD] text-black">
+                <SelectItem value="7d" className="text-black">Last 7 days</SelectItem>
+                <SelectItem value="30d" className="text-black">Last 30 days</SelectItem>
+                <SelectItem value="90d" className="text-black">Last 90 days</SelectItem>
+                <SelectItem value="1y" className="text-black">Last year</SelectItem>
               </SelectContent>
             </Select>
             <Button
               onClick={handleExportCSV}
-              variant="outline"
-              className="bg-white border-[#BEE4CD] text-[#295641] hover:bg-[#F6FDF8] font-bold rounded-xl"
+              className="!bg-white !text-black border border-[#BEE4CD] hover:bg-gray-50 font-bold rounded-xl"
             >
               <Download className="mr-2 w-4 h-4 text-[#5ABF88]" />
               Export CSV
             </Button>
             <Button
               onClick={handleExportPDF}
-              variant="outline"
-              className="bg-white border-[#BEE4CD] text-[#295641] hover:bg-[#F6FDF8] font-bold rounded-xl"
+              className="!bg-white !text-black border border-[#BEE4CD] hover:bg-gray-50 font-bold rounded-xl"
             >
               <FileText className="mr-2 w-4 h-4 text-[#5ABF88]" />
               Export PDF

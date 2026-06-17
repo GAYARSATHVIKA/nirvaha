@@ -3,6 +3,8 @@ import { BarChart3, Settings, LogOut, Menu, X, Compass } from 'lucide-react';
 import { motion } from 'motion/react';
 import { SuccessStoriesManager } from '../components/admin/SuccessStoriesManager';
 import { WellnessRetreatsManager } from '../components/admin/WellnessRetreatsManager';
+import { CertificationsManager } from '../components/admin/CertificationsManager';
+import { Award } from 'lucide-react';
 
 interface SidebarItem {
   id: string;
@@ -27,6 +29,12 @@ export function AdminDashboard() {
       label: 'Wellness Retreats',
       icon: <Compass className="w-5 h-5" />,
       component: <WellnessRetreatsManager />
+    },
+    {
+      id: 'certifications',
+      label: 'Certifications',
+      icon: <Award className="w-5 h-5" />,
+      component: <CertificationsManager />
     },
     {
       id: 'settings',

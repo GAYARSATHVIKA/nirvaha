@@ -162,7 +162,7 @@ export function DashboardPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-light text-[#5A7165] font-['Cinzel'] tracking-wide text-center flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto"
+          className="text-5xl md:text-7xl font-light text-[#5A7165] font-['Cinzel'] tracking-wide text-center flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto uppercase"
         >
           <span className="whitespace-nowrap md:w-1/2 md:text-right md:pr-4">Find your</span>
           <span className="text-[#3A5145] inline-flex justify-center md:justify-start md:w-1/2 md:pl-4 mt-2 md:mt-0">
@@ -199,7 +199,7 @@ export function DashboardPage() {
             const el = document.getElementById('start-practice');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="px-10 py-4 rounded-full bg-[#5A7165] text-[#FAFAF8] text-sm font-bold tracking-widest uppercase hover:bg-[#4A6155] transition-all hover:scale-105 active:scale-95 shadow-lg shadow-[#5A7165]/20 flex items-center justify-center gap-3 group"
+          className="px-10 py-4 rounded-full bg-[#1a5d47] text-[#FAFAF8] text-sm font-bold tracking-widest uppercase hover:bg-[#113d2f] transition-all hover:scale-105 active:scale-95 shadow-lg shadow-[#1a5d47]/30 flex items-center justify-center gap-3 group"
         >
           <span>Begin Practice</span>
           <svg 

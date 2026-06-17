@@ -20,6 +20,7 @@ import {
   Compass,
   Play,
   HelpCircle,
+  Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -127,6 +128,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           title: "Wellness OTT",
           icon: Play,
           path: "/admin/wellness-ott",
+        },
+        {
+          title: "Certifications",
+          icon: Award,
+          path: "/admin/certifications",
         },
         {
           title: "Common Problems",
@@ -373,6 +379,15 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                   </p>
                 </div>
               </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate("/")}
+                className="text-[#1a5d47] hover:text-[#0f3d2e] hover:bg-green-50 mr-2"
+              >
+                <Compass className="w-4 h-4 mr-2" />
+                <span className="hidden sm:inline">Visit Platform</span>
+              </Button>
               <Button
                 variant="ghost"
                 size="sm"

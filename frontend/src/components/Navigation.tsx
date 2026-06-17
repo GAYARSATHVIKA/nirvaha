@@ -178,6 +178,7 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
       onNavigate(page);
     } else {
       switch (page) {
+        case 'landing': navigate('/'); break;
         case 'home': navigate('/dashboard/overview'); break;
         case 'overview': navigate('/dashboard/overview'); break;
         case 'meditation': navigate('/dashboard/meditation'); break;
@@ -187,7 +188,13 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
         case 'marketplace': navigate('/dashboard/marketplace'); break;
         case 'companion': navigate('/dashboard/companion'); break;
         case 'gaming-hub': navigate('/dashboard/overview?scrollTo=gaming-hub'); break;
-        case 'profile': navigate('/dashboard/profile'); break;
+        case 'profile': 
+          if (user?.role === 'admin') {
+            navigate('/admin');
+          } else {
+            navigate('/dashboard/profile');
+          }
+          break;
         case 'certification': navigate('/certifications'); break;
         default: navigate(`/dashboard/${page}`);
       }
@@ -231,7 +238,7 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
             <motion.div
               className="flex items-center gap-3 cursor-pointer relative h-12 w-24"
               whileHover={{ scale: 1.05 }}
-              onClick={() => handleNavigate("home")}
+              onClick={() => handleNavigate("landing")}
             >
               <img
                 src="/logo1.png"
@@ -243,6 +250,20 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-2">
+              {/* Home */}
+              <motion.button
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleNavigate("home")}
+                className={`flex items-center gap-2 px-4 py-2 transition-all ${
+                  ["home", "overview"].includes(currentPage)
+                    ? "text-white"
+                    : "text-white/70 hover:text-white"
+                }`}
+              >
+                <span className="text-sm font-bold uppercase tracking-wider">Home</span>
+              </motion.button>
+
               {/* Features Dropdown */}
               <div className="relative">
                 <motion.button
@@ -459,8 +480,12 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
                     <motion.button
                       whileHover={{ x: 4, backgroundColor: "rgba(16, 185, 129, 0.15)" }}
                       onClick={() => {
-                        if (onNavigate) { onNavigate("profile?open=settings"); }
-                        else { navigate("/dashboard/profile?open=settings"); }
+                        if (user?.role === 'admin') {
+                          navigate('/admin/settings');
+                        } else {
+                          if (onNavigate) { onNavigate("profile?open=settings"); }
+                          else { navigate("/dashboard/profile?open=settings"); }
+                        }
                         setProfileMenuOpen(false);
                       }}
                       className="w-full flex items-center gap-3 px-6 py-3 text-white/80 transition-all"
@@ -578,9 +603,22 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
                 className="w-full py-2 rounded-xl text-white text-sm"
                 style={{ background: 'rgba(16,185,129,0.2)' }}
               >
-                Go to Profile
+                Go to {user?.role === 'admin' ? 'Admin Dashboard' : 'Profile'}
               </motion.button>
             </div>
+
+            {/* Home */}
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => { handleNavigate("home"); setMobileMenuOpen(false); }}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl transition-all ${
+                ["home", "overview"].includes(currentPage)
+                  ? "bg-emerald-500/30 text-white"
+                  : "text-white/70 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              <span>Home</span>
+            </motion.button>
 
             {/* Features */}
             <div className="space-y-2">
