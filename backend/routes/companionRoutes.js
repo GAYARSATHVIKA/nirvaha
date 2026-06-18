@@ -23,7 +23,7 @@ function splitList(value) {
 
 function toAdminCompanion(app) {
   return {
-    id: app.id,
+    id: app.id || (app._id ? app._id.toString() : null),
     name: app.fullName,
     email: app.email,
     expertise: app.title,
@@ -52,7 +52,7 @@ function toAdminCompanion(app) {
 
 function toPublicCompanion(app) {
   return {
-    id: app.id,
+    id: app.id || (app._id ? app._id.toString() : null),
     name: app.fullName,
     title: app.title,
     avatar: app.profileImage || '',
@@ -106,12 +106,17 @@ router.get('/applications', async (req, res) => {
 router.get('/applications/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const application = await CompanionApplication.findOne({ id }).lean();
+    const mongoose = require('mongoose');
+    const orConditions = [{ id }];
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      orConditions.push({ _id: id });
+    }
+    const application = await CompanionApplication.findOne({ $or: orConditions }).lean();
     if (!application) {
       return res.status(404).json({ error: 'application not found' });
     }
     res.json({
-      id: application.id,
+      id: application.id || application._id,
       fullName: application.fullName,
       email: application.email,
       phone: application.phone,
@@ -224,8 +229,14 @@ router.put('/applications/:id', async (req, res) => {
     const { id } = req.params;
     const payload = req.body || {};
 
+    const mongoose = require('mongoose');
+    const orConditions = [{ id }];
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      orConditions.push({ _id: id });
+    }
+
     const updated = await CompanionApplication.findOneAndUpdate(
-      { id },
+      { $or: orConditions },
       {
         ...(payload.fullName !== undefined ? { fullName: payload.fullName } : {}),
         ...(payload.name !== undefined ? { fullName: payload.name } : {}),
@@ -314,24 +325,46 @@ router.put('/applications/:id', async (req, res) => {
   }
 });
 
+router.get('/debug/applications', async (req, res) => {
+  const apps = await CompanionApplication.find().lean();
+  res.json(apps);
+});
+
+router.get('/debug/users', async (req, res) => {
+  const users = await require('../models/User').find().lean();
+  res.json(users);
+});
+
 // Update companion application status
 router.patch('/applications/:id/status', async (req, res) => {
+  console.log('--- PATCH /applications/:id/status CALLED ---');
+  console.log('Params:', req.params, 'Body:', req.body);
   try {
     const { id } = req.params;
     const { status } = req.body || {};
     if (!status) {
+      console.log('Error: status is required');
       return res.status(400).json({ error: 'status is required' });
     }
 
+    const mongoose = require('mongoose');
+    const orConditions = [{ id }];
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      orConditions.push({ _id: id });
+    }
+
     const updated = await CompanionApplication.findOneAndUpdate(
-      { id },
+      { $or: orConditions },
       { status },
       { new: true, runValidators: true }
     );
 
     if (!updated) {
+      console.log('Error: application not found for id:', id);
       return res.status(404).json({ error: 'application not found' });
     }
+    
+    console.log('Application updated successfully:', updated.id, 'status:', updated.status);
 
     const statusNorm = normalizeStatus(updated.status);
     const isApproved = statusNorm === 'approved';
@@ -380,10 +413,46 @@ router.patch('/applications/:id/status', async (req, res) => {
 router.delete('/applications/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await CompanionApplication.deleteOne({ id });
+    const mongoose = require('mongoose');
+    const orConditions = [{ id }];
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      orConditions.push({ _id: id });
+    }
+    
+    const appToDelete = await CompanionApplication.findOne({ $or: orConditions });
+    if (!appToDelete) {
+      return res.status(404).json({ error: 'application not found' });
+    }
+
+    const deleted = await CompanionApplication.deleteOne({ $or: orConditions });
     if (deleted.deletedCount === 0) {
       return res.status(404).json({ error: 'application not found' });
     }
+    
+    // Revert user back to normal user
+    await persistCompanionApprovalToUser(
+      appToDelete.email,
+      {
+        isApprovedCompanion: false,
+        companionStatus: null,
+        companionId: null,
+      },
+      { fallbackName: appToDelete.fullName }
+    );
+
+    // Emit real-time event so clients update
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('request-status-updated', {
+        id: appToDelete.id,
+        status: 'deleted',
+        fullName: appToDelete.fullName,
+        email: appToDelete.email,
+        isApprovedCompanion: false,
+        companionStatus: null,
+      });
+    }
+
     res.json({ ok: true });
   } catch (error) {
     res.status(500).json({ error: error.message });

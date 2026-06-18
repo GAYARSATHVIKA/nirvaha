@@ -109,7 +109,7 @@ async function persistCompanionApprovalToUser(email, companionMeta, options = {}
   const companionStatus = isApproved ? 'approved' : (meta.companionStatus || null);
 
   await User.findOneAndUpdate(
-    { id: user.id },
+    { _id: user._id },
     {
       $set: {
         isApprovedCompanion: isApproved,
