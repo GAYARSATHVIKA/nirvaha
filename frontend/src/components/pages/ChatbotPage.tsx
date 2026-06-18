@@ -174,7 +174,7 @@ export function ChatbotPage() {
   const initialMessage: Message = useMemo(
     () => ({
       type: "ai",
-      content: "Namaste 🙏 I'm your NIRVAHA AI spiritual guide. How can I support your reflection today?",
+      content: "Namaste. I'm your NIRVAHA AI spiritual guide. How can I support your reflection today?",
       timestamp: new Date().toISOString(),
     }),
     []

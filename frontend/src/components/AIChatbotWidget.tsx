@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot, Loader2 } from 'lucide-react';
 import BACKEND_CONFIG from '../config/backend';
 import { useNavigate } from 'react-router-dom';
-import Twemoji from 'react-twemoji';
 
 interface Message {
   id: string;
@@ -14,8 +13,7 @@ interface Message {
 const SYSTEM_PROMPT = `You are Nirvaha AI, but think of yourself as a warm, human wellness buddy and mentor. Do NOT sound like a typical formal AI chatbot. Speak naturally, casually, and empathetically—like a caring friend over a cup of tea. Use everyday language, contractions, and natural conversational flow. 
 
 ## EMOJI USAGE (CRITICAL)
-- You MUST use at least 2 to 3 expressive emojis in EVERY SINGLE RESPONSE to make the conversation feel incredibly warm, friendly, and visually engaging. 
-- Match the emojis exactly to the emotional context of the user's situation (e.g., use comforting emojis like 💙, 🫂, 🌿, 🥺 for sadness, and uplifting ones like ✨, 🌻, 🚀, 🙌, 🥰 for motivation). Do not hold back on emojis!
+- Do NOT use any emojis in your responses. Keep it text only.
 
 ## TONE & PERSONALITY (CRITICAL)
 - CRITICAL RESTRICTION: You MUST ONLY answer questions related to mental health, physical health, wellness, the Nirvaha website, or the Nirvaha company. If the user asks about ANY other topic, politely decline to answer and redirect them to health, wellness, or Nirvaha-related topics.
@@ -43,7 +41,7 @@ Do NOT list these out like a robot. Just naturally ask the reflection question t
 ## ADVANCED CAPABILITIES
 - REDIRECTIONS: If the user explicitly asks to go to a page, open a feature, or navigate somewhere, you MUST output a special command at the very end of your response on a new line: [REDIRECT:/path]
 Valid paths: /dashboard, /wellness-ott, /companion, /marketplace, /community, /meditation, /sounds
-Example: "Sure thing! Let me take you right over to the Wellness OTT platform so you can relax. 🌿 [REDIRECT:/wellness-ott]"
+Example: "Sure thing! Let me take you right over to the Wellness OTT platform so you can relax. [REDIRECT:/wellness-ott]"
 
 - FORMATTING: If the user asks for bullet points or a list, you MUST use clear numbered lists formatted exactly like this with line breaks:
 1) First point here
@@ -72,7 +70,7 @@ const AIChatbotWidget: React.FC = () => {
     {
       id: '1',
       type: 'ai',
-      text: 'Namaste 🙏 I am Nirvaha AI. How can I help you today? You can ask me about our platform, services, or if you just need a mental health tip.',
+      text: 'Namaste. I am Nirvaha AI. How can I help you today? You can ask me about our platform, services, or if you just need a mental health tip.',
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -111,40 +109,40 @@ const AIChatbotWidget: React.FC = () => {
     const lower = userText.toLowerCase();
 
     if (lower.includes('stress') || lower.includes('anxious') || lower.includes('anxiety') || lower.includes('overwhelm')) {
-      return "I hear you. When stress hits, try box breathing: inhale for 4 seconds, hold for 4, exhale for 4, hold for 4. Repeat 4 times. You might also find our Stress Relief series on Wellness OTT helpful 💚";
+      return "I hear you. When stress hits, try box breathing: inhale for 4 seconds, hold for 4, exhale for 4, hold for 4. Repeat 4 times. You might also find our Stress Relief series on Wellness OTT helpful.";
     }
     if (lower.includes('sleep') || lower.includes('insomnia') || lower.includes('tired')) {
-      return "Sleep struggles are tough. Try keeping a consistent bedtime, avoid screens 30 minutes before bed, and explore our Sleep Stories on Wellness OTT 🌙";
+      return "Sleep struggles are tough. Try keeping a consistent bedtime, avoid screens 30 minutes before bed, and explore our Sleep Stories on Wellness OTT.";
     }
     if (lower.includes('sad') || lower.includes('depress') || lower.includes('lonely') || lower.includes('empty')) {
-      return "I'm sorry you're feeling this way — your feelings are valid. Our Nirvaha Companions are certified wellness experts who offer personalized 1-on-1 support. Would you like to explore that? 💙";
+      return "I'm sorry you're feeling this way — your feelings are valid. Our Nirvaha Companions are certified wellness experts who offer personalized 1-on-1 support. Would you like to explore that?";
     }
     if (lower.includes('meditat') || lower.includes('calm') || lower.includes('relax')) {
-      return "Our Wellness OTT has guided meditation series for all levels. Head to /wellness-ott to explore. For a quick start, try belly breathing — breathe deep into your stomach, hold briefly, and exhale slowly 🧘";
+      return "Our Wellness OTT has guided meditation series for all levels. Head to /wellness-ott to explore. For a quick start, try belly breathing — breathe deep into your stomach, hold briefly, and exhale slowly.";
     }
     if (lower.includes('companion') || lower.includes('mentor') || lower.includes('book')) {
-      return "Nirvaha Companions are verified wellness experts ready to offer personalized guidance. Browse their profiles and book a session from Dashboard → Companions 🌿";
+      return "Nirvaha Companions are verified wellness experts ready to offer personalized guidance. Browse their profiles and book a session from Dashboard → Companions.";
     }
     if (lower.includes('marketplace') || lower.includes('shop') || lower.includes('product')) {
-      return "Our Marketplace has curated wellness products — essential oils, grounding crystals, wellness journals. Explore it from your Dashboard 🛍️";
+      return "Our Marketplace has curated wellness products — essential oils, grounding crystals, wellness journals. Explore it from your Dashboard.";
     }
     if (lower.includes('price') || lower.includes('cost') || lower.includes('plan')) {
       return "Pricing is tailored to your organization's needs. Please contact our team via the Contact section or email support@nirvaha.org for a custom plan.";
     }
     if (lower.includes('what is nirvaha') || lower.includes('about')) {
-      return "Nirvaha is an AI-powered emotional healing platform that blends ancient spiritual wisdom with modern therapy and meditation 🌱";
+      return "Nirvaha is an AI-powered emotional healing platform that blends ancient spiritual wisdom with modern therapy and meditation.";
     }
     if (lower.includes('tip') || lower.includes('advice') || lower.includes('help me')) {
-      return "Try the 5-4-3-2-1 grounding technique: name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste. It brings you back to the present moment ✨";
+      return "Try the 5-4-3-2-1 grounding technique: name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste. It brings you back to the present moment.";
     }
     if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey') || lower.includes('namaste')) {
-      return "Namaste! 🙏 So glad you're here. How can I support you today?";
+      return "Namaste! So glad you're here. How can I support you today?";
     }
     if (lower.includes('breath')) {
-      return "Try 4-7-8 breathing: inhale for 4 seconds, hold for 7, exhale for 8. This calms anxiety almost immediately 🌬️";
+      return "Try 4-7-8 breathing: inhale for 4 seconds, hold for 7, exhale for 8. This calms anxiety almost immediately.";
     }
 
-    return "Thank you for sharing that. I'm here to help — whether it's learning about Nirvaha's services or a gentle wellness tip. You can also book a session with one of our Companions for deeper support 💚";
+    return "Thank you for sharing that. I'm here to help — whether it's learning about Nirvaha's services or a gentle wellness tip. You can also book a session with one of our Companions for deeper support.";
   };
 
   const handleSend = async () => {
@@ -245,9 +243,9 @@ const AIChatbotWidget: React.FC = () => {
                         : 'bg-white border border-gray-100 text-gray-800 shadow-sm rounded-bl-none'
                     }`}
                   >
-                    <Twemoji options={{ className: 'emoji' }}>
+                    <div className="emoji-container">
                       {msg.text}
-                    </Twemoji>
+                    </div>
                   </div>
                 </div>
               ))}
