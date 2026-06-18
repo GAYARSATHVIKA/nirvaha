@@ -59,7 +59,7 @@ const CommunityHero = () => {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a1912]">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* 1. Breathing Image Background */}
       <motion.div 
         className="absolute inset-0 w-full h-full bg-[length:auto_85%] lg:bg-[length:auto_90%] bg-bottom lg:bg-right-bottom bg-no-repeat"
@@ -69,7 +69,7 @@ const CommunityHero = () => {
         }}
         animate={{ 
           scale: [1, 1.02, 1],
-          opacity: [0.8, 1, 0.8]
+          opacity: [0.95, 1, 0.95]
         }}
         transition={{
           duration: 12,
@@ -188,7 +188,7 @@ const CommunityHero = () => {
       </div>
 
       {/* 6. Atmosphere Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a1912]/50 to-[#0a1912] z-[5]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 z-[5]" />
 
       {/* 7. Hero Content - Center-aligned layout */}
       <div className="relative z-[20] w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center justify-center text-center min-h-screen pt-24">
