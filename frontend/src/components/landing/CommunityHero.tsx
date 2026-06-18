@@ -199,10 +199,10 @@ const CommunityHero = () => {
           className="w-full flex flex-col items-center justify-center max-w-5xl"
         >
           <h1 
-            className="text-5xl md:text-7xl font-light text-white tracking-wide text-center flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto uppercase"
+            className="text-5xl md:text-7xl font-light text-black tracking-wide text-center flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto uppercase"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
-            <span className="whitespace-nowrap md:w-1/2 md:text-right md:pr-4">
+            <span className="whitespace-nowrap md:w-1/2 md:text-right md:pr-4 text-black">
               {heroData.title || "Find your"}
             </span>
             <span className="text-emerald-400 inline-flex justify-center md:justify-start md:w-1/2 md:pl-4 mt-2 md:mt-0 relative">
