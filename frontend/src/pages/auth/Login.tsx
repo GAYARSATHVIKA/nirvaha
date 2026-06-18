@@ -279,9 +279,7 @@ const Login: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           />
-          <h1 className="text-4xl font-bold mb-3 login-title">
-            Nirvaha
-          </h1>
+
           <p className="text-sm login-subtitle">
             Begin your journey to timeless wellness
           </p>
