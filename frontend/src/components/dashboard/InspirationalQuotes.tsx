@@ -132,13 +132,6 @@ export const InspirationalQuotes = () => {
                                     <p className="text-[#1a3d2b] italic text-center text-sm md:text-base mb-3 leading-relaxed relative z-10" style={{ fontFamily: "'Cinzel', serif" }}>
                                         "{note.quote}"
                                     </p>
-                                    <Link 
-                                        to={note.link}
-                                        className="bg-[#e8f5e9] text-[#2e7d32] text-[10px] font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 border border-[#c8e6c9] hover:bg-[#c8e6c9] transition-colors cursor-pointer relative z-10"
-                                        style={{ boxShadow: '0 0 12px rgba(134,197,134,0.5)' }}
-                                    >
-                                        <span>🎵</span> {note.chant}
-                                    </Link>
                                     {/* Speech Bubble Tail */}
                                     <div 
                                         className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 transform"

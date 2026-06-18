@@ -208,6 +208,9 @@ export function CompanionManagementPage() {
         const status = confirmAction.type === "approve" ? "approved" : "rejected";
         const updated = await updateCompanionStatus(confirmAction.companion.id, status);
         setCompanions((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
+        if (selectedCompanion?.id === updated.id) {
+          setSelectedCompanion(updated);
+        }
       }
     } catch (error) {
       console.error('Failed to update companion application:', error);

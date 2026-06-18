@@ -12,7 +12,7 @@ export const WellnessOTT = () => {
         e.preventDefault();
         e.stopPropagation();
         // Navigate immediately — all animation is handled inside NirvahaStreamIntro
-        navigate(`/wellness-ott-intro?seriesId=${item.id}`, {
+        navigate(`/wellness-ott/series/${item.id}`, {
             state: {
                 thumbnail: item.thumbnail,
                 title: item.title,
@@ -24,7 +24,7 @@ export const WellnessOTT = () => {
     const handleViewMore = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        navigate('/wellness-ott-intro');
+        navigate('/wellness-ott');
     };
 
     return (

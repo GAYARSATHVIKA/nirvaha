@@ -41,6 +41,7 @@ import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ShareProfileCard } from "./ShareProfileCard";
 import { MeditationSessionModal } from "./MeditationSessionModal";
+import { CompanionApplicationModal } from "./CompanionApplicationModal";
 import { useAuth } from "../contexts/AuthContext";
 import { useSettings } from "../contexts/SettingsContext";
 import { useSocket } from "../contexts/SocketContext";
@@ -403,6 +404,7 @@ export function ProfilePage() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
 
   const location = useLocation();
 
@@ -603,12 +605,10 @@ export function ProfilePage() {
   const [sessionsLoading, setSessionsLoading] = useState(true);
   const [userBookings, setUserBookings] = useState<any[]>([]);
 
-  // ── Companion Mode Switch (TEMPORARY OVERRIDE FOR VERIFICATION) ───
+  // ── Companion Mode Switch ───
 
-  // Force-enable companion UI to verify runtime user object
-  const canAccessCompanionMode = true;
-
-  const isUserApprovedCompanion = canAccessCompanionMode;
+  const isUserApprovedCompanion = user?.isApprovedCompanion === true || user?.companionStatus === 'approved';
+  const isApplicationPending = user?.companionStatus === 'pending';
 
   const CompanionModeSwitch = () => {
     return (
@@ -1298,7 +1298,7 @@ export function ProfilePage() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50/20 to-gray-50/20 pt-24 pb-16">
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50/20 to-gray-50/20 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 dark:text-gray-100 transition-colors duration-300 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-6" ref={profileRef}>
         {/* Profile Header */}
         <motion.div
@@ -1432,7 +1432,17 @@ export function ProfilePage() {
 
 
 
-        {/* Dashboard Stats Row */}
+        {/* User Dashboard Stats (Hidden when Companion Mode is ON) */}
+        <AnimatePresence>
+          {(!isCompanionModeEnabled || !isUserApprovedCompanion) && (
+            <motion.div
+              key="personal-dashboard-stats"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="overflow-hidden"
+            >
+              {/* Dashboard Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Streak Card */}
           <motion.div
@@ -1829,6 +1839,9 @@ export function ProfilePage() {
           </div>
         </motion.div>
         </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Quote of the Day — above Account Settings / Subscription */}
         <motion.section
@@ -1909,7 +1922,33 @@ export function ProfilePage() {
               Today&apos;s calm thought
             </p>
           )}
-          {/* My Sessions section removed: functionality moved to CompanionPage */}
+          
+          <div className="mt-6">
+            <AnimatePresence mode="wait">
+              {isUserApprovedCompanion ? (
+                <CompanionModeSwitch />
+              ) : isApplicationPending ? (
+                <motion.div
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-2xl border border-emerald-200 shadow-sm w-fit"
+                >
+                  <Users className="w-4 h-4 text-emerald-600" />
+                  <span className="text-sm font-semibold select-none">Application Pending</span>
+                </motion.div>
+              ) : (
+                <motion.button
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  onClick={() => setIsApplicationModalOpen(true)}
+                  className="flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-4 py-2 rounded-2xl shadow-md transition-all hover:scale-105"
+                >
+                  <Users className="w-4 h-4" />
+                  <span className="text-sm font-bold select-none">Apply as Companion</span>
+                </motion.button>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.section>
 
         {/* ── User's Booked Sessions Section (Visible when companion mode is OFF) ── */}
@@ -2507,23 +2546,7 @@ export function ProfilePage() {
                     </select>
                   </div>
 
-                  {/* Language */}
-                  <div>
-                    <label className="block">
-                      <p className="text-[#1B4332] font-bold text-sm mb-1.5">{t("settings.appLanguage")}</p>
-                      <p className="text-gray-500 text-xs mb-3">Choose your preferred display language</p>
-                    </label>
-                    <select
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-semibold text-sm cursor-pointer"
-                      value={settings.language}
-                      onChange={(e) => void setLanguage(e.target.value as AppLanguage)}
-                    >
-                      <option value="en">🇺🇸 English</option>
-                      <option value="hi">🇮🇳 Hindi (हिन्दी)</option>
-                      <option value="te">🇮🇳 Telugu (తెలుగు)</option>
-                      <option value="kn">🇮🇳 Kannada (ಕನ್ನಡ)</option>
-                    </select>
-                  </div>
+                  {/* Language (Removed) */}
                 </div>
 
                 {/* Account Details Quick View */}
@@ -3010,6 +3033,15 @@ export function ProfilePage() {
         isOpen={isSessionModalOpen}
         onClose={() => setIsSessionModalOpen(false)}
         session={activeSession}
+      />
+      
+      <CompanionApplicationModal 
+        isOpen={isApplicationModalOpen} 
+        onClose={() => setIsApplicationModalOpen(false)} 
+        user={user}
+        onSuccess={() => {
+           void syncUserFromServer();
+        }}
       />
     </div>
   );

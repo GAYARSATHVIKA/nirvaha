@@ -44,15 +44,12 @@ const WhatIsNirvaha: React.FC = () => {
     useEffect(() => {
         const fetchPillars = async () => {
             try {
-                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/landing_pillars`);
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
                 if (res.ok) {
                     const data = await res.json();
-                    if (data && data.value) {
-                        const parsed = JSON.parse(data.value);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            setPillars(parsed);
-                            return;
-                        }
+                    if (data && data.pillars && Array.isArray(data.pillars) && data.pillars.length > 0) {
+                        setPillars(data.pillars);
+                        return;
                     }
                 }
             } catch (err) {

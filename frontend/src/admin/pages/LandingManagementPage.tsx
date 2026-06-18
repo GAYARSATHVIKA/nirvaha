@@ -12,7 +12,8 @@ import {
   Trash2,
   Image as ImageIcon,
   Type,
-  ToggleLeft
+  ToggleLeft,
+  BookOpen
 } from 'lucide-react';
 import BACKEND_CONFIG from '../../config/backend';
 import { useAuth } from '../../contexts/AuthContext';
@@ -26,6 +27,9 @@ interface Section {
 
 const SECTIONS: Section[] = [
   { id: 'hero', label: 'Hero Section', icon: <ImageIcon size={18} /> },
+  { id: 'pillars', label: 'Core Pillars', icon: <ToggleLeft size={18} /> },
+  { id: 'academy', label: 'Academy', icon: <BookOpen size={18} /> },
+  { id: 'library', label: 'Vast Library', icon: <BookOpen size={18} /> },
   { id: 'stats', label: 'Trusted Stats', icon: <Plus size={18} /> },
   { id: 'wisdom', label: 'Ancient Wisdom', icon: <Type size={18} /> },
   { id: 'settings', label: 'Access Controls', icon: <Shield size={18} /> }
@@ -38,6 +42,7 @@ export function LandingManagementPage() {
   const [saving, setSaving] = useState(false);
   const [data, setData] = useState<any>(null);
   const [editingCourse, setEditingCourse] = useState<{ idx: number; data: any } | null>(null);
+  const [editingLibraryItem, setEditingLibraryItem] = useState<{ idx: number; data: any } | null>(null);
 
   useEffect(() => {
     fetchLandingData();
@@ -107,17 +112,17 @@ export function LandingManagementPage() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-8">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-emerald-100 pb-8">
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-3xl font-bold text-[#1b4332] flex items-center gap-3">
             <Layout className="text-emerald-500" /> Landing Page CMS
           </h1>
-          <p className="text-white/40 mt-1">Manage all public-facing content and access controls dynamically.</p>
+          <p className="text-gray-500 mt-1">Manage all public-facing content and access controls dynamically.</p>
         </div>
         <div className="flex items-center gap-3">
           <button 
             onClick={fetchLandingData}
-            className="p-3 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors"
+            className="p-3 bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl transition-colors"
           >
             <RefreshCw size={20} />
           </button>
@@ -142,7 +147,7 @@ export function LandingManagementPage() {
               className={`w-full flex items-center gap-3 px-5 py-4 rounded-2xl transition-all ${
                 activeTab === section.id 
                 ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
-                : 'text-white/40 hover:bg-white/5 hover:text-white border border-transparent'
+                : 'text-gray-500 hover:bg-white shadow-sm border border-emerald-100 hover:text-[#1b4332] border border-transparent'
               }`}
             >
               {section.icon}
@@ -152,7 +157,7 @@ export function LandingManagementPage() {
         </aside>
 
         {/* Content Editor */}
-        <main className="bg-white/5 border border-white/10 rounded-[2rem] p-8 md:p-12 min-h-[600px]">
+        <main className="bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-[2rem] p-8 md:p-12 min-h-[600px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -165,33 +170,93 @@ export function LandingManagementPage() {
               {/* Render editors based on tab */}
               {activeTab === 'hero' && (
                 <div className="space-y-8">
-                  <h3 className="text-xl font-bold text-white border-l-4 border-emerald-500 pl-4">Hero Section Content</h3>
+                  <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Hero Section Content</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Headline</label>
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Headline</label>
                       <input 
                         type="text" 
                         value={data.hero?.title}
                         onChange={(e) => updateNestedField('hero.title', e.target.value)}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none"
+                        className="w-full bg-white shadow-inner border border-emerald-200 rounded-xl px-4 py-3 text-[#1b4332] focus:border-emerald-500/50 outline-none"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Button Label</label>
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Button Label</label>
                       <input 
                         type="text" 
                         value={data.hero?.buttonText}
                         onChange={(e) => updateNestedField('hero.buttonText', e.target.value)}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none"
+                        className="w-full bg-white shadow-inner border border-emerald-200 rounded-xl px-4 py-3 text-[#1b4332] focus:border-emerald-500/50 outline-none"
                       />
                     </div>
                     <div className="space-y-2 md:col-span-2">
-                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Sub-headline</label>
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Sub-headline</label>
                       <textarea 
                         value={data.hero?.subtitle}
                         onChange={(e) => updateNestedField('hero.subtitle', e.target.value)}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none min-h-[100px]"
+                        className="w-full bg-white shadow-inner border border-emerald-200 rounded-xl px-4 py-3 text-[#1b4332] focus:border-emerald-500/50 outline-none min-h-[100px]"
                       />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'library' && (
+                <div className="space-y-8">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Vast Library Section</h3>
+                  </div>
+
+                  <div className="space-y-4">
+                    <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Library Items</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {data.library?.map((item: any, idx: number) => (
+                        <div key={idx} className="p-4 bg-white shadow-sm border border-emerald-100 border border-emerald-100 rounded-2xl flex flex-col gap-3">
+                          <img src={item.image || item.imageUrl} className="w-full h-32 rounded-lg object-cover bg-white shadow-inner" />
+                          <div>
+                            <span className="text-sm font-bold text-[#1b4332] block truncate">{item.title || 'Untitled'}</span>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold uppercase">{item.category}</span>
+                              <span className="text-[10px] text-gray-500">{item.duration}</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 mt-2 pt-3 border-t border-emerald-100">
+                            <button 
+                                onClick={() => setEditingLibraryItem({ idx, data: { ...item } })}
+                                className="flex-1 py-2 text-xs font-bold bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg transition-colors flex items-center justify-center gap-2"
+                            >
+                                <Settings size={14} /> Edit
+                            </button>
+                            <button 
+                                onClick={() => {
+                                  const newItems = (data.library || []).filter((_: any, i: number) => i !== idx);
+                                  updateNestedField('library', newItems);
+                                }}
+                                className="px-3 py-2 text-xs font-bold bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"
+                            >
+                                <Trash2 size={14} />
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                      <button 
+                        onClick={() => {
+                            const newItem = {
+                                id: `lib-${Date.now()}`,
+                                title: 'New Library Item',
+                                category: 'Wellness',
+                                duration: '10 min',
+                                image: '',
+                                story: ''
+                            };
+                            updateNestedField('library', [...(data.library || []), newItem]);
+                        }}
+                        className="p-4 min-h-[220px] border border-dashed border-emerald-300 rounded-2xl flex flex-col items-center justify-center gap-3 text-gray-400 hover:text-emerald-700 transition-colors"
+                      >
+                        <Plus size={24} /> 
+                        <span className="text-sm font-bold">Add Library Item</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -200,57 +265,57 @@ export function LandingManagementPage() {
               {activeTab === 'academy' && (
                 <div className="space-y-8">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-white border-l-4 border-emerald-500 pl-4">Academy Section</h3>
-                    <div className="flex items-center gap-3 p-2 bg-black/40 rounded-xl border border-white/5">
-                      <span className="text-xs text-white/40 font-bold px-2">LOGIN REQUIRED?</span>
+                    <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Academy Section</h3>
+                    <div className="flex items-center gap-3 p-2 bg-white shadow-inner rounded-xl border border-emerald-100">
+                      <span className="text-xs text-gray-500 font-bold px-2">LOGIN REQUIRED?</span>
                       <button 
-                        onClick={() => updateNestedField('academy.isLoginRequired', !data.academy.isLoginRequired)}
-                        className={`p-1 w-12 h-6 rounded-full transition-colors flex items-center ${data.academy.isLoginRequired ? 'bg-emerald-500' : 'bg-white/10'}`}
+                        onClick={() => updateNestedField('academy.isLoginRequired', !data.academy?.isLoginRequired)}
+                        className={`p-1 w-12 h-6 rounded-full transition-colors flex items-center ${data.academy?.isLoginRequired ? 'bg-emerald-500' : 'bg-emerald-50'}`}
                       >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${data.academy.isLoginRequired ? 'translate-x-7' : 'translate-x-1'}`} />
+                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${data.academy?.isLoginRequired ? 'translate-x-7' : 'translate-x-1'}`} />
                       </button>
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Title</label>
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Title</label>
                       <input 
                         type="text" 
                         value={data.academy?.title}
                         onChange={(e) => updateNestedField('academy.title', e.target.value)}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none"
+                        className="w-full bg-white shadow-inner border border-emerald-200 rounded-xl px-4 py-3 text-[#1b4332] focus:border-emerald-500/50 outline-none"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Explore Button Text</label>
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Explore Button Text</label>
                       <input 
                         type="text" 
                         value={data.academy?.exploreButtonText}
                         onChange={(e) => updateNestedField('academy.exploreButtonText', e.target.value)}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none"
+                        className="w-full bg-white shadow-inner border border-emerald-200 rounded-xl px-4 py-3 text-[#1b4332] focus:border-emerald-500/50 outline-none"
                       />
                     </div>
                     <div className="space-y-2 md:col-span-2">
-                      <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Subtitle</label>
+                      <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Subtitle</label>
                       <textarea 
                         value={data.academy?.subtitle}
                         onChange={(e) => updateNestedField('academy.subtitle', e.target.value)}
-                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-emerald-500/50 outline-none h-20"
+                        className="w-full bg-white shadow-inner border border-emerald-200 rounded-xl px-4 py-3 text-[#1b4332] focus:border-emerald-500/50 outline-none h-20"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <label className="text-xs uppercase tracking-widest text-white/40 font-bold">Academy Cards ( Teasers )</label>
+                    <label className="text-xs uppercase tracking-widest text-gray-500 font-bold">Academy Cards ( Teasers )</label>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {data.academy?.courses?.map((course: any, idx: number) => (
-                        <div key={idx} className="p-4 bg-black/20 border border-white/5 rounded-2xl flex items-center justify-between">
+                        <div key={idx} className="p-4 bg-white shadow-sm border border-emerald-100 border border-emerald-100 rounded-2xl flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <img src={course.image} className="w-10 h-10 rounded-lg object-cover" />
                             <div>
                                 <span className="text-sm font-medium block">{course.title}</span>
-                                <span className="text-[10px] text-white/40 uppercase font-black">Instructor: {course.instructor?.name || 'Not Set'}</span>
+                                <span className="text-[10px] text-gray-500 uppercase font-black">Instructor: {course.instructor?.name || 'Not Set'}</span>
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
@@ -262,7 +327,7 @@ export function LandingManagementPage() {
                             </button>
                             <button 
                                 onClick={() => {
-                                const newCourses = data.academy.courses.filter((_: any, i: number) => i !== idx);
+                                const newCourses = (data.academy?.courses || []).filter((_: any, i: number) => i !== idx);
                                 updateNestedField('academy.courses', newCourses);
                                 }}
                                 className="p-2 text-red-400/60 hover:text-red-400"
@@ -283,9 +348,9 @@ export function LandingManagementPage() {
                                 bgColor: 'bg-emerald-50',
                                 instructor: { name: '', title: '', avatar: '', bio: '', experience: '', certifications: '', coursesHandled: '', expertise: '', socialLinks: '', website: '', rating: 4.8, reviewsCount: 0 }
                             };
-                            updateNestedField('academy.courses', [...(data.academy.courses || []), newCourse]);
+                            updateNestedField('academy.courses', [...(data.academy?.courses || []), newCourse]);
                         }}
-                        className="p-4 border border-dashed border-white/10 rounded-2xl flex items-center justify-center gap-2 text-white/30 hover:text-white transition-colors"
+                        className="p-4 border border-dashed border-emerald-300 rounded-2xl flex items-center justify-center gap-2 text-gray-400 hover:text-emerald-700 transition-colors"
                       >
                         <Plus size={18} /> Add Teaser Card
                       </button>
@@ -296,23 +361,23 @@ export function LandingManagementPage() {
 
               {activeTab === 'settings' && (
                 <div className="space-y-12">
-                  <h3 className="text-xl font-bold text-white border-l-4 border-emerald-500 pl-4">Global Site Settings</h3>
+                  <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Global Site Settings</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {[
                       { key: 'maintenanceMode', label: 'Maintenance Mode', desc: 'Take the site offline for updates.' },
                       { key: 'showCollaborators', label: 'Show Collaborators', desc: 'Toggle the collaborators section.' },
                       { key: 'showContactForm', label: 'Show Contact Form', desc: 'Toggle the contact us section.' }
                     ].map(setting => (
-                      <div key={setting.key} className="p-6 bg-black/20 border border-white/5 rounded-3xl flex items-center justify-between">
+                      <div key={setting.key} className="p-6 bg-white shadow-sm border border-emerald-100 border border-emerald-100 rounded-3xl flex items-center justify-between">
                         <div className="space-y-1">
-                          <p className="font-bold text-white">{setting.label}</p>
-                          <p className="text-xs text-white/30">{setting.desc}</p>
+                          <p className="font-bold text-[#1b4332]">{setting.label}</p>
+                          <p className="text-xs text-gray-400">{setting.desc}</p>
                         </div>
                         <button 
-                          onClick={() => updateNestedField(`settings.${setting.key}`, !data.settings[setting.key])}
-                          className={`p-1 w-12 h-6 rounded-full transition-colors flex items-center ${data.settings[setting.key] ? 'bg-emerald-500' : 'bg-white/10'}`}
+                          onClick={() => updateNestedField(`settings.${setting.key}`, !(data.settings?.[setting.key]))}
+                          className={`p-1 w-12 h-6 rounded-full transition-colors flex items-center ${data.settings?.[setting.key] ? 'bg-emerald-500' : 'bg-emerald-50'}`}
                         >
-                          <div className={`w-4 h-4 bg-white rounded-full transition-transform ${data.settings[setting.key] ? 'translate-x-7' : 'translate-x-1'}`} />
+                          <div className={`w-4 h-4 bg-white rounded-full transition-transform ${data.settings?.[setting.key] ? 'translate-x-7' : 'translate-x-1'}`} />
                         </button>
                       </div>
                     ))}
@@ -320,11 +385,233 @@ export function LandingManagementPage() {
                 </div>
               )}
 
-              {/* Placeholder for other sections */}
-              {['stats', 'wisdom'].includes(activeTab) && (
-                <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
-                  <Settings className="text-white/10" size={64} />
-                  <p className="text-white/40 max-w-xs">The editor for this section is being populated with your current component schemas.</p>
+              {activeTab === 'pillars' && (
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Core Pillars</h3>
+                  <div className="grid grid-cols-1 gap-6">
+                    {(data.pillars || []).map((pillar: any, idx: number) => (
+                      <div key={idx} className="p-6 bg-white shadow-sm border border-emerald-100 rounded-3xl space-y-4 relative">
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-sm font-bold text-emerald-500">Pillar #{idx + 1}</span>
+                            <button 
+                                onClick={() => {
+                                    const newPillars = [...data.pillars];
+                                    newPillars.splice(idx, 1);
+                                    updateNestedField('pillars', newPillars);
+                                }}
+                                className="text-red-400 hover:text-red-600"
+                            >
+                                <Trash2 size={16} />
+                            </button>
+                        </div>
+                        <input
+                          type="text"
+                          value={pillar.title || ''}
+                          onChange={e => {
+                            const newPillars = [...data.pillars];
+                            newPillars[idx].title = e.target.value;
+                            updateNestedField('pillars', newPillars);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                          placeholder="Pillar Title"
+                        />
+                        <textarea
+                          value={pillar.desc || pillar.description || ''}
+                          onChange={e => {
+                            const newPillars = [...data.pillars];
+                            newPillars[idx].desc = e.target.value;
+                            newPillars[idx].description = e.target.value;
+                            updateNestedField('pillars', newPillars);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[80px]"
+                          placeholder="Pillar Description"
+                        />
+                        <input
+                          type="text"
+                          value={pillar.image || ''}
+                          onChange={e => {
+                            const newPillars = [...data.pillars];
+                            newPillars[idx].image = e.target.value;
+                            updateNestedField('pillars', newPillars);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                          placeholder="Image URL"
+                        />
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => {
+                        const newPillars = [...(data.pillars || [])];
+                        newPillars.push({ id: `p-${Date.now()}`, title: 'New Pillar', desc: '', image: '' });
+                        updateNestedField('pillars', newPillars);
+                      }}
+                      className="p-4 border border-dashed border-emerald-300 rounded-2xl flex items-center justify-center gap-2 text-gray-400 hover:text-emerald-700 transition-colors"
+                    >
+                      <Plus size={18} /> Add Pillar
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'wisdom' && (
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Ancient Wisdom (Goals)</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {(data.goals || []).map((goal: any, idx: number) => (
+                      <div key={idx} className="p-6 bg-white shadow-sm border border-emerald-100 rounded-3xl space-y-4">
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-sm font-bold text-emerald-500">Goal #{idx + 1}</span>
+                            <button 
+                                onClick={() => {
+                                    const newGoals = [...data.goals];
+                                    newGoals.splice(idx, 1);
+                                    updateNestedField('goals', newGoals);
+                                }}
+                                className="text-red-400 hover:text-red-600"
+                            >
+                                <Trash2 size={16} />
+                            </button>
+                        </div>
+                        <input
+                          type="text"
+                          value={goal.title || ''}
+                          onChange={e => {
+                            const newGoals = [...data.goals];
+                            newGoals[idx].title = e.target.value;
+                            updateNestedField('goals', newGoals);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                          placeholder="Goal Title (e.g. INNER PEACE)"
+                        />
+                        <input
+                          type="text"
+                          value={goal.subtitle || ''}
+                          onChange={e => {
+                            const newGoals = [...data.goals];
+                            newGoals[idx].subtitle = e.target.value;
+                            updateNestedField('goals', newGoals);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                          placeholder="Subtitle (e.g. I'm looking to find)"
+                        />
+                        <textarea
+                          value={goal.desc || goal.description || ''}
+                          onChange={e => {
+                            const newGoals = [...data.goals];
+                            newGoals[idx].desc = e.target.value;
+                            newGoals[idx].description = e.target.value;
+                            updateNestedField('goals', newGoals);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[80px]"
+                          placeholder="Goal Description"
+                        />
+                        <input
+                          type="text"
+                          value={goal.image || goal.imageUrl || ''}
+                          onChange={e => {
+                            const newGoals = [...data.goals];
+                            newGoals[idx].image = e.target.value;
+                            newGoals[idx].imageUrl = e.target.value;
+                            updateNestedField('goals', newGoals);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                          placeholder="Image URL"
+                        />
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => {
+                        const newGoals = [...(data.goals || [])];
+                        newGoals.push({ id: Date.now(), title: 'NEW GOAL', subtitle: 'I am looking for', desc: '', image: '' });
+                        updateNestedField('goals', newGoals);
+                      }}
+                      className="p-4 border border-dashed border-emerald-300 rounded-2xl flex items-center justify-center gap-2 text-gray-400 hover:text-emerald-700 transition-colors md:col-span-2"
+                    >
+                      <Plus size={18} /> Add Goal
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'stats' && (
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Trusted Stats & Partners</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {(data.partners || []).map((partner: any, idx: number) => (
+                      <div key={idx} className="p-6 bg-white shadow-sm border border-emerald-100 rounded-3xl space-y-4">
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-sm font-bold text-emerald-500">Stat/Partner #{idx + 1}</span>
+                            <button 
+                                onClick={() => {
+                                    const newPartners = [...data.partners];
+                                    newPartners.splice(idx, 1);
+                                    updateNestedField('partners', newPartners);
+                                }}
+                                className="text-red-400 hover:text-red-600"
+                            >
+                                <Trash2 size={16} />
+                            </button>
+                        </div>
+                        <input
+                          type="text"
+                          value={partner.value || partner.name || ''}
+                          onChange={e => {
+                            const newPartners = [...data.partners];
+                            newPartners[idx].value = e.target.value;
+                            newPartners[idx].name = e.target.value;
+                            updateNestedField('partners', newPartners);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                          placeholder="Value / Name (e.g. 50,000+ or Google)"
+                        />
+                        <input
+                          type="text"
+                          value={partner.label || ''}
+                          onChange={e => {
+                            const newPartners = [...data.partners];
+                            newPartners[idx].label = e.target.value;
+                            updateNestedField('partners', newPartners);
+                          }}
+                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                          placeholder="Label (e.g. Active Members)"
+                        />
+                        <div className="flex gap-4">
+                            <input
+                              type="text"
+                              value={partner.icon || ''}
+                              onChange={e => {
+                                const newPartners = [...data.partners];
+                                newPartners[idx].icon = e.target.value;
+                                updateNestedField('partners', newPartners);
+                              }}
+                              className="w-1/3 bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                              placeholder="Emoji/Icon"
+                            />
+                            <input
+                              type="text"
+                              value={partner.logoUrl || ''}
+                              onChange={e => {
+                                const newPartners = [...data.partners];
+                                newPartners[idx].logoUrl = e.target.value;
+                                updateNestedField('partners', newPartners);
+                              }}
+                              className="w-2/3 bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                              placeholder="Logo URL (optional)"
+                            />
+                        </div>
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => {
+                        const newPartners = [...(data.partners || [])];
+                        newPartners.push({ value: '', label: '', icon: '', name: '', logoUrl: '' });
+                        updateNestedField('partners', newPartners);
+                      }}
+                      className="p-4 border border-dashed border-emerald-300 rounded-2xl flex items-center justify-center gap-2 text-gray-400 hover:text-emerald-700 transition-colors md:col-span-2"
+                    >
+                      <Plus size={18} /> Add Stat / Partner
+                    </button>
+                  </div>
                 </div>
               )}
             </motion.div>
@@ -339,16 +626,16 @@ export function LandingManagementPage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-6 overflow-y-auto"
+                className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-md flex items-center justify-center p-6 overflow-y-auto"
             >
                 <motion.div 
                     initial={{ scale: 0.95, y: 20 }}
                     animate={{ scale: 1, y: 0 }}
-                    className="bg-[#111] border border-white/10 rounded-[2.5rem] w-full max-w-4xl p-10 relative my-auto"
+                    className="bg-white border border-emerald-200 rounded-[2.5rem] w-full max-w-4xl p-10 relative my-auto"
                 >
                     <button 
                         onClick={() => setEditingCourse(null)}
-                        className="absolute top-8 right-8 text-white/20 hover:text-white"
+                        className="absolute top-8 right-8 text-gray-400 hover:text-gray-600 hover:text-[#1b4332]"
                     >
                         <X className="w-6 h-6" />
                     </button>
@@ -358,8 +645,8 @@ export function LandingManagementPage() {
                             <CheckCircle2 size={24} />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-bold text-white">Edit Academy Course</h2>
-                            <p className="text-white/40 text-sm">Configure course details and instructor information.</p>
+                            <h2 className="text-2xl font-bold text-[#1b4332]">Edit Academy Course</h2>
+                            <p className="text-gray-500 text-sm">Configure course details and instructor information.</p>
                         </div>
                     </div>
 
@@ -369,39 +656,39 @@ export function LandingManagementPage() {
                             <h3 className="text-sm font-black text-emerald-500 uppercase tracking-widest">COURSE INFO</h3>
                             <div className="space-y-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Course Title</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Course Title</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.title}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, title: e.target.value } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Course Focus (e.g. Calm & Focused)</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Course Focus (e.g. Calm & Focused)</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.feel}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, feel: e.target.value } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Image URL</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Image URL</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.image}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, image: e.target.value } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Background Color Class (Tailwind)</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Background Color Class (Tailwind)</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.bgColor}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, bgColor: e.target.value } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                             </div>
@@ -412,96 +699,197 @@ export function LandingManagementPage() {
                             <h3 className="text-sm font-black text-emerald-500 uppercase tracking-widest">INSTRUCTOR PROFILE</h3>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Name</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Name</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.name}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, name: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Title</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Title</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.title}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, title: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Experience</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Experience</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.experience}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, experience: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Certifications</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Certifications</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.certifications}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, certifications: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2 col-span-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Courses Handled</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Courses Handled</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.coursesHandled}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, coursesHandled: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2 col-span-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Specialties</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Specialties</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.expertise}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, expertise: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Social Link</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Social Link</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.socialLinks}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, socialLinks: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-white/40 uppercase">Website URL</label>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Website URL</label>
                                     <input 
                                         type="text" 
                                         value={editingCourse.data.instructor?.website}
                                         onChange={(e) => setEditingCourse({ ...editingCourse, data: { ...editingCourse.data, instructor: { ...editingCourse.data.instructor, website: e.target.value } } })}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50"
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="mt-12 pt-8 border-t border-white/5 flex justify-end gap-4">
+                    <div className="mt-12 pt-8 border-t border-emerald-100 flex justify-end gap-4">
                         <button 
                             onClick={() => setEditingCourse(null)}
-                            className="px-8 py-3 bg-white/5 hover:bg-white/10 text-white font-bold rounded-xl transition-all"
+                            className="px-8 py-3 bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold rounded-xl transition-all"
                         >
                             Cancel
                         </button>
                         <button 
                             onClick={() => {
                                 if (!editingCourse) return;
-                                const newCourses = [...data.academy.courses];
+                                const newCourses = [...(data.academy?.courses || [])];
                                 newCourses[editingCourse.idx] = editingCourse.data;
                                 updateNestedField('academy.courses', newCourses);
                                 setEditingCourse(null);
                                 toast.success('Course updated in staging. Remember to Save All Changes.');
+                            }}
+                            className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-black font-bold rounded-xl transition-all"
+                        >
+                            Confirm Updates
+                        </button>
+                    </div>
+                </motion.div>
+            </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Library Item Editor Modal */}
+      <AnimatePresence>
+        {editingLibraryItem && (
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-md flex items-center justify-center p-6 overflow-y-auto"
+            >
+                <motion.div 
+                    initial={{ scale: 0.95, y: 20 }}
+                    animate={{ scale: 1, y: 0 }}
+                    className="bg-white border border-emerald-200 rounded-[2.5rem] w-full max-w-2xl p-10 relative my-auto"
+                >
+                    <button 
+                        onClick={() => setEditingLibraryItem(null)}
+                        className="absolute top-8 right-8 text-gray-400 hover:text-emerald-700 transition-colors"
+                    >
+                        <Trash2 size={24} className="rotate-45" /> {/* Use Trash2 rotated as close icon if X not available, or just clear text. Wait, Trash2 rotate 45 looks weird. I will just use standard close logic */}
+                    </button>
+                    
+                    <div className="mb-10">
+                        <h2 className="text-3xl font-black text-[#1b4332] mb-2" style={{ fontFamily: "'Cinzel', serif" }}>Edit Library Item</h2>
+                        <p className="text-gray-500">Modify the details of this item to update the Library Carousel.</p>
+                    </div>
+
+                    <div className="space-y-6">
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase">Title</label>
+                                <input 
+                                    type="text" 
+                                    value={editingLibraryItem.data.title}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, title: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase">Category</label>
+                                <input 
+                                    type="text" 
+                                    value={editingLibraryItem.data.category}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, category: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase">Duration</label>
+                                <input 
+                                    type="text" 
+                                    value={editingLibraryItem.data.duration}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, duration: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase">Image URL</label>
+                                <input 
+                                    type="text" 
+                                    value={editingLibraryItem.data.image || editingLibraryItem.data.imageUrl}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, image: e.target.value, imageUrl: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                                />
+                            </div>
+                            <div className="space-y-2 col-span-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase">Story / Description</label>
+                                <textarea 
+                                    value={editingLibraryItem.data.story}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, story: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[100px]"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-12 pt-8 border-t border-emerald-100 flex justify-end gap-4">
+                        <button 
+                            onClick={() => setEditingLibraryItem(null)}
+                            className="px-8 py-3 bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold rounded-xl transition-all"
+                        >
+                            Cancel
+                        </button>
+                        <button 
+                            onClick={() => {
+                                if (!editingLibraryItem) return;
+                                const newItems = [...(data.library || [])];
+                                newItems[editingLibraryItem.idx] = editingLibraryItem.data;
+                                updateNestedField('library', newItems);
+                                setEditingLibraryItem(null);
+                                toast.success('Library item updated. Remember to Save All Changes.');
                             }}
                             className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-black font-bold rounded-xl transition-all"
                         >

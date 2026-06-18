@@ -102,20 +102,21 @@ const LibraryCarousel: React.FC = () => {
     useEffect(() => {
         const fetchLibrary = async () => {
             try {
-                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/landing_library`);
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
                 if (res.ok) {
                     const data = await res.json();
-                    if (data && data.value) {
-                        const parsed = JSON.parse(data.value);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            // Merge with default items to ensure stories or other missing fields are present
-                            const merged = defaultLibraryItems.map(def => {
-                                const saved = parsed.find((p: any) => p.title === def.title);
-                                return saved ? { ...def, ...saved } : def;
-                            });
-                            setLibraryItems(merged);
-                            return;
-                        }
+                    if (data && data.library && Array.isArray(data.library) && data.library.length > 0) {
+                        // Merge with default items to ensure stories or other missing fields are present
+                        const merged = defaultLibraryItems.map(def => {
+                            const saved = data.library.find((p: any) => p.title === def.title);
+                            return saved ? { ...def, ...saved } : def;
+                        });
+                        
+                        // Add any completely new items that aren't in defaults
+                        const newItems = data.library.filter((p: any) => !defaultLibraryItems.some(def => def.title === p.title));
+                        
+                        setLibraryItems([...merged, ...newItems]);
+                        return;
                     }
                 }
             } catch (err) {

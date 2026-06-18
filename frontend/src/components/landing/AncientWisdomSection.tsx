@@ -52,16 +52,13 @@ export function AncientWisdomSection() {
     useEffect(() => {
         const fetchGoals = async () => {
             try {
-                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/landing_goals`);
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
                 if (res.ok) {
                     const data = await res.json();
-                    if (data && data.value) {
-                        const parsed = JSON.parse(data.value);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            setGoals(parsed);
-                            setCurrentIndex(parsed.length);
-                            return;
-                        }
+                    if (data && data.goals && Array.isArray(data.goals) && data.goals.length > 0) {
+                        setGoals(data.goals);
+                        setCurrentIndex(data.goals.length);
+                        return;
                     }
                 }
             } catch (err) {

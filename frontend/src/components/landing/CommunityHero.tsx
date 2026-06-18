@@ -27,25 +27,9 @@ const CommunityHero = () => {
   useEffect(() => {
     const fetchHeroData = async () => {
       try {
-        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/landing_hero`);
+        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
         if (res.ok) {
           const data = await res.json();
-          if (data && data.value) {
-            const parsed = JSON.parse(data.value);
-            setHeroData({
-              title: parsed.title || "Find your",
-              subtitle: parsed.subtitle || "Experience the convergence of ancient wisdom and modern technology for your complete holistic healing journey.",
-              buttonText: parsed.buttonText || "Start Your Journey",
-              imageUrl: parsed.imageUrl || "/LP.png"
-            });
-            return;
-          }
-        }
-
-        // Fallback to old landing endpoint
-        const fallbackRes = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
-        if (fallbackRes.ok) {
-          const data = await fallbackRes.json();
           if (data && data.hero) {
             setHeroData({
               title: data.hero.title || "Find your",
@@ -75,8 +59,8 @@ const CommunityHero = () => {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#f4fbf7]">
-      {/* 1. Breathing Image Background - Light theme */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a1912]">
+      {/* 1. Breathing Image Background */}
       <motion.div 
         className="absolute inset-0 w-full h-full bg-[length:auto_85%] lg:bg-[length:auto_90%] bg-bottom lg:bg-right-bottom bg-no-repeat"
         style={{ 
@@ -85,7 +69,7 @@ const CommunityHero = () => {
         }}
         animate={{ 
           scale: [1, 1.02, 1],
-          opacity: [0.85, 0.9, 0.85]
+          opacity: [0.3, 0.4, 0.3]
         }}
         transition={{
           duration: 12,
@@ -94,11 +78,11 @@ const CommunityHero = () => {
         }}
       />
 
-      {/* 2. Drifting Mist Layer (Soft Light green) */}
+      {/* 2. Drifting Mist Layer */}
       <motion.div 
-        className="absolute inset-0 opacity-15 z-[2] pointer-events-none"
+        className="absolute inset-0 opacity-40 z-[2] pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(165,243,207,0.3) 0%, transparent 60%)',
+          backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(45,198,143,0.3) 0%, transparent 60%)',
           backgroundSize: '200% 200%'
         }}
         animate={{
@@ -203,8 +187,8 @@ const CommunityHero = () => {
         ))}
       </div>
 
-      {/* 6. Atmosphere Overlay - Light/Soft vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/60 z-[5]" />
+      {/* 6. Atmosphere Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a1912]/50 to-[#0a1912] z-[5]" />
 
       {/* 7. Hero Content - Center-aligned layout */}
       <div className="relative z-[20] w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center justify-center text-center min-h-screen pt-24">
@@ -215,13 +199,13 @@ const CommunityHero = () => {
           className="w-full flex flex-col items-center justify-center max-w-5xl"
         >
           <h1 
-            className="text-5xl md:text-7xl font-light text-[#5A7165] tracking-wide text-center flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto uppercase"
+            className="text-5xl md:text-7xl font-light text-white tracking-wide text-center flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto uppercase"
             style={{ fontFamily: "'Cinzel', serif" }}
           >
             <span className="whitespace-nowrap md:w-1/2 md:text-right md:pr-4">
               {heroData.title || "Find your"}
             </span>
-            <span className="text-[#3A5145] inline-flex justify-center md:justify-start md:w-1/2 md:pl-4 mt-2 md:mt-0 relative">
+            <span className="text-emerald-400 inline-flex justify-center md:justify-start md:w-1/2 md:pl-4 mt-2 md:mt-0 relative">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={phraseIndex}
@@ -241,7 +225,7 @@ const CommunityHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1.5 }}
-            className="mt-8 text-lg md:text-xl lg:text-2xl text-[#123c24] opacity-90 max-w-4xl leading-snug font-medium italic text-center w-full"
+            className="mt-8 text-lg md:text-xl lg:text-2xl text-emerald-50 opacity-90 max-w-4xl leading-snug font-medium italic text-center w-full"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             {subLine2 ? (

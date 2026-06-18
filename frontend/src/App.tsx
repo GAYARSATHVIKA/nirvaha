@@ -70,6 +70,7 @@ import { PosesContent } from "./admin/pages/content/PosesContent";
 import YogaContent from "./admin/pages/content/YogaContent";
 import { ProductsContent } from "./admin/pages/content/ProductsContent";
 import { ContentUpdatePage } from "./admin/pages/ContentUpdatePage";
+import { LandingManagementPage } from "./admin/pages/LandingManagementPage";
 import { MarketplaceManagementPage } from "./admin/pages/MarketplaceManagementPage";
 import { ProductManagementPage } from "./admin/pages/ProductManagementPage";
 import { ContactManagementPage } from "./admin/pages/ContactManagementPage";
@@ -174,6 +175,7 @@ function AppInner() {
           <Route path="marketplace" element={<MarketplaceManagementPage />} />
           <Route path="products" element={<ProductManagementPage />} />
           <Route path="content-update" element={<ContentUpdatePage />} />
+          <Route path="landing" element={<LandingManagementPage />} />
           <Route path="content" element={<ContentManagementPage />} />
           <Route path="content/meditation" element={<MeditationContent />} />
           <Route path="content/sound" element={<SoundHealingContent />} />

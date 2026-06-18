@@ -16,19 +16,17 @@ const TrustedStats: React.FC = () => {
     useEffect(() => {
         const fetchPartners = async () => {
             try {
-                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/landing_partners`);
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
                 if (res.ok) {
                     const data = await res.json();
-                    if (data && data.value) {
-                        const parsed = JSON.parse(data.value);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
-                            const mapped = parsed.map((p: any) => ({
-                                name: p.name,
-                                logo: p.logo || p.logoUrl,
-                                url: p.url || p.websiteUrl
-                            }));
-                            setPartners(mapped);
-                        }
+                    if (data && data.partners && Array.isArray(data.partners) && data.partners.length > 0) {
+                        const mapped = data.partners.map((p: any) => ({
+                            name: p.name || p.label,
+                            logo: p.logoUrl || p.logo || p.icon,
+                            url: p.websiteUrl || p.url || "#"
+                        }));
+                        setPartners(mapped);
+                        return;
                     }
                 }
             } catch (err) {

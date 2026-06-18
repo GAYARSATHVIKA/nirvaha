@@ -82,7 +82,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
           >
             <div className="flex items-center gap-2">
               {expandedMod === modIdx ? <ChevronDown className="w-5 h-5 text-gray-500" /> : <ChevronRight className="w-5 h-5 text-gray-500" />}
-              <h3 className="font-semibold">{mod.title || 'Untitled Module'}</h3>
+              <h3 className="font-semibold text-black">{mod.title || 'Untitled Module'}</h3>
             </div>
             <button
               onClick={(e) => { e.stopPropagation(); removeModule(modIdx); }}
@@ -100,7 +100,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                   <label className="block text-xs text-gray-500 mb-1">Module Title</label>
                   <input
                     type="text"
-                    className="w-full border rounded p-2 text-sm"
+                    className="w-full border rounded p-2 text-sm bg-white text-black"
                     value={mod.title}
                     onChange={(e) => updateModule(modIdx, 'title', e.target.value)}
                   />
@@ -109,7 +109,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                   <label className="block text-xs text-gray-500 mb-1">Module ID</label>
                   <input
                     type="text"
-                    className="w-full border rounded p-2 text-sm"
+                    className="w-full border rounded p-2 text-sm bg-white text-black"
                     value={mod.id}
                     onChange={(e) => updateModule(modIdx, 'id', e.target.value)}
                   />
@@ -118,7 +118,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Module Description</label>
                 <textarea
-                  className="w-full border rounded p-2 text-sm"
+                  className="w-full border rounded p-2 text-sm bg-white text-black"
                   rows={2}
                   value={mod.description}
                   onChange={(e) => updateModule(modIdx, 'description', e.target.value)}
@@ -132,7 +132,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                   <button
                     type="button"
                     onClick={() => addUnit(modIdx)}
-                    className="flex items-center gap-1 text-xs bg-white border border-gray-300 px-2 py-1 rounded hover:bg-gray-50"
+                    className="flex items-center gap-1 text-xs text-black bg-white border border-gray-300 px-2 py-1 rounded hover:bg-gray-50"
                   >
                     <Plus className="w-3 h-3" /> Add Unit
                   </button>
@@ -168,15 +168,15 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                               <div>
                                 <label className="block text-xs text-gray-500 mb-1">Title</label>
-                                <input type="text" className="w-full border rounded p-1.5 text-sm" value={unit.title} onChange={(e) => updateUnit(modIdx, unitIdx, 'title', e.target.value)} />
+                                <input type="text" className="w-full border rounded p-1.5 text-sm bg-white text-black" value={unit.title} onChange={(e) => updateUnit(modIdx, unitIdx, 'title', e.target.value)} />
                               </div>
                               <div>
                                 <label className="block text-xs text-gray-500 mb-1">ID</label>
-                                <input type="text" className="w-full border rounded p-1.5 text-sm" value={unit.id} onChange={(e) => updateUnit(modIdx, unitIdx, 'id', e.target.value)} />
+                                <input type="text" className="w-full border rounded p-1.5 text-sm bg-white text-black" value={unit.id} onChange={(e) => updateUnit(modIdx, unitIdx, 'id', e.target.value)} />
                               </div>
                               <div>
                                 <label className="block text-xs text-gray-500 mb-1">Type</label>
-                                <select className="w-full border rounded p-1.5 text-sm" value={unit.type} onChange={(e) => updateUnit(modIdx, unitIdx, 'type', e.target.value)}>
+                                <select className="w-full border rounded p-1.5 text-sm bg-white text-black" value={unit.type} onChange={(e) => updateUnit(modIdx, unitIdx, 'type', e.target.value)}>
                                   <option value="reading">Reading</option>
                                   <option value="video">Video</option>
                                   <option value="quiz">Quiz</option>
@@ -186,7 +186,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                               </div>
                               <div>
                                 <label className="block text-xs text-gray-500 mb-1">XP</label>
-                                <input type="number" className="w-full border rounded p-1.5 text-sm" value={unit.xp} onChange={(e) => updateUnit(modIdx, unitIdx, 'xp', parseInt(e.target.value))} />
+                                <input type="number" className="w-full border rounded p-1.5 text-sm bg-white text-black" value={unit.xp} onChange={(e) => updateUnit(modIdx, unitIdx, 'xp', parseInt(e.target.value))} />
                               </div>
                             </div>
 
@@ -198,7 +198,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                                 <div>
                                   <label className="block text-xs text-gray-500 mb-1">Objectives (one per line)</label>
                                   <textarea
-                                    className="w-full border rounded p-2 text-sm"
+                                    className="w-full border rounded p-2 text-sm bg-white text-black"
                                     rows={3}
                                     value={(unit.content?.objectives || []).join('\n')}
                                     onChange={(e) => handleArrayText(modIdx, unitIdx, 'objectives', e.target.value)}
@@ -208,7 +208,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                                 <div>
                                   <label className="block text-xs text-gray-500 mb-1">Body Text (one paragraph per line)</label>
                                   <textarea
-                                    className="w-full border rounded p-2 text-sm"
+                                    className="w-full border rounded p-2 text-sm bg-white text-black"
                                     rows={5}
                                     value={(unit.content?.body || []).join('\n')}
                                     onChange={(e) => handleArrayText(modIdx, unitIdx, 'body', e.target.value)}
@@ -218,7 +218,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                                 <div>
                                   <label className="block text-xs text-gray-500 mb-1">Summary</label>
                                   <textarea
-                                    className="w-full border rounded p-2 text-sm"
+                                    className="w-full border rounded p-2 text-sm bg-white text-black"
                                     rows={2}
                                     value={unit.content?.summary || ''}
                                     onChange={(e) => updateUnitContent(modIdx, unitIdx, 'summary', e.target.value)}
@@ -243,7 +243,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
       <button
         type="button"
         onClick={addModule}
-        className="w-full py-3 border-2 border-dashed border-gray-300 text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700 flex items-center justify-center gap-2 font-medium"
+        className="w-full py-3 border-2 border-dashed border-gray-300 text-black rounded-lg hover:bg-gray-50 flex items-center justify-center gap-2 font-medium"
       >
         <Plus className="w-4 h-4" /> Add New Module
       </button>

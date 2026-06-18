@@ -115,6 +115,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           path: "/admin/content-update",
         },
         {
+          title: "Landing Management (New)",
+          icon: Palette,
+          path: "/admin/landing",
+        },
+        {
           title: "Inquiries & Leads",
           icon: MessageSquare,
           path: "/admin/inquiries",

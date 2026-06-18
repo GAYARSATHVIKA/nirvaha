@@ -1044,7 +1044,7 @@ export function CompanionPage() {
                   },
                   {
                     title: "Estimated Earnings",
-                    value: `₹${(companionSessions.filter(s => s.status === "completed").length * (parseInt(String(companionProfile?.hourlyRate || "").replace(/[^\d]/g, "")) || 1000)) + 4500}`,
+                    value: `₹${(companionSessions.filter(s => s.status === "completed").length * (parseInt(String(companionProfile?.hourlyRate || "").replace(/[^\d]/g, "")) || 1000))}`,
                     icon: DollarSign,
                     color: "from-teal-500/10 to-emerald-500/10 text-teal-600 border-teal-500/20",
                     pulse: false,
@@ -1332,13 +1332,13 @@ export function CompanionPage() {
                         <div className="h-80 w-full font-sans text-xs">
                           <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={[
-                              { day: "Mon", earnings: 2400, hours: 3 },
-                              { day: "Tue", earnings: 3600, hours: 4.5 },
-                              { day: "Wed", earnings: 1800, hours: 2.25 },
-                              { day: "Thu", earnings: 4800, hours: 6 },
-                              { day: "Fri", earnings: 6000, hours: 7.5 },
-                              { day: "Sat", earnings: 7200, hours: 9 },
-                              { day: "Sun", earnings: 5400, hours: 6.75 },
+                              { day: "Mon", earnings: 0, hours: 0 },
+                              { day: "Tue", earnings: 0, hours: 0 },
+                              { day: "Wed", earnings: 0, hours: 0 },
+                              { day: "Thu", earnings: 0, hours: 0 },
+                              { day: "Fri", earnings: 0, hours: 0 },
+                              { day: "Sat", earnings: 0, hours: 0 },
+                              { day: "Sun", earnings: 0, hours: 0 },
                             ]}>
                               <defs>
                                 <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">

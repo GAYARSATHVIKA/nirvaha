@@ -49,7 +49,7 @@ const SessionRow = ({
     e.preventDefault();
     e.stopPropagation();
     
-    navigate(`/wellness-ott-intro?seriesId=${item.id}`, {
+    navigate(`/wellness-ott/series/${item.id}`, {
       state: {
         thumbnail: item.thumbnail,
         title: item.title,

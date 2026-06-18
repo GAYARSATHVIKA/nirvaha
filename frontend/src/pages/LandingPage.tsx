@@ -44,9 +44,12 @@ const DEFAULT_SECTIONS = [
   { id: 'ClosingSection', visible: true }
 ];
 
+import { useLandingData } from '../hooks/useLandingData';
+
 const LandingPage: React.FC = () => {
   const [sections, setSections] = useState(DEFAULT_SECTIONS);
   const [loading, setLoading] = useState(true);
+  const { data: landingData } = useLandingData();
 
   useEffect(() => {
     // Force scroll to top on refresh
@@ -101,8 +104,25 @@ const LandingPage: React.FC = () => {
   }
 
   // Helper to separate main sections from footer sections
-  const mainSections = sections.filter(s => s.id !== 'Contact' && s.id !== 'ClosingSection');
-  const footerSections = sections.filter(s => s.id === 'Contact' || s.id === 'ClosingSection');
+  const mainSections = sections.filter(s => {
+    if (s.id === 'Contact' || s.id === 'ClosingSection') return false;
+    
+    if (landingData?.settings) {
+      if (s.id === 'CollaboratorsSection' && landingData.settings.showCollaborators === false) return false;
+    }
+    
+    return true;
+  });
+  
+  const footerSections = sections.filter(s => {
+    if (s.id !== 'Contact' && s.id !== 'ClosingSection') return false;
+
+    if (landingData?.settings) {
+      if (s.id === 'Contact' && landingData.settings.showContactForm === false) return false;
+    }
+
+    return true;
+  });
 
   return (
     <div className="min-h-screen relative overflow-x-hidden">

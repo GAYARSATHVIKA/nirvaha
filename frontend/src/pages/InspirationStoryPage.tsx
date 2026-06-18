@@ -276,26 +276,6 @@ export default function InspirationStoryPage() {
                             
                             <div className="space-y-6">
                                 <div>
-                                    <p className="text-xs font-bold uppercase tracking-wider text-[#7a9384] mb-2">Favorite Chant</p>
-                                    <Link to="/healing-music" className="group flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-transparent hover:border-[#86c586] transition-all">
-                                        <div className="w-8 h-8 rounded-full bg-[#e8f5e9] flex items-center justify-center text-[#2e7d32]">
-                                            <Music className="w-4 h-4" />
-                                        </div>
-                                        <span className="text-sm font-medium text-[#1a3d2b] group-hover:text-[#2e7d32] transition-colors">{story.favorites.chant}</span>
-                                    </Link>
-                                </div>
-
-                                <div>
-                                    <p className="text-xs font-bold uppercase tracking-wider text-[#7a9384] mb-2">Healing Music</p>
-                                    <Link to="/healing-music" className="group flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-transparent hover:border-[#86c586] transition-all">
-                                        <div className="w-8 h-8 rounded-full bg-[#e8f5e9] flex items-center justify-center text-[#2e7d32]">
-                                            <PlayCircle className="w-4 h-4" />
-                                        </div>
-                                        <span className="text-sm font-medium text-[#1a3d2b] group-hover:text-[#2e7d32] transition-colors">{story.favorites.music}</span>
-                                    </Link>
-                                </div>
-
-                                <div>
                                     <p className="text-xs font-bold uppercase tracking-wider text-[#7a9384] mb-2">Top Feature</p>
                                     <div className="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
                                         <div className="w-8 h-8 rounded-full bg-[#e8f5e9] flex items-center justify-center text-[#2e7d32]">

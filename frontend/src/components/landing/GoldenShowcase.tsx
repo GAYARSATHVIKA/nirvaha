@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import SplitDoorAnimation from './SplitDoorAnimation';
 import { useAuth } from '../../contexts/AuthContext';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const GoldenShowcase: React.FC = () => {
   const navigate = useNavigate();
@@ -53,13 +54,21 @@ const GoldenShowcase: React.FC = () => {
     }
   ];
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slideData.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slideData.length) % slideData.length);
+  };
+
   useEffect(() => {
     if (!isRevealed) return;
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slideData.length);
-    }, 3000); // 3 seconds per slide
+      nextSlide();
+    }, 6000); // Increased from 3s to 6s per slide
     return () => clearInterval(timer);
-  }, [isRevealed, slideData.length]);
+  }, [isRevealed, slideData.length, currentSlide]);
 
   return (
     <section 
@@ -124,6 +133,21 @@ const GoldenShowcase: React.FC = () => {
           {/* Elegant Overlay */}
           <div className="absolute inset-0 bg-gradient-to-tr from-[#1a442f]/20 via-transparent to-transparent pointer-events-none" />
           
+          {/* Navigation Buttons */}
+          <button 
+            onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-colors border border-white/30"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button 
+            onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/40 transition-colors border border-white/30"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
           {/* Navigation Dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-4 z-30">
             {slideData.map((_, idx) => (
@@ -133,7 +157,8 @@ const GoldenShowcase: React.FC = () => {
                   width: idx === currentSlide ? 32 : 8,
                   backgroundColor: idx === currentSlide ? "rgba(255, 255, 255, 1)" : "rgba(255, 255, 255, 0.4)"
                 }}
-                className="h-2 rounded-full transition-all duration-500"
+                className="h-2 rounded-full transition-all duration-500 cursor-pointer"
+                onClick={(e) => { e.stopPropagation(); setCurrentSlide(idx); }}
               />
             ))}
           </div>

@@ -253,7 +253,7 @@ export function CertificationsManager() {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">ID (URL slug)</label>
-                          <input type="text" value={newCert.id} disabled={!!selectedCert} onChange={e => setNewCert({...newCert, id: e.target.value})} required className="w-full px-3 py-2 border rounded-lg bg-white text-black disabled:bg-gray-100" placeholder="e.g. mindfulness-mastery" />
+                          <input type="text" value={newCert.id} disabled={!!selectedCert} onChange={e => setNewCert({...newCert, id: e.target.value})} required className="w-full px-3 py-2 border rounded-lg bg-white text-black disabled:bg-white disabled:text-black disabled:opacity-100" placeholder="e.g. mindfulness-mastery" />
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
@@ -282,7 +282,7 @@ export function CertificationsManager() {
                         <div className="grid grid-cols-2 gap-2">
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
-                            <input type="number" value={newCert.price} onChange={e => setNewCert({...newCert, price: Number(e.target.value)})} disabled={newCert.isFree} className="w-full px-3 py-2 border rounded-lg bg-white text-black disabled:bg-gray-100" />
+                            <input type="number" value={newCert.price} onChange={e => setNewCert({...newCert, price: Number(e.target.value)})} disabled={newCert.isFree} className="w-full px-3 py-2 border rounded-lg bg-white text-black disabled:bg-white disabled:text-black disabled:opacity-100" />
                           </div>
                           <div className="flex items-center mt-6">
                             <label className="flex items-center gap-2 cursor-pointer">

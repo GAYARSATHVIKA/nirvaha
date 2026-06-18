@@ -80,8 +80,8 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
     { name: "Settings", path: "/dashboard/profile?open=settings", category: "Account" as const },
     { name: "Chakra Experience", path: "/chakra-experience", category: "Academy" as const },
     { name: "Healing Music", path: "/healing-music", category: "Academy" as const },
-    { name: "Wellness OTT", path: "/wellness-ott-intro", category: "Features" as const, desc: "Watch wellness experiences on-demand." },
-    { name: "OTT Wellness", path: "/wellness-ott-intro", category: "Features" as const, desc: "Netflix-style wellness series and films." },
+    { name: "Wellness OTT", path: "/wellness-ott", category: "Features" as const, desc: "Watch wellness experiences on-demand." },
+    { name: "OTT Wellness", path: "/wellness-ott", category: "Features" as const, desc: "Netflix-style wellness series and films." },
     { name: "Gaming Wellness Hub", path: "/dashboard/overview?scrollTo=gaming-hub", category: "Features" as const, desc: "Gamified wellness and interactive sessions." },
     { name: "Breathing", path: "/breathing", category: "Academy" as const },
     ...wellnessSessions.map((s) => ({
