@@ -146,10 +146,10 @@ const EmotionalMandala: React.FC = () => (
 
     {/* Floating concept chips */}
     {[
-      { label: 'ðŸ’¬ Clarity',   style: { top: '10%',  left: '58%'  }, delay: 0   },
-      { label: 'ðŸŽ¯ Focus',     style: { top: '76%',  left: '62%'  }, delay: 1   },
-      { label: 'ðŸŒ¿ Balance',   style: { top: '68%',  left: '6%'   }, delay: 2   },
-      { label: 'âœ¨ Growth',    style: { top: '12%',  left: '10%'  }, delay: 1.5 },
+      { label: '\u{1F4A1} Clarity',   style: { top: '10%',  left: '58%'  }, delay: 0   },
+      { label: '\u{1F3AF} Focus',     style: { top: '76%',  left: '62%'  }, delay: 1   },
+      { label: '\u{1F33F} Balance',   style: { top: '68%',  left: '6%'   }, delay: 2   },
+      { label: '\u{2728} Growth',    style: { top: '12%',  left: '10%'  }, delay: 1.5 },
     ].map(({ label, style, delay }) => (
       <motion.div
         key={label}
@@ -280,7 +280,7 @@ const LearningPathPage: React.FC = () => {
           <p className="mb-4" style={{ color: '#1a4a2e' }}>Learning path not found.</p>
           <button onClick={() => navigate('/learn')}
             className="font-semibold hover:underline" style={{ color: '#0f7a55' }}>
-            â† Back to catalog
+            {"\u{2190}"} Back to catalog
           </button>
         </div>
       </div>
@@ -336,7 +336,7 @@ const LearningPathPage: React.FC = () => {
       className="relative min-h-screen overflow-x-hidden"
       style={{ background: 'linear-gradient(135deg, #f0fdf8 0%, #ecfdf5 50%, #f7fffe 100%)', fontFamily: "'Inter', 'Poppins', sans-serif", color: '#0a1a12' }}
     >
-      {/* â”€â”€ Ambient background orbs â”€â”€ */}
+      {/* — Ambient background orbs — */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
         <div className="absolute -top-60 -left-40 w-[800px] h-[800px] rounded-full"
           style={{ background: 'radial-gradient(circle, rgba(15,122,85,0.07) 0%, transparent 65%)' }} />
@@ -359,7 +359,7 @@ const LearningPathPage: React.FC = () => {
         ))}
       </div>
 
-      {/* â”€â”€ Back button â”€â”€ */}
+      {/* — Back button — */}
       <motion.button
         initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
         onClick={() => { window.scrollTo({ top: 0, behavior: 'instant' }); navigate('/learn'); }}
@@ -372,7 +372,7 @@ const LearningPathPage: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
 
-        {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HERO â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+        {/* ——————————————————————— HERO ——————————————————————— */}
         <section className="min-h-screen flex items-center pt-24 pb-16">
           <div className="w-full grid grid-cols-1 lg:grid-cols-[1fr_460px] gap-16 items-center">
 
@@ -507,11 +507,11 @@ const LearningPathPage: React.FC = () => {
           </div>
         </section>
 
-        {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• PROGRESS CARDS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+        {/* ——————————————————————— PROGRESS CARDS ——————————————————————— */}
         <section className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {/* Card 1 â€“ Circular Progress */}
+            {/* Card 1 – Circular Progress */}
             <motion.div
               initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -555,7 +555,7 @@ const LearningPathPage: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Card 2 â€“ XP */}
+            {/* Card 2 – XP */}
             <motion.div
               initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.1 }}
@@ -600,7 +600,7 @@ const LearningPathPage: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Card 3 â€“ Streak */}
+            {/* Card 3 – Streak */}
             <motion.div
               initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }}
@@ -611,7 +611,7 @@ const LearningPathPage: React.FC = () => {
 
               <div className="flex items-center gap-3 mb-6">
                 <motion.span animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-                  <span className="text-4xl">ðŸ”¥</span>
+                  <span className="text-4xl">{"\u{1F525}"}</span>
                 </motion.span>
                 <div>
                   <p className="text-[10px] font-bold tracking-widest uppercase" style={{ color: '#2e5040' }}>
@@ -634,7 +634,7 @@ const LearningPathPage: React.FC = () => {
                         boxShadow: dayInfo.isCompleted ? '0 0 8px rgba(15,122,85,0.2)' : 'none',
                         fontSize: '10px',
                       }}>
-                      {dayInfo.isCompleted ? 'âœ“' : dayInfo.dayName}
+                      {dayInfo.isCompleted ? "\u{2713}" : dayInfo.dayName}
                     </div>
                     <span style={{ color: '#0a1a12', fontSize: '9px' }}>{dayInfo.dayName}</span>
                   </div>
@@ -643,14 +643,14 @@ const LearningPathPage: React.FC = () => {
 
               <div className="rounded-[14px] p-3" style={{ background: 'rgba(15,122,85,0.06)', border: '1px solid rgba(15,122,85,0.12)' }}>
                 <p className="text-xs leading-relaxed" style={{ color: '#1a4a2e' }}>
-                  Keep going! You're on a <span style={{ color: '#0f7a55', fontWeight: 700 }}>{currentStreak}-day streak</span> ðŸŒ¿ One more day to unlock a new badge.
+                  Keep going! You're on a <span style={{ color: '#0f7a55', fontWeight: 700 }}>{currentStreak}-day streak</span> {"\u{1F33F}"} One more day to unlock a new badge.
                 </p>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• REFLECTION QUOTE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+        {/* ——————————————————————— REFLECTION QUOTE ——————————————————————— */}
         <motion.section
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.9 }}
@@ -671,12 +671,12 @@ const LearningPathPage: React.FC = () => {
               "{quote.text}"
             </p>
             <p className="text-xs font-bold tracking-widest uppercase" style={{ color: '#2e5040' }}>
-              â€” {quote.author}
+              {"\u{2014}"} {quote.author}
             </p>
           </div>
         </motion.section>
 
-        {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• WHAT YOU'LL CULTIVATE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+        {/* ——————————————————————— WHAT YOU'LL CULTIVATE ——————————————————————— */}
         {outcomes.length > 0 && (
           <motion.section
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
@@ -706,7 +706,7 @@ const LearningPathPage: React.FC = () => {
           </motion.section>
         )}
 
-        {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• COURSE STRUCTURE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+        {/* ——————————————————————— COURSE STRUCTURE ——————————————————————— */}
         <section className="mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -717,7 +717,7 @@ const LearningPathPage: React.FC = () => {
               Your Learning Path
             </h2>
             <p className="text-sm" style={{ color: '#2e5040' }}>
-              {modules.length} modules Â· {totalUnits} units Â· {totalXP} total XP
+              {modules.length} modules {"\u{00B7}"} {totalUnits} units {"\u{00B7}"} {totalXP} total XP
             </p>
           </motion.div>
 
@@ -795,7 +795,7 @@ const LearningPathPage: React.FC = () => {
                               {isComplete && (
                                 <span className="text-[10px] px-2 py-0.5 rounded-full font-bold"
                                   style={{ background: 'rgba(52,211,153,0.12)', color: '#34d399', border: '1px solid rgba(52,211,153,0.25)' }}>
-                                  âœ“ Complete
+                                  {"\u{2713}"} Complete
                                 </span>
                               )}
                             </div>
@@ -892,7 +892,7 @@ const LearningPathPage: React.FC = () => {
           </div>
         </section>
 
-        {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• BOTTOM CTA â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+        {/* ——————————————————————— BOTTOM CTA ——————————————————————— */}
         <motion.section
           initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.9 }}
@@ -1010,7 +1010,7 @@ const LearningPathPage: React.FC = () => {
 
       </div>
 
-      {/* â”€â”€ Premium Footer â”€â”€ */}
+      {/* — Premium Footer — */}
       <footer className="relative bg-[#040706] text-emerald-100/70 py-16 px-6 lg:px-20 border-t border-emerald-900/40 overflow-hidden mt-0">
         {/* Glow effects */}
         <div className="absolute inset-0 pointer-events-none z-0">
@@ -1139,9 +1139,9 @@ const LearningPathPage: React.FC = () => {
 
         {/* Footer Bottom */}
         <div className="relative z-10 pt-8 border-t border-emerald-900/40 flex flex-col md:flex-row items-center justify-between gap-4 font-sans">
-          <p className="text-[12px] text-emerald-100/30 font-medium text-center md:text-left">
-            Â© 2026 Nirvaha Academy â€¢ Learn with Clarity â€¢ Grow with Purpose
-          </p>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium opacity-60">
+            <p>{"\u{00A9}"} 2026 Nirvaha Academy {"\u{00B7}"} Learn with Clarity {"\u{00B7}"} Grow with Purpose</p>
+          </div>
           <div className="flex gap-6 text-[12px] text-emerald-100/30 font-medium">
             <button onClick={() => setPrivacyOpen(true)} className="hover:text-emerald-100/60 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-100/30">Privacy Policy</button>
             <button onClick={() => setTermsOpen(true)} className="hover:text-emerald-100/60 transition-colors cursor-pointer bg-transparent border-none p-0 font-medium text-[12px] text-emerald-100/30">Terms of Service</button>
