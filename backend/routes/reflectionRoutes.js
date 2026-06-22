@@ -1,12 +1,24 @@
 const express = require('express');
-const { Groq } = require('groq-sdk');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const fs = require('fs');
+const path = require('path');
 const Reflection = require('../models/Reflection');
 const { createReflectionBackup } = require('../utils/retention');
 const router = express.Router();
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const CONTEXT_FILE = path.join(__dirname, '../data/nirvaha_context.txt');
+
+function getNirvahaContext() {
+  try {
+    if (fs.existsSync(CONTEXT_FILE)) {
+      return fs.readFileSync(CONTEXT_FILE, 'utf-8');
+    }
+  } catch (e) {
+    console.warn("Could not read nirvaha context file", e);
+  }
+  return "";
+}
 
 function normalizeShortReply(text) {
   if (!text) return text;
@@ -251,6 +263,11 @@ ${personaInstruction}${problemSpecificGuide}`;
       maxTokens = 200;
     }
 
+    const nirvahaContext = getNirvahaContext();
+    if (nirvahaContext) {
+      systemPrompt += `\n\nCOMPANY KNOWLEDGE BASE:\n${nirvahaContext}`;
+    }
+
     // ── Conversation history for memory ───────────────────────────────────
     let historyMessages = [];
     if (userId && userId !== 'anonymous') {
@@ -262,8 +279,8 @@ ${personaInstruction}${problemSpecificGuide}`;
           .select('message reply timestamp');
         const chronological = pastReflections.reverse();
         chronological.forEach(ref => {
-          historyMessages.push({ role: "user", content: ref.message });
-          historyMessages.push({ role: "assistant", content: ref.reply });
+          historyMessages.push({ role: "user", parts: [{ text: ref.message }] });
+          historyMessages.push({ role: "model", parts: [{ text: ref.reply }] });
         });
       } catch (dbError) {
         console.error('Error fetching chat history from DB:', dbError);
@@ -275,33 +292,35 @@ ${personaInstruction}${problemSpecificGuide}`;
     if (historyMessages.length === 0 && Array.isArray(recentMessages) && recentMessages.length > 0) {
       const recent = recentMessages.slice(-6); // last 3 exchanges (6 messages)
       recent.forEach(m => {
-        if (m.type === 'user') historyMessages.push({ role: 'user', content: m.content });
-        else if (m.type === 'ai') historyMessages.push({ role: 'assistant', content: m.content });
+        if (m.type === 'user') historyMessages.push({ role: 'user', parts: [{ text: m.content }] });
+        else if (m.type === 'ai') historyMessages.push({ role: 'model', parts: [{ text: m.content }] });
       });
     }
 
-    // ── Call Groq ──────────────────────────────────────────────────────────
+    // ── Call Gemini ──────────────────────────────────────────────────────────
     let reply = "";
-    let groqUsed = false;
+    let geminiUsed = false;
     try {
-      const messagesPayload = [
-        { role: "system", content: systemPrompt },
-        ...historyMessages,
-        { role: "user", content: effectiveMessage }
-      ];
+      console.log(`[AI Guide] → Gemini request | intent="${intent}" | followUp=${isFollowUp} | effectiveMessage="${effectiveMessage.slice(0, 100)}"`);
 
-      console.log(`[AI Guide] → Groq request | intent="${intent}" | followUp=${isFollowUp} | effectiveMessage="${effectiveMessage.slice(0, 100)}"`);
-
-      const completion = await groq.chat.completions.create({
-        messages: messagesPayload,
-        model: "llama-3.3-70b-versatile",
-        temperature: intent === 'educational' ? 0.4 : 0.7,
-        max_tokens: maxTokens,
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash",
+        systemInstruction: systemPrompt
       });
 
-      const raw = completion.choices[0]?.message?.content || "";
-      console.log(`[AI Guide] ✓ Groq success | tokens_used=${completion.usage?.total_tokens ?? 'n/a'} | raw_length=${raw.length}`);
-      console.log(`[AI Guide] Raw Groq response: "${raw.slice(0, 200)}${raw.length > 200 ? '...' : ''}"`);
+      const chatSession = model.startChat({
+        history: historyMessages,
+        generationConfig: {
+          temperature: intent === 'educational' ? 0.4 : 0.7,
+          maxOutputTokens: maxTokens,
+        }
+      });
+
+      const result = await chatSession.sendMessage(effectiveMessage);
+      const raw = result.response.text() || "";
+      
+      console.log(`[AI Guide] ✓ Gemini success | raw_length=${raw.length}`);
+      console.log(`[AI Guide] Raw Gemini response: "${raw.slice(0, 200)}${raw.length > 200 ? '...' : ''}"`);
 
       // Strip markdown from Groq output before sending to client
       const stripMarkdown = (t) => t
@@ -364,17 +383,17 @@ ${personaInstruction}${problemSpecificGuide}`;
         // Deterministically remove any trailing question from wellness replies
         reply = intent === 'educational' ? processed : stripTrailingQuestion(processed);
       }
-      groqUsed = true;
+      geminiUsed = true;
 
       if (!reply) {
-        console.warn('[AI Guide] ⚠ Groq returned empty content — using empty-reply fallback');
+        console.warn('[AI Guide] ⚠ Gemini returned empty content — using empty-reply fallback');
         reply = intent === 'educational'
           ? "I wasn't able to generate an answer right now. Could you rephrase your question?"
           : "I'm here for you. Take a gentle breath. How are you feeling right now?";
-        groqUsed = false;
+        geminiUsed = false;
       }
     } catch (aiError) {
-      console.error('[AI Guide] ✗ Groq API error:', aiError.message);
+      console.error('[AI Guide] ✗ Gemini API error:', aiError.message);
       if (aiError.status) console.error(`[AI Guide] HTTP status: ${aiError.status}`);
       console.warn('[AI Guide] ⚠ Falling back to hardcoded fallback response');
       const fallbacks = {
@@ -389,7 +408,7 @@ ${personaInstruction}${problemSpecificGuide}`;
         || "It sounds like something is weighing on you. Take a breath and give yourself a moment. Whatever you're working through, you don't have to figure it all out right now.";
     }
 
-    console.log(`[AI Guide] Response source: ${groqUsed ? '✓ GROQ' : '✗ FALLBACK'} | reply_length=${reply.length}`);
+    console.log(`[AI Guide] Response source: ${geminiUsed ? '✓ GEMINI' : '✗ FALLBACK'} | reply_length=${reply.length}`);
 
     // ── Save to MongoDB (non-blocking) ─────────────────────────────────────
     try {
@@ -407,7 +426,7 @@ ${personaInstruction}${problemSpecificGuide}`;
     res.json({ reply });
     console.log(`[AI Guide] → Response sent | length=${reply.length}`);
   } catch (error) {
-    console.error('[AI Guide] ✗ Route-level error (not Groq):', error.message);
+    console.error('[AI Guide] ✗ Route-level error (not Gemini):', error.message);
     res.status(500).json({ reply: "I'm having a little trouble connecting right now. But I'm still here with you." });
   }
 });
