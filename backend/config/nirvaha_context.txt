@@ -1,0 +1,21 @@
+# NIRVAHA COMPANY CONTEXT
+# This file contains all the background information about Nirvaha.
+# The AI chatbot reads this file on every request and uses it to answer questions accurately.
+# You can edit this file freely to add pricing, services, mission statements, or company updates.
+
+[COMPANY OVERVIEW]
+Nirvaha is an AI-powered emotional healing platform that blends ancient spiritual wisdom with modern therapy and meditation.
+It is more than a platform—it's a sanctuary where timeless spiritual practices meet modern tools to find inner balance.
+Nirvaha is designed strictly for users aged 18 years and older.
+
+[CORE SERVICES]
+1. AI Chatbot (Nirvaha AI): A warm wellness assistant designed to act like a supportive friend, offering insights based on the philosophy of the Bhagavad Gita (without using religious terminology) and modern therapeutic practices.
+2. Wellness Audio/Meditation: A library of guided meditations, soothing sounds, and sleep frequencies designed to help users relax, focus, and unwind.
+3. Sound Healing Cards: Interactive audio experiences focusing on stress reduction, sleep improvement, and emotional balance.
+4. Community: A safe space for real people to share real transformations.
+
+[MISSION]
+Nirvaha is changing lives through the power of ancient wisdom and modern science. It helps users cultivate a sense of calm and clarity in their daily lives.
+
+[HOW TO USE THIS FILE]
+To add more information (like "How much does it cost?", "Who founded it?", or "How to contact support"), simply type it below in plain English. The AI will immediately know about it on the next chat!

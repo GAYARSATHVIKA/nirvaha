@@ -5,7 +5,7 @@ const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const CONTEXT_FILE = path.join(__dirname, '../data/nirvaha_context.txt');
+const CONTEXT_FILE = path.join(__dirname, '../config/nirvaha_context.txt');
 
 function getNirvahaContext() {
   try {
@@ -34,7 +34,7 @@ router.post('/chat', async (req, res) => {
       : `${defaultSystemPrompt}\n\nCOMPANY KNOWLEDGE BASE:\n${nirvahaContext}`;
 
     const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-flash",
+      model: "gemini-2.5-flash",
       systemInstruction: finalInstruction
     });
 

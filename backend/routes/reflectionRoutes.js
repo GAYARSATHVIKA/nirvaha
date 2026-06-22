@@ -7,7 +7,7 @@ const { createReflectionBackup } = require('../utils/retention');
 const router = express.Router();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const CONTEXT_FILE = path.join(__dirname, '../data/nirvaha_context.txt');
+const CONTEXT_FILE = path.join(__dirname, '../config/nirvaha_context.txt');
 
 function getNirvahaContext() {
   try {
@@ -304,7 +304,7 @@ ${personaInstruction}${problemSpecificGuide}`;
       console.log(`[AI Guide] → Gemini request | intent="${intent}" | followUp=${isFollowUp} | effectiveMessage="${effectiveMessage.slice(0, 100)}"`);
 
       const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: "gemini-2.5-flash",
         systemInstruction: systemPrompt
       });
 
