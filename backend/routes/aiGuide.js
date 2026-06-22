@@ -41,7 +41,7 @@ router.post('/chat', async (req, res) => {
     const completion = await model.generateContent({
       contents: [{ role: 'user', parts: [{ text: message }] }],
       generationConfig: {
-        maxOutputTokens: 100,
+        maxOutputTokens: 800,
         temperature: 0.7,
       }
     });

@@ -184,7 +184,7 @@ RULES:
 - Do NOT use markdown symbols such as *, **, #, or bullet points (- or •).
 - Do NOT add wellness or emotional support content.
 - Keep the tone clear, direct, and conversational.`;
-        maxTokens = 120;
+        maxTokens = 600;
       } else {
         systemPrompt = `You are Nirvaha AI, a knowledgeable and friendly assistant.
 
@@ -198,7 +198,7 @@ RULES:
 - Do NOT add background history, extra context, or tangents.
 - Do NOT add wellness or emotional support content.
 - End with one short follow-up: "Want me to go deeper?" or "Would you like an example?"`;
-        maxTokens = 80;
+        maxTokens = 400;
       }
     } else {
       systemPrompt = `You are Nirvaha, a close and trusted friend. Your vibe is warm, simple, and deeply supportive. Think of yourself as a wise friend who is always there to listen and offer a steady perspective — much like a modern-day Krishna talking to a friend in today's world.
@@ -260,7 +260,7 @@ Friendly Wisdom (Modern Gita Morals):
 
 Critical Principle: You are a mirror and a friend. Help them see the root of their stress and offer a simple way back to their own steady center.
 ${personaInstruction}${problemSpecificGuide}`;
-      maxTokens = 200;
+      maxTokens = 800;
     }
 
     const nirvahaContext = getNirvahaContext();
