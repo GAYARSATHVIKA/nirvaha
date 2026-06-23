@@ -207,7 +207,10 @@ router.put('/items/:id', async (req, res) => {
     }
 
     if (req.body.status) item.status = req.body.status;
-    if (req.body.data) item.data = { ...item.data, ...req.body.data };
+    if (req.body.data) {
+      item.data = { ...item.data, ...req.body.data };
+      item.markModified('data');
+    }
     
     await item.save();
     return res.json(item);

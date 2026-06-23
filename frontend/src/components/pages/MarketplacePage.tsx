@@ -697,18 +697,20 @@ export function MarketplacePage() {
                 </motion.button>
               </>
             )}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                setSelectedAddType(activeTab === "retreats" ? "retreat" : "session");
-                setIsAddOpen(true);
-              }}
-              className="px-6 py-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-[24px] shadow-lg flex items-center gap-2 hover:from-teal-600 hover:to-emerald-600 transition-colors"
-            >
-              <Plus className="w-5 h-5" />
-              Add
-            </motion.button>
+            {(user?.role === "admin" || user?.email === "admin@nirvaha.com") && (
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  setSelectedAddType(activeTab === "retreats" ? "retreat" : "session");
+                  setIsAddOpen(true);
+                }}
+                className="px-6 py-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-[24px] shadow-lg flex items-center gap-2 hover:from-teal-600 hover:to-emerald-600 transition-colors"
+              >
+                <Plus className="w-5 h-5" />
+                Add
+              </motion.button>
+            )}
 
           </div>
         </motion.div>

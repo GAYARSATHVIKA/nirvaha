@@ -94,11 +94,6 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           path: "/admin/companions",
         },
         {
-          title: "Success Stories",
-          icon: FileText,
-          path: "/admin/success-stories",
-        },
-        {
           title: "Booking Management",
           icon: Calendar,
           path: "/admin/bookings",
@@ -125,9 +120,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           path: "/admin/inquiries",
         },
         {
-          title: "Wellness Retreats",
+          title: "Trusted Network",
           icon: Compass,
-          path: "/admin/wellness-retreats",
+          path: "/admin/trusted-network",
         },
         {
           title: "Wellness OTT",
@@ -247,8 +242,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       } else {
         const rect = e.currentTarget.getBoundingClientRect();
         setDropdownPos({
-          top: rect.bottom + window.scrollY,
-          left: rect.left + window.scrollX,
+          top: rect.bottom + 4, // 4px gap
+          left: rect.left,
         });
         setOpenDropdown(item.title);
       }
@@ -416,4 +411,5 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     </div>
   );
 }
+
 

@@ -2,163 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, Pause, ExternalLink, Music, Link, Share2 } from 'lucide-react';
 
-// ---------------------------------------------------------------------------
-// Data – each card has 9 unique thematically related sounds
-// ---------------------------------------------------------------------------
-const ADS_DATA = [
-  {
-    id: 1,
-    image: "/about/ADS/vedic chants.png",
-    link: "https://www.jiosaavn.com/album/powerful-vedic-chants/A3owXFDaI4Q_",
-    alt: "Vedic Chants",
-    description: "Powerful Vedic Chants by Priests of Kashi — sacred suktas on JioSaavn.",
-    theme: "Sacred Vedic Frequencies",
-    accent: "#C4A35A",
-    accentDim: "rgba(196,163,90,0.15)",
-    sounds: [
-      {
-        id: "v1",
-        label: "Purush Sukta",
-        icon: "🕉️",
-        description: "Ancient Vedic hymn for cosmic consciousness",
-        url: "/audio/stress/Tibetan-Bowls.mp3",
-      },
-      {
-        id: "v2",
-        label: "Mahamrityunjay Mantra",
-        icon: "🧘",
-        description: "The great liberation mantra for healing",
-        url: "/audio/meditation/Sacred-Sound-Bath.mp3",
-      },
-      {
-        id: "v3",
-        label: "Shanti Sukta",
-        icon: "🕊️",
-        description: "Powerful Sanskrit chants for universal peace",
-        url: "/audio/meditation/Tibetan-Bowl-Journey.mp3",
-      },
-      {
-        id: "v4",
-        label: "Gayatri Mantra",
-        icon: "☀️",
-        description: "Sacred chant for wisdom and enlightenment",
-        url: "/audio/meditation/Crystal-Frequency-Healing.mp3",
-      },
-      {
-        id: "v5",
-        label: "Rudra Chamakam",
-        icon: "🔥",
-        description: "Vedic hymn invoking cosmic energies",
-        url: "/audio/emotional/Healing-Bowls.mp3",
-      },
-      {
-        id: "v6",
-        label: "Om Chanting",
-        icon: "🕉️",
-        description: "Primordial sound of the universe",
-        url: "/audio/meditation/Indoor-Calm-Meditation.mp3",
-      },
-      {
-        id: "v7",
-        label: "Saraswati Vandana",
-        icon: "🎶",
-        description: "Prayer for knowledge and arts",
-        url: "/audio/emotional/Chakra-Harmony.mp3",
-      },
-      {
-        id: "v8",
-        label: "Durga Suktam",
-        icon: "🛡️",
-        description: "Vedic prayer for protection and strength",
-        url: "/audio/emotional/Sacred-Geometry.mp3",
-      },
-      {
-        id: "v9",
-        label: "Sacred Sound Bath",
-        icon: "🥣",
-        description: "Deep resonance healing bowl soundscape",
-        url: "/audio/focus/Clear-Mind-Frequencies.mp3",
-      },
-    ],
-    delay: 0,
-  },
-  {
-    id: 2,
-    image: "/about/ADS/med spotify.png",
-    link: "https://www.jiosaavn.com/album/peace-of-mind/ZMr0o3I8EuQ_",
-    alt: "JioSaavn Meditation",
-    description: "Peace of Mind by Peaceful Music Orchestra — calming meditation on JioSaavn.",
-    theme: "Mindful Soundscapes",
-    accent: "#7A9384",
-    accentDim: "rgba(122,147,132,0.15)",
-    sounds: [
-      {
-        id: "m1",
-        label: "Peace of Mind",
-        icon: "🌿",
-        description: "Peaceful Music Orchestra · Peace of Mind · JioSaavn",
-        url: "/audio/meditation/Nature-Meditation.mp3",
-      },
-      {
-        id: "m2",
-        label: "Nirvana — Meditation Music",
-        icon: "🧘",
-        description: "Peaceful Music Orchestra · Peace of Mind · JioSaavn",
-        url: "/audio/meditation/Deep-Breath-Meditation.mp3",
-      },
-      {
-        id: "m3",
-        label: "Ambient for Inner Peace",
-        icon: "🌙",
-        description: "Peaceful Music Orchestra · Peace of Mind · JioSaavn",
-        url: "/audio/sleep/Moonlight-Lullaby.mp3",
-      },
-      {
-        id: "m4",
-        label: "Deep Breath Meditation",
-        icon: "💨",
-        description: "Guided breathing rhythms for calm",
-        url: "/audio/focus/Minimal-Nature-Sounds.mp3",
-      },
-      {
-        id: "m5",
-        label: "Sunrise Meditation",
-        icon: "🌅",
-        description: "Gentle music for morning awareness",
-        url: "/audio/stress/Ocean-Waves-Calm.mp3",
-      },
-      {
-        id: "m6",
-        label: "Yoga Nidra Flow",
-        icon: "🧘",
-        description: "Deep relaxation and sleep meditation",
-        url: "/audio/sleep/Starlit-Delta-Waves.mp3",
-      },
-      {
-        id: "m7",
-        label: "Forest Stream",
-        icon: "🌲",
-        description: "Nature sounds for mindfulness focus",
-        url: "/audio/stress-nature.mp3",
-      },
-      {
-        id: "m8",
-        label: "Raindrops for Calm",
-        icon: "🌧️",
-        description: "Gentle rain sounds for stress relief",
-        url: "/audio/stress/Gentle-Rain-Drops.mp3",
-      },
-      {
-        id: "m9",
-        label: "Soft Meadow Breeze",
-        icon: "🍃",
-        description: "Calm wind and nature ambiance",
-        url: "/audio/anxiety/Soft-Meadow-Breeze.mp3",
-      },
-    ],
-    delay: 1.5,
-  },
-];
+import BACKEND_CONFIG from '@/config/backend';
 
 // ---------------------------------------------------------------------------
 // Sub-component: animated waveform bars
@@ -184,10 +28,34 @@ const WaveformBars = ({ color }: { color: string }) => {
 // Main component
 // ---------------------------------------------------------------------------
 export const TrustedNetwork = () => {
-  const [openAdId, setOpenAdId] = useState<number | null>(null);
+  const [adsData, setAdsData] = useState<any[]>([]);
+  const [openAdId, setOpenAdId] = useState<string | null>(null);
   const [playingTrackId, setPlayingTrackId] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/trusted-network`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.items) {
+          const formatted = data.items.map((item: any, idx: number) => ({
+            id: item._id,
+            image: item.image,
+            link: item.websiteUrl,
+            alt: item.title,
+            description: item.description,
+            theme: item.theme,
+            accent: item.accent,
+            accentDim: item.accentDim,
+            sounds: item.sounds || [],
+            delay: idx * 1.5
+          }));
+          setAdsData(formatted);
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   // Initialise single shared audio element
   useEffect(() => {
@@ -216,13 +84,14 @@ export const TrustedNetwork = () => {
 
   // Handle sound query param on load to auto-play shared sounds
   useEffect(() => {
+    if (adsData.length === 0) return;
     const params = new URLSearchParams(window.location.search);
     const soundParam = params.get("sound");
     if (soundParam) {
-      const matchedCard = ADS_DATA.find((ad) => ad.sounds.some((s) => s.id === soundParam));
+      const matchedCard = adsData.find((ad) => ad.sounds.some((s: any) => s.id === soundParam));
       if (matchedCard) {
         setOpenAdId(matchedCard.id);
-        const matchedSound = matchedCard.sounds.find((s) => s.id === soundParam);
+        const matchedSound = matchedCard.sounds.find((s: any) => s.id === soundParam);
         if (matchedSound && audioRef.current) {
           audioRef.current.src = matchedSound.url;
           audioRef.current.currentTime = 0;
@@ -237,7 +106,7 @@ export const TrustedNetwork = () => {
         }
       }
     }
-  }, []);
+  }, [adsData]);
 
   const handleTrackClick = (trackId: string, url: string) => {
     if (!audioRef.current) return;
@@ -289,7 +158,7 @@ export const TrustedNetwork = () => {
     }
   };
 
-  const openAd = ADS_DATA.find((a) => a.id === openAdId) ?? null;
+  const openAd = adsData.find((a) => a.id === openAdId) ?? null;
 
   return (
     <>
@@ -368,7 +237,7 @@ export const TrustedNetwork = () => {
 
                 {/* 3D Soundboard Buttons Grid (Myinstants Style) */}
                 <div className="grid grid-cols-3 gap-4 sm:gap-5 justify-items-center mb-4 pt-2">
-                  {openAd.sounds.map((track) => {
+                  {openAd.sounds && openAd.sounds.map((track: any) => {
                     const isPlaying = playingTrackId === track.id;
                     return (
                       <div key={track.id} className="flex flex-col items-center w-full max-w-[120px] mb-2">
@@ -473,14 +342,14 @@ export const TrustedNetwork = () => {
                     >
                       <div className="flex items-center gap-3">
                         <span className="text-xl select-none">
-                          {openAd.sounds.find((s) => s.id === playingTrackId)?.icon}
+                          {openAd.sounds && openAd.sounds.find((s: any) => s.id === playingTrackId)?.icon}
                         </span>
                         <div className="flex flex-col">
                           <span className="text-[10px] uppercase font-bold tracking-wider" style={{ color: openAd.accent }}>
                             Now Playing
                           </span>
                           <span className="text-xs font-semibold text-white truncate max-w-[180px]">
-                            {openAd.sounds.find((s) => s.id === playingTrackId)?.label}
+                            {openAd.sounds && openAd.sounds.find((s: any) => s.id === playingTrackId)?.label}
                           </span>
                         </div>
                       </div>
@@ -553,7 +422,7 @@ export const TrustedNetwork = () => {
           </motion.div>
 
           <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
-            {ADS_DATA.map((ad) => (
+            {adsData.map((ad) => (
               <motion.div
                 key={ad.id}
                 animate={{ y: [0, -15, 0] }}
@@ -602,7 +471,7 @@ export const TrustedNetwork = () => {
                         backdropFilter: "blur(6px)",
                       }}
                     >
-                      9 Sounds
+                      {ad.sounds?.length || 0} Sounds
                     </div>
                   </button>
 

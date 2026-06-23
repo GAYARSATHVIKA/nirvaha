@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, ChevronDown, ChevronRight, Save } from 'lucide-react';
+import { Plus, Trash2, ChevronDown, ChevronRight, Save, Circle, CheckCircle2 } from 'lucide-react';
 
 interface CurriculumBuilderProps {
   modules: any[];
@@ -37,7 +37,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
       xp: 50,
       duration: '5 min',
       locked: false,
-      content: { objectives: [], body: [], summary: '', quizQuestions: [] }
+      content: { objectives: [], body: [], summary: '', quizQuestions: [], videoUrl: '', audioUrl: '' }
     };
     updated[modIdx].units = [...(updated[modIdx].units || []), newUnit];
     onChange(updated);
@@ -64,9 +64,60 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
   };
 
   const handleArrayText = (modIdx: number, unitIdx: number, field: string, text: string) => {
-    // split by newlines for arrays like objectives or body
     const arr = text.split('\n').filter(s => s.trim() !== '');
     updateUnitContent(modIdx, unitIdx, field, arr);
+  };
+
+  // --- Quiz Builder Helpers ---
+  const addQuizQuestion = (modIdx: number, unitIdx: number) => {
+    const updated = [...modules];
+    const unitContent = updated[modIdx].units[unitIdx].content;
+    const currentQuestions = unitContent.quizQuestions || [];
+    unitContent.quizQuestions = [
+      ...currentQuestions, 
+      { question: 'New Question', options: ['Option 1'], correct: 0 }
+    ];
+    onChange(updated);
+  };
+
+  const updateQuizQuestion = (modIdx: number, unitIdx: number, qIdx: number, field: string, val: any) => {
+    const updated = [...modules];
+    const qs = updated[modIdx].units[unitIdx].content.quizQuestions;
+    qs[qIdx] = { ...qs[qIdx], [field]: val };
+    onChange(updated);
+  };
+
+  const removeQuizQuestion = (modIdx: number, unitIdx: number, qIdx: number) => {
+    const updated = [...modules];
+    updated[modIdx].units[unitIdx].content.quizQuestions.splice(qIdx, 1);
+    onChange(updated);
+  };
+
+  const addQuizOption = (modIdx: number, unitIdx: number, qIdx: number) => {
+    const updated = [...modules];
+    const qs = updated[modIdx].units[unitIdx].content.quizQuestions;
+    qs[qIdx].options.push(`Option ${qs[qIdx].options.length + 1}`);
+    onChange(updated);
+  };
+
+  const updateQuizOption = (modIdx: number, unitIdx: number, qIdx: number, optIdx: number, val: string) => {
+    const updated = [...modules];
+    const qs = updated[modIdx].units[unitIdx].content.quizQuestions;
+    qs[qIdx].options[optIdx] = val;
+    onChange(updated);
+  };
+
+  const removeQuizOption = (modIdx: number, unitIdx: number, qIdx: number, optIdx: number) => {
+    const updated = [...modules];
+    const qs = updated[modIdx].units[unitIdx].content.quizQuestions;
+    qs[qIdx].options.splice(optIdx, 1);
+    // Adjust correct answer if needed
+    if (qs[qIdx].correct === optIdx) {
+      qs[qIdx].correct = 0;
+    } else if (qs[qIdx].correct > optIdx) {
+      qs[qIdx].correct -= 1;
+    }
+    onChange(updated);
   };
 
   if (!modules) return null;
@@ -128,7 +179,7 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
               {/* Units List */}
               <div className="mt-6 border-t border-gray-200 pt-4">
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-semibold text-sm">Units inside {mod.title}</h4>
+                  <h4 className="font-semibold text-sm text-black">Units inside {mod.title}</h4>
                   <button
                     type="button"
                     onClick={() => addUnit(modIdx)}
@@ -179,9 +230,11 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
                                 <select className="w-full border rounded p-1.5 text-sm bg-white text-black" value={unit.type} onChange={(e) => updateUnit(modIdx, unitIdx, 'type', e.target.value)}>
                                   <option value="reading">Reading</option>
                                   <option value="video">Video</option>
-                                  <option value="quiz">Quiz</option>
+                                  <option value="audio">Audio</option>
+                                  <option value="quiz">Quiz / Assessment</option>
                                   <option value="mindfulness">Mindfulness</option>
                                   <option value="activity">Activity</option>
+                                  <option value="reflection">Reflection</option>
                                 </select>
                               </div>
                               <div>
@@ -192,39 +245,116 @@ export function CurriculumBuilder({ modules, onChange }: CurriculumBuilderProps)
 
                             {/* Unit Content */}
                             <div className="pt-2 border-t border-gray-100">
-                              <h5 className="text-sm font-semibold mb-3">Lesson Content</h5>
+                              <h5 className="text-sm font-semibold mb-3 text-emerald-900">Lesson Content</h5>
                               
-                              <div className="space-y-3">
-                                <div>
-                                  <label className="block text-xs text-gray-500 mb-1">Objectives (one per line)</label>
-                                  <textarea
-                                    className="w-full border rounded p-2 text-sm bg-white text-black"
-                                    rows={3}
-                                    value={(unit.content?.objectives || []).join('\n')}
-                                    onChange={(e) => handleArrayText(modIdx, unitIdx, 'objectives', e.target.value)}
-                                  />
+                              {/* Video Slot */}
+                              {unit.type === 'video' && (
+                                <div className="mb-4 bg-gray-50 p-3 rounded border border-gray-200">
+                                  <label className="block text-xs text-gray-700 font-semibold mb-1">Video URL (Vimeo, YouTube, etc)</label>
+                                  <input type="text" className="w-full border rounded p-2 text-sm bg-white text-black" value={unit.content?.videoUrl || ''} onChange={(e) => updateUnitContent(modIdx, unitIdx, 'videoUrl', e.target.value)} placeholder="https://..." />
                                 </div>
-                                
-                                <div>
-                                  <label className="block text-xs text-gray-500 mb-1">Body Text (one paragraph per line)</label>
-                                  <textarea
-                                    className="w-full border rounded p-2 text-sm bg-white text-black"
-                                    rows={5}
-                                    value={(unit.content?.body || []).join('\n')}
-                                    onChange={(e) => handleArrayText(modIdx, unitIdx, 'body', e.target.value)}
-                                  />
+                              )}
+
+                              {/* Audio Slot */}
+                              {unit.type === 'audio' && (
+                                <div className="mb-4 bg-gray-50 p-3 rounded border border-gray-200">
+                                  <label className="block text-xs text-gray-700 font-semibold mb-1">Audio URL (.mp3)</label>
+                                  <input type="text" className="w-full border rounded p-2 text-sm bg-white text-black" value={unit.content?.audioUrl || ''} onChange={(e) => updateUnitContent(modIdx, unitIdx, 'audioUrl', e.target.value)} placeholder="https://..." />
                                 </div>
-                                
-                                <div>
-                                  <label className="block text-xs text-gray-500 mb-1">Summary</label>
-                                  <textarea
-                                    className="w-full border rounded p-2 text-sm bg-white text-black"
-                                    rows={2}
-                                    value={unit.content?.summary || ''}
-                                    onChange={(e) => updateUnitContent(modIdx, unitIdx, 'summary', e.target.value)}
-                                  />
+                              )}
+
+                              {/* Quiz Builder */}
+                              {unit.type === 'quiz' ? (
+                                <div className="space-y-4">
+                                  <div className="flex justify-between items-center bg-emerald-50 px-3 py-2 rounded">
+                                    <span className="text-xs font-semibold text-emerald-800">Quiz Questions</span>
+                                    <button type="button" onClick={() => addQuizQuestion(modIdx, unitIdx)} className="bg-[#1a5d47] text-white px-2 py-1 rounded text-xs flex items-center gap-1 hover:bg-[#113d2f]">
+                                      <Plus className="w-3 h-3" /> Add Question
+                                    </button>
+                                  </div>
+                                  
+                                  {(unit.content?.quizQuestions || []).map((q: any, qIdx: number) => (
+                                    <div key={qIdx} className="border border-gray-200 rounded p-4 bg-white shadow-sm relative">
+                                      <div className="flex items-start justify-between mb-3">
+                                        <input 
+                                          type="text" 
+                                          className="flex-1 border-b border-gray-300 bg-transparent py-1 text-base font-medium focus:outline-none focus:border-[#1a5d47] text-black" 
+                                          value={q.question} 
+                                          onChange={(e) => updateQuizQuestion(modIdx, unitIdx, qIdx, 'question', e.target.value)}
+                                          placeholder="Question Title"
+                                        />
+                                        <button onClick={() => removeQuizQuestion(modIdx, unitIdx, qIdx)} className="ml-4 text-red-400 hover:text-red-600">
+                                          <Trash2 className="w-4 h-4" />
+                                        </button>
+                                      </div>
+
+                                      <div className="space-y-2 mt-4 pl-2">
+                                        {q.options.map((opt: string, optIdx: number) => (
+                                          <div key={optIdx} className="flex items-center gap-3 group">
+                                            <button 
+                                              type="button" 
+                                              onClick={() => updateQuizQuestion(modIdx, unitIdx, qIdx, 'correct', optIdx)}
+                                              className={`transition-colors ${q.correct === optIdx ? 'text-[#1a5d47]' : 'text-gray-300 hover:text-gray-400'}`}
+                                            >
+                                              {q.correct === optIdx ? <CheckCircle2 className="w-5 h-5" /> : <Circle className="w-5 h-5" />}
+                                            </button>
+                                            <input 
+                                              type="text" 
+                                              className={`flex-1 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-[#1a5d47] focus:outline-none py-1 text-sm ${q.correct === optIdx ? 'font-medium text-black' : 'text-gray-600'}`}
+                                              value={opt}
+                                              onChange={(e) => updateQuizOption(modIdx, unitIdx, qIdx, optIdx, e.target.value)}
+                                            />
+                                            {q.options.length > 1 && (
+                                              <button type="button" onClick={() => removeQuizOption(modIdx, unitIdx, qIdx, optIdx)} className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500">
+                                                <Trash2 className="w-3 h-3" />
+                                              </button>
+                                            )}
+                                          </div>
+                                        ))}
+                                        <button type="button" onClick={() => addQuizOption(modIdx, unitIdx, qIdx)} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#1a5d47] mt-2 pl-1 py-1">
+                                          <Circle className="w-5 h-5 text-transparent border border-gray-300 rounded-full bg-gray-50" />
+                                          <span>Add option</span>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  ))}
+                                  {(!unit.content?.quizQuestions || unit.content.quizQuestions.length === 0) && (
+                                    <p className="text-center text-xs text-gray-400 py-4 border border-dashed border-gray-200 rounded">No questions added yet.</p>
+                                  )}
                                 </div>
-                              </div>
+                              ) : (
+                                <div className="space-y-3">
+                                  <div>
+                                    <label className="block text-xs text-gray-500 mb-1">Objectives (one per line)</label>
+                                    <textarea
+                                      className="w-full border rounded p-2 text-sm bg-white text-black"
+                                      rows={3}
+                                      value={(unit.content?.objectives || []).join('\n')}
+                                      onChange={(e) => handleArrayText(modIdx, unitIdx, 'objectives', e.target.value)}
+                                    />
+                                  </div>
+                                  
+                                  <div>
+                                    <label className="block text-xs text-gray-500 mb-1">Body Text (one paragraph per line)</label>
+                                    <textarea
+                                      className="w-full border rounded p-2 text-sm bg-white text-black"
+                                      rows={5}
+                                      value={(unit.content?.body || []).join('\n')}
+                                      onChange={(e) => handleArrayText(modIdx, unitIdx, 'body', e.target.value)}
+                                    />
+                                  </div>
+                                  
+                                  <div>
+                                    <label className="block text-xs text-gray-500 mb-1">Summary</label>
+                                    <textarea
+                                      className="w-full border rounded p-2 text-sm bg-white text-black"
+                                      rows={2}
+                                      value={unit.content?.summary || ''}
+                                      onChange={(e) => updateUnitContent(modIdx, unitIdx, 'summary', e.target.value)}
+                                    />
+                                  </div>
+                                </div>
+                              )}
                             </div>
 
                           </div>

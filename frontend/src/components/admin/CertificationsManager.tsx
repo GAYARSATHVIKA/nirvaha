@@ -10,7 +10,7 @@ export function CertificationsManager() {
   const [enrollments, setEnrollments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const defaultCert = { id: '', title: '', description: '', image: '', feel: '', cta: '', price: 0, isFree: false, skillLevel: 'Beginner', duration: 'Self-paced', certificate: 'Professional Certificate', modules: [] };
+  const defaultCert = { id: '', title: '', description: '', image: '', feel: '', cta: '', price: 0, isFree: false, bgColor: 'bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]', skillLevel: 'Beginner', duration: 'Self-paced', certificate: 'Professional Certificate', modules: [] };
   const [newCert, setNewCert] = useState<any>(defaultCert);
   const [editorTab, setEditorTab] = useState<'basic' | 'curriculum'>('basic');
   const [showAddForm, setShowAddForm] = useState(false);
@@ -267,7 +267,36 @@ export function CertificationsManager() {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                          <input type="url" value={newCert.image} onChange={e => setNewCert({...newCert, image: e.target.value})} className="w-full px-3 py-2 border rounded-lg bg-white text-black" />
+                          <div className="flex gap-2">
+                            <input type="url" value={newCert.image} onChange={e => setNewCert({...newCert, image: e.target.value})} className="flex-1 px-3 py-2 border rounded-lg bg-white text-black" placeholder="https://..." />
+                            <label className="cursor-pointer flex items-center justify-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
+                              Upload
+                              <input 
+                                type="file" 
+                                className="hidden" 
+                                accept="image/*" 
+                                onChange={async (e) => {
+                                  if (!e.target.files || e.target.files.length === 0) return;
+                                  const file = e.target.files[0];
+                                  const formData = new FormData();
+                                  formData.append('file', file);
+                                  try {
+                                    const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/upload`, {
+                                      method: 'POST',
+                                      body: formData
+                                    });
+                                    const data = await res.json();
+                                    if (data.url) {
+                                      setNewCert({...newCert, image: `${BACKEND_CONFIG.API_BASE_URL}${data.url}`});
+                                    }
+                                  } catch (err) {
+                                    console.error('Error uploading image:', err);
+                                    alert('Failed to upload image. Please try again.');
+                                  }
+                                }} 
+                              />
+                            </label>
+                          </div>
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">Course Feel / Vibe</label>
@@ -275,6 +304,10 @@ export function CertificationsManager() {
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Background CSS (Tailwind classes)</label>
+                          <input type="text" value={newCert.bgColor || ''} onChange={e => setNewCert({...newCert, bgColor: e.target.value})} className="w-full px-3 py-2 border rounded-lg bg-white text-black" placeholder="e.g. bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]" />
+                        </div>
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">CTA Text</label>
                           <input type="text" value={newCert.cta} onChange={e => setNewCert({...newCert, cta: e.target.value})} className="w-full px-3 py-2 border rounded-lg bg-white text-black" placeholder="e.g. Begin Your Journey" />
@@ -354,7 +387,7 @@ export function CertificationsManager() {
                         <td className="px-6 py-4 text-sm text-gray-600">{cert.feel || '-'}</td>
                         <td className="px-6 py-4 text-sm font-medium text-[#1a5d47]">${cert.price || 0}</td>
                         <td className="px-6 py-4 text-right space-x-2">
-                           <button onClick={() => { setSelectedCert(cert.id); setNewCert({ id: cert.id, title: cert.title, description: cert.description || '', image: cert.image || '', feel: cert.feel || '', cta: cert.cta || '', price: cert.price || 0, isFree: cert.isFree || false, skillLevel: cert.skillLevel || 'Beginner', duration: cert.duration || 'Self-paced', certificate: cert.certificate || 'Professional Certificate', modules: cert.modules || [] }); setEditorTab('basic'); setShowAddForm(true); }} className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium hover:bg-gray-200 transition-colors">Edit</button>
+                           <button onClick={() => { setSelectedCert(cert.id); setNewCert({ id: cert.id, title: cert.title, description: cert.description || '', image: cert.image || '', feel: cert.feel || '', cta: cert.cta || '', price: cert.price || 0, isFree: cert.isFree || false, bgColor: cert.bgColor || 'bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]', skillLevel: cert.skillLevel || 'Beginner', duration: cert.duration || 'Self-paced', certificate: cert.certificate || 'Professional Certificate', modules: cert.modules || [] }); setEditorTab('basic'); setShowAddForm(true); }} className="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-lg text-xs font-medium hover:bg-gray-200 transition-colors">Edit</button>
                            <button onClick={() => handleDeleteCert(cert.id)} className="inline-flex items-center gap-1 px-3 py-1.5 bg-red-50 text-red-600 rounded-lg text-xs font-medium hover:bg-red-100 transition-colors"><Trash2 className="w-3.5 h-3.5" /> Delete</button>
                         </td>
                       </tr>

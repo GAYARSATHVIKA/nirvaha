@@ -69,14 +69,12 @@ import { HealingFrequenciesContent } from "./admin/pages/content/HealingFrequenc
 import { PosesContent } from "./admin/pages/content/PosesContent";
 import YogaContent from "./admin/pages/content/YogaContent";
 import { ProductsContent } from "./admin/pages/content/ProductsContent";
-import { ContentUpdatePage } from "./admin/pages/ContentUpdatePage";
 import { LandingManagementPage } from "./admin/pages/LandingManagementPage";
 import { MarketplaceManagementPage } from "./admin/pages/MarketplaceManagementPage";
 import { ProductManagementPage } from "./admin/pages/ProductManagementPage";
 import { ContactManagementPage } from "./admin/pages/ContactManagementPage";
 import { AdminDashboard } from "./pages/AdminDashboard";
-import { SuccessStoriesManager } from "./components/admin/SuccessStoriesManager";
-import { WellnessRetreatsManager } from "./components/admin/WellnessRetreatsManager";
+import { TrustedNetworkManager } from "./components/admin/TrustedNetworkManager";
 import { WellnessOTTProvider } from "./contexts/WellnessOTTContext";
 import { WellnessOTTManagementPage } from "./admin/pages/WellnessOTTManagementPage";
 import { CommonProblemsManagementPage } from "./admin/pages/CommonProblemsManagementPage";
@@ -174,7 +172,6 @@ function AppInner() {
           <Route path="inquiries" element={<ContactManagementPage />} />
           <Route path="marketplace" element={<MarketplaceManagementPage />} />
           <Route path="products" element={<ProductManagementPage />} />
-          <Route path="content-update" element={<ContentUpdatePage />} />
           <Route path="landing" element={<LandingManagementPage />} />
           <Route path="content" element={<ContentManagementPage />} />
           <Route path="content/meditation" element={<MeditationContent />} />
@@ -187,8 +184,7 @@ function AppInner() {
           <Route path="content/dynamic" element={<ContentManagementPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="users" element={<UserManagementPage />} />
-          <Route path="success-stories" element={<SuccessStoriesManager />} />
-          <Route path="wellness-retreats" element={<WellnessRetreatsManager />} />
+          <Route path="trusted-network" element={<TrustedNetworkManager />} />
           <Route path="wellness-ott" element={<WellnessOTTManagementPage />} />
           <Route path="common-problems" element={<CommonProblemsManagementPage />} />
           <Route path="certifications" element={<CertificationsManager />} />

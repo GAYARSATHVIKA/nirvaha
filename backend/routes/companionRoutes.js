@@ -493,24 +493,33 @@ router.get('/sessions', authenticateJWT, async (req, res) => {
     console.log('Logged-in Companion:', loggedInUser._id);
     console.log('Logged-in Companion Email:', loggedInUser.email);
 
-    const filter = {
-      companionId: loggedInUser._id,
-      $or: [
-        { sessionType: { $regex: /^(session|video|chat)$/i } },
-        { type: { $regex: /^(session|video|chat)$/i } }
+    const companionMatch = [{ companionId: loggedInUser._id }];
+    if (loggedInUser.companionId) {
+      companionMatch.push({ legacyCompanionId: loggedInUser.companionId });
+    }
+
+    let filter = {
+      $or: companionMatch,
+      $and: [
+        {
+          $or: [
+            { sessionType: { $regex: /session|video|chat/i } },
+            { type: { $regex: /session|video|chat/i } }
+          ]
+        }
       ]
     };
 
     if (req.query.status) {
       const qStatus = req.query.status.toLowerCase();
       if (qStatus === 'upcoming' || qStatus === 'confirmed') {
-        filter.status = { $in: ['Session Confirmed', 'approved'] };
+        filter.status = { $regex: /^(session confirmed|approved)$/i };
       } else if (qStatus === 'completed') {
-        filter.status = 'completed';
+        filter.status = { $regex: /^completed$/i };
       } else if (qStatus === 'pending') {
         filter.status = { $regex: /pending/i };
       } else if (qStatus === 'rejected') {
-        filter.status = 'rejected';
+        filter.status = { $regex: /^rejected$/i };
       }
     }
 
@@ -532,20 +541,26 @@ router.get('/sessions', authenticateJWT, async (req, res) => {
     
     console.log(`[COMPANION-SESSIONS] Found ${sessions.length} sessions for companion`);
     
-    // Count by status (based on ALL assigned sessions for dashboard stats)
-    const allSessions = await Booking.find({
-      companionId: loggedInUser._id,
-      $or: [
-        { sessionType: { $regex: /^(session|video|chat)$/i } },
-        { type: { $regex: /^(session|video|chat)$/i } }
+    const allSessionsFilter = {
+      $or: companionMatch,
+      $and: [
+        {
+          $or: [
+            { sessionType: { $regex: /session|video|chat/i } },
+            { type: { $regex: /session|video|chat/i } }
+          ]
+        }
       ]
-    }).lean();
+    };
+
+    // Count by status (based on ALL assigned sessions for dashboard stats)
+    const allSessions = await Booking.find(allSessionsFilter).lean();
 
     const stats = {
       total: allSessions.length,
       assigned: allSessions.length,
       pending: allSessions.filter(s => !s.status || s.status.toLowerCase().includes('pending')).length,
-      confirmed: allSessions.filter(s => s.status && s.status.toLowerCase() === 'session confirmed').length,
+      confirmed: allSessions.filter(s => s.status && ['session confirmed', 'approved'].includes(s.status.toLowerCase())).length,
       completed: allSessions.filter(s => s.status && s.status.toLowerCase() === 'completed').length,
       rejected: allSessions.filter(s => s.status && s.status.toLowerCase() === 'rejected').length,
     };
@@ -587,10 +602,15 @@ router.put('/sessions/:id/status', authenticateJWT, async (req, res) => {
       orConditions.push({ _id: id });
     }
 
+    const companionMatch = [{ companionId: loggedInUser._id }];
+    if (loggedInUser.companionId) {
+      companionMatch.push({ legacyCompanionId: loggedInUser.companionId });
+    }
+
     const booking = await Booking.findOne({ 
       $and: [
         { $or: orConditions },
-        { companionId: loggedInUser._id }
+        { $or: companionMatch }
       ]
     });
 

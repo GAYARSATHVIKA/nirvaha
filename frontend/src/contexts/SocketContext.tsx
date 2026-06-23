@@ -99,8 +99,10 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         toast.success(`Your companion request has been ${request.status}`, {
           autoClose: 5000,
         });
+        if (!window.location.pathname.includes('/admin')) {
+          window.dispatchEvent(new CustomEvent('nirvaha-user-sync-request'));
+        }
       }
-      window.dispatchEvent(new CustomEvent('nirvaha-user-sync-request'));
     });
 
     // Listen for new companion requests (for admins)

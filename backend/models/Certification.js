@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const unitContentSchema = new mongoose.Schema({
+  videoUrl: { type: String },
+  audioUrl: { type: String },
   objectives: [{ type: String }],
   body: [{ type: String }],
   summary: { type: String },
@@ -37,6 +39,7 @@ const certificationSchema = new mongoose.Schema({
   cta: { type: String },
   price: { type: Number, default: 0 },
   isFree: { type: Boolean, default: false },
+  bgColor: { type: String, default: 'bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]' },
   skillLevel: { type: String, default: 'Beginner' },
   duration: { type: String, default: 'Self-paced' },
   certificate: { type: String, default: 'Professional Certificate' },

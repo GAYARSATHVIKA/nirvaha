@@ -1,45 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
-const courses = [
-    {
-        id: "mindfulness-meditation-certification",
-        title: "Mindfulness Meditation Certification",
-        desc: "Learn the art and science of mindfulness meditation and become a certified instructor.",
-        feel: "Calm & Focused",
-        image: "/NA01.png",
-        bgColor: "bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]"
-    },
-    {
-        id: "emotional-intelligence-mastery",
-        title: "Emotional Intelligence Mastery",
-        desc: "Deep dive into emotional intelligence with practical tools and certification.",
-        feel: "Empowered & Aware",
-        image: "/NA02.png",
-        bgColor: "bg-gradient-to-br from-[#fde68a] to-[#f59e0b]"
-    },
-    {
-        id: "holistic-wellness-coach",
-        title: "Holistic Wellness Coach",
-        desc: "Comprehensive training to guide others on their holistic wellness journey.",
-        feel: "Balanced & Inspired",
-        image: "/NA03.png",
-        bgColor: "bg-gradient-to-br from-[#a7f3d0] to-[#34d399]"
-    },
-    {
-        id: "spiritual-counseling-program",
-        title: "Spiritual Counseling Program",
-        desc: "Integrate ancient wisdom and modern psychology for spiritual counseling.",
-        feel: "Connected & Uplifted",
-        image: "/NA04.png",
-        bgColor: "bg-gradient-to-br from-[#e0e7ff] to-[#818cf8]"
-    }
-];
+import BACKEND_CONFIG from '../../config/backend';
 
 const CertificationCoursesSection: React.FC = () => {
     const navigate = useNavigate();
+    const [courses, setCourses] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/admin/certifications`);
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    setCourses(data);
+                }
+            } catch (err) {
+                console.error("Error fetching certifications:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCourses();
+    }, []);
+
+    if (loading) {
+        return null; // Or a loading spinner, but keeping it clean
+    }
+
+    if (courses.length === 0) {
+        return null; // Hide section if no certifications exist
+    }
 
     return (
         <section className="py-24 relative overflow-hidden bg-[#fafafa]">
@@ -72,21 +65,27 @@ const CertificationCoursesSection: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-16">
                     {courses.map((course, idx) => (
                         <motion.div
-                            key={idx}
+                            key={course.id || idx}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
                             whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
-                            className={`flex flex-col sm:flex-row rounded-[24px] overflow-hidden shadow-lg border border-white/20 transition-all duration-300 ${course.bgColor}`}
+                            className={`flex flex-col sm:flex-row rounded-[24px] overflow-hidden shadow-lg border border-white/20 transition-all duration-300 ${course.bgColor || 'bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]'}`}
                         >
                             {/* Image Half */}
                             <div className="w-full sm:w-2/5 h-48 sm:h-auto shrink-0 relative overflow-hidden">
-                                <img 
-                                    src={course.image} 
-                                    alt={course.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                                />
+                                {course.image ? (
+                                    <img 
+                                        src={course.image} 
+                                        alt={course.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold text-3xl">
+                                        {(course.title || 'C').charAt(0)}
+                                    </div>
+                                )}
                             </div>
 
                             {/* Content Half */}
@@ -94,13 +93,13 @@ const CertificationCoursesSection: React.FC = () => {
                                 <h3 className="text-xl md:text-2xl font-bold text-[#0c141d] mb-3 leading-snug">
                                     {course.title}
                                 </h3>
-                                <p className="text-[#0c141d]/80 text-sm md:text-base leading-relaxed mb-6 font-medium">
-                                    {course.desc}
+                                <p className="text-[#0c141d]/80 text-sm md:text-base leading-relaxed mb-6 font-medium line-clamp-3">
+                                    {course.description || course.desc}
                                 </p>
                                 <div className="mt-auto inline-flex items-center gap-2 bg-black/10 backdrop-blur-sm px-4 py-2 rounded-full w-fit">
                                     <Clock className="w-4 h-4 text-[#0c141d]/80" />
                                     <span className="text-xs font-bold uppercase tracking-wider text-[#0c141d]/80">
-                                        COURSE FEEL: {course.feel}
+                                        COURSE FEEL: {course.feel || 'Empowering'}
                                     </span>
                                 </div>
                             </div>

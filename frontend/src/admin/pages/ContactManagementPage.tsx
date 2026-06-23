@@ -285,7 +285,18 @@ export function ContactManagementPage() {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsViewModalOpen(false)}>Close</Button>
-            <Button className="bg-emerald-600 text-white">Reply via Email</Button>
+            <Button 
+              className="bg-emerald-600 text-white"
+              onClick={() => {
+                if (selectedMessage) {
+                  const to = encodeURIComponent(selectedMessage.email);
+                  const subject = encodeURIComponent("Reply to your Nirvaha inquiry");
+                  window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}`, "_blank");
+                }
+              }}
+            >
+              Reply via Email
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

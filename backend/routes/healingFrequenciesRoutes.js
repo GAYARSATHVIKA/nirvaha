@@ -169,7 +169,7 @@ router.get('/cards/all', async (req, res) => {
 // POST /api/healing-frequencies/cards
 router.post('/cards', async (req, res) => {
   try {
-    const { collectionId, collectionSlug, moodSlug, title, description, artist, coverImage, audioUrl, frequency, tag, duration, category, status } = req.body;
+    const { collectionId, collectionSlug, moodSlug, title, description, artist, coverImage, audioUrl, frequency, tag, duration, category, status, additionalTracks } = req.body;
     if (!title) return res.status(400).json({ success: false, message: 'title is required' });
     if (!collectionId && !collectionSlug && !moodSlug) return res.status(400).json({ success: false, message: 'collectionId, collectionSlug, or moodSlug is required' });
 
@@ -185,6 +185,7 @@ router.post('/cards', async (req, res) => {
       coverImage: coverImage || '', audioUrl: audioUrl || '',
       frequency: frequency || '', tag: tag || '',
       duration: duration || '', category: category || '',
+      additionalTracks: additionalTracks || [],
       status: status || 'Draft',
       displayOrder: (last?.displayOrder ?? -1) + 1,
     });

@@ -698,7 +698,7 @@ export function WellnessOTTManagementPage() {
                           type="text"
                           value={editingSession.title}
                           onChange={(e) => setEditingSession({ ...editingSession, title: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                           placeholder="e.g., The Art of Deep Meditation"
                         />
                       </div>
@@ -707,7 +707,7 @@ export function WellnessOTTManagementPage() {
                         <select
                           value={editingSession.category}
                           onChange={(e) => setEditingSession({ ...editingSession, category: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         >
                           {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                         </select>
@@ -720,7 +720,7 @@ export function WellnessOTTManagementPage() {
                         value={editingSession.description}
                         onChange={(e) => setEditingSession({ ...editingSession, description: e.target.value })}
                         rows={3}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                        className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         placeholder="Describe this wellness session..."
                       />
                     </div>
@@ -732,7 +732,7 @@ export function WellnessOTTManagementPage() {
                           type="text"
                           value={editingSession.duration}
                           onChange={(e) => setEditingSession({ ...editingSession, duration: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                           placeholder="e.g., 3 Seasons"
                         />
                       </div>
@@ -741,7 +741,7 @@ export function WellnessOTTManagementPage() {
                         <select
                           value={editingSession.type}
                           onChange={(e) => setEditingSession({ ...editingSession, type: e.target.value as 'Series' | 'Film' })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         >
                           <option value="Series">Series</option>
                           <option value="Film">Film</option>
@@ -753,7 +753,7 @@ export function WellnessOTTManagementPage() {
                           type="text"
                           value={editingSession.year}
                           onChange={(e) => setEditingSession({ ...editingSession, year: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         />
                       </div>
                       <div>
@@ -762,7 +762,7 @@ export function WellnessOTTManagementPage() {
                           type="text"
                           value={editingSession.rating}
                           onChange={(e) => setEditingSession({ ...editingSession, rating: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         />
                       </div>
                     </div>
@@ -774,7 +774,7 @@ export function WellnessOTTManagementPage() {
                           type="text"
                           value={editingSession.match}
                           onChange={(e) => setEditingSession({ ...editingSession, match: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         />
                       </div>
                       <div>
@@ -783,7 +783,7 @@ export function WellnessOTTManagementPage() {
                           type="text"
                           value={editingSession.audioSource}
                           onChange={(e) => setEditingSession({ ...editingSession, audioSource: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full px-4 py-2.5 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                           placeholder="URL for the audio file"
                         />
                       </div>
@@ -821,7 +821,7 @@ export function WellnessOTTManagementPage() {
                         <select
                           value={moodInput}
                           onChange={(e) => setMoodInput(e.target.value)}
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47] text-sm"
+                          className="flex-1 px-3 py-2 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47] text-sm"
                         >
                           <option value="">Select mood...</option>
                           {MOODS.filter(m => !editingSession.mood?.includes(m)).map(m => <option key={m} value={m}>{m}</option>)}
@@ -848,7 +848,7 @@ export function WellnessOTTManagementPage() {
                           onChange={(e) => setTagInput(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && addTag()}
                           placeholder="Add a tag..."
-                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47] text-sm"
+                          className="flex-1 px-3 py-2 bg-white text-black border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47] text-sm"
                         />
                         <button onClick={addTag} className="px-4 py-2 bg-[#1a5d47] text-white rounded-lg text-sm font-semibold hover:bg-[#113d2f]">
                           Add
@@ -898,7 +898,7 @@ export function WellnessOTTManagementPage() {
                                     type="number"
                                     value={season.seasonNumber}
                                     onChange={(e) => updateSeason(sIdx, 'seasonNumber', parseInt(e.target.value) || 1)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#1a5d47]"
+                                    className="w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#1a5d47]"
                                   />
                                 </div>
                                 <div>
@@ -906,7 +906,7 @@ export function WellnessOTTManagementPage() {
                                   <select
                                     value={season.level}
                                     onChange={(e) => updateSeason(sIdx, 'level', e.target.value)}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#1a5d47]"
+                                    className="w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#1a5d47]"
                                   >
                                     <option value="Beginner">Beginner</option>
                                     <option value="Intermediate">Intermediate</option>
@@ -932,21 +932,21 @@ export function WellnessOTTManagementPage() {
                                         value={ep.title}
                                         onChange={(e) => updateEpisode(sIdx, epIdx, 'title', e.target.value)}
                                         placeholder="Episode Title"
-                                        className="px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                                        className="px-3 py-1.5 bg-white text-black border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                                       />
                                       <input
                                         type="text"
                                         value={ep.duration}
                                         onChange={(e) => updateEpisode(sIdx, epIdx, 'duration', e.target.value)}
                                         placeholder="Duration (e.g., 12:30)"
-                                        className="px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                                        className="px-3 py-1.5 bg-white text-black border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                                       />
                                       <input
                                         type="text"
                                         value={ep.id}
                                         onChange={(e) => updateEpisode(sIdx, epIdx, 'id', e.target.value)}
                                         placeholder="Episode ID"
-                                        className="px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                                        className="px-3 py-1.5 bg-white text-black border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                                       />
                                     </div>
                                     <input
@@ -954,7 +954,7 @@ export function WellnessOTTManagementPage() {
                                       value={ep.description}
                                       onChange={(e) => updateEpisode(sIdx, epIdx, 'description', e.target.value)}
                                       placeholder="Episode Description"
-                                      className="w-full px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                                      className="w-full px-3 py-1.5 bg-white text-black border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                                     />
                                     <div className="grid md:grid-cols-2 gap-2">
                                       <input
@@ -962,14 +962,14 @@ export function WellnessOTTManagementPage() {
                                         value={ep.thumbnail}
                                         onChange={(e) => updateEpisode(sIdx, epIdx, 'thumbnail', e.target.value)}
                                         placeholder="Thumbnail URL"
-                                        className="px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                                        className="px-3 py-1.5 bg-white text-black border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                                       />
                                       <input
                                         type="text"
                                         value={ep.videoUrl}
                                         onChange={(e) => updateEpisode(sIdx, epIdx, 'videoUrl', e.target.value)}
                                         placeholder="Video/Audio URL"
-                                        className="px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                                        className="px-3 py-1.5 bg-white text-black border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                                       />
                                     </div>
                                   </div>

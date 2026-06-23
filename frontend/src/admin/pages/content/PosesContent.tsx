@@ -350,8 +350,8 @@ export function PosesContent() {
                 filtered.map((p, i) => (
                   <tr key={p.id} className="pose-row border-b border-[#d8f3dc] transition-colors" style={{ background: i % 2 === 0 ? "rgba(240,255,244,0.8)" : "rgba(220,237,193,0.35)" }}>
                     <td className="px-5 py-3.5">
-                      <div className="flex items-center gap-3">
-                        {p.imageUrl ? (
+                      <div className="flex items-center gap-3" title="Pose Image">
+                        {p.imageUrl && p.imageUrl.trim() !== "" && p.imageUrl !== "null" ? (
                           <img src={p.imageUrl} alt="" className="w-12 h-12 rounded-full object-cover border border-[#9fcaa8]" />
                         ) : (
                           <Image className="w-6 h-6 text-[#52b788]" />
@@ -361,7 +361,7 @@ export function PosesContent() {
                     <td className="px-5 py-3.5"><span className="font-semibold text-[#1b4332] line-clamp-1">{p.name}</span></td>
                     <td className="px-5 py-3.5 text-[#2d6a4f]">{p.sanskritName || "—"}</td>
                     <td className="px-5 py-3.5 text-[#40916c]">{p.category || "—"}</td>
-                    <td className="px-5 py-3.5"><span className="px-2 py-1 rounded-full text-xs font-semibold border border-[#9fcaa8] bg-white">{p.set || "Set 1"}</span></td>
+                    <td className="px-5 py-3.5"><span className="px-2 py-1 rounded-full text-xs font-semibold border border-[#9fcaa8] bg-white text-black">{p.set || "Set 1"}</span></td>
                     <td className="px-5 py-3.5">{p.position || i+1}</td>
                     <td className="px-5 py-3.5"><StatusBadge status={p.status} /></td>
                     <td className="px-5 py-3.5">

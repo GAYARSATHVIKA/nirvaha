@@ -48,7 +48,7 @@ const userRoutes = require('./routes/userRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const reflectionRoutes = require('./routes/reflectionRoutes');
 const successStoriesRoutes = require('./routes/successStoriesRoutes');
-const wellnessRetreatRoutes = require('./routes/wellnessRetreatRoutes');
+const trustedNetworkRoutes = require('./routes/trustedNetworkRoutes');
 const wellnessSessionRoutes = require('./routes/wellnessSessionRoutes');
 const commonProblemRoutes = require('./routes/commonProblemRoutes');
 const essentialGuidanceRoutes = require('./routes/essentialGuidanceRoutes');
@@ -1134,13 +1134,26 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(compression());
 app.use(cors({
-  origin: [
-    'https://nirvaha-three.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000'
-  ],
+  origin: function (origin, callback) {
+    // Allow any localhost origin
+    if (!origin || /^http:\/\/localhost:\d+$/.test(origin) || /^http:\/\/127\.0\.0\.1:\d+$/.test(origin)) {
+      return callback(null, true);
+    }
+    const allowedOrigins = [
+      'https://nirvaha-three.vercel.app',
+      'https://nirvaha.vercel.app',
+      'https://nirvaha-wellnessllp.vercel.app',
+      'https://nirvaha-git-railway-code-chang-0161fa-dtarun2202-6431s-projects.vercel.app',
+      'https://nirvaha-production.up.railway.app'
+    ];
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
@@ -1176,7 +1189,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/reflect', reflectionRoutes);
 app.use('/api/success-stories', successStoriesRoutes);
-app.use('/api/wellness-retreats', wellnessRetreatRoutes);
+app.use('/api/trusted-network', trustedNetworkRoutes);
 app.use('/api/wellness-sessions', wellnessSessionRoutes);
 app.use('/api/common-problems', commonProblemRoutes);
 app.use('/api/essential-guidance', essentialGuidanceRoutes);

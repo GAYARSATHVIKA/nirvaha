@@ -641,10 +641,18 @@ export function ProfilePage() {
     );
   };
 
-  const [isCompanionModeEnabled, setIsCompanionModeEnabled] = useState(false);
+  const [isCompanionModeEnabled, setIsCompanionModeEnabled] = useState(() => {
+    return localStorage.getItem('companionMode') !== 'false';
+  });
   const [companionBookings, setCompanionBookings] = useState<any[]>([]);
   const [companionBookingsLoading, setCompanionBookingsLoading] = useState(false);
   const [markingCompleted, setMarkingCompleted] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isUserApprovedCompanion && isCompanionModeEnabled) {
+      fetchCompanionBookings();
+    }
+  }, [isUserApprovedCompanion]);
 
   const fetchMySessions = useCallback(async () => {
     if (!user?.email) return;
@@ -803,6 +811,7 @@ export function ProfilePage() {
   const handleCompanionToggle = () => {
     const next = !isCompanionModeEnabled;
     setIsCompanionModeEnabled(next);
+    localStorage.setItem('companionMode', String(next));
     if (next && isUserApprovedCompanion) {
       fetchCompanionBookings();
     }

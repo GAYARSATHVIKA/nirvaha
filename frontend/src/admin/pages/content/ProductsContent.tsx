@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import BACKEND_CONFIG from "@/config/backend";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -53,41 +54,34 @@ export function ProductsContent() {
     inventoryEnabled: true,
   });
   const [imageName, setImageName] = useState("");
-  const [products, setProducts] = useState<Product[]>([
-    {
-      id: "P-001",
-      name: "Spiritual Journey Kit",
-      category: "Wellness Kits",
-      price: 2499,
-      stock: 15,
-      status: "active",
-      description: "Complete wellness kit with meditation accessories...",
-      image: "",
-      inventoryEnabled: true,
-    },
-    {
-      id: "P-002",
-      name: "Ayurvedic Herbal Tea Set",
-      category: "Beverages",
-      price: 599,
-      stock: 0,
-      status: "out-of-stock",
-      description: "Organic herbal tea blends for wellness...",
-      image: "",
-      inventoryEnabled: true,
-    },
-    {
-      id: "P-003",
-      name: "Yoga Mat Premium",
-      category: "Accessories",
-      price: 1299,
-      stock: 30,
-      status: "active",
-      description: "High-quality eco-friendly yoga mat...",
-      image: "",
-      inventoryEnabled: true,
-    },
-  ]);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items/all`);
+      if (!res.ok) throw new Error("Failed to fetch products");
+      const data = await res.json();
+      const productItems = data.filter((item: any) => item.type === "product");
+      const mapped = productItems.map((item: any) => ({
+        id: item.id,
+        name: item.data?.name || item.data?.title || "",
+        category: item.data?.category || "",
+        price: item.data?.price || 0,
+        stock: item.data?.stock || 0,
+        status: item.status || "active",
+        description: item.data?.description || "",
+        image: item.data?.image || "",
+        inventoryEnabled: item.data?.inventoryEnabled ?? true,
+      }));
+      setProducts(mapped);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const filteredProducts = useMemo(
     () =>
@@ -126,35 +120,54 @@ export function ProductsContent() {
     setIsDeleteModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!formData.name) return;
-    if (selectedProduct) {
-      setProducts((prev) =>
-        prev.map((p) =>
-          p.id === selectedProduct.id ? { ...p, ...formData, image: imageName } : p
-        )
-      );
-    } else {
-      const newProduct: Product = {
-        id: `P-${Math.floor(Math.random() * 9000 + 1000)}`,
-        name: formData.name || "",
-        category: formData.category || "",
-        price: formData.price || 0,
-        stock: formData.stock || 0,
-        status: (formData.status as Product["status"]) || "active",
-        description: formData.description || "",
-        image: imageName,
-        inventoryEnabled: formData.inventoryEnabled ?? true,
-      };
-      setProducts((prev) => [...prev, newProduct]);
+    const payload = {
+      type: "product",
+      status: formData.status || "active",
+      data: {
+        name: formData.name,
+        category: formData.category,
+        price: formData.price,
+        stock: formData.stock,
+        description: formData.description,
+        inventoryEnabled: formData.inventoryEnabled,
+        image: imageName
+      }
+    };
+
+    try {
+      if (selectedProduct) {
+        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items/${selectedProduct.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      }
+      await fetchProducts();
+      setIsModalOpen(false);
+      setSelectedProduct(null);
+    } catch (err) {
+      console.error(err);
     }
-    setIsModalOpen(false);
-    setSelectedProduct(null);
   };
 
-  const handleDeleteConfirm = () => {
+  const handleDeleteConfirm = async () => {
     if (selectedProduct) {
-      setProducts((prev) => prev.filter((p) => p.id !== selectedProduct.id));
+      try {
+        await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/marketplace/items/${selectedProduct.id}`, {
+          method: "DELETE"
+        });
+        await fetchProducts();
+      } catch (err) {
+        console.error(err);
+      }
       setIsDeleteModalOpen(false);
       setSelectedProduct(null);
     }
@@ -326,12 +339,12 @@ export function ProductsContent() {
                   <SelectTrigger className="mt-2 bg-white border-[#BEE4CD] text-[#295641] focus-visible:ring-[#5ABF88] rounded-xl font-medium">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-white border-[#BEE4CD]">
-                    <SelectItem value="Wellness Kits">Wellness Kits</SelectItem>
-                    <SelectItem value="Beverages">Beverages</SelectItem>
-                    <SelectItem value="Accessories">Accessories</SelectItem>
-                    <SelectItem value="Books">Books</SelectItem>
-                    <SelectItem value="Herbs & Supplements">Herbs & Supplements</SelectItem>
+                  <SelectContent className="bg-white border-[#BEE4CD] text-[#295641]">
+                    <SelectItem value="Wellness Kits" className="text-[#295641]">Wellness Kits</SelectItem>
+                    <SelectItem value="Beverages" className="text-[#295641]">Beverages</SelectItem>
+                    <SelectItem value="Accessories" className="text-[#295641]">Accessories</SelectItem>
+                    <SelectItem value="Books" className="text-[#295641]">Books</SelectItem>
+                    <SelectItem value="Herbs & Supplements" className="text-[#295641]">Herbs & Supplements</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -344,10 +357,10 @@ export function ProductsContent() {
                   <SelectTrigger className="mt-2 bg-white border-[#BEE4CD] text-[#295641] focus-visible:ring-[#5ABF88] rounded-xl font-medium">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-white border-[#BEE4CD]">
-                    <SelectItem value="active">Active</SelectItem>
-                    <SelectItem value="inactive">Inactive</SelectItem>
-                    <SelectItem value="out-of-stock">Out of Stock</SelectItem>
+                  <SelectContent className="bg-white border-[#BEE4CD] text-[#295641]">
+                    <SelectItem value="active" className="text-[#295641]">Active</SelectItem>
+                    <SelectItem value="inactive" className="text-[#295641]">Inactive</SelectItem>
+                    <SelectItem value="out-of-stock" className="text-[#295641]">Out of Stock</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

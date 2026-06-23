@@ -14,6 +14,12 @@ const soundCardSchema = new mongoose.Schema(
     tag: { type: String, default: '' },
     duration: { type: String, default: '' },
     category: { type: String, default: '' },
+    additionalTracks: [
+      {
+        audioUrl: { type: String, default: '' },
+        loop: { type: Boolean, default: false }
+      }
+    ],
     status: { type: String, enum: ['Active', 'Draft'], default: 'Draft' },
     displayOrder: { type: Number, default: 0 },
   },

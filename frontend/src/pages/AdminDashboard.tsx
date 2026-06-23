@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BarChart3, Settings, LogOut, Menu, X, Compass } from 'lucide-react';
 import { motion } from 'motion/react';
-import { SuccessStoriesManager } from '../components/admin/SuccessStoriesManager';
-import { WellnessRetreatsManager } from '../components/admin/WellnessRetreatsManager';
+import { TrustedNetworkManager } from '../components/admin/TrustedNetworkManager';
 import { CertificationsManager } from '../components/admin/CertificationsManager';
-import { Award } from 'lucide-react';
+import { Award, Layout } from 'lucide-react';
+import { LandingManagementPage } from '../admin/pages/LandingManagementPage';
 
 interface SidebarItem {
   id: string;
@@ -14,21 +14,21 @@ interface SidebarItem {
 }
 
 export function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState('success-stories');
+  const [activeTab, setActiveTab] = useState('landing-cms');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const sidebarItems: SidebarItem[] = [
     {
-      id: 'success-stories',
-      label: 'Success Stories Manager',
-      icon: <BarChart3 className="w-5 h-5" />,
-      component: <SuccessStoriesManager />
+      id: 'landing-cms',
+      label: 'Landing Page CMS',
+      icon: <Layout className="w-5 h-5" />,
+      component: <div className="p-8"><LandingManagementPage /></div>
     },
     {
-      id: 'wellness-retreats',
-      label: 'Wellness Retreats',
+      id: 'trusted-network',
+      label: 'Trusted Network',
       icon: <Compass className="w-5 h-5" />,
-      component: <WellnessRetreatsManager />
+      component: <TrustedNetworkManager />
     },
     {
       id: 'certifications',
@@ -145,3 +145,4 @@ export function AdminDashboard() {
     </div>
   );
 }
+

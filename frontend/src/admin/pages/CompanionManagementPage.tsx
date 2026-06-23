@@ -200,22 +200,39 @@ export function CompanionManagementPage() {
 
   const confirmActionHandler = async () => {
     if (!confirmAction) return;
-    try {
-      if (confirmAction.type === "delete") {
-        await deleteCompanionApplication(confirmAction.companion.id);
-        setCompanions((prev) => prev.filter((c) => c.id !== confirmAction.companion.id));
-      } else {
-        const status = confirmAction.type === "approve" ? "approved" : "rejected";
-        const updated = await updateCompanionStatus(confirmAction.companion.id, status);
-        setCompanions((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
-        if (selectedCompanion?.id === updated.id) {
-          setSelectedCompanion(updated);
-        }
+    
+    const { type, companion } = confirmAction;
+    const previousCompanions = [...companions]; // For rollback if needed
+    
+    // 1. Optimistic Update (Instant UI feedback)
+    if (type === "delete") {
+      setCompanions((prev) => prev.filter((c) => c.id !== companion.id));
+    } else {
+      const status = type === "approve" ? "approved" : "rejected";
+      setCompanions((prev) => prev.map((c) => (c.id === companion.id ? { ...c, status } : c)));
+      if (selectedCompanion?.id === companion.id) {
+        setSelectedCompanion({ ...selectedCompanion, status });
       }
-    } catch (error) {
+    }
+    
+    // 2. Close the modal instantly
+    setConfirmAction(null);
+
+    // 3. Make the actual API call in the background
+    try {
+      if (type === "delete") {
+        await deleteCompanionApplication(companion.id);
+      } else {
+        const status = type === "approve" ? "approved" : "rejected";
+        const updated = await updateCompanionStatus(companion.id, status);
+        // Optionally update with server data if it returns anything new
+        setCompanions((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
+      }
+    } catch (error: any) {
       console.error('Failed to update companion application:', error);
-    } finally {
-      setConfirmAction(null);
+      alert(`Action failed: ${error.message || 'Unknown error'}. Please refresh the page.`);
+      // Revert if it fails
+      setCompanions(previousCompanions);
     }
   };
 

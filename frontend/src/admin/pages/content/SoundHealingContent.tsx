@@ -84,7 +84,7 @@ function StatusBadge({ status }: { status: string }) {
   const active = status === "Active";
   return (
     <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold
-      ${active ? "bg-[#d8f3dc] text-[#1b4332] border border-[#95d5b2]" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>
+      ${active ? "bg-[#d8f3dc] text-black border border-[#95d5b2]" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>
       <span className={`w-1.5 h-1.5 rounded-full ${active ? "bg-[#52b788]" : "bg-gray-400"}`} />
       {status}
     </span>
@@ -336,7 +336,7 @@ export function SoundHealingContent() {
                   <td className="px-5 py-3.5">
                     <div className="flex items-center gap-3">
                       {s.thumbnailUrl ? (
-                        <img src={s.thumbnailUrl} alt="" className="w-9 h-9 rounded-lg object-cover border border-[#b7e4c7]" />
+                        <img src={s.thumbnailUrl.startsWith('http') ? s.thumbnailUrl : s.thumbnailUrl.startsWith('/uploads') ? `${BACKEND_CONFIG.API_BASE_URL}${s.thumbnailUrl}` : s.thumbnailUrl} alt="" className="w-9 h-9 rounded-lg object-cover border border-[#b7e4c7]" />
                       ) : (
                         <Music className="w-5 h-5 text-[#52b788]" />
                       )}

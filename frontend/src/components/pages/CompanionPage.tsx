@@ -42,6 +42,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import CompanionBookingModal from "../companion/CompanionBookingModal";
 import CompanionApplicationModal from "../companion/CompanionApplicationModal";
+import { CompanionScheduleModal } from "../companion/CompanionScheduleModal";
 import CompanionTransition from "../companion/CompanionTransition";
 import {
   createCompanionApplication,
@@ -414,6 +415,11 @@ export function CompanionPage() {
 
     fetchCompanions();
 
+    if (socket) {
+      socket.on("request-status-updated", fetchCompanions);
+      socket.on("new-companion-request", fetchCompanions);
+    }
+
     // Fetch Companion page CMS config
     const fetchCompanionConfig = async () => {
       try {
@@ -431,7 +437,14 @@ export function CompanionPage() {
     };
 
     fetchCompanionConfig();
-  }, []);
+
+    return () => {
+      if (socket) {
+        socket.off("request-status-updated", fetchCompanions);
+        socket.off("new-companion-request", fetchCompanions);
+      }
+    };
+  }, [socket]);
 
   const fetchDashboardSessions = async () => {
     try {
@@ -551,6 +564,7 @@ export function CompanionPage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [hasApplied, setHasApplied] = useState(false);
   const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
+  const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [companionMode, setCompanionMode] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
   const [booking, setBooking] = useState<{
@@ -655,7 +669,7 @@ export function CompanionPage() {
     setBooking({ open: true, companion, type, platform: "", date: "", time: "" });
   };
 
-  const submitBooking = () => {
+  const submitBooking = async () => {
     if (!booking.open || !booking.companion || !booking.type || !booking.platform || !booking.date || !booking.time) return;
     const record = {
       id: crypto.randomUUID?.() || `${Date.now()}`,
@@ -668,6 +682,26 @@ export function CompanionPage() {
       createdAt: Date.now(),
     };
     try {
+      await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: record.id,
+          companionId: record.companionId,
+          companionName: record.companionName,
+          itemName: `Session with ${record.companionName}`,
+          userId: user?.id,
+          userName: user?.name,
+          email: user?.email,
+          type: "session",
+          sessionType: record.type,
+          date: record.date,
+          time: record.time,
+          platform: record.platform,
+          status: "pending",
+        }),
+      });
+
       const raw = localStorage.getItem("nirvaha_bookings");
       const arr = raw ? JSON.parse(raw) : [];
       arr.unshift(record);
@@ -679,7 +713,26 @@ export function CompanionPage() {
 
   const handleBookingSubmit = async (formData: any) => {
     try {
-      // Mock submission for now
+      const recordId = crypto.randomUUID?.() || `${Date.now()}`;
+      await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/bookings`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: recordId,
+          companionId: formData.companionId,
+          companionName: selectedCompanion?.name || "Companion",
+          itemName: `Session with ${selectedCompanion?.name || "Companion"}`,
+          userId: user?.id,
+          userName: formData.fullName || user?.name,
+          email: formData.email || user?.email,
+          type: "session",
+          sessionType: "session",
+          date: formData.date,
+          time: formData.time,
+          status: "pending",
+        }),
+      });
+
       alert('Booking request received! We will contact you soon.');
       setIsBookingOpen(false);
     } catch (error) {
@@ -1006,9 +1059,9 @@ export function CompanionPage() {
                       Manage Profile
                     </motion.button>
                     <motion.button
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => setActiveTab("sessions")}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setIsScheduleModalOpen(true)}
                       className="px-6 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold rounded-2xl text-sm shadow-lg shadow-emerald-500/20 transition-all flex items-center gap-2"
                     >
                       <Calendar className="w-4 h-4" />
@@ -1030,21 +1083,24 @@ export function CompanionPage() {
                   },
                   {
                     title: "Upcoming Sessions",
-                    value: companionSessions.filter(s => s.status === "Session Confirmed" || s.status === "approved").length,
+                    value: companionSessions.filter(s => {
+                      const status = s.status?.toLowerCase();
+                      return status === "session confirmed" || status === "approved";
+                    }).length,
                     icon: Calendar,
                     color: "from-emerald-500/10 to-teal-500/10 text-emerald-600 border-emerald-500/20",
                     pulse: false,
                   },
                   {
                     title: "Completed",
-                    value: companionSessions.filter(s => s.status === "completed").length,
+                    value: companionSessions.filter(s => s.status?.toLowerCase() === "completed").length,
                     icon: CheckCircle,
                     color: "from-blue-500/10 to-cyan-500/10 text-blue-600 border-blue-500/20",
                     pulse: false,
                   },
                   {
                     title: "Estimated Earnings",
-                    value: `₹${(companionSessions.filter(s => s.status === "completed").length * (parseInt(String(companionProfile?.hourlyRate || "").replace(/[^\d]/g, "")) || 1000))}`,
+                    value: `₹${(companionSessions.filter(s => s.status?.toLowerCase() === "completed").length * (parseInt(String(companionProfile?.hourlyRate || "").replace(/[^\d]/g, "")) || 1000))}`,
                     icon: DollarSign,
                     color: "from-teal-500/10 to-emerald-500/10 text-teal-600 border-teal-500/20",
                     pulse: false,
@@ -1189,17 +1245,26 @@ export function CompanionPage() {
                     <div>
                       <div className="flex items-center gap-2 mb-6">
                         <CheckCircle className="w-5 h-5 text-emerald-500" />
-                        <h2 className="text-2xl font-black tracking-tight text-[#1B4332]">Upcoming Confirmed Sessions ({companionSessions.filter(s => s.status === "Session Confirmed" || s.status === "approved").length})</h2>
+                        <h2 className="text-2xl font-black tracking-tight text-[#1B4332]">Upcoming Confirmed Sessions ({companionSessions.filter(s => {
+                          const status = s.status?.toLowerCase();
+                          return status === "session confirmed" || status === "approved";
+                        }).length})</h2>
                       </div>
 
-                      {companionSessions.filter(s => s.status === "Session Confirmed" || s.status === "approved").length === 0 ? (
+                      {companionSessions.filter(s => {
+                        const status = s.status?.toLowerCase();
+                        return status === "session confirmed" || status === "approved";
+                      }).length === 0 ? (
                         <div className="text-center py-12 bg-white/40 rounded-3xl border border-dashed border-emerald-100 flex flex-col items-center">
                           <Calendar className="w-8 h-8 text-emerald-300 mb-2" />
                           <p className="text-emerald-800/60 font-bold">No upcoming sessions scheduled yet.</p>
                         </div>
                       ) : (
                         <div className="grid md:grid-cols-2 gap-6">
-                          {companionSessions.filter(s => s.status === "Session Confirmed" || s.status === "approved").map((session) => (
+                          {companionSessions.filter(s => {
+                            const status = s.status?.toLowerCase();
+                            return status === "session confirmed" || status === "approved";
+                          }).map((session) => (
                             <motion.div
                               key={session._id || session.id}
                               layout
@@ -1527,7 +1592,7 @@ export function CompanionPage() {
                 >
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-rose-100 rounded-2xl flex items-center justify-center text-rose-600 border border-rose-200">
+                      <div className="w-12 h-12 bg-rose-100 rounded-2xl flex items-center justify-center text-rose-600 border-rose-200">
                         <XCircle className="w-6 h-6" />
                       </div>
                       <div>
@@ -2495,6 +2560,13 @@ export function CompanionPage() {
         <CompanionApplicationModal 
           isOpen={isApplicationModalOpen} 
           onClose={() => setIsApplicationModalOpen(false)} 
+        />
+
+        {/* Companion Schedule Modal */}
+        <CompanionScheduleModal
+          isOpen={isScheduleModalOpen}
+          onClose={() => setIsScheduleModalOpen(false)}
+          sessions={companionSessions}
         />
 
         {/* Companion Video Simulation Modal */}
