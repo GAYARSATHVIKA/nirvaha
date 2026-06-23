@@ -3948,6 +3948,202 @@ img.emoji {
 
   -webkit-background-clip: text;
 
+}
+
+
+
+.animate-energy-pulse {
+
+  animation: energy-pulse 3s ease-in-out infinite;
+
+}
+
+
+
+.animate-lotus-float {
+
+  animation: lotus-float 4s ease-in-out infinite;
+
+}
+
+
+
+.animate-divine-glow {
+
+  animation: divine-glow 2s ease-in-out infinite;
+
+}
+
+
+
+/* Glassmorphism for Dashboard Cards */
+
+.glass-card {
+
+  background: rgba(255, 255, 255, 0.7);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  box-shadow: 0 8px 32px 0 rgba(77, 48, 98, 0.1);
+
+}
+
+
+
+.glass-card-hover {
+
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+}
+
+
+
+.glass-card-hover:hover {
+
+  background: rgba(255, 255, 255, 0.85);
+
+  backdrop-filter: blur(30px);
+
+  -webkit-backdrop-filter: blur(30px);
+
+  transform: translateY(-8px) scale(1.02);
+
+  box-shadow: 0 20px 60px 0 rgba(77, 48, 98, 0.2);
+
+}
+
+
+
+/* Sacred Gradient Text - White Theme */
+
+.text-sacred-gradient {
+
+  background: linear-gradient(135deg, #1a1a1a 0%, #555555 50%, #333333 100%);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+
+  background-size: 200% 200%;
+
+  animation: aurora-wave 6s ease infinite;
+
+}
+
+
+
+/* Spiritual Border Animation - White Theme */
+
+.border-sacred {
+
+  position: relative;
+
+  border: 2px solid transparent;
+
+  background: linear-gradient(white, white) padding-box,
+
+    linear-gradient(135deg, #aaaaaa, #555555, #888888) border-box;
+
+}
+
+
+
+.border-sacred-animated {
+
+  position: relative;
+
+  border: 2px solid transparent;
+
+  background: linear-gradient(white, white) padding-box,
+
+    linear-gradient(135deg, #aaaaaa, #555555, #888888, #aaaaaa) border-box;
+
+  background-size: 200% 200%;
+
+  animation: aurora-wave 4s ease infinite;
+
+}
+
+
+
+.heading-sharp-grotesk {
+
+  font-family: 'Sharp Grotesk Cyr Medium 20', 'Verdana-fallback-3', 'sans-serif';
+
+  font-size: 2.25rem;
+
+  font-weight: 400;
+
+  letter-spacing: .0069444444em;
+
+  line-height: 2.75rem;
+
+}
+
+
+
+/* Animated Gradient Text - for Meditation & Guidance labels */
+
+.animated-gradient-text {
+
+  position: relative;
+
+  display: inline-flex;
+
+  max-width: fit-content;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 500;
+
+  overflow: visible;
+
+  cursor: pointer;
+
+  background: none !important;
+
+}
+
+
+
+.animated-gradient-text.with-border {
+
+  padding: 0;
+
+}
+
+
+
+.gradient-overlay {
+
+  display: none;
+
+}
+
+
+
+.text-content {
+
+  display: inline-block;
+
+  position: relative;
+
+  z-index: 2;
+
+  background-clip: text;
+
+  -webkit-background-clip: text;
+
   color: transparent;
 
 }
@@ -3955,5 +4151,3 @@ img.emoji {
 * {
   font-family: 'Poppins', sans-serif !important;
 }
-@import './dark-mode.css';
-

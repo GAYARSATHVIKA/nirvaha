@@ -526,26 +526,7 @@ export function AdminDashboardPage() {
             </div>
           </Card>
           
-          {/* Landing Page Updates Section */}
-          <Card className="bg-gradient-to-r from-[#EAFBF0] to-[#D5F2D9] border-[#BDE8CE] shadow-sm rounded-2xl flex items-center h-full">
-            <div className="p-6 w-full">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-bold text-[#1F4131] mb-2 uppercase">Landing Page Updates</h2>
-                  <p className="text-[#329D66] text-sm font-medium">
-                    Easily update images and information for "What is Nirvaha" and "Explore Our Learning" sections
-                  </p>
-                </div>
-                <Button
-                  onClick={() => navigate("/admin/content-update")}
-                  className="bg-[#4EAA77] hover:bg-[#3C9162] text-white rounded-xl px-6 py-2.5 h-auto font-bold shadow-md shrink-0 ml-4"
-                >
-                  Manage Content
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </Card>
+
         </div>
       </div>
     </div>

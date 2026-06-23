@@ -15,6 +15,7 @@ export interface LibraryItem {
     quotes: string[];
     impact: string[];
     referenceLinks: ReferenceLink[];
+    galleryImages?: string[];
 }
 
 export const defaultLibraryItems: LibraryItem[] = [

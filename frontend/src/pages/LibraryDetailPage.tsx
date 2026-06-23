@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Quote, BookOpen, CheckCircle, Sparkles, Flame, Star, Sun } from 'lucide-react';
+import { ArrowLeft, Quote, BookOpen, CheckCircle, Sparkles, Flame, Star, Sun, Loader2 } from 'lucide-react';
 import { defaultLibraryItems, LibraryItem } from '../data/libraryData';
+import BACKEND_CONFIG from '../config/backend';
 
 const curatedImageSets: Record<string, string[]> = {
     'agni-the-sacred-fire': ['/agni1.png', '/agni2.png', '/agni3.png', '/agni4.png'],
@@ -29,10 +30,46 @@ const LibraryDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
-    const item: LibraryItem | undefined = defaultLibraryItems.find(i => i.id === id);
-    const curatedImages = item ? curatedImageSets[item.id] : undefined;
+    const [item, setItem] = useState<LibraryItem | null>(null);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => { window.scrollTo(0, 0); }, [id]);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        const fetchItem = async () => {
+            try {
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const libraryItems: LibraryItem[] = data.library || [];
+                    const found = libraryItems.find((i: any) => i.id === id);
+                    if (found) {
+                        setItem(found);
+                    } else {
+                        setItem(defaultLibraryItems.find(i => i.id === id) || null);
+                    }
+                } else {
+                    setItem(defaultLibraryItems.find(i => i.id === id) || null);
+                }
+            } catch (e) {
+                setItem(defaultLibraryItems.find(i => i.id === id) || null);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchItem();
+    }, [id]);
+
+    const curatedImages = item?.galleryImages?.filter((img: string) => img.trim() !== '').length 
+        ? item.galleryImages.filter((img: string) => img.trim() !== '') 
+        : (item ? curatedImageSets[item.id] : undefined);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-[#0d1410]">
+                <Loader2 className="w-8 h-8 text-[#d4af37] animate-spin" />
+            </div>
+        );
+    }
 
     if (!item) return (
         <div className="min-h-screen flex items-center justify-center bg-[#0d1410]">

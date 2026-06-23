@@ -21,6 +21,7 @@ import {
   Play,
   HelpCircle,
   Award,
+  BookOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -103,15 +104,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           icon: Calendar,
           path: "/admin/marketplace",
         },
-
         {
-          title: "Landing Page Updates",
-          icon: Palette,
-          path: "/admin/content-update",
-        },
-        {
-          title: "Landing Management (New)",
-          icon: Palette,
+          title: "Vast Library",
+          icon: BookOpen,
           path: "/admin/landing",
         },
         {

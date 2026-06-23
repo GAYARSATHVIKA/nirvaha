@@ -225,7 +225,7 @@ const CommunityHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1.5 }}
-            className="mt-8 text-lg md:text-xl lg:text-2xl text-emerald-50 opacity-90 max-w-4xl leading-snug font-medium italic text-center w-full"
+            className="mt-8 text-lg md:text-xl lg:text-2xl text-teal-900 max-w-4xl leading-snug font-medium italic text-center w-full drop-shadow-sm"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             {subLine2 ? (

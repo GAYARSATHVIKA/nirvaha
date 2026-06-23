@@ -13,7 +13,9 @@ import {
   Image as ImageIcon,
   Type,
   ToggleLeft,
-  BookOpen
+  BookOpen,
+  Upload,
+  X
 } from 'lucide-react';
 import BACKEND_CONFIG from '../../config/backend';
 import { useAuth } from '../../contexts/AuthContext';
@@ -26,18 +28,18 @@ interface Section {
 }
 
 const SECTIONS: Section[] = [
-  { id: 'hero', label: 'Hero Section', icon: <ImageIcon size={18} /> },
-  { id: 'pillars', label: 'Core Pillars', icon: <ToggleLeft size={18} /> },
-  { id: 'academy', label: 'Academy', icon: <BookOpen size={18} /> },
+  // { id: 'hero', label: 'Hero Section', icon: <ImageIcon size={18} /> },
+  // { id: 'pillars', label: 'Core Pillars', icon: <ToggleLeft size={18} /> },
+  // { id: 'academy', label: 'Academy', icon: <BookOpen size={18} /> },
   { id: 'library', label: 'Vast Library', icon: <BookOpen size={18} /> },
-  { id: 'stats', label: 'Trusted Stats', icon: <Plus size={18} /> },
-  { id: 'wisdom', label: 'Ancient Wisdom', icon: <Type size={18} /> },
-  { id: 'settings', label: 'Access Controls', icon: <Shield size={18} /> }
+  // { id: 'stats', label: 'Trusted Stats', icon: <Plus size={18} /> },
+  // { id: 'wisdom', label: 'Ancient Wisdom', icon: <Type size={18} /> },
+  // { id: 'settings', label: 'Access Controls', icon: <Shield size={18} /> }
 ];
 
 export function LandingManagementPage() {
   const { user } = useAuth();
-  const [activeTab, setActiveTab] = useState('hero');
+  const [activeTab, setActiveTab] = useState('library');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [data, setData] = useState<any>(null);
@@ -48,12 +50,30 @@ export function LandingManagementPage() {
     fetchLandingData();
   }, []);
 
+  const defaultLibraryItems = [
+      { id: "agni-the-sacred-fire", title: "Agni - The Sacred Fire", category: "Transformation", image: "/agni.jpg", duration: "15 min", story: "Agni is the element of transformation.\nIt burns away the impurities of the ego." },
+      { id: "sadvritta-ethical-living", title: "Sadvritta - Ethical Living", category: "Ethics", image: "/sadvrita.jpg", duration: "Practice", story: "Right conduct is the foundation of a spiritual life." },
+      { id: "satmya-holistic-adaptability", title: "Satmya - Holistic Adaptability", category: "Adaptability", image: "/satmya.jpg", duration: "10 min", story: "Satmya is the art of adapting to one's environment." },
+      { id: "bramhacharya-energy-mastery", title: "Bramhacharya - Energy Mastery", category: "Discipline", image: "/bramhacharya.jpg", duration: "Series", story: "Bramhacharya is the preservation of vital energy." },
+      { id: "dhinacharya-daily-routine", title: "Dhinacharya - Daily Routine", category: "Lifestyle", image: "/dhinacharya.jpg", duration: "Practice", story: "Dhinacharya aligns our daily rhythm with nature." },
+      { id: "manas-shuddhi-mental-clarity", title: "Manas Shuddhi - Mental Clarity", category: "Mind", image: "/manas shuddhi.jpg", duration: "20 min", story: "Purifying the mind is like cleaning a temple." },
+      { id: "saradhi-the-divine-guide", title: "Saradhi - The Divine Guide", category: "Guidance", image: "/saradhi.jpg", duration: "Journey", story: "The guide is the lighthouse in the storm of existence." },
+      { id: "vyayama-sacred-movement", title: "Vyayama - Sacred Movement", category: "Discipline", image: "/vyayama.jpg", duration: "Movement", story: "The body is the temple of the living soul." },
+      { id: "indriya-nigraha-sensory-control", title: "Indriya Nigraha - Sensory Control", category: "Senses", image: "/indriya.jpg", duration: "10 min", story: "Master the senses to master the mind." },
+      { id: "civilizational-wisdom", title: "Civilizational Wisdom", category: "Heritage", image: "/civilizational.jpg", duration: "Lecture", story: "Our ancient civilization holds profound truths." },
+      { id: "ritucharya-seasonal-harmony", title: "Ritucharya - Seasonal Harmony", category: "Nature", image: "/ritucharya.jpg", duration: "Series", story: "Ritucharya is the wisdom of seasonal living." }
+  ];
+
   const fetchLandingData = async () => {
     try {
       setLoading(true);
       const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
       if (res.ok) {
         const result = await res.json();
+        // If library is empty or missing, populate with defaults
+        if (!result.library || result.library.length === 0) {
+          result.library = defaultLibraryItems;
+        }
         setData(result);
       }
     } catch (error) {
@@ -115,7 +135,7 @@ export function LandingManagementPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-emerald-100 pb-8">
         <div>
           <h1 className="text-3xl font-bold text-[#1b4332] flex items-center gap-3">
-            <Layout className="text-emerald-500" /> Landing Page CMS
+            <BookOpen className="text-emerald-500" /> Vast Library CMS
           </h1>
           <p className="text-gray-500 mt-1">Manage all public-facing content and access controls dynamically.</p>
         </div>
@@ -248,7 +268,12 @@ export function LandingManagementPage() {
                                 category: 'Wellness',
                                 duration: '10 min',
                                 image: '',
-                                story: ''
+                                story: '',
+                                description: '',
+                                whyTheyMatter: '',
+                                impact: [''],
+                                quotes: [''],
+                                galleryImages: ['', '', '']
                             };
                             updateNestedField('library', [...(data.library || []), newItem]);
                         }}
@@ -856,21 +881,181 @@ export function LandingManagementPage() {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-bold text-gray-500 uppercase">Image URL</label>
-                                <input 
-                                    type="text" 
-                                    value={editingLibraryItem.data.image || editingLibraryItem.data.imageUrl}
-                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, image: e.target.value, imageUrl: e.target.value } })}
-                                    className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                                <label className="text-xs font-bold text-gray-500 uppercase">Image</label>
+                                <div className="flex flex-col gap-2">
+                                    <input 
+                                        type="text" 
+                                        placeholder="Image URL"
+                                        value={editingLibraryItem.data.image || editingLibraryItem.data.imageUrl || ''}
+                                        onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, image: e.target.value } })}
+                                        className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                                    />
+                                    <label className="cursor-pointer flex items-center justify-center gap-2 w-full py-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-xl font-bold transition-colors text-sm">
+                                        <Upload size={16} /> Upload from Computer
+                                        <input 
+                                            type="file" 
+                                            accept="image/*" 
+                                            className="hidden" 
+                                            onChange={async (e) => {
+                                                if (e.target.files && e.target.files[0]) {
+                                                    const file = e.target.files[0];
+                                                    try {
+                                                        const formData = new FormData();
+                                                        formData.append('image', file);
+                                                        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/upload`, {
+                                                            method: 'POST',
+                                                            body: formData,
+                                                        });
+                                                        if (res.ok) {
+                                                            const result = await res.json();
+                                                            setEditingLibraryItem({ 
+                                                                ...editingLibraryItem, 
+                                                                data: { ...editingLibraryItem.data, image: result.url } 
+                                                            });
+                                                        } else {
+                                                            console.error('Upload failed');
+                                                        }
+                                                    } catch (err) {
+                                                        console.error('Upload error', err);
+                                                    }
+                                                }
+                                            }}
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="space-y-2 col-span-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase">Short Story</label>
+                                <textarea 
+                                    value={editingLibraryItem.data.story || ''}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, story: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[80px]"
                                 />
                             </div>
                             <div className="space-y-2 col-span-2">
-                                <label className="text-xs font-bold text-gray-500 uppercase">Story / Description</label>
+                                <label className="text-xs font-bold text-gray-500 uppercase">The Essence (Detailed Description)</label>
                                 <textarea 
-                                    value={editingLibraryItem.data.story}
-                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, story: e.target.value } })}
-                                    className="w-full bg-white shadow-sm border border-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[100px]"
+                                    value={editingLibraryItem.data.description || ''}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, description: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[120px]"
                                 />
+                            </div>
+                            <div className="space-y-2 col-span-2">
+                                <label className="text-xs font-bold text-gray-500 uppercase">Modern Application (Why It Matters)</label>
+                                <textarea 
+                                    value={editingLibraryItem.data.whyTheyMatter || ''}
+                                    onChange={(e) => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, whyTheyMatter: e.target.value } })}
+                                    className="w-full bg-white shadow-sm border border-emerald-100 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[100px]"
+                                />
+                            </div>
+
+                            <div className="col-span-2 border-t border-emerald-100 pt-6 mt-2">
+                                <h4 className="font-bold text-[#1b4332] mb-4">Gallery Images (Up to 3)</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    {[0, 1, 2].map((imgIdx) => (
+                                        <div key={imgIdx} className="space-y-2">
+                                            <input 
+                                                type="text" 
+                                                placeholder={`Image URL ${imgIdx + 1}`}
+                                                value={(editingLibraryItem.data.galleryImages && editingLibraryItem.data.galleryImages[imgIdx]) || ''}
+                                                onChange={(e) => {
+                                                    const newGallery = [...(editingLibraryItem.data.galleryImages || ['', '', ''])];
+                                                    newGallery[imgIdx] = e.target.value;
+                                                    setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, galleryImages: newGallery } });
+                                                }}
+                                                className="w-full bg-white shadow-sm border border-emerald-100 rounded-xl px-4 py-2 text-gray-900 outline-none text-sm"
+                                            />
+                                            <label className="cursor-pointer flex items-center justify-center gap-2 w-full py-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-xl font-bold transition-colors text-xs">
+                                                <Upload size={14} /> Upload
+                                                <input 
+                                                    type="file" 
+                                                    accept="image/*" 
+                                                    className="hidden" 
+                                                    onChange={async (e) => {
+                                                        if (e.target.files && e.target.files[0]) {
+                                                            try {
+                                                                const formData = new FormData();
+                                                                formData.append('image', e.target.files[0]);
+                                                                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/upload`, { method: 'POST', body: formData });
+                                                                if (res.ok) {
+                                                                    const result = await res.json();
+                                                                    const newGallery = [...(editingLibraryItem.data.galleryImages || ['', '', ''])];
+                                                                    newGallery[imgIdx] = result.url;
+                                                                    setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, galleryImages: newGallery } });
+                                                                }
+                                                            } catch (err) {}
+                                                        }
+                                                    }}
+                                                />
+                                            </label>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="col-span-2 border-t border-emerald-100 pt-6 mt-2">
+                                <div className="flex justify-between items-center mb-4">
+                                    <h4 className="font-bold text-[#1b4332]">Impact in Focus</h4>
+                                    <button 
+                                        onClick={() => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, impact: [...(editingLibraryItem.data.impact || []), ''] } })}
+                                        className="text-xs flex items-center gap-1 text-emerald-600 hover:text-emerald-700"
+                                    ><Plus size={14}/> Add Item</button>
+                                </div>
+                                <div className="space-y-2">
+                                    {(editingLibraryItem.data.impact || []).map((imp: string, i: number) => (
+                                        <div key={i} className="flex gap-2">
+                                            <input 
+                                                type="text" 
+                                                value={imp}
+                                                onChange={(e) => {
+                                                    const newImpact = [...editingLibraryItem.data.impact];
+                                                    newImpact[i] = e.target.value;
+                                                    setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, impact: newImpact } });
+                                                }}
+                                                className="flex-1 bg-white shadow-sm border border-emerald-100 rounded-xl px-4 py-2 text-gray-900 outline-none text-sm"
+                                            />
+                                            <button 
+                                                onClick={() => {
+                                                    const newImpact = editingLibraryItem.data.impact.filter((_: any, idx: number) => idx !== i);
+                                                    setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, impact: newImpact } });
+                                                }}
+                                                className="p-2 text-red-400 hover:bg-red-50 rounded-xl"
+                                            ><Trash2 size={16} /></button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="col-span-2 border-t border-emerald-100 pt-6 mt-2">
+                                <div className="flex justify-between items-center mb-4">
+                                    <h4 className="font-bold text-[#1b4332]">Words of Wisdom (Quotes)</h4>
+                                    <button 
+                                        onClick={() => setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, quotes: [...(editingLibraryItem.data.quotes || []), ''] } })}
+                                        className="text-xs flex items-center gap-1 text-emerald-600 hover:text-emerald-700"
+                                    ><Plus size={14}/> Add Quote</button>
+                                </div>
+                                <div className="space-y-2">
+                                    {(editingLibraryItem.data.quotes || []).map((q: string, i: number) => (
+                                        <div key={i} className="flex gap-2">
+                                            <textarea 
+                                                value={q}
+                                                onChange={(e) => {
+                                                    const newQ = [...editingLibraryItem.data.quotes];
+                                                    newQ[i] = e.target.value;
+                                                    setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, quotes: newQ } });
+                                                }}
+                                                className="flex-1 bg-white shadow-sm border border-emerald-100 rounded-xl px-4 py-2 text-gray-900 outline-none text-sm min-h-[60px]"
+                                            />
+                                            <button 
+                                                onClick={() => {
+                                                    const newQ = editingLibraryItem.data.quotes.filter((_: any, idx: number) => idx !== i);
+                                                    setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, quotes: newQ } });
+                                                }}
+                                                className="p-2 text-red-400 hover:bg-red-50 rounded-xl h-fit"
+                                            ><Trash2 size={16} /></button>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
