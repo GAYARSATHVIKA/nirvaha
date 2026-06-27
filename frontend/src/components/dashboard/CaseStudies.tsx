@@ -168,6 +168,23 @@ function NirvahGlobe() {
             globeRef.current.pointOfView({ lat: 20, lng: 78, altitude: 2 });
         }
     }, [globeSize]); // Re-run if size changes to ensure controls remain applied
+    
+    // Proper cleanup to prevent WebGL context limits (Error creating WebGL context)
+    useEffect(() => {
+        return () => {
+            if (globeRef.current) {
+                const renderer = globeRef.current.renderer();
+                if (renderer) {
+                    renderer.dispose();
+                    const gl = renderer.getContext();
+                    if (gl) {
+                        const ext = gl.getExtension('WEBGL_lose_context');
+                        if (ext) ext.loseContext();
+                    }
+                }
+            }
+        };
+    }, []);
 
     return (
         <div style={{ position: 'relative', width: 480, height: 480 }}>
