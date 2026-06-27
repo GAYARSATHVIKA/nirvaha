@@ -927,388 +927,548 @@ const DCST_CONTENT: Record<string, LessonContent> = {
 // ════════════════════════════════════════
 const DMML_CONTENT: Record<string, LessonContent> = {
   'dmml-1-1': {
-    objectives: ['Understand the mechanisms that make digital distraction so pervasive', 'Recognize how technology is designed to capture and hold attention'],
+    objectives: ["Understand how digital platforms affect attention, focus, and daily behavior.", "Why Digital Distraction Happens"],
     body: [
-      'Digital distraction is not an accident. It is the product of sophisticated engineering designed by teams of behavioral psychologists and product designers to maximize the time you spend on digital platforms. Understanding this design intent is the first step to reclaiming control of your attention.',
-      'Social media platforms, messaging apps, and video services are built around a concept called *variable reward schedules* — the same mechanism that makes slot machines so addictive. Every time you pull to refresh or scroll your feed, you receive an unpredictable reward: sometimes something interesting, sometimes nothing. This unpredictability makes the behavior compulsive. Your brain keeps seeking the next reward.',
-      'Notification systems are another deliberately engineered attention capture mechanism. Each notification creates a micro-interruption — a ping, a badge, a banner — that hijacks your attention and redirects it to the platform. Research shows that after a digital interruption, the average person takes 23 minutes and 15 seconds to return to their original task. For someone with 50 notifications per day, this represents hours of fragmented, low-quality work.',
-      'The *attention economy* is the framework that makes sense of this. In an economy where the commodity being sold is human attention, your time and focus are the product. Advertisers pay for access to your attention. Platforms earn revenue by holding your attention as long and as often as possible. Your focus has been converted into a commercial resource — without your explicit consent.',
-      'Awareness of these mechanisms is not meant to induce cynicism — it is meant to restore agency. When you understand why your phone feels impossible to put down, you can make conscious choices about how you engage with technology instead of being unconsciously managed by it.',
+      "Modern apps and platforms are designed to continuously capture attention.",
+      "Notifications, short videos, endless scrolling, and instant updates make it easy to lose focus without realizing it.",
+      "For example:",
+      "A student opens their phone to reply to one message.",
+      "A few minutes later:",
+      "* they start watching short videos",
+      "* switch between apps",
+      "* forget the original task",
+      "What was supposed to take 2 minutes becomes 30 minutes of distraction.",
+      "This happens because digital platforms are built to encourage continuous engagement.",
+      "Common digital distractions include:",
+      "\u2022 notifications",
+      "\u2022 social media scrolling",
+      "\u2022 constant app switching",
+      "\u2022 multitasking between screens",
+      "Over time, frequent distractions reduce the ability to focus deeply on one task.",
+      "A useful principle:",
+      "Attention moves where stimulation is strongest.",
+      "Learning to manage attention is an important modern skill.",
     ],
-    keyTakeaways: [
-      'Digital distraction is the product of deliberate behavioral engineering, not personal weakness',
-      'Variable reward schedules make digital scrolling compulsively hard to stop',
-      'The average recovery time after a digital interruption is over 23 minutes',
-      'Understanding the attention economy restores agency over your own focus',
-    ],
-    practicalExercise: 'For one full day, track every time you reach for your phone without a specific intention. Keep a tally. At the end of the day, calculate approximately how many minutes each mindless check cost you (including the time to refocus afterward). What does the total represent in your day? This single exercise creates powerful awareness that motivates change.',
-    summary: 'Digital distraction is a systemic design challenge, not a personal failing. When you understand the mechanisms behind it, you reclaim the ability to make conscious choices about your attention — the most valuable resource you possess.',
+    summary: "End of Why Digital Distraction Happens."
   },
   'dmml-1-2': {
-    objectives: ['Understand why multitasking is neurologically impossible', 'Recognize the performance cost of task-switching', 'Develop a single-tasking mindset'],
+    objectives: ["Understand how digital platforms affect attention, focus, and daily behavior.", "The Myth of Multitasking"],
     body: [
-      'Multitasking is one of the most persistent and costly myths in modern productivity culture. We believe we are doing multiple things simultaneously. What we are actually doing is switching rapidly between tasks — and paying a performance penalty every time we switch.',
-      'Neuroscientists are clear: the human brain cannot perform two cognitively demanding tasks simultaneously. What appears to be multitasking is sequential task-switching — the brain rapidly toggling between contexts. Each switch has a cost. Researchers call this the *switch cost* or *attention residue*. When you move from Task A to Task B, part of your attention remains on Task A, impairing your performance on Task B.',
-      'The performance impact is significant. A University of Michigan study found that multitasking reduces productivity by up to 40%. A study by the Institute of Psychiatry found that the IQ deficit produced by multitasking is greater than that produced by smoking marijuana. These are not small effects — they represent fundamental cognitive impairment.',
-      'The digital environment is designed to encourage multitasking. Multiple browser tabs, simultaneous messaging and document editing, podcasts while writing — each of these is a form of task-switching that degrades the quality of every task involved. The work feels done. The thinking behind the work is shallow.',
-      'The alternative is *single-tasking*: deliberately giving your full, undivided attention to one task until it is complete or until a planned stopping point. This requires closing other tabs, silencing notifications, and defending your focus from internal impulses as much as external interruptions. The results — in depth, quality, and actual completion — are consistently superior to multitasking.',
+      "Many people believe multitasking improves productivity.",
+      "In reality, constantly switching between tasks reduces focus and efficiency.",
+      "For example:",
+      "A student is:",
+      "* attending an online lecture",
+      "* replying to messages",
+      "* checking social media",
+      "* watching videos",
+      "Although multiple activities are happening at once, the brain is not fully focused on any one task.",
+      "This creates:",
+      "\u2022 lower concentration",
+      "\u2022 more mistakes",
+      "\u2022 mental fatigue",
+      "Research shows that the brain performs better when attention is focused on one important task at a time.",
+      "A better approach is:",
+      "\u2022 complete one task",
+      "\u2022 then move to the next task",
+      "This helps improve both focus and quality of work.",
+      "A simple rule:",
+      "Focused attention is more effective than divided attention.",
     ],
-    keyTakeaways: [
-      'Multitasking is neurologically impossible — what we call multitasking is costly task-switching',
-      'Each switch carries an attention residue that impairs performance on the new task',
-      'Task-switching reduces productivity by up to 40% and significantly impairs cognitive quality',
-      'Single-tasking produces deeper, higher-quality work than any form of parallel processing',
-    ],
-    practicalExercise: 'Block one 90-minute period tomorrow for single-tasking. One task. No notifications. No other tabs. No checking messages. Work on this one task for 90 uninterrupted minutes. At the end, evaluate: How much did you accomplish compared to what you typically do in 90 distracted minutes? What was the quality difference? This single experiment tends to convert people to single-tasking permanently.',
-    summary: 'Multitasking is not a skill — it is a habit with significant hidden costs. When you commit to single-tasking, you do not slow down. You produce more, at higher quality, with less mental exhaustion.',
+    summary: "End of The Myth of Multitasking."
   },
   'dmml-1-3': {
-    objectives: ['Understand attention as a finite and depletable resource', 'Learn how digital consumption patterns drain attentional capacity', 'Develop practices to conserve and restore attention'],
+    objectives: ["Understand how digital platforms affect attention, focus, and daily behavior.", "Attention Is a Limited Resource"],
     body: [
-      'Attention is the most fundamental cognitive resource you possess. Every conscious activity requires it. And like all resources, it is finite. The model of *ego depletion* — developed by psychologist Roy Baumeister — demonstrates that mental resources, including focused attention, deplete with use and must be replenished with rest.',
-      'Digital consumption is one of the most attention-intensive activities most people engage in. Every piece of content processed requires attentional resources: visual scanning, information evaluation, emotional response, memory encoding. Hours of social media, news, and content consumption drain these resources — often without producing anything of value in return.',
-      'The phenomenon of *continuous partial attention* — described by tech researcher Linda Stone — is the habitual state most heavy digital users operate in. Rather than giving anything their full attention, they maintain a state of semi-awareness across multiple streams simultaneously. The phone is on the table during a meeting. The email is open in the background during deep work. This state is characterized by persistent low-level alertness that prevents deep focus and accumulates fatigue.',
-      'Attentional restoration theory, developed by Rachel and Stephen Kaplan, shows that natural environments — trees, water, open sky — restore depleted attention in ways that digital environments do not. Time in nature is not an indulgence for the privileged; it is a neurological necessity for sustained cognitive performance. Twenty minutes in a natural environment produces measurable restoration of attentional capacity.',
-      'Rest is equally important. Sleep is the primary mechanism through which the brain clears metabolic waste, consolidates memory, and restores attentional reserves. Research by Matthew Walker shows that even one night of inadequate sleep reduces cognitive performance to a level equivalent to moderate intoxication. Protecting sleep is protecting your capacity to think clearly.',
+      "Attention works like energy.",
+      "The more it is constantly interrupted, the harder it becomes to focus deeply.",
+      "For example:",
+      "A person studying for an exam may receive:",
+      "* notifications",
+      "* messages",
+      "* social media updates",
+      "Each interruption breaks concentration.",
+      "Even short distractions can make it difficult to return to deep focus.",
+      "Over time, this creates:",
+      "\u2022 shorter attention span",
+      "\u2022 mental exhaustion",
+      "\u2022 reduced productivity",
+      "Strong focus requires periods of uninterrupted attention.",
+      "Simple habits can help protect attention:",
+      "\u2022 turning off unnecessary notifications",
+      "\u2022 keeping the phone away during important work",
+      "\u2022 scheduling focused work sessions",
+      "A useful principle:",
+      "What repeatedly receives your attention shapes your habits and thinking.",
     ],
-    keyTakeaways: [
-      'Attention is finite and depletes with use — it must be actively protected and restored',
-      'Continuous partial attention is a chronic state of semi-focus that prevents deep work and accumulates cognitive fatigue',
-      'Twenty minutes in natural environments measurably restores depleted attention',
-      'Sleep is the primary attentional restoration mechanism — protecting sleep is a cognitive performance strategy',
-    ],
-    practicalExercise: 'Conduct an attention audit for one week. Each evening, rate your attentional quality that day on a scale of 1-10. Note: hours of sleep the previous night, total screen time, time spent in natural environments, and whether you practiced any form of single-tasking. At the end of the week, identify the variables that most strongly correlate with high attentional quality. These are your personal attention-restoration levers.',
-    summary: 'Attention is the currency of cognitive performance. When you understand it as a limited resource — depletable and restorable — you begin making different choices about how you spend and replenish it each day.',
+    summary: "End of Attention Is a Limited Resource."
   },
   'dmml-1-4': {
-    objectives: ['Assess your understanding of Module 1: Understanding Digital Distraction'],
-    body: ['Answer all questions and submit for feedback.'],
+    objectives: ['Assess your understanding of Module 1'],
+    body: ['Answer all questions and submit.'],
     quizQuestions: [
       {
-        question: 'Why are social media platforms deliberately designed with variable reward schedules?',
-        options: ['To improve user experience', 'To make scrolling behavior compulsive by providing unpredictable rewards', 'To reduce screen time for user wellbeing', 'To organize content more effectively'],
+        question: "Why do digital distractions easily capture attention?",
+        options: ["Phones are naturally harmful", "Digital platforms are designed to encourage engagement", "Notifications improve focus", "Multitasking improves concentration"],
         correct: 1,
       },
       {
-        question: 'Research shows that after a digital interruption, the average recovery time to return fully to the original task is approximately:',
-        options: ['2-3 minutes', '5-10 minutes', '23 minutes', '45 minutes'],
-        correct: 2,
-      },
-      {
-        question: 'What is "continuous partial attention"?',
-        options: ['A technique for effective multitasking', 'The state of maintaining semi-awareness across multiple digital streams simultaneously', 'A type of focused work session', 'Checking notifications only once per hour'],
+        question: "What is a major problem with multitasking?",
+        options: ["It improves deep focus", "It reduces concentration and efficiency", "It increases attention span", "It reduces mental fatigue"],
         correct: 1,
       },
     ],
-    summary: 'Module 1 complete. You now understand the engineered nature of digital distraction, the myth of multitasking, and the finite nature of attention. Module 2 addresses practical screen-time management.',
+    summary: 'Module 1 complete.'
   },
-
   'dmml-2-1': {
-    objectives: ['Develop awareness of how digital time is actually spent', 'Learn to use data-driven tracking to reveal unconscious usage patterns'],
+    objectives: ["Learn how to use technology more intentionally, reduce unnecessary screen time, and build healthier digital habits without completely avoiding technology.", "Track Where Your Time Goes"],
     body: [
-      'The first step in managing screen time is knowing how you actually spend it — not how you think you spend it, and not how you would like to spend it. Most people dramatically underestimate their digital usage. Research consistently finds that self-reported screen time is 50-100% lower than actual measured usage.',
-      'Every major smartphone platform — iOS Screen Time, Android Digital Wellbeing — provides detailed data on usage patterns. Total daily screen time. Breakdown by app and category. Number of pickups per day. Number of notifications received. These numbers are often surprising and almost always motivating when confronted honestly.',
-      'The goal of tracking is not guilt — it is clarity. Awareness without judgment. When you see that you spent three hours on social media on Tuesday, the question is not "what is wrong with me?" The question is "Is this how I want to be spending three hours?" That re-framing converts data into agency.',
-      'Weekly reviews of digital usage, even brief ones, create ongoing awareness that prevents the gradual re-accumulation of screen time after initial reductions. The review does not need to be extensive: five minutes looking at the week\'s data and identifying one adjustment for the following week is sufficient.',
-      'Digital journaling is a complementary practice: each evening, note how your screen time felt — whether it was intentional or reactive, whether it served you or drained you. This qualitative layer adds meaning to the quantitative data and identifies the specific contexts in which unconscious usage occurs.',
+      "Many people underestimate how much time they spend on their phones.",
+      "Short periods of scrolling throughout the day can add up to several hours without notice.",
+      "For example:",
+      "A person checks social media:",
+      "* for 5 minutes after waking up",
+      "* during meals",
+      "* between study sessions",
+      "* before sleeping",
+      "Individually, each session feels small.",
+      "But together, they may total 3\u20135 hours daily.",
+      "The first step toward better digital balance is awareness.",
+      "Most smartphones now provide:",
+      "\u2022 screen time reports",
+      "\u2022 app usage statistics",
+      "\u2022 daily usage breakdowns",
+      "Tracking usage helps answer important questions:",
+      "\u2022 Which apps consume the most time?",
+      "\u2022 Is the usage intentional or automatic?",
+      "\u2022 Which habits reduce productivity?",
+      "A useful principle:",
+      "You cannot improve habits you do not measure.",
     ],
-    keyTakeaways: [
-      'Self-reported screen time is typically 50-100% lower than actual measured usage',
-      'Platform tools provide objective data that reveals unconscious usage patterns',
-      'Awareness without judgment — not guilt — is the goal of tracking',
-      'Brief weekly reviews prevent gradual re-accumulation of screen time after reductions',
-    ],
-    practicalExercise: 'Today, access the screen time data on your primary device. Record the total daily average, the top three apps by usage time, and the number of pickups per day. Compare this to what you would have estimated without looking. Identify one specific usage pattern — one app or context — that most surprises you. That surprise is the beginning of change.',
-    summary: 'You cannot manage what you do not measure. Screen time data makes the invisible visible and converts vague concern about digital habits into specific, actionable information.',
+    summary: "End of Track Where Your Time Goes."
   },
   'dmml-2-2': {
-    objectives: ['Learn practical techniques for creating healthy boundaries around screen time', 'Develop personalized boundaries that match your values and goals'],
+    objectives: ["Learn how to use technology more intentionally, reduce unnecessary screen time, and build healthier digital habits without completely avoiding technology.", "Reduce Unnecessary Notifications"],
     body: [
-      'A boundary is a defined limit that protects something you value. Screen-time boundaries protect your attention, relationships, sleep, and mental wellbeing from the expanding demands of the digital environment. Like all boundaries, they must be consciously set, communicated where necessary, and actively maintained.',
-      'The most effective screen-time boundaries are *time-based* or *space-based* or both. Time-based boundaries define when you use technology: "No screens in the first hour after waking." "No devices after 9pm." "Phone-free from dinner until bedtime." Space-based boundaries define where: "No phones in the bedroom." "No screens at the dining table." "Phone in a drawer during work sessions."',
-      'The power of space-based boundaries lies in the friction they create. Research shows that the mere presence of a smartphone on a desk — even face down, even silent — reduces available cognitive capacity. Removing the device from the environment removes the temptation entirely, which is far more effective than relying on willpower to resist an ever-present trigger.',
-      'Charging your phone outside the bedroom is consistently rated as one of the highest-impact digital boundaries available. It removes the last check before sleeping and the first check upon waking — two high-risk moments for unconscious digital consumption. An alarm clock used for its intended purpose replaces the phone\'s role.',
-      'Boundaries with others also matter. Communicating your boundaries — "I don\'t respond to messages after 8pm" or "I\'m unavailable by phone during deep work sessions" — manages expectations and removes the social pressure that often drives reactive checking. Most people respond positively to clearly communicated boundaries; the anxiety about setting them is usually greater than the reality.',
+      "Notifications constantly compete for attention.",
+      "Even when ignored, they interrupt concentration and increase mental distraction.",
+      "For example:",
+      "A student studying for an exam receives:",
+      "* social media notifications",
+      "* shopping app alerts",
+      "* promotional messages",
+      "* group chat updates",
+      "Each notification pulls attention away from the task.",
+      "Over time, this creates fragmented focus.",
+      "A more intentional approach is to:",
+      "\u2022 turn off non-essential notifications",
+      "\u2022 keep only important alerts active",
+      "\u2022 schedule specific times to check messages",
+      "This reduces unnecessary interruptions and helps create longer periods of focused attention.",
+      "A useful rule:",
+      "Not every notification deserves immediate attention.",
     ],
-    keyTakeaways: [
-      'Screen-time boundaries can be time-based, space-based, or both — and each is effective',
-      'The mere presence of a smartphone reduces cognitive capacity even when not in use',
-      'Removing devices from environments is more effective than relying on willpower',
-      'Communicating boundaries to others manages expectations and removes social pressure for reactive checking',
-    ],
-    practicalExercise: 'Choose two screen-time boundaries to implement this week — one time-based and one space-based. Write them as specific commitments: "No screens before 7:30am" and "Phone charges in the kitchen, not the bedroom." Tell one person about each commitment for accountability. Track whether you maintained each boundary daily for seven days. Reflect on the impact at the end of the week.',
-    summary: 'Screen-time boundaries are not restrictions — they are commitments to what you value more than unlimited digital access. When clearly defined and consistently maintained, they create space for what matters most.',
+    summary: "End of Reduce Unnecessary Notifications."
   },
   'dmml-2-3': {
-    objectives: ['Learn how to shift from reactive technology use to intentional engagement', 'Develop a technology relationship based on conscious choice'],
+    objectives: ["Learn how to use technology more intentionally, reduce unnecessary screen time, and build healthier digital habits without completely avoiding technology.", "Create Intentional Usage Habits"],
     body: [
-      'Most digital technology use is reactive — driven by habit, boredom, social pressure, or the engineered pull of the platform itself. Intentional technology use is fundamentally different: it begins with a question. "What do I want to accomplish with this tool, right now, for this defined period of time?"',
-      'The *before-use intention* is one of the most practical tools for shifting from reactive to intentional technology use. Before opening an app or website, pause for three seconds and state your purpose: "I am opening email to respond to the two urgent messages from this morning. I will spend 20 minutes on this." Then execute exactly that — and close when the intention is complete.',
-      'Scheduled technology use is another powerful practice. Instead of checking email continuously throughout the day, schedule two or three defined email windows. Instead of having messaging apps open all day, check and respond in batches at specific times. This batching approach dramatically reduces the cognitive fragmentation of continuous checking while maintaining responsiveness.',
-      'Digital minimalism, articulated by computer scientist Cal Newport, is the philosophy that technology should serve your values and goals — and that any technology that does not clearly do this should be removed. This is not about using less technology for its own sake. It is about curating your digital environment so that every tool in it has a clear, deliberate purpose in your life.',
-      'The question that drives digital minimalism is simple: "What is the highest-quality way for me to use technology to achieve my goals?" This question reveals which tools are genuinely valuable and which are habitual filler. The filler, once identified, is surprisingly easy to reduce or eliminate — especially when its cost in attention and time becomes visible.',
+      "Technology becomes harmful when usage becomes automatic instead of intentional.",
+      "For example:",
+      "Many people unlock their phones without a clear purpose.",
+      "A quick check for one message can become:",
+      "* endless scrolling",
+      "* switching between apps",
+      "* consuming random content",
+      "Intentional usage means using technology with a specific purpose.",
+      "Before opening an app, ask:",
+      "\u2022 Why am I opening this app?",
+      "\u2022 What task do I want to complete?",
+      "\u2022 How much time should I spend here?",
+      "Simple habits can improve digital control:",
+      "\u2022 keeping the phone away during focused work",
+      "\u2022 avoiding screens during meals",
+      "\u2022 limiting screen use before sleep",
+      "These habits help reduce unconscious digital behavior.",
+      "A useful principle:",
+      "Use technology as a tool, not as constant stimulation.",
     ],
-    keyTakeaways: [
-      'Intentional technology use begins with a question: what do I want to accomplish, right now, for how long?',
-      'The before-use intention reduces reactive use and creates purposeful engagement',
-      'Batching digital tasks reduces cognitive fragmentation from continuous checking',
-      'Digital minimalism asks: does this technology clearly serve my values and goals?',
-    ],
-    practicalExercise: 'For three consecutive days, apply the before-use intention to every technology session. Before opening any app or browser, write (or think) your specific intention and time limit. After the session, note whether you stayed intentional or drifted into reactive use. At the end of three days, identify which contexts most trigger reactive use. These are the specific situations where stronger boundaries or alternatives are needed.',
-    summary: 'The shift from reactive to intentional technology use is one of the most significant improvements available in modern life. When your digital engagement is purposeful, the same technology that drains you becomes a genuinely useful tool.',
+    summary: "End of Create Intentional Usage Habits."
   },
   'dmml-2-4': {
-    objectives: ['Assess your understanding of Module 2: Managing Screen Time Intentionally'],
+    objectives: ['Assess your understanding of Module 2'],
     body: ['Answer all questions and submit.'],
     quizQuestions: [
       {
-        question: 'Why are space-based boundaries (removing devices from certain environments) more effective than willpower-based approaches?',
-        options: ['They cost less money', 'They eliminate the trigger entirely rather than requiring ongoing resistance', 'They work better for specific personality types', 'They have no effect on actual usage'],
+        question: "Why is attention considered a limited resource?",
+        options: ["It can handle unlimited interruptions", "Constant interruptions reduce deep focus", "Notifications improve concentration", "Attention does not affect productivity"],
         correct: 1,
       },
       {
-        question: 'What is the core principle behind the "before-use intention" practice?',
-        options: ['Setting an alarm before using your phone', 'Stating a specific purpose and time limit before engaging with technology', 'Asking someone for permission before checking your phone', 'Reviewing your screen time before each session'],
+        question: "What is the first step toward improving digital habits?",
+        options: ["Deleting all apps", "Tracking screen time usage", "Avoiding technology completely", "Buying productivity tools"],
         correct: 1,
       },
       {
-        question: 'Digital minimalism asks which primary question about technology?',
-        options: ['How expensive is this technology?', 'How popular is this technology?', 'Does this technology clearly serve my values and goals?', 'How much time should I spend on this technology?'],
-        correct: 2,
+        question: "Why should unnecessary notifications be reduced?",
+        options: ["They improve multitasking", "They increase concentration breaks and distractions", "They reduce productivity tracking", "They make apps slower"],
+        correct: 1,
       },
     ],
-    summary: 'Module 2 complete. You now have practical tools for tracking usage, setting boundaries, and shifting to intentional technology engagement. Module 3 addresses rebuilding deep focus and concentration.',
+    summary: 'Module 2 complete.'
   },
-
   'dmml-3-1': {
-    objectives: ['Understand the principles of deep focus and why they are increasingly rare', 'Learn the conditions required for deep cognitive work'],
+    objectives: ["Learn how to rebuild focus, improve concentration, and reduce attention fatigue in a highly distracting digital environment.", "Deep Focus vs Constant Distraction"],
     body: [
-      'Deep focus is the ability to perform cognitively demanding tasks — writing, analysis, design, complex problem-solving — with sustained, undivided attention and without distraction. It produces the highest-quality work of which a mind is capable. And in a world of digital fragmentation, it has become increasingly rare — which means it has become increasingly valuable.',
-      'Cal Newport, in his foundational work "Deep Work," defines it as "professional activities performed in a state of distraction-free concentration that push your cognitive capabilities to their limit." The opposite — shallow work — is work performed in a distracted state. Shallow work produces quantity. Deep work produces quality, insight, and genuine value.',
-      'Deep focus has three prerequisites. First, *time blocks* — extended, uninterrupted periods dedicated to a single demanding task. Most cognitively complex work requires at least 90-minute blocks to reach a state of deep engagement; anything shorter rarely reaches that depth. Second, *environment design* — a physical or digital environment deliberately configured to minimize interruption. Third, *ritual* — consistent habits that signal to the brain that deep work is beginning.',
-      'Flow states — the deep engagement described by psychologist Mihaly Csikszentmihalyi — occur naturally during deep work when skill level matches challenge level appropriately. These states are characterized by total absorption, effortless focus, and profound satisfaction. They represent the peak of human cognitive experience — and they are entirely incompatible with the fragmented, distracted digital environment most people work in.',
-      'Building deep focus capacity is a skill that develops with practice and atrophies with neglect. If you have spent years working in a fragmented, high-interruption environment, your capacity for sustained attention has likely diminished. It can be rebuilt — but it requires deliberate, consistent practice, starting with shorter blocks and extending them as capacity grows.',
+      "Modern digital environments train the brain to constantly switch attention.",
+      "Short videos, rapid scrolling, and continuous notifications make it difficult to stay focused on one task for a long time.",
+      "For example:",
+      "A student starts studying for an exam.",
+      "Within a few minutes:",
+      "* a message notification appears",
+      "* social media is checked",
+      "* another app is opened",
+      "Even short interruptions reduce concentration.",
+      "Deep focus happens when attention stays fully connected to one important task without frequent distractions.",
+      "This is when:",
+      "\u2022 learning improves",
+      "\u2022 productivity increases",
+      "\u2022 ideas become clearer",
+      "Deep focus requires:",
+      "\u2022 uninterrupted time",
+      "\u2022 fewer distractions",
+      "\u2022 sustained attention",
+      "A useful principle:",
+      "Focus grows when distractions are reduced consistently.",
     ],
-    keyTakeaways: [
-      'Deep focus is increasingly rare in the digital age — making it increasingly valuable',
-      'Deep work requires time blocks, environment design, and consistent ritual',
-      'Flow states occur naturally in conditions of deep focus — they are incompatible with distraction',
-      'Attentional capacity is a trainable skill that builds with practice and atrophies with neglect',
-    ],
-    practicalExercise: 'Schedule one deep work session this week: a minimum of 90 minutes, one demanding task, no notifications, no other tabs, phone in another room. Design the environment before starting — clear your desk, close irrelevant programs, set a clear start and end time. Afterward, record: how long before you felt genuinely absorbed? What was your output quality compared to fragmented work sessions? What would it mean for your work if you had three such sessions per week?',
-    summary: 'Deep focus is not a luxury — it is the source of your most valuable work. Protecting and developing this capacity is one of the highest-leverage investments you can make in your professional and creative life.',
+    summary: "End of Deep Focus vs Constant Distraction."
   },
   'dmml-3-2': {
-    objectives: ['Identify the primary sources of interruption in your environment', 'Learn strategies for reducing interruptions systematically'],
+    objectives: ["Learn how to rebuild focus, improve concentration, and reduce attention fatigue in a highly distracting digital environment.", "Protect Your Focus Environment"],
     body: [
-      'Interruptions destroy deep focus. Not just the time of the interruption itself — but the 23 minutes of recovery time afterward. For most knowledge workers, the working day is a sequence of interrupted half-tasks rather than sustained deep work. The source of most interruptions is not other people — it is technology, and it can be managed.',
-      'The most impactful single change for reducing interruptions is *notification management*. The default setting on most devices and apps is maximum notification intensity. Every message, post, and update triggers an interruption. Moving to a curated notification system — where only truly time-sensitive communications can interrupt — eliminates the majority of digital interruptions without meaningful loss of responsiveness.',
-      'Batch communication is the complementary strategy: instead of responding to messages as they arrive, process communication in defined windows. This removes the implicit expectation — and the anxious monitoring it produces — that you are always immediately available. Most communication that feels urgent in the moment can wait 2-4 hours without any real consequence.',
-      'The physical environment also generates interruptions. Open-plan offices — despite their popularity — are research-demonstrated destroyers of deep work. When deep work is required, environmental relocation is often necessary: a quiet room, a library, a home office. The signal is clear — when your current environment is producing interruptions faster than you can manage them, the environment needs to change.',
-      'Internal interruptions are equally important to address. The impulse to check email, switch tasks, or google a passing thought is not external — it is a habit generated within your own mind. The tool for managing internal interruptions is a *capture system*: a simple notepad where you write down any non-urgent thought that arises during deep work, then return to your task. The thought is preserved; the interruption is prevented.',
+      "Focus is strongly influenced by the surrounding environment.",
+      "For example:",
+      "Trying to study while:",
+      "* notifications are active",
+      "* multiple tabs are open",
+      "* videos are playing in the background",
+      "makes concentration more difficult.",
+      "A better focus environment includes:",
+      "\u2022 clean workspace",
+      "\u2022 fewer distractions",
+      "\u2022 silent notifications",
+      "\u2022 clear task priority",
+      "Small environmental changes can improve concentration significantly.",
+      "For example:",
+      "* keeping the phone away during focused work",
+      "* using full-screen mode while studying",
+      "* working in quiet spaces",
+      "These changes reduce unnecessary attention shifts.",
+      "A useful rule:",
+      "Your environment influences your attention more than motivation alone.",
     ],
-    keyTakeaways: [
-      'Notification management is the highest-impact single action for reducing digital interruptions',
-      'Batch communication removes the anxious monitoring that generates constant checking',
-      'Environmental relocation is often necessary when the current environment is fundamentally incompatible with deep work',
-      'A capture system manages internal interruptions without losing the thoughts they carry',
-    ],
-    practicalExercise: 'Conduct a 24-hour interruption audit. Every time something interrupts your focus — a notification, a colleague, an internal impulse, an environmental distraction — record what it was. At the end of 24 hours, categorize and count: what are your top three interruption sources? For each, identify one specific change you can implement this week to reduce it. Focus on the highest-frequency source first.',
-    summary: 'Interruptions are not inevitable — they are the product of default settings, unmanaged environments, and undisciplined habits. When you systematically reduce them, the quality and depth of your work transforms.',
+    summary: "End of Protect Your Focus Environment."
   },
   'dmml-3-3': {
-    objectives: ['Learn evidence-based techniques for building sustained concentration', 'Develop a personal practice for strengthening attentional capacity'],
+    objectives: ["Learn how to rebuild focus, improve concentration, and reduce attention fatigue in a highly distracting digital environment.", "Give Your Brain Time to Recover"],
     body: [
-      'Concentration is a skill. Like any skill, it can be developed through deliberate practice, strengthened through consistent use, and weakened through neglect. The fragmented digital environment most people inhabit is an environment of constant concentration degradation. Rebuilding it requires deliberate counter-practice.',
-      'The *Pomodoro Technique*, developed by Francesco Cirillo, provides a practical scaffold for building concentration. Work with complete focus for 25 minutes, then take a 5-minute break. After four cycles, take a longer 20-30 minute break. This structured rhythm trains the brain to sustain focus for defined intervals, prevents the chronic fatigue that comes from pushing through exhaustion, and creates a measurable unit of work that supports progress tracking.',
-      'Meditation is the most direct training available for concentration. Specifically, *focused attention meditation* — bringing your attention to a single object (typically the breath), noticing when it wanders, and returning it without self-criticism — is functionally identical to the skill of maintaining focus during work. Research consistently shows that even brief, regular meditation practice (10-15 minutes per day) produces measurable improvements in attention, working memory, and cognitive flexibility.',
-      'Physical exercise has a powerful and often underutilized effect on concentration. Aerobic exercise increases production of BDNF (Brain-Derived Neurotrophic Factor) — sometimes called "fertilizer for the brain." Even a 20-minute walk before a deep work session measurably improves the focus quality of the session that follows. This is not merely correlation — the neurological mechanism is well understood.',
-      'The progression for building concentration is simple but requires patience. Start with 25-minute focused blocks and protect them completely. After two weeks of consistency, extend to 45-minute blocks. After another two weeks, try 60 or 90-minute blocks. The key is consistency of practice, not the length of individual sessions. A 25-minute daily practice for a month produces far greater gains than a single 4-hour deep work marathon.',
+      "Continuous stimulation can mentally exhaust attention.",
+      "Many people move constantly between:",
+      "* social media",
+      "* videos",
+      "* music",
+      "* messages",
+      "* work tasks",
+      "without giving the brain time to rest.",
+      "As a result:",
+      "\u2022 concentration decreases",
+      "\u2022 mental fatigue increases",
+      "\u2022 focus becomes weaker",
+      "Attention recovery requires periods of low stimulation.",
+      "Simple recovery habits include:",
+      "\u2022 short breaks between deep work sessions",
+      "\u2022 walking without using the phone",
+      "\u2022 spending time away from screens",
+      "\u2022 avoiding excessive content consumption before sleep",
+      "These activities help the brain reset and recover attention capacity.",
+      "A useful principle:",
+      "Rest is necessary for sustained focus.",
     ],
-    keyTakeaways: [
-      'Concentration is a trainable skill that builds with deliberate practice',
-      'The Pomodoro Technique provides a structured rhythm for developing sustained focus',
-      'Focused attention meditation directly trains the cognitive skill of maintaining attention',
-      'Even 20 minutes of aerobic exercise before focused work measurably improves concentration quality',
-    ],
-    practicalExercise: 'For the next 14 days, commit to one daily concentration-building practice. Choose one: (1) Daily 25-minute Pomodoro session (one complete, protected, single-task block), (2) 10-minute focused attention meditation before work, or (3) A 20-minute walk before your most cognitively demanding task. Practice the same one consistently for 14 days. Track your perceived focus quality each day on a 1-10 scale. Review the trend.',
-    summary: 'Concentration is built through daily practice, not through willpower. When you train it deliberately — with structure, consistency, and patience — your capacity for deep, meaningful work grows in ways that transform both output and satisfaction.',
+    summary: "End of Give Your Brain Time to Recover."
   },
   'dmml-3-4': {
-    objectives: ['Assess your understanding of Module 3: Attention & Focus Recovery'],
+    objectives: ['Assess your understanding of Module 3'],
     body: ['Answer all questions and submit.'],
     quizQuestions: [
       {
-        question: 'What are the three prerequisites for deep focus identified in this module?',
-        options: ['Silence, darkness, and solitude', 'Time blocks, environment design, and consistent ritual', 'Coffee, a deadline, and a quiet room', 'Motivation, skill, and time'],
+        question: "What is intentional technology use?",
+        options: ["Using multiple apps at once", "Using technology with a clear purpose and limit", "Constantly checking notifications", "Spending more time online"],
         correct: 1,
       },
       {
-        question: 'What is a "capture system" used for in attention management?',
-        options: ['Recording all notifications received during work', 'Writing down non-urgent thoughts that arise during deep work so you can return without losing them', 'Capturing focus time on a timer', 'Documenting interruptions from colleagues'],
+        question: "What is deep focus?",
+        options: ["Using multiple apps at the same time", "Maintaining uninterrupted attention on one task", "Constantly switching tasks", "Watching educational videos while studying"],
         correct: 1,
       },
       {
-        question: 'What neurological substance does aerobic exercise increase, contributing to improved focus?',
-        options: ['Serotonin only', 'Cortisol', 'BDNF — Brain-Derived Neurotrophic Factor', 'Adrenaline'],
-        correct: 2,
+        question: "Why is the focus environment important?",
+        options: ["Motivation alone controls attention", "The environment affects concentration and distractions", "Notifications improve focus", "Workspace setup does not matter"],
+        correct: 1,
       },
     ],
-    summary: 'Module 3 complete. Deep focus principles, interruption reduction, and concentration-building practices now form your focus recovery toolkit. Module 4 addresses healthy digital habits.',
+    summary: 'Module 3 complete.'
   },
-
   'dmml-4-1': {
-    objectives: ['Develop a deliberate system for managing notifications', 'Understand the difference between notification types and their appropriate handling'],
+    objectives: ["Learn how to build sustainable digital habits that improve focus, sleep, productivity, and overall mental balance.", "Build Device-Free Routines"],
     body: [
-      'The average smartphone user receives 63-80 notifications per day. Each is an interruption. Each carries an implicit demand for attention. Each one, responded to or not, leaves a trace of attentional residue that fragments the flow of focused work and presence. Managing notifications is not a preference — it is a cognitive performance necessity.',
-      'The first principle of notification management is *ruthless curation*. The default setting on every app is "notify me of everything." This is designed to maximize platform engagement, not to serve your wellbeing. Go through every notification-enabled app and ask: "Do I need to know about this instantly?" For most apps, the answer is no. Turn off all notifications that do not require immediate response.',
-      'Create three categories for your notifications. Category 1: *Always on* — direct communication from key contacts, security alerts, genuinely time-sensitive professional messages. Category 2: *Batched* — most messaging apps, email, non-urgent platform updates. These you check on schedule, not in real-time. Category 3: *Off entirely* — social media, promotional content, app engagement prompts, news. These have no legitimate claim on your immediate attention.',
-      'Do Not Disturb modes are powerful tools that most people underutilize. Scheduling DND for deep work blocks, evening hours, and sleep removes the choice from the moment — you do not have to decide to ignore a notification; it simply does not arrive. This prevention-based approach consistently outperforms willpower-based resistance.',
-      'Communicate your notification approach to those who regularly contact you. "I check messages three times per day — at 9am, 1pm, and 5pm. For urgent matters, please call." This simple communication manages expectations and largely eliminates the anxiety — for you and for them — that comes from less-than-immediate responsiveness.',
+      "Many digital habits become automatic because phones are constantly nearby.",
+      "For example:",
+      "Some people:",
+      "* check their phone immediately after waking up",
+      "* use screens during meals",
+      "* scroll continuously before sleeping",
+      "Over time, this creates dependency on constant stimulation.",
+      "Building device-free routines helps create healthier boundaries with technology.",
+      "Simple examples include:",
+      "\u2022 avoiding phone use during meals",
+      "\u2022 keeping phones away during study sessions",
+      "\u2022 spending the first 30 minutes after waking up without screens",
+      "These routines help reduce automatic phone checking and improve awareness.",
+      "A useful principle:",
+      "Not every moment needs digital stimulation.",
     ],
-    keyTakeaways: [
-      'The average user receives 63-80 notifications daily — each is an interruption with attentional cost',
-      'Default notification settings maximize platform engagement, not your wellbeing — audit and curate',
-      'Three-category notification system: always on, batched, and off entirely',
-      'Communicating your response schedule to key contacts manages expectations and reduces anxiety for both parties',
-    ],
-    practicalExercise: 'Spend 30 minutes today conducting a notification audit on your primary device. Review every app with notification access. Categorize each as: (1) Keep on (genuinely urgent need), (2) Batch (turn off, check on schedule), or (3) Turn off entirely. Implement the changes. For the next seven days, track whether any truly important communication was missed. Almost certainly, none will be.',
-    summary: 'Notification management is not about being less responsive — it is about being more intentional about when and how you engage. A curated notification environment is one of the simplest and most powerful digital wellbeing interventions available.',
+    summary: "End of Build Device-Free Routines."
   },
   'dmml-4-2': {
-    objectives: ['Understand the value of device-free time and spaces', 'Design personal device-free routines that restore presence and wellbeing'],
+    objectives: ["Learn how to build sustainable digital habits that improve focus, sleep, productivity, and overall mental balance.", "Manage Screen Exposure Before Sleep"],
     body: [
-      'There is growing scientific evidence that humans need significant periods completely free of digital devices — not just for productivity, but for psychological health, social connection, and cognitive restoration. Device-free routines are not a rejection of technology; they are an affirmation of what matters more.',
-      'The *morning hour* is one of the highest-value device-free zones available. The first 60 minutes after waking are neurologically distinct — the brain is in a transitional state between sleep and full waking, creative and open, not yet filled with the day\'s agenda. Introducing a device immediately fills this window with others\' inputs, social comparison, and reactive information. Protecting it with device-free time — movement, journaling, quiet reflection, reading physical books — tends to produce remarkable improvements in mood, clarity, and intentionality.',
-      'Meals are another natural device-free context. Eating with a device present consistently degrades both the meal experience and the social connection it could involve. Research shows that families who eat together without devices report stronger bonds, better communication, and better emotional regulation in children. The device-free meal table is a simple but profound practice.',
-      'Walking — for transportation, exercise, or simply for its own sake — is increasingly colonized by device use. Earphones in, phone out, scrolling while moving. The device-free walk restores something important: unstructured time for mental processing, creative thinking, and sensory awareness. Many of history\'s great thinkers — from Aristotle to Darwin to Beethoven — maintained deliberate walking practices as cognitive tools.',
-      'Device-free social time — conversations, shared activities, leisure — produces measurably stronger relationships and greater wellbeing than digitally mediated social time. When a device is present during social interaction, research shows that both parties report lower connection quality and less trust — even if the device is never actually used. Physical absence of devices is necessary for full social presence.',
+      "Screen usage late at night can affect sleep quality.",
+      "For example:",
+      "Many people use:",
+      "* social media",
+      "* videos",
+      "* messaging apps",
+      "immediately before sleeping.",
+      "Continuous screen exposure keeps the brain mentally active and makes relaxation more difficult.",
+      "Poor sleep can lead to:",
+      "\u2022 lower concentration",
+      "\u2022 mental fatigue",
+      "\u2022 reduced productivity",
+      "Healthier habits include:",
+      "\u2022 reducing screen usage before bedtime",
+      "\u2022 avoiding stimulating content late at night",
+      "\u2022 creating a consistent sleep schedule",
+      "Even small improvements in nighttime digital habits can improve recovery and focus.",
+      "A useful rule:",
+      "Better sleep supports better attention and decision-making.",
     ],
-    keyTakeaways: [
-      'The first hour after waking is a high-value device-free window for clarity and intentionality',
-      'Device-free meals strengthen family and social bonds and improve communication',
-      'Device-free walks provide unstructured time for mental processing and creative thinking',
-      'Physical device absence — not just silence or face-down placement — is required for full social presence',
-    ],
-    practicalExercise: 'Design two new device-free routines to implement this week: one in the morning (first 30-60 minutes after waking) and one social (at least one meal or one social activity per day). Write them as specific commitments — not "I will try to have less screen time" but "From 6:30 to 7:30am each day, I will not touch my phone. All family dinners this week will be device-free." After seven days, reflect on what changed.',
-    summary: 'Device-free routines are acts of presence — commitments to being fully in the time and place and with the people you are with. They are among the most human things you can do in the digital age.',
+    summary: "End of Manage Screen Exposure Before Sleep."
   },
   'dmml-4-3': {
-    objectives: ['Understand the scientific relationship between screen exposure and sleep quality', 'Learn practical strategies for protecting sleep from digital interference'],
+    objectives: ["Learn how to build sustainable digital habits that improve focus, sleep, productivity, and overall mental balance.", "Replace Passive Consumption With Intentional Use"],
     body: [
-      'Sleep is the single most important health behavior available to humans. It affects cognitive function, immune health, emotional regulation, physical performance, and longevity — more than any other lifestyle factor. And digital technology has become one of the primary disruptors of sleep quality in the modern world.',
-      'The primary mechanism of digital sleep disruption is *blue light emission*. Screens — phones, tablets, computers, televisions — emit significant blue light wavelengths. Blue light suppresses melatonin production — the hormone that signals the brain to prepare for sleep. Research shows that two hours of screen exposure before bed suppresses melatonin by up to 22%, delaying sleep onset and reducing deep sleep quality.',
-      'The second mechanism is *cognitive and emotional stimulation*. Content consumed before sleep — news, social media, email, engaging videos — activates the sympathetic nervous system (the stress response) and fills the mind with unresolved cognitive loops. This stimulation is the opposite of what the brain needs to transition to sleep: a gradual de-escalation of arousal.',
-      'The third mechanism is *device presence in the sleep environment*. Even when not in use, a phone within reach creates micro-arousals — small awakenings in response to the possibility of a notification. Research shows that having a phone in the bedroom reduces sleep quality even when it is on silent and face down. Removing it from the bedroom entirely produces measurable sleep improvement.',
-      'The *digital sunset* is the practice of ending screen use 60-90 minutes before sleep. During this window, alternatives include physical books, light conversation, gentle movement, journaling, or quiet music. This transition period allows cortisol levels to fall, melatonin to rise, and the mind to process the day\'s events sufficiently to release them rather than carry them into sleep.',
+      "A large amount of digital time is spent consuming content passively.",
+      "For example:",
+      "* endless scrolling",
+      "* random video watching",
+      "* repeatedly switching apps without purpose",
+      "This often creates mental fatigue without adding real value.",
+      "Intentional digital use focuses on:",
+      "\u2022 learning",
+      "\u2022 communication",
+      "\u2022 productivity",
+      "\u2022 meaningful entertainment",
+      "Before consuming content, ask:",
+      "\u2022 Is this useful?",
+      "\u2022 Am I choosing this intentionally?",
+      "\u2022 Is this helping or simply filling time?",
+      "Strong digital habits are built by becoming more conscious of how technology is used.",
+      "A useful principle:",
+      "Technology should support your goals, not control your attention.",
     ],
-    keyTakeaways: [
-      'Blue light from screens suppresses melatonin production by up to 22%, delaying sleep onset',
-      'Content consumed before sleep activates the stress response — the opposite of sleep preparation',
-      'Phone presence in the bedroom reduces sleep quality even when silent and face down',
-      'A 60-90 minute digital sunset dramatically improves sleep onset and quality',
-    ],
-    practicalExercise: 'For seven consecutive nights, implement a digital sunset: no screens of any kind for 60 minutes before your intended sleep time. Remove your phone from the bedroom and charge it in another room. Use a traditional alarm clock for waking. After seven days, compare your sleep quality, morning energy, and mood to the week prior. The results of this single change are typically striking enough to make it permanent.',
-    summary: 'Protecting sleep from digital interference is one of the highest-leverage wellbeing choices available. When sleep improves, every other dimension of cognitive and physical performance improves with it.',
+    summary: "End of Replace Passive Consumption With Intentional Use."
   },
   'dmml-4-4': {
-    objectives: ['Assess your understanding of Module 4: Building Healthy Digital Habits'],
+    objectives: ['Assess your understanding of Module 4'],
     body: ['Answer all questions and submit.'],
     quizQuestions: [
       {
-        question: 'What is the primary neurological mechanism by which screen use before bed disrupts sleep?',
-        options: ['It increases cortisol to wake the brain', 'Blue light suppresses melatonin production, delaying sleep onset', 'Screen brightness overstimulates the eyes', 'It causes the brain to expect entertainment before sleep'],
+        question: "Why is attention recovery important?",
+        options: ["Continuous stimulation improves concentration", "Rest helps restore focus and reduce mental fatigue", "Screen exposure improves sleep quality", "Breaks reduce productivity permanently"],
         correct: 1,
       },
       {
-        question: 'What does research show about having a phone present in the bedroom, even on silent and face down?',
-        options: ['It has no measurable effect on sleep', 'It creates micro-arousals and reduces sleep quality', 'It actually improves sleep by providing comfort', 'It only affects sleep if notifications are received'],
+        question: "Why are device-free routines useful?",
+        options: ["They eliminate technology completely", "They help reduce automatic digital habits", "They increase screen dependency", "They reduce productivity permanently"],
         correct: 1,
       },
       {
-        question: 'How long before sleep should the "digital sunset" ideally begin?',
-        options: ['15-30 minutes', '60-90 minutes', '30-45 minutes', 'Immediately before getting into bed'],
-        correct: 1,
-      },
-    ],
-    summary: 'Module 4 complete. Notification management, device-free routines, and sleep protection are now part of your healthy digital habits toolkit. Final module: creating a sustainable balanced lifestyle.',
-  },
-
-  'dmml-5-1': {
-    objectives: ['Understand how to intentionally design the balance between online and offline life', 'Learn to evaluate digital activities against offline alternatives'],
-    body: [
-      'The question of online-offline balance is not "how much should I use technology?" It is "what does a genuinely good life look like for me, and how does my technology use serve or undermine it?" This reframing converts a productivity conversation into a values conversation — which is where the most sustainable change originates.',
-      'Most people\'s online-offline balance has evolved by default rather than design. Technology expanded into the available space, filling gaps that were previously occupied by rest, relationship, creativity, and embodied experience. Reclaiming balance requires intentional design — not passive reduction of screen time, but deliberate cultivation of offline activities that represent genuine alternatives.',
-      'The concept of *offline anchors* is useful here. These are regular, recurring activities that take place entirely offline and provide meaning, connection, or restoration: family meals, physical exercise, creative hobbies, in-person social gatherings, time in nature, reading physical books. Offline anchors are not the absence of technology — they are affirmative commitments to activities that technology cannot replicate.',
-      'Online activities vary widely in their value and in their contribution to wellbeing. Active, intentional online engagement — creating, learning, genuine connection — tends to contribute positively to wellbeing. Passive, reactive consumption — endless scrolling, comparison-driven browsing, outrage media — consistently correlates with lower wellbeing, higher anxiety, and reduced life satisfaction. The quality of online engagement matters as much as the quantity.',
-      'Weekly life design is a practical tool for maintaining intentional balance. Each Sunday, plan the coming week with explicit attention to offline anchors: which days will include exercise? Which meals will be device-free? When will in-person social connection occur? When will nature time happen? Planning offline activities with the same intention as digital commitments ensures they actually occur rather than being continuously displaced by digital defaults.',
-    ],
-    keyTakeaways: [
-      'Online-offline balance is a values question, not merely a time management question',
-      'Offline anchors are deliberate commitments to meaningful activities that technology cannot replicate',
-      'Active online engagement contributes to wellbeing; passive consumption consistently undermines it',
-      'Planning offline activities intentionally prevents them from being displaced by digital defaults',
-    ],
-    practicalExercise: 'Design your ideal week. On a physical piece of paper, map out seven days. First, place your offline anchors — exercise, device-free meals, social connection, nature time, creative pursuits. Then, around those anchors, identify specific, intentional windows for technology use. Notice how different this design feels from your current default week. Implement as much of it as possible in the coming week.',
-    summary: 'Online-offline balance is not achieved by accident — it is designed on purpose. When you lead with what you value offline and let technology fill the remaining space intentionally, life feels fundamentally different.',
-  },
-  'dmml-5-2': {
-    objectives: ['Learn how to use technology in ways that enhance rather than diminish life quality', 'Develop criteria for evaluating technology\'s role in your life'],
-    body: [
-      'Meaningful technology use is not about using less technology — it is about using the right technology, for the right purposes, in the right amounts, at the right times. This distinction matters because technology, used intentionally, is genuinely one of the most powerful tools for human flourishing ever created.',
-      'The framework for evaluating meaningful technology use has three questions. First: "Does this technology help me accomplish something I value?" Learning, creating, staying connected to people who matter, building a business, managing health — these are genuine values that technology can serve. Second: "Is this the best way to achieve this purpose?" Sometimes technology is the best tool. Sometimes a phone call, a walk, or a book would serve the purpose better. Third: "What is the real cost of this use in time, attention, and wellbeing?"',
-      'Technology for learning has never been more powerful. Online education platforms, research databases, expert communities, and professional development tools give individuals access to knowledge and skills that previous generations could not have imagined. Used with intention and discipline, this represents one of the greatest human capability expansions in history.',
-      'Technology for genuine connection — maintaining relationships across distance, coordinating care for family members, staying involved in communities — is similarly meaningful. The distinction between meaningful connection technology and social comparison technology is important: the former serves relationships, the latter primarily serves platforms.',
-      'Technology for creative expression — writing, design, music production, video creation, coding — amplifies human creative capacity in extraordinary ways. Using technology to make, build, and express tends to produce wellbeing; using technology primarily to consume tends to drain it. A useful heuristic: end each week by noting the ratio of creation to consumption in your digital life. That ratio reflects a great deal about the quality of your technology relationship.',
-    ],
-    keyTakeaways: [
-      'Meaningful technology use serves specific values — learning, genuine connection, creation, capability building',
-      'Three evaluation questions: Does it serve something I value? Is it the best method? What is the real cost?',
-      'Creation vs. consumption ratio is a powerful heuristic for evaluating technology quality',
-      'Technology for learning and skilled creation tends to enhance wellbeing; passive consumption tends to diminish it',
-    ],
-    practicalExercise: 'Review the past seven days of technology use. Categorize each significant block of digital time as either: (1) Meaningful — served a specific value (learning, creation, genuine connection, important communication), or (2) Unconscious — habitual, reactive, or primarily passive consumption. Calculate the ratio. Set a specific goal for improving that ratio in the coming week by adding one meaningful use and reducing one unconscious use.',
-    summary: 'Technology is a tool, and like all tools, its value depends entirely on the wisdom with which it is used. When you apply it to what genuinely matters, it amplifies your capacity for a life well-lived.',
-  },
-  'dmml-5-3': {
-    objectives: ['Integrate all course learnings into a coherent, sustainable digital lifestyle', 'Create a personal digital wellness plan for long-term balance'],
-    body: [
-      'Sustainable digital lifestyle design is not a destination — it is an ongoing practice of adjustment, reflection, and recommitment. The digital environment is constantly changing, new platforms emerge, and the pressures of professional and social life continuously test the boundaries we create. What makes a digital lifestyle sustainable is not rigidity — it is a clear set of values and the skills to realign with them when drift occurs.',
-      'Drift is inevitable. You will have weeks when your screen time spikes, when device-free routines slip, when you find yourself in a notification spiral you thought you had resolved. This is not failure — it is the nature of practice in a dynamic environment. The difference between those who build lasting digital health and those who do not is not avoiding drift. It is recovering from it without self-criticism and returning to intentional practice.',
-      'A personal digital wellness plan synthesizes the practices from this course into a coherent system. It includes: a core set of non-negotiables (the two or three boundaries you protect regardless of circumstances), a weekly rhythm of device-free anchors, a notification configuration that reflects your values, a daily practice for attention restoration (meditation, exercise, nature time), and a monthly review of digital usage patterns.',
-      'Social infrastructure matters enormously for sustainability. Digital lifestyle changes are harder to maintain in isolation. Shared commitments — a partner, family, or community that holds similar values around technology — create the social context within which individual practices become easier to sustain. Sharing your intentions, involving others in device-free times, and participating in communities of people committed to digital mindfulness all significantly increase sustainability.',
-      'The measure of success in this journey is not total screen time — it is the quality of your attention, the depth of your relationships, the creativity in your work, and the presence you bring to the moments of your life. When technology serves these things, it is serving you well. When it systematically undermines them, it needs to be managed differently. You now have the knowledge and tools to make that judgment and act on it.',
-    ],
-    keyTakeaways: [
-      'Sustainable digital lifestyle is an ongoing practice, not a destination — drift is normal and manageable',
-      'A personal digital wellness plan integrates non-negotiables, weekly rhythms, notification design, attention practices, and monthly review',
-      'Social infrastructure — shared commitments with others — significantly increases individual sustainability',
-      'Success is measured not by screen time but by attention quality, relationship depth, and life presence',
-    ],
-    practicalExercise: 'Write your Personal Digital Wellness Plan. Include: (1) Your two non-negotiable digital boundaries. (2) Your three weekly offline anchors. (3) Your notification configuration (what stays on, what is batched, what is off). (4) Your daily attention-restoration practice. (5) Your monthly review commitment (when and what you will review). Share this plan with at least one person who will support it. Review it in 30 days.',
-    summary: 'A sustainable digital lifestyle is a conscious design choice renewed daily. You now have the framework, the practices, and the understanding to make technology your tool — not your master. The balance you create from here is yours to design.',
-  },
-  'dmml-5-4': {
-    objectives: ['Complete the final assessment for Course 3: Digital Mindfulness & Modern Life Balance'],
-    body: ['This final assessment covers all five modules. Completion earns your Digital Mindfulness & Modern Life Balance Certificate.'],
-    quizQuestions: [
-      {
-        question: 'What is the primary mechanism through which variable reward schedules make digital scrolling compulsive?',
-        options: ['They always deliver interesting content', 'The unpredictable nature of rewards drives continued behavior seeking the next reward', 'They limit the amount of time you can spend on a platform', 'They create a fear of missing out'],
-        correct: 1,
-      },
-      {
-        question: 'What does the creation-to-consumption ratio reflect about your digital life?',
-        options: ['How much content you produce versus how much you consume — an indicator of technology quality', 'The ratio of paid to free apps you use', 'How many platforms you create accounts on', 'The time spent creating files versus reading them'],
-        correct: 0,
-      },
-      {
-        question: 'According to this course, what is the most accurate measure of success in building a sustainable digital lifestyle?',
-        options: ['Total daily screen time under two hours', 'Number of apps deleted from your phone', 'Quality of attention, depth of relationships, and presence in life', 'Frequency of device-free days'],
+        question: "How can late-night screen usage affect people?",
+        options: ["It improves recovery", "It increases sleep quality", "It can reduce sleep quality and focus", "It improves concentration immediately"],
         correct: 2,
       },
     ],
-    summary: 'Congratulations — you have completed Digital Mindfulness & Modern Life Balance. You now have a comprehensive understanding of digital distraction, practical screen-time management, attention recovery, healthy digital habits, and sustainable lifestyle design. Your certificate is ready.',
+    summary: 'Module 4 complete.'
+  },
+  'dmml-5-1': {
+    objectives: ["Learn how to maintain a healthy balance between digital life, real-world responsibilities, relationships, and personal well-being.", "Balance Online and Offline Life"],
+    body: [
+      "Technology is now part of daily life.",
+      "People use digital platforms for:",
+      "* communication",
+      "* learning",
+      "* entertainment",
+      "* work",
+      "However, problems begin when digital life completely replaces offline experiences.",
+      "For example:",
+      "A person may spend hours:",
+      "* scrolling social media",
+      "* watching videos",
+      "* chatting online",
+      "but very little time:",
+      "* interacting with family",
+      "* exercising",
+      "* developing real-world skills",
+      "* resting properly",
+      "Over time, this creates imbalance.",
+      "Healthy digital balance means making time for both:",
+      "\u2022 online activities",
+      "\u2022 offline experiences",
+      "Offline activities such as:",
+      "* physical exercise",
+      "* face-to-face conversations",
+      "* hobbies",
+      "* time in nature",
+      "help improve mental clarity and reduce overstimulation.",
+      "A useful principle:",
+      "Technology should support life, not replace it.",
+    ],
+    summary: "End of Balance Online and Offline Life."
+  },
+  'dmml-5-2': {
+    objectives: ["Learn how to maintain a healthy balance between digital life, real-world responsibilities, relationships, and personal well-being.", "Create Boundaries With Technology"],
+    body: [
+      "Without boundaries, digital usage can expand into every part of the day.",
+      "For example:",
+      "Many people:",
+      "* check phones during conversations",
+      "* use screens while eating",
+      "* continue working late into the night",
+      "This reduces focus, presence, and recovery time.",
+      "Healthy boundaries help create more control over digital habits.",
+      "Examples of useful boundaries:",
+      "\u2022 no phone during meals",
+      "\u2022 fixed times for checking social media",
+      "\u2022 screen-free time before sleep",
+      "\u2022 focused work periods without interruptions",
+      "Boundaries are not about avoiding technology completely.",
+      "They are about using technology intentionally instead of constantly.",
+      "A useful rule:",
+      "If technology controls your attention all day, balance becomes difficult.",
+    ],
+    summary: "End of Create Boundaries With Technology."
+  },
+  'dmml-5-3': {
+    objectives: ["Learn how to maintain a healthy balance between digital life, real-world responsibilities, relationships, and personal well-being.", "Build a Sustainable Digital Lifestyle"],
+    body: [
+      "Many people try extreme digital detox methods but return to old habits quickly.",
+      "Long-term balance is created through sustainable habits, not temporary extremes.",
+      "For example:",
+      "Instead of:",
+      "* deleting every app suddenly",
+      "* avoiding technology completely",
+      "a sustainable approach would be:",
+      "\u2022 reducing unnecessary screen time gradually",
+      "\u2022 improving focus habits step by step",
+      "\u2022 creating realistic digital boundaries",
+      "Small consistent improvements are easier to maintain long-term.",
+      "A balanced digital lifestyle should support:",
+      "\u2022 productivity",
+      "\u2022 learning",
+      "\u2022 relationships",
+      "\u2022 mental well-being",
+      "Technology is most useful when it helps people achieve meaningful goals without controlling their attention constantly.",
+      "A useful principle:",
+      "Sustainable habits create long-term balance.",
+    ],
+    summary: "End of Build a Sustainable Digital Lifestyle."
+  },
+  'dmml-5-4': {
+    objectives: ['Assess your understanding of Module 5'],
+    body: ['Answer all questions and submit.'],
+    quizQuestions: [
+      {
+        question: "What is intentional technology use?",
+        options: ["Endless scrolling", "Using technology consciously for meaningful purposes", "Constant multitasking", "Continuous content consumption"],
+        correct: 1,
+      },
+      {
+        question: "Why is balancing online and offline life important?",
+        options: ["Technology should replace real-world experiences", "Offline experiences support mental clarity and well-being", "Social media improves all relationships automatically", "Online life is more important than offline life"],
+        correct: 1,
+      },
+      {
+        question: "What is the purpose of creating digital boundaries?",
+        options: ["To avoid all technology", "To use technology more intentionally and maintain balance", "To increase screen dependency", "To multitask more effectively"],
+        correct: 1,
+      },
+      {
+        question: "What is the best approach for long-term digital balance?",
+        options: ["Extreme digital detox permanently", "Avoiding all devices", "Building sustainable habits gradually", "Using more productivity apps continuously"],
+        correct: 2,
+      },
+      {
+        question: "A student opens a phone to reply to one message but spends 40 minutes scrolling social media.",
+        options: ["Lack of internet access", "Digital distraction and unintentional usage", "Excessive studying", "Too much offline activity"],
+        correct: 1,
+      },
+      {
+        question: "Why is multitasking often ineffective?",
+        options: ["It improves concentration", "It reduces attention quality and focus", "It increases deep work", "It helps memory retention"],
+        correct: 1,
+      },
+      {
+        question: "What is a useful first step toward improving digital habits?",
+        options: ["Deleting all apps immediately", "Tracking screen time usage", "Avoiding all technology", "Buying a new phone"],
+        correct: 1,
+      },
+      {
+        question: "Why should unnecessary notifications be reduced?",
+        options: ["They improve productivity", "They interrupt concentration and attention", "They improve deep focus", "They reduce app usage statistics"],
+        correct: 1,
+      },
+      {
+        question: "What is deep focus?",
+        options: ["Constantly switching between apps", "Working while watching videos", "Maintaining uninterrupted attention on one task", "Multitasking efficiently"],
+        correct: 2,
+      },
+      {
+        question: "How can focus environments be improved?",
+        options: ["Keeping notifications active", "Opening multiple apps during work", "Reducing distractions and interruptions", "Watching videos while studying"],
+        correct: 2,
+      },
+      {
+        question: "Why is attention recovery important?",
+        options: ["Continuous stimulation improves concentration", "The brain needs periods of reduced stimulation to recover focus", "Notifications improve mental recovery", "Constant screen exposure improves sleep"],
+        correct: 1,
+      },
+      {
+        question: "How can screen usage before sleep affect people?",
+        options: ["It improves concentration immediately", "It can reduce sleep quality and recovery", "It improves memory automatically", "It increases deep focus at night"],
+        correct: 1,
+      },
+      {
+        question: "What is intentional technology use?",
+        options: ["Endless scrolling without purpose", "Using technology consciously for meaningful tasks", "Constant multitasking", "Switching between apps continuously"],
+        correct: 1,
+      },
+      {
+        question: "What creates long-term digital balance?",
+        options: ["Extreme short-term detox methods", "Avoiding all devices permanently", "Sustainable habits and healthy boundaries", "Constant productivity tracking"],
+        correct: 2,
+      },
+    ],
+    summary: 'Congratulations — you have completed Digital Mindfulness & Modern Life Balance.'
   },
 };
 
@@ -1455,6 +1615,8 @@ const CoursePlayerPage: React.FC = () => {
   const [rightPanelOpen, setRightPanelOpen] = useState(true);
   const [quizAnswers, setQuizAnswers]       = useState<Record<number, number>>({});
   const [quizSubmitted, setQuizSubmitted]   = useState(false);
+  const [quizStarted, setQuizStarted]       = useState(false);
+  const [timeLeft, setTimeLeft]             = useState<number | null>(null);
   const [reflectionAnswers, setReflectionAnswers] = useState<Record<string, string>>({});
   const [certModalOpen, setCertModalOpen]   = useState(false);
 
@@ -1466,7 +1628,21 @@ const CoursePlayerPage: React.FC = () => {
     contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
     setQuizAnswers({});
     setQuizSubmitted(false);
+    setQuizStarted(false);
+    setTimeLeft(null);
   }, [activeUnitId]);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (quizStarted && !quizSubmitted && timeLeft !== null && timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft(prev => prev !== null ? prev - 1 : 0);
+      }, 1000);
+    } else if (timeLeft === 0 && !quizSubmitted) {
+      setQuizSubmitted(true);
+    }
+    return () => clearInterval(timer);
+  }, [quizStarted, quizSubmitted, timeLeft]);
 
   const totalUnits     = allUnits.length;
   const progressPct    = totalUnits > 0 ? Math.round((completedUnits.size / totalUnits) * 100) : 0;
@@ -1658,21 +1834,25 @@ const CoursePlayerPage: React.FC = () => {
                             const isActive = unit.id === activeUnitId;
                             const isDone   = completedUnits.has(unit.id);
                             const tc       = TYPE_CONFIG[unit.type] ?? TYPE_CONFIG['reading'];
+                            
+                            const unitIdx = allUnits.findIndex(u => u.id === unit.id);
+                            const previousUnit = unitIdx > 0 ? allUnits[unitIdx - 1] : null;
+                            const isLocked = previousUnit ? !completedUnits.has(previousUnit.id) : false;
 
                             return (
                               <button
                                 key={unit.id}
-                                disabled={unit.locked && !isDone}
-                                onClick={() => !unit.locked && setActiveUnitId(unit.id)}
+                                disabled={isLocked && !isDone}
+                                onClick={() => !isLocked && setActiveUnitId(unit.id)}
                                 className="w-full flex items-center gap-3 px-4 py-3 pl-[52px] text-left transition-all"
                                 style={{
                                   background: isActive ? '#f0fdf7' : 'transparent',
                                   borderLeft: isActive ? '3px solid #0f7a55' : '3px solid transparent',
-                                  opacity: unit.locked && !isDone ? 0.4 : 1,
+                                  opacity: isLocked && !isDone ? 0.4 : 1,
                                 }}
                               >
                                 <div className="flex-shrink-0" style={{ color: isDone ? '#0f7a55' : tc.color }}>
-                                  {isDone ? <CheckCircle2 className="w-4 h-4" /> : unit.locked ? <Lock className="w-3.5 h-3.5 text-[#d1d5db]" /> : tc.icon}
+                                  {isDone ? <CheckCircle2 className="w-4 h-4" /> : isLocked ? <Lock className="w-3.5 h-3.5 text-[#d1d5db]" /> : tc.icon}
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <p className={`text-[14px] truncate font-semibold ${isActive ? 'text-[#0b1310] font-bold' : isDone ? 'text-[#9ca3af]' : 'text-[#374151]'}`}>
@@ -1701,7 +1881,7 @@ const CoursePlayerPage: React.FC = () => {
 
             {/* Certificate badge */}
             <div className="p-4" style={{ borderTop: '1px solid #e5ede9' }}>
-              {progressPct === 100 || user?.role === 'admin' ? (
+              {progressPct === 100 ? (
                 <button
                   onClick={() => setCertModalOpen(true)}
                   className="w-full flex items-center gap-3 px-4 py-3.5 rounded-[12px] text-left transition-all hover:scale-[1.02]"
@@ -1830,16 +2010,33 @@ const CoursePlayerPage: React.FC = () => {
               {/* Body text */}
               {currentUnit?.type !== 'quiz' && currentContent.body && (
                 <div className="space-y-6 mb-10">
-                  {currentContent.body.map((para, i) => (
-                    <motion.p
-                      key={i}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.08 + i * 0.05 }}
-                      className="text-[20px] md:text-[22px] text-[#2c3733] leading-[1.85] font-light"
-                      dangerouslySetInnerHTML={{ __html: para.replace(/\*(.*?)\*/g, '<strong style="color:#0f7a55;font-weight:700">$1</strong>') }}
-                    />
-                  ))}
+                  {currentContent.body.map((para, i) => {
+                    const imgMatch = para.match(/^!\[(.*?)\]\((.*?)\)$/);
+                    if (imgMatch) {
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.08 + i * 0.05 }}
+                          className="my-10 rounded-2xl overflow-hidden shadow-lg border border-[#e5ede9]"
+                        >
+                          <img src={imgMatch[2]} alt={imgMatch[1] || 'Course Image'} className="w-full h-auto object-cover" />
+                        </motion.div>
+                      );
+                    }
+                    
+                    return (
+                      <motion.p
+                        key={i}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.08 + i * 0.05 }}
+                        className="text-[20px] md:text-[22px] text-[#2c3733] leading-[1.85] font-light"
+                        dangerouslySetInnerHTML={{ __html: para.replace(/\\*(.*?)\\*/g, '<strong style="color:#0f7a55;font-weight:700">$1</strong>') }}
+                      />
+                    );
+                  })}
                 </div>
               )}
 
@@ -1933,78 +2130,104 @@ const CoursePlayerPage: React.FC = () => {
                     <HelpCircle className="w-6 h-6 text-[#d97706]" />
                     <h2 className="text-2xl font-extrabold text-[#0b1310]">Knowledge Check</h2>
                     <span className="text-sm text-[#9ca3af] ml-2">{currentContent.quizQuestions.length} questions</span>
+                    {quizStarted && !quizSubmitted && timeLeft !== null && (
+                      <span className={`ml-auto text-sm font-bold flex items-center gap-1.5 ${timeLeft <= 60 ? 'text-red-500' : 'text-[#0f7a55]'}`}>
+                        <Clock className="w-4 h-4" />
+                        {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+                      </span>
+                    )}
                   </div>
 
-                  <div className="space-y-8">
-                    {currentContent.quizQuestions.map((q, qi) => (
-                      <div key={qi} className="p-7 rounded-[18px]"
-                        style={{ background: '#fafafa', border: '1px solid #e5e7eb' }}>
-                        <p className="text-[20px] font-bold text-[#0b1310] mb-5 leading-snug">
-                          <span className="text-[#d97706] mr-2">{qi + 1}.</span>{q.question}
-                        </p>
-                        <div className="space-y-3">
-                          {q.options.map((opt, oi) => {
-                            const selected = quizAnswers[qi] === oi;
-                            const correct  = quizSubmitted && oi === q.correct;
-                            const wrong    = quizSubmitted && selected && oi !== q.correct;
-                            return (
-                              <button
-                                key={oi}
-                                disabled={quizSubmitted}
-                                onClick={() => !quizSubmitted && setQuizAnswers(prev => ({ ...prev, [qi]: oi }))}
-                                className="w-full flex items-center gap-3 px-5 py-4 rounded-[12px] text-left transition-all text-[18px]"
-                                style={{
-                                  background: correct ? '#ecfdf5' : wrong ? '#fef2f2' : selected ? '#fffbeb' : '#ffffff',
-                                  border: correct ? '1px solid #6ee7b7' : wrong ? '1px solid #fca5a5' : selected ? '1px solid #fde68a' : '1px solid #e5e7eb',
-                                  color: correct ? '#059669' : wrong ? '#dc2626' : selected ? '#d97706' : '#374151',
-                                }}
-                              >
-                                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                                  style={{ border: `1.5px solid ${correct ? '#6ee7b7' : wrong ? '#fca5a5' : selected ? '#fde68a' : '#d1d5db'}` }}>
-                                  {correct && <CheckCircle2 className="w-4 h-4 text-[#059669]" />}
-                                  {wrong   && <X className="w-3.5 h-3.5 text-[#dc2626]" />}
-                                  {selected && !quizSubmitted && <div className="w-3 h-3 rounded-full bg-[#d97706]" />}
-                                </div>
-                                {opt}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {!quizSubmitted ? (
-                    <button
-                      onClick={() => {
-                        if (Object.keys(quizAnswers).length === currentContent.quizQuestions!.length) setQuizSubmitted(true);
-                      }}
-                      disabled={Object.keys(quizAnswers).length < (currentContent.quizQuestions?.length ?? 0)}
-                      className="mt-6 flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all disabled:opacity-30"
-                      style={{ background: 'linear-gradient(135deg, #1a5d47, #0f7a55)', color: '#fff' }}
-                    >
-                      <ListChecks className="w-4 h-4" />
-                      Submit Answers
-                    </button>
-                  ) : (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mt-6 p-5 rounded-[14px] flex items-center gap-4"
-                      style={{ background: '#f0fdf7', border: '1px solid #a7f3d0' }}
-                    >
-                      <CheckCircle2 className="w-8 h-8 text-[#0f7a55] flex-shrink-0" />
-                      <div>
-                        <p className="text-[14px] font-bold text-[#0f7a55]">Assessment Complete!</p>
-                        <p className="text-[12px] text-[#6b7280]">
-                          {Object.entries(quizAnswers).filter(([qi, ans]) => ans === currentContent.quizQuestions![+qi].correct).length} / {currentContent.quizQuestions?.length} correct
-                        </p>
-                      </div>
-                      <button onClick={() => { setQuizAnswers({}); setQuizSubmitted(false); }}
-                        className="ml-auto flex items-center gap-1.5 text-xs text-[#9ca3af] hover:text-[#0b1310] transition-colors">
-                        <RotateCcw className="w-3.5 h-3.5" />Retry
+                  {!quizStarted && !quizSubmitted ? (
+                    <div className="p-8 text-center rounded-[18px]" style={{ background: '#fafafa', border: '1px solid #e5e7eb' }}>
+                      <HelpCircle className="w-12 h-12 text-[#d97706] mx-auto mb-4 opacity-50" />
+                      <h3 className="text-xl font-bold text-[#0b1310] mb-2">Ready to test your knowledge?</h3>
+                      <p className="text-[#6b7280] mb-6">You will have {currentContent.quizQuestions.length} minutes to complete this assessment.</p>
+                      <button
+                        onClick={() => {
+                          setQuizStarted(true);
+                          setTimeLeft(currentContent.quizQuestions!.length * 60);
+                        }}
+                        className="px-8 py-3 rounded-full text-sm font-bold transition-all inline-block hover:scale-105"
+                        style={{ background: 'linear-gradient(135deg, #1a5d47, #0f7a55)', color: '#fff' }}
+                      >
+                        Start Quiz
                       </button>
-                    </motion.div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="space-y-8">
+                        {currentContent.quizQuestions.map((q, qi) => (
+                          <div key={qi} className="p-7 rounded-[18px]"
+                            style={{ background: '#fafafa', border: '1px solid #e5e7eb' }}>
+                            <p className="text-[20px] font-bold text-[#0b1310] mb-5 leading-snug">
+                              <span className="text-[#d97706] mr-2">{qi + 1}.</span>{q.question}
+                            </p>
+                            <div className="space-y-3">
+                              {q.options.map((opt, oi) => {
+                                const selected = quizAnswers[qi] === oi;
+                                const correct  = quizSubmitted && oi === q.correct;
+                                const wrong    = quizSubmitted && selected && oi !== q.correct;
+                                return (
+                                  <button
+                                    key={oi}
+                                    disabled={quizSubmitted}
+                                    onClick={() => !quizSubmitted && setQuizAnswers(prev => ({ ...prev, [qi]: oi }))}
+                                    className="w-full flex items-center gap-3 px-5 py-4 rounded-[12px] text-left transition-all text-[18px]"
+                                    style={{
+                                      background: correct ? '#ecfdf5' : wrong ? '#fef2f2' : selected ? '#fffbeb' : '#ffffff',
+                                      border: correct ? '1px solid #6ee7b7' : wrong ? '1px solid #fca5a5' : selected ? '1px solid #fde68a' : '1px solid #e5e7eb',
+                                      color: correct ? '#059669' : wrong ? '#dc2626' : selected ? '#d97706' : '#374151',
+                                    }}
+                                  >
+                                    <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
+                                      style={{ border: `1.5px solid ${correct ? '#6ee7b7' : wrong ? '#fca5a5' : selected ? '#fde68a' : '#d1d5db'}` }}>
+                                      {correct && <CheckCircle2 className="w-4 h-4 text-[#059669]" />}
+                                      {wrong   && <X className="w-3.5 h-3.5 text-[#dc2626]" />}
+                                      {selected && !quizSubmitted && <div className="w-3 h-3 rounded-full bg-[#d97706]" />}
+                                    </div>
+                                    {opt}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {!quizSubmitted ? (
+                        <button
+                          onClick={() => {
+                            if (Object.keys(quizAnswers).length === currentContent.quizQuestions!.length) setQuizSubmitted(true);
+                          }}
+                          disabled={Object.keys(quizAnswers).length < (currentContent.quizQuestions?.length ?? 0)}
+                          className="mt-6 flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all disabled:opacity-30"
+                          style={{ background: 'linear-gradient(135deg, #1a5d47, #0f7a55)', color: '#fff' }}
+                        >
+                          <ListChecks className="w-4 h-4" />
+                          Submit Answers
+                        </button>
+                      ) : (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-6 p-5 rounded-[14px] flex items-center gap-4"
+                          style={{ background: '#f0fdf7', border: '1px solid #a7f3d0' }}
+                        >
+                          <CheckCircle2 className="w-8 h-8 text-[#0f7a55] flex-shrink-0" />
+                          <div>
+                            <p className="text-[14px] font-bold text-[#0f7a55]">Assessment Complete!</p>
+                            <p className="text-[12px] text-[#6b7280]">
+                              {Object.entries(quizAnswers).filter(([qi, ans]) => ans === currentContent.quizQuestions![+qi].correct).length} / {currentContent.quizQuestions?.length} correct
+                            </p>
+                          </div>
+                          <button onClick={() => { setQuizAnswers({}); setQuizSubmitted(false); setQuizStarted(false); setTimeLeft(null); }}
+                            className="ml-auto flex items-center gap-1.5 text-xs text-[#9ca3af] hover:text-[#0b1310] transition-colors">
+                            <RotateCcw className="w-3.5 h-3.5" />Retry
+                          </button>
+                        </motion.div>
+                      )}
+                    </>
                   )}
                 </div>
               )}

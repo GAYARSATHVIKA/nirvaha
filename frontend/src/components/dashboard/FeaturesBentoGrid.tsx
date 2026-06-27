@@ -4,41 +4,53 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const features = [
     {
-        title: "Guided Meditation",
-        description: "Experience personalized meditation sessions that adapt to your emotional state. Our AI-powered guidance helps you find peace, clarity, and balance through ancient techniques reimagined for modern life.",
+        title: "AI Spiritual Chatbot (ZenChat)",
+        description: "An intelligent conversational AI assistant designed to provide spiritual guidance, wellness advice, and personalized recommendations. The chatbot leverages artificial intelligence to understand user queries and provide thoughtful, contextual responses related to meditation, wellness, spirituality, and personal growth.",
+        image: "/Productivity Flow.jpg",
+        color: "#ce93d8"
+    },
+    {
+        title: "Meditation Platform",
+        description: "A comprehensive meditation and mindfulness platform offering various meditation techniques including Mudra-based practices, guided meditation sessions, breathing exercises, and wellness programs. Features categorized content, progress tracking, and personalized recommendations.",
         image: "/guided_meditation_pop.png",
         color: "#1a5d47"
     },
     {
-        title: "Mood Tracking",
-        description: "Gain deep insights into your emotional patterns with our intuitive mood tracking system. Visualize your journey, identify triggers, and celebrate your progress towards emotional wellness.",
-        image: "/Meditation at Sunrise.png",
-        color: "#e57373"
-    },
-    {
-        title: "Sleep Stories",
-        description: "Drift into restful slumber with our collection of soothing audio journeys. From enchanted forests to peaceful shores, let gentle narratives and ambient sounds guide you to deep, restorative sleep.",
+        title: "Sound Healing",
+        description: "A specialized module dedicated to sound-based wellness practices. Includes sound healing sessions, binaural beats, frequency-based healing audio, and related wellness content to explore different sound healing modalities and integrate them into your wellness routine.",
         image: "/cozy Bed.webp",
         color: "#7986cb"
     },
     {
-        title: "Energy Balance",
-        description: "Restore your inner vitality with practices designed to harmonize your energy centers. Through guided exercises and mindful techniques, unlock your body's natural ability to heal and recharge.",
+        title: "Community Rooms",
+        description: "Safe spaces within the community where users can engage in anonymous discussions on wellness topics, share experiences, seek advice, and support others without revealing their identity. Promotes open communication and support within a secure environment.",
+        image: "/Meditation at Sunrise.png",
+        color: "#e57373"
+    },
+    {
+        title: "Companion Mode",
+        description: "A feature connecting users with experienced mentors, wellness guides, and spiritual teachers. Users can request guidance, book sessions, access mentorship programs, and receive personalized wellness recommendations from qualified companions.",
         image: "/energy_balance_yoga.png",
         color: "#ffb74d"
     },
     {
-        title: "Breathwork",
-        description: "Master the art of conscious breathing with powerful techniques from ancient traditions. Reduce stress, boost focus, and transform your state of mind in just a few minutes of daily practice.",
+        title: "Certification & Training Modules",
+        description: "Structured educational programs offering certifications in various wellness disciplines. Users can enroll in courses, complete modules, earn certifications, and become certified practitioners in areas such as meditation instruction, sound healing facilitation, and wellness coaching.",
         image: "/breathwork_indoor.png",
         color: "#4fc3f7"
     },
     {
-        title: "Daily Affirmations",
-        description: "Begin each day with intention and positivity. Our curated affirmations are designed to rewire negative thought patterns and cultivate a mindset of abundance, gratitude, and self-love.",
+        title: "Marketplace",
+        description: "An integrated marketplace for wellness products including meditation aids, sound healing devices, wellness supplements, books, and related items. Users can browse products, make purchases, and have items delivered directly to them, enhancing their wellness journey.",
+        image: "/guided_meditation_pop.png",
+        color: "#1a5d47"
+    },
+    {
+        title: "User Dashboard",
+        description: "A personalized dashboard providing users with an overview of their wellness journey. The dashboard displays progress metrics, meditation statistics, upcoming sessions, community activity, marketplace orders, and personalized recommendations based on user behavior and preferences.",
         image: "/Productivity Flow.jpg",
         color: "#ce93d8"
-    },
+    }
 ];
 
 export const FeaturesBentoGrid = () => {

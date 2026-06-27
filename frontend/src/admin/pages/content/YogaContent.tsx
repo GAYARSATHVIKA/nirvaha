@@ -118,6 +118,10 @@ export function YogaContent() {
     duration: 10,
     youtube: "",
     imageUrl: "",
+    description: "",
+    guidelines: [] as string[],
+    benefits: [] as string[],
+    precautions: [] as string[],
   });
 
   // Debounce search
@@ -158,7 +162,10 @@ export function YogaContent() {
     setSelected(null);
     setContentAction("add");
     setReplaceTargetId("");
-    setForm({ name: "", difficulty: "Gentle", duration: 10, youtube: "", imageUrl: "" });
+    setForm({ 
+      name: "", difficulty: "Gentle", duration: 10, youtube: "", imageUrl: "",
+      description: "", guidelines: [], benefits: [], precautions: []
+    });
     setImageFile(null);
     setIsModalOpen(true);
   };
@@ -171,6 +178,10 @@ export function YogaContent() {
       duration: p.duration || 10,
       youtube: p.youtubeUrl || "",
       imageUrl: p.imageUrl || "",
+      description: p.description || "",
+      guidelines: p.guidelines || [],
+      benefits: p.benefits || [],
+      precautions: p.precautions || [],
     });
     setImageFile(null);
     setIsModalOpen(true);
@@ -210,6 +221,10 @@ export function YogaContent() {
         duration: form.duration,
         youtubeUrl: form.youtube,
         imageUrl,
+        description: form.description,
+        guidelines: form.guidelines,
+        benefits: form.benefits,
+        precautions: form.precautions,
         status: "Active",
       };
 
@@ -532,6 +547,10 @@ export function YogaContent() {
                               duration: target.duration || 10,
                               youtube: target.youtubeUrl || "",
                               imageUrl: target.imageUrl || "",
+                              description: target.description || "",
+                              guidelines: target.guidelines || [],
+                              benefits: target.benefits || [],
+                              precautions: target.precautions || [],
                             });
                             setImageFile(null);
                           }
@@ -617,6 +636,65 @@ export function YogaContent() {
                 <p className="text-[10px] text-[#95d5b2] mt-1">
                   Clicking the pose card on the frontend will open this link.
                 </p>
+              </div>
+
+              {/* Description */}
+              <div>
+                <label className="yoga-label">Description</label>
+                <textarea
+                  className="yoga-input min-h-[80px]"
+                  placeholder="A restorative pose that gently stretches..."
+                  value={form.description}
+                  onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
+                />
+              </div>
+
+              {/* Guidelines, Benefits, Precautions (Dynamic Lists) */}
+              <div className="space-y-4">
+                {(["guidelines", "benefits", "precautions"] as const).map(field => (
+                  <div key={field} className="bg-white/40 p-3 rounded-xl border border-[#b7e4c7]">
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="yoga-label capitalize mb-0">{field}</label>
+                      <button
+                        type="button"
+                        onClick={() => setForm(f => ({ ...f, [field]: [...f[field], ""] }))}
+                        className="text-xs font-semibold text-[#52b788] hover:text-[#40916c] flex items-center gap-1"
+                      >
+                        <Plus className="w-3 h-3" /> Add
+                      </button>
+                    </div>
+                    {form[field].length === 0 ? (
+                      <p className="text-[10px] text-gray-400 italic">No {field} added.</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {form[field].map((val, idx) => (
+                          <div key={idx} className="flex gap-2">
+                            <input
+                              className="yoga-input !py-1.5 !text-sm"
+                              value={val}
+                              onChange={e => {
+                                const arr = [...form[field]];
+                                arr[idx] = e.target.value;
+                                setForm(f => ({ ...f, [field]: arr }));
+                              }}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const arr = [...form[field]];
+                                arr.splice(idx, 1);
+                                setForm(f => ({ ...f, [field]: arr }));
+                              }}
+                              className="w-8 h-8 flex items-center justify-center rounded-lg bg-red-50 text-red-400 hover:text-red-600 hover:bg-red-100 flex-shrink-0"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
 

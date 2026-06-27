@@ -21,11 +21,14 @@ router.get('/', async (req, res) => {
     const meditations = await Meditation.find(query).sort({ createdAt: -1 }).lean();
 
     // Normalize relative URLs to absolute so frontend can play audio directly
-    const BASE = process.env.BASE_URL || `http://localhost:${process.env.PORT || 5001}`;
     const toAbsolute = (url) => {
       if (!url) return '';
-      if (url.startsWith('http')) return url;       // already absolute
-      return `${BASE}${url.startsWith('/') ? '' : '/'}${url}`;
+      if (url.startsWith('http')) return url;
+      if (url.startsWith('/uploads/') || url.startsWith('uploads/')) {
+        const BASE = process.env.BASE_URL || `http://localhost:${process.env.PORT || 5001}`;
+        return `${BASE}${url.startsWith('/') ? '' : '/'}${url}`;
+      }
+      return url;
     };
 
     res.json(

@@ -1,0 +1,819 @@
+[
+  {
+    "id": "dmml-m1",
+    "title": "Module 1: Understanding Digital Distraction",
+    "description": "Understand how digital platforms affect attention, focus, and daily behavior.",
+    "units": [
+      {
+        "id": "dmml-m1-1",
+        "title": "Why Digital Distraction Happens",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "Modern apps and platforms are designed to continuously capture attention.",
+            "Notifications, short videos, endless scrolling, and instant updates make it easy to lose focus without realizing it.",
+            "For example:",
+            "A student opens their phone to reply to one message.",
+            "A few minutes later:",
+            "* they start watching short videos",
+            "* switch between apps",
+            "* forget the original task",
+            "What was supposed to take 2 minutes becomes 30 minutes of distraction.",
+            "This happens because digital platforms are built to encourage continuous engagement.",
+            "Common digital distractions include:",
+            "• notifications",
+            "• social media scrolling",
+            "• constant app switching",
+            "• multitasking between screens",
+            "Over time, frequent distractions reduce the ability to focus deeply on one task.",
+            "Learning to manage attention is an important modern skill."
+          ],
+          "summary": "Attention moves where stimulation is strongest."
+        }
+      },
+      {
+        "id": "dmml-m1-2",
+        "title": "The Myth of Multitasking",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image3.png)",
+            "Many people believe multitasking improves productivity.",
+            "In reality, constantly switching between tasks reduces focus and efficiency.",
+            "For example:",
+            "A student is:",
+            "* attending an online lecture",
+            "* replying to messages",
+            "* checking social media",
+            "* watching videos",
+            "Although multiple activities are happening at once, the brain is not fully focused on any one task.",
+            "This creates:",
+            "• lower concentration",
+            "• more mistakes",
+            "• mental fatigue",
+            "Research shows that the brain performs better when attention is focused on one important task at a time.",
+            "A better approach is:",
+            "• complete one task",
+            "• then move to the next task",
+            "This helps improve both focus and quality of work.",
+            "A simple rule:",
+            "Focused attention is more effective than divided attention."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "dmml-m1-3",
+        "title": "Attention Is a Limited Resource",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image4.png)",
+            "Attention works like energy.",
+            "The more it is constantly interrupted, the harder it becomes to focus deeply.",
+            "For example:",
+            "A person studying for an exam may receive:",
+            "* notifications",
+            "* messages",
+            "* social media updates",
+            "Each interruption breaks concentration.",
+            "Even short distractions can make it difficult to return to deep focus.",
+            "Over time, this creates:",
+            "• shorter attention span",
+            "• mental exhaustion",
+            "• reduced productivity",
+            "Strong focus requires periods of uninterrupted attention.",
+            "Simple habits can help protect attention:",
+            "• turning off unnecessary notifications",
+            "• keeping the phone away during important work",
+            "• scheduling focused work sessions"
+          ],
+          "summary": "What repeatedly receives your attention shapes your habits and thinking."
+        }
+      },
+      {
+        "id": "dmml-m1-q",
+        "title": "Module 1 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "Why do digital distractions easily capture attention?",
+              "options": [
+                "Phones are naturally harmful",
+                "Digital platforms are designed to encourage engagement",
+                "Notifications improve focus",
+                "Multitasking improves concentration"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is a major problem with multitasking?",
+              "options": [
+                "It improves deep focus",
+                "It reduces concentration and efficiency",
+                "It increases attention span",
+                "It reduces mental fatigue"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is attention considered a limited resource?",
+              "options": [
+                "It can handle unlimited interruptions",
+                "Constant interruptions reduce deep focus"
+              ],
+              "correct": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dmml-m2",
+    "title": "Module 2: Managing Screen Time Intentionally",
+    "description": "Learn how to use technology more intentionally, reduce unnecessary screen time, and build healthier digital habits without completely avoiding technology.",
+    "units": [
+      {
+        "id": "dmml-m2-1",
+        "title": "Track Where Your Time Goes",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image11.png)",
+            "Many people underestimate how much time they spend on their phones.",
+            "Short periods of scrolling throughout the day can add up to several hours without notice.",
+            "For example:",
+            "A person checks social media:",
+            "* for 5 minutes after waking up",
+            "* during meals",
+            "* between study sessions",
+            "* before sleeping",
+            "Individually, each session feels small.",
+            "But together, they may total 3–5 hours daily.",
+            "The first step toward better digital balance is awareness.",
+            "Most smartphones now provide:",
+            "• screen time reports",
+            "• app usage statistics",
+            "• daily usage breakdowns",
+            "Tracking usage helps answer important questions:",
+            "• Which apps consume the most time?",
+            "• Is the usage intentional or automatic?",
+            "• Which habits reduce productivity?"
+          ],
+          "summary": "You cannot improve habits you do not measure."
+        }
+      },
+      {
+        "id": "dmml-m2-2",
+        "title": "Reduce Unnecessary Notifications",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image10.png)",
+            "Notifications constantly compete for attention.",
+            "Even when ignored, they interrupt concentration and increase mental distraction.",
+            "For example:",
+            "A student studying for an exam receives:",
+            "* social media notifications",
+            "* shopping app alerts",
+            "* promotional messages",
+            "* group chat updates",
+            "Each notification pulls attention away from the task.",
+            "Over time, this creates fragmented focus.",
+            "A more intentional approach is to:",
+            "• turn off non-essential notifications",
+            "• keep only important alerts active",
+            "• schedule specific times to check messages",
+            "This reduces unnecessary interruptions and helps create longer periods of focused attention."
+          ],
+          "summary": "Not every notification deserves immediate attention."
+        }
+      },
+      {
+        "id": "dmml-m2-3",
+        "title": "Create Intentional Usage Habits",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image2.png)",
+            "Technology becomes harmful when usage becomes automatic instead of intentional.",
+            "For example:",
+            "Many people unlock their phones without a clear purpose.",
+            "A quick check for one message can become:",
+            "* endless scrolling",
+            "* switching between apps",
+            "* consuming random content",
+            "Intentional usage means using technology with a specific purpose.",
+            "Before opening an app, ask:",
+            "• Why am I opening this app?",
+            "• What task do I want to complete?",
+            "• How much time should I spend here?",
+            "Simple habits can improve digital control:",
+            "• keeping the phone away during focused work",
+            "• avoiding screens during meals",
+            "• limiting screen use before sleep",
+            "These habits help reduce unconscious digital behavior."
+          ],
+          "summary": "Use technology as a tool, not as constant stimulation."
+        }
+      },
+      {
+        "id": "dmml-m2-q",
+        "title": "Module 2 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is the first step toward improving digital habits?",
+              "options": [
+                "Deleting all apps",
+                "Tracking screen time usage",
+                "Avoiding technology completely",
+                "Buying productivity tools"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why should unnecessary notifications be reduced?",
+              "options": [
+                "They improve multitasking",
+                "They increase concentration breaks and distractions",
+                "They reduce productivity tracking",
+                "They make apps slower"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is intentional technology use?",
+              "options": [
+                "Using multiple apps at once",
+                "Using technology with a clear purpose and limit",
+                "Constantly checking notifications",
+                "Spending more time online"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dmml-m3",
+    "title": "Module 3: Attention & Focus Recovery",
+    "description": "Learn how to rebuild focus, improve concentration, and reduce attention fatigue in a highly distracting digital environment.",
+    "units": [
+      {
+        "id": "dmml-m3-1",
+        "title": "Deep Focus vs Constant Distraction",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image8.png)",
+            "Modern digital environments train the brain to constantly switch attention.",
+            "Short videos, rapid scrolling, and continuous notifications make it difficult to stay focused on one task for a long time.",
+            "For example:",
+            "A student starts studying for an exam.",
+            "Within a few minutes:",
+            "* a message notification appears",
+            "* social media is checked",
+            "* another app is opened",
+            "Even short interruptions reduce concentration.",
+            "Deep focus happens when attention stays fully connected to one important task without frequent distractions.",
+            "This is when:",
+            "• learning improves",
+            "• productivity increases",
+            "• ideas become clearer",
+            "Deep focus requires:",
+            "• uninterrupted time",
+            "• fewer distractions",
+            "• sustained attention",
+            "Focus grows when distractions are reduced consistently."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "dmml-m3-2",
+        "title": "Protect Your Focus Environment",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image6.png)",
+            "Focus is strongly influenced by the surrounding environment.",
+            "For example:",
+            "Trying to study while:",
+            "* notifications are active",
+            "* multiple tabs are open",
+            "* videos are playing in the background",
+            "makes concentration more difficult.",
+            "A better focus environment includes:",
+            "• clean workspace",
+            "• fewer distractions",
+            "• silent notifications",
+            "• clear task priority",
+            "Small environmental changes can improve concentration significantly.",
+            "For example:",
+            "* keeping the phone away during focused work",
+            "* using full-screen mode while studying",
+            "* working in quiet spaces",
+            "These changes reduce unnecessary attention shifts."
+          ],
+          "summary": "Your environment influences your attention more than motivation alone."
+        }
+      },
+      {
+        "id": "dmml-m3-3",
+        "title": "Give Your Brain Time to Recover",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image15.png)",
+            "Continuous stimulation can mentally exhaust attention.",
+            "Many people move constantly between:",
+            "* social media",
+            "* videos",
+            "* music",
+            "* messages",
+            "* work tasks",
+            "without giving the brain time to rest.",
+            "As a result:",
+            "• concentration decreases",
+            "• mental fatigue increases",
+            "• focus becomes weaker",
+            "Attention recovery requires periods of low stimulation.",
+            "Simple recovery habits include:",
+            "• short breaks between deep work sessions",
+            "• walking without using the phone",
+            "• spending time away from screens",
+            "• avoiding excessive content consumption before sleep",
+            "These activities help the brain reset and recover attention capacity."
+          ],
+          "summary": "Rest is necessary for sustained focus."
+        }
+      },
+      {
+        "id": "dmml-m3-q",
+        "title": "Module 3 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is deep focus?",
+              "options": [
+                "Using multiple apps at the same time",
+                "Maintaining uninterrupted attention on one task",
+                "Constantly switching tasks",
+                "Watching educational videos while studying"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is the focus environment important?",
+              "options": [
+                "Motivation alone controls attention",
+                "The environment affects concentration and distractions",
+                "Notifications improve focus",
+                "Workspace setup does not matter"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is attention recovery important?",
+              "options": [
+                "Continuous stimulation improves concentration",
+                "Rest helps restore focus and reduce mental fatigue",
+                "Screen exposure improves sleep quality",
+                "Breaks reduce productivity permanently"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dmml-m4",
+    "title": "Module 4: Building Healthy Digital Habits",
+    "description": "Learn how to build sustainable digital habits that improve focus, sleep, productivity, and overall mental balance.",
+    "units": [
+      {
+        "id": "dmml-m4-1",
+        "title": "Build Device-Free Routines",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image12.png)",
+            "Many digital habits become automatic because phones are constantly nearby.",
+            "For example:",
+            "Some people:",
+            "* check their phone immediately after waking up",
+            "* use screens during meals",
+            "* scroll continuously before sleeping",
+            "Over time, this creates dependency on constant stimulation.",
+            "Building device-free routines helps create healthier boundaries with technology.",
+            "Simple examples include:",
+            "• avoiding phone use during meals",
+            "• keeping phones away during study sessions",
+            "• spending the first 30 minutes after waking up without screens",
+            "These routines help reduce automatic phone checking and improve awareness."
+          ],
+          "summary": "Not every moment needs digital stimulation."
+        }
+      },
+      {
+        "id": "dmml-m4-2",
+        "title": "Manage Screen Exposure Before Sleep",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image5.png)",
+            "Screen usage late at night can affect sleep quality.",
+            "For example:",
+            "Many people use:",
+            "* social media",
+            "* videos",
+            "* messaging apps",
+            "immediately before sleeping.",
+            "Continuous screen exposure keeps the brain mentally active and makes relaxation more difficult.",
+            "Poor sleep can lead to:",
+            "• lower concentration",
+            "• mental fatigue",
+            "• reduced productivity",
+            "Healthier habits include:",
+            "• reducing screen usage before bedtime",
+            "• avoiding stimulating content late at night",
+            "• creating a consistent sleep schedule",
+            "Even small improvements in nighttime digital habits can improve recovery and focus."
+          ],
+          "summary": "Better sleep supports better attention and decision-making."
+        }
+      },
+      {
+        "id": "dmml-m4-3",
+        "title": "Replace Passive Consumption With Intentional Use",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image1.png)",
+            "A large amount of digital time is spent consuming content passively.",
+            "For example:",
+            "* endless scrolling",
+            "* random video watching",
+            "* repeatedly switching apps without purpose",
+            "This often creates mental fatigue without adding real value.",
+            "Intentional digital use focuses on:",
+            "• learning",
+            "• communication",
+            "• productivity",
+            "• meaningful entertainment",
+            "Before consuming content, ask:",
+            "• Is this useful?",
+            "• Am I choosing this intentionally?",
+            "• Is this helping or simply filling time?",
+            "Strong digital habits are built by becoming more conscious of how technology is used."
+          ],
+          "summary": "Technology should support your goals, not control your attention."
+        }
+      },
+      {
+        "id": "dmml-m4-q",
+        "title": "Module 4 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "Why are device-free routines useful?",
+              "options": [
+                "They eliminate technology completely",
+                "They help reduce automatic digital habits",
+                "They increase screen dependency",
+                "They reduce productivity permanently"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "How can late-night screen usage affect people?",
+              "options": [
+                "It improves recovery",
+                "It increases sleep quality",
+                "It can reduce sleep quality and focus",
+                "It improves concentration immediately"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What is intentional technology use?",
+              "options": [
+                "Endless scrolling",
+                "Using technology consciously for meaningful purposes",
+                "Constant multitasking",
+                "Continuous content consumption"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dmml-m5",
+    "title": "Module 5: Creating Modern Life Balance",
+    "description": "Learn how to maintain a healthy balance between digital life, real-world responsibilities, relationships, and personal well-being.",
+    "units": [
+      {
+        "id": "dmml-m5-1",
+        "title": "Balance Online and Offline Life",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image13.png)",
+            "Technology is now part of daily life.",
+            "People use digital platforms for:",
+            "* communication",
+            "* learning",
+            "* entertainment",
+            "* work",
+            "However, problems begin when digital life completely replaces offline experiences.",
+            "For example:",
+            "A person may spend hours:",
+            "* scrolling social media",
+            "* watching videos",
+            "* chatting online",
+            "but very little time:",
+            "* interacting with family",
+            "* exercising",
+            "* developing real-world skills",
+            "* resting properly",
+            "Over time, this creates imbalance.",
+            "Healthy digital balance means making time for both:",
+            "• online activities",
+            "• offline experiences",
+            "Offline activities such as:",
+            "* physical exercise",
+            "* face-to-face conversations",
+            "* hobbies",
+            "* time in nature",
+            "help improve mental clarity and reduce overstimulation."
+          ],
+          "summary": "Technology should support life, not replace it."
+        }
+      },
+      {
+        "id": "dmml-m5-2",
+        "title": "Create Boundaries With Technology",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image14.png)",
+            "Without boundaries, digital usage can expand into every part of the day.",
+            "For example:",
+            "Many people:",
+            "* check phones during conversations",
+            "* use screens while eating",
+            "* continue working late into the night",
+            "This reduces focus, presence, and recovery time.",
+            "Healthy boundaries help create more control over digital habits.",
+            "Examples of useful boundaries:",
+            "• no phone during meals",
+            "• fixed times for checking social media",
+            "• screen-free time before sleep",
+            "• focused work periods without interruptions",
+            "Boundaries are not about avoiding technology completely.",
+            "They are about using technology intentionally instead of constantly."
+          ],
+          "summary": "If technology controls your attention all day, balance becomes difficult."
+        }
+      },
+      {
+        "id": "dmml-m5-3",
+        "title": "Build a Sustainable Digital Lifestyle",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dmml/image9.png)",
+            "Many people try extreme digital detox methods but return to old habits quickly.",
+            "Long-term balance is created through sustainable habits, not temporary extremes.",
+            "For example:",
+            "Instead of:",
+            "* deleting every app suddenly",
+            "* avoiding technology completely",
+            "a sustainable approach would be:",
+            "• reducing unnecessary screen time gradually",
+            "• improving focus habits step by step",
+            "• creating realistic digital boundaries",
+            "Small consistent improvements are easier to maintain long-term.",
+            "A balanced digital lifestyle should support:",
+            "• productivity",
+            "• learning",
+            "• relationships",
+            "• mental well-being",
+            "Technology is most useful when it helps people achieve meaningful goals without controlling their attention constantly."
+          ],
+          "summary": "Sustainable habits create long-term balance."
+        }
+      },
+      {
+        "id": "dmml-m5-q",
+        "title": "Module 5 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "Why is balancing online and offline life important?",
+              "options": [
+                "Technology should replace real-world experiences",
+                "Offline experiences support mental clarity and well-being",
+                "Social media improves all relationships automatically",
+                "Online life is more important than offline life"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is the purpose of creating digital boundaries?",
+              "options": [
+                "To avoid all technology",
+                "To use technology more intentionally and maintain balance",
+                "To increase screen dependency",
+                "To multitask more effectively"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is the best approach for long-term digital balance?",
+              "options": [
+                "Extreme digital detox permanently",
+                "Avoiding all devices",
+                "Building sustainable habits gradually",
+                "Using more productivity apps continuously"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dmml-final",
+    "title": "Final Assessment",
+    "description": "Final Assessment for Digital Mindfulness",
+    "units": [
+      {
+        "id": "dmml-final-q",
+        "title": "Final Quiz",
+        "type": "quiz",
+        "xp": 100,
+        "duration": "20 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "A student opens a phone to reply to one message but spends 40 minutes scrolling social media. What is the main issue?",
+              "options": [
+                "Lack of internet access",
+                "Digital distraction and unintentional usage",
+                "Excessive studying",
+                "Too much offline activity"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is multitasking often ineffective?",
+              "options": [
+                "It improves concentration",
+                "It reduces attention quality and focus",
+                "It increases deep work",
+                "It helps memory retention"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is a useful first step toward improving digital habits?",
+              "options": [
+                "Deleting all apps immediately",
+                "Tracking screen time usage",
+                "Avoiding all technology",
+                "Buying a new phone"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why should unnecessary notifications be reduced?",
+              "options": [
+                "They improve productivity",
+                "They interrupt concentration and attention",
+                "They improve deep focus",
+                "They reduce app usage statistics"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is deep focus?",
+              "options": [
+                "Constantly switching between apps",
+                "Working while watching videos",
+                "Maintaining uninterrupted attention on one task",
+                "Multitasking efficiently"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "How can focus environments be improved?",
+              "options": [
+                "Keeping notifications active",
+                "Opening multiple apps during work",
+                "Reducing distractions and interruptions",
+                "Watching videos while studying"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why is attention recovery important?",
+              "options": [
+                "Continuous stimulation improves concentration",
+                "The brain needs periods of reduced stimulation to recover focus",
+                "Notifications improve mental recovery",
+                "Constant screen exposure improves sleep"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "How can screen usage before sleep affect people?",
+              "options": [
+                "It improves concentration immediately",
+                "It can reduce sleep quality and recovery",
+                "It improves memory automatically",
+                "It increases deep focus at night"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is intentional technology use?",
+              "options": [
+                "Endless scrolling without purpose",
+                "Using technology consciously for meaningful tasks",
+                "Constant multitasking",
+                "Switching between apps continuously"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What creates long-term digital balance?",
+              "options": [
+                "Extreme short-term detox methods",
+                "Avoiding all devices permanently",
+                "Sustainable habits and healthy boundaries",
+                "Constant productivity tracking"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

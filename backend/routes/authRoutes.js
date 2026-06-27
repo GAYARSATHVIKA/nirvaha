@@ -86,6 +86,30 @@ async function attachCompanionFields(userPayload) {
     companionId: companion.companionId,
   };
 }
+
+async function getSafeUser(userDoc) {
+  const safeUser = {
+    ...userDoc.toObject(),
+    isApprovedCompanion: userDoc.isApprovedCompanion === true,
+    companionStatus: userDoc.companionStatus || null,
+    companionId: userDoc.companionId || null,
+  };
+
+  if (safeUser.password) delete safeUser.password;
+  if (safeUser.__v !== undefined) delete safeUser.__v;
+
+  try {
+    const EnrollmentApplication = require('../models/EnrollmentApplication');
+    const applications = await EnrollmentApplication.find({ userId: userDoc.id });
+    safeUser.pendingApplications = applications.filter(a => a.status === 'pending').map(a => a.courseId);
+  } catch (err) {
+    console.error('Failed to fetch pending applications for user', err);
+    safeUser.pendingApplications = [];
+  }
+
+  return safeUser;
+}
+
 const JWT_SECRET = process.env.JWT_SECRET || 'nirvaha-secret-key-please-change-in-production';
 
 // Register new user
@@ -148,11 +172,7 @@ router.post('/register', async (req, res) => {
     );
 
     // Build safeUser by spreading the full mongoose document and appending companion fields
-    const safeUser = {
-      ...newUser.toObject(),
-      isApprovedCompanion: newUser.isApprovedCompanion === true,
-      companionStatus: newUser.companionStatus || null,
-    };
+    const safeUser = await getSafeUser(newUser);
 
     // Return user data (without password)
     res.status(201).json({
@@ -196,11 +216,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '365d' }
     );
 
-    const safeUser = {
-      ...user.toObject(),
-      isApprovedCompanion: user.isApprovedCompanion === true,
-      companionStatus: user.companionStatus || null,
-    };
+    const safeUser = await getSafeUser(user);
 
     res.status(200).json({
       success: true,
@@ -338,11 +354,7 @@ router.post('/firebase', async (req, res) => {
       { expiresIn: '365d' }
     );
 
-    const safeUser = {
-      ...user.toObject(),
-      isApprovedCompanion: user.isApprovedCompanion === true,
-      companionStatus: user.companionStatus || null,
-    };
+    const safeUser = await getSafeUser(user);
 
     res.status(200).json({
       success: true,
@@ -423,14 +435,7 @@ router.get('/user', async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const safeUser = {
-      ...user.toObject(),
-      isApprovedCompanion: user.isApprovedCompanion === true,
-      companionStatus: user.companionStatus || null,
-      companionId: user.companionId || null,
-    };
-    if (safeUser.password) delete safeUser.password;
-    if (safeUser.__v) delete safeUser.__v;
+    const safeUser = await getSafeUser(user);
 
     console.log('ðŸ” GET /api/auth/user - Response:', {
       userId: user.id,

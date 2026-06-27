@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Clock, Users, Star, Play, Award, TrendingUp, ChevronRight } from "lucide-react";
 import { EnrollmentFormModal } from "../EnrollmentFormModal";
+import { useAuth } from "../../contexts/AuthContext";
+import { useEnrollment } from "../../hooks/useEnrollment";
 
 export function CoursesPage() {
   const [enrollModal, setEnrollModal] = useState<{ open: boolean; courseId: string; title: string }>({
@@ -283,15 +285,44 @@ export function CoursesPage() {
                   </div>
 
                   {/* Enroll Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setEnrollModal({ open: true, courseId: course.title.toLowerCase().replace(/\s+/g, '-'), title: course.title })}
-                    className={`mt-6 w-full py-3 bg-gradient-to-r ${course.color} text-white rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2`}
-                  >
-                    Enroll Now
-                    <ChevronRight className="w-4 h-4" />
-                  </motion.button>
+                  {(() => {
+                    const courseId = course.title.toLowerCase().replace(/\s+/g, '-');
+                    const { user } = useAuth();
+                    const { isEnrolled } = useEnrollment();
+                    const enrolled = isEnrolled(courseId);
+                    const isPending = user?.pendingApplications?.includes(courseId);
+
+                    if (enrolled) {
+                      return (
+                        <motion.button
+                          className={`mt-6 w-full py-3 bg-gradient-to-r ${course.color} text-white rounded-2xl shadow-lg flex items-center justify-center gap-2 opacity-90 cursor-default`}
+                        >
+                          Open
+                        </motion.button>
+                      );
+                    }
+                    if (isPending) {
+                      return (
+                        <motion.button
+                          disabled
+                          className={`mt-6 w-full py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-2xl shadow-sm flex items-center justify-center gap-2 opacity-75 cursor-not-allowed`}
+                        >
+                          Requested
+                        </motion.button>
+                      );
+                    }
+                    return (
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setEnrollModal({ open: true, courseId, title: course.title })}
+                        className={`mt-6 w-full py-3 bg-gradient-to-r ${course.color} text-white rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2`}
+                      >
+                        Enroll Now
+                        <ChevronRight className="w-4 h-4" />
+                      </motion.button>
+                    );
+                  })()}
                 </div>
               </div>
             </motion.div>

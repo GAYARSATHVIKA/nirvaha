@@ -21,11 +21,14 @@ router.get('/', async (req, res) => {
     }
 
     const poses = await Pose.find(query).sort({ position: 1, createdAt: -1 }).lean();
-    const BASE = process.env.BASE_URL || `http://localhost:${process.env.PORT || 5001}`;
     const toAbsolute = (url) => {
       if (!url) return '';
       if (url.startsWith('http')) return url;
-      return `${BASE}${url.startsWith('/') ? '' : '/'}${url}`;
+      if (url.startsWith('/uploads/') || url.startsWith('uploads/')) {
+        const BASE = process.env.BASE_URL || `http://localhost:${process.env.PORT || 5001}`;
+        return `${BASE}${url.startsWith('/') ? '' : '/'}${url}`;
+      }
+      return url;
     };
 
     res.json(

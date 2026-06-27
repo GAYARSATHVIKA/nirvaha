@@ -135,6 +135,36 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           path: "/admin/common-problems",
         },
         {
+          title: "Features",
+          icon: LayoutDashboard,
+          path: "/admin/features",
+        },
+        {
+          title: "Gaming Hub",
+          icon: Play,
+          path: "/admin/gaming-hub",
+        },
+        {
+          title: "Chakra Experience",
+          icon: Compass,
+          path: "/admin/chakra-experience",
+        },
+        {
+          title: "Inspirational Quotes",
+          icon: MessageSquare,
+          path: "/admin/quotes",
+        },
+        {
+          title: "Case Studies",
+          icon: FileText,
+          path: "/admin/case-studies",
+        },
+        {
+          title: "FAQs",
+          icon: HelpCircle,
+          path: "/admin/faqs",
+        },
+        {
           title: "Content Management",
           icon: FileText,
           children: [
@@ -142,11 +172,6 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               title: "Meditation",
               icon: Music,
               path: "/admin/content/meditation",
-            },
-            {
-              title: "Yoga for Meditation",
-              icon: Music,
-              path: "/admin/content/yoga",
             },
             {
               title: "Pose Management",
@@ -264,7 +289,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           // eslint-disable-next-line react/no-unknown-property
           <div 
             ref={dropdownRef}
-            className="fixed bg-white border border-gray-200 rounded-3xl shadow-xl z-[9999] min-w-[240px] py-2"
+            className="fixed bg-white border border-gray-200 rounded-3xl shadow-xl z-[9999] min-w-[240px] py-2 max-h-[75vh] overflow-y-auto custom-scrollbar"
             style={{
               top: `${dropdownPos.top}px`,
               left: `${dropdownPos.left}px`,

@@ -1,0 +1,682 @@
+[
+  {
+    "id": "fcc-m1",
+    "title": "Module 1: Foundations of Clear Communication",
+    "description": "",
+    "units": [
+      {
+        "id": "fcc-m1-2",
+        "title": "Thinking Before Speaking",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image1.png)",
+            "Many communication problems happen because people start speaking before organizing their thoughts.",
+            "This often leads to:",
+            "Long explanations",
+            "Repeating the same point again",
+            "Losing the listener’s attention",
+            "For example, imagine a student presenting a project.",
+            "Unstructured explanation:",
+            "\"So our project is about renewable energy and we looked at solar power and wind energy and we also tried to understand the impact on the environment and the main idea is that renewable energy is important for the future.\"",
+            "This explanation feels confusing because the ideas are not organized.",
+            "Now look at the same idea using a simple structure.",
+            "Structured explanation:",
+            "Idea:",
+            "\"Our project studies the importance of renewable energy.\"",
+            "Explanation:",
+            "\"We focused on two sources: solar energy and wind energy.\"",
+            "Example:",
+            "\"For example, solar panels can help homes reduce electricity costs and pollution.\"",
+            "This structure helps the listener follow the message easily.",
+            "This simple structure helps you:",
+            "organize your thoughts",
+            "explain ideas clearly",
+            "keep your audience engaged",
+            "Before speaking, take a moment and ask yourself:",
+            "What is the main idea?",
+            "How can I explain it simply?",
+            "Can I give a quick example?",
+            "Even a 3-second pause before speaking can make your communication much clearer."
+          ],
+          "summary": "Idea → Explanation → Example"
+        }
+      },
+      {
+        "id": "fcc-m1-3",
+        "title": "Use Simple Language",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image3.png)",
+            "Many people believe that using complex words makes them sound more intelligent.",
+            "In reality, clear and simple language is more effective, especially in professional environments.",
+            "When communication is complicated, people may struggle to understand the message.",
+            "For example:",
+            "Complex communication:",
+            "\"We need to facilitate a collaborative synergy to optimize our operational efficiency.\"",
+            "Clear communication:",
+            "\"We need to work together to improve how our team operates.\"",
+            "The second sentence is easier to understand and delivers the same message.",
+            "This is why professionals prefer clear and direct communication.",
+            "Another example from everyday life:",
+            "Imagine a team leader giving instructions.",
+            "Unclear instruction:",
+            "\"Try to ensure that the task is handled in a manner that aligns with our expectations.\"",
+            "Clear instruction:",
+            "\"Please complete the report and send it by 4 PM today.\"",
+            "The second instruction is clear, specific, and easy to follow.",
+            "To communicate clearly:",
+            "• Use short sentences",
+            "• Avoid unnecessary jargon",
+            "• Focus on the main message",
+            "Clear communication is not about sounding impressive.",
+            "It is about making your ideas easy for others to understand."
+          ],
+          "summary": "Simple language makes complex ideas easier to understand."
+        }
+      },
+      {
+        "id": "fcc-m1-q",
+        "title": "Quiz — Module 1",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is the main reason communication becomes unclear?",
+              "options": [
+                "Speaking slowly",
+                "Lack of vocabulary",
+                "Unclear thinking",
+                "Speaking loudly"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Which structure helps organize ideas before speaking?",
+              "options": [
+                "Opinion → Emotion → Story",
+                "Idea → Explanation → Example",
+                "Problem → Emotion → Reaction",
+                "Question → Conclusion → Opinion"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is simple language important in professional communication?",
+              "options": [
+                "It makes communication shorter",
+                "It makes ideas easier to understand",
+                "It avoids technical topics",
+                "It makes speech informal"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "fcc-m2",
+    "title": "Module 2: ",
+    "description": "",
+    "units": []
+  },
+  {
+    "id": "fcc-mGoal",
+    "title": "Module Goal: Learn how to communicate ideas confidently in presentations, meetings, and conversations.",
+    "description": "",
+    "units": [
+      {
+        "id": "fcc-mGoal-2",
+        "title": "Speak Slowly and Clearly",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image2.png)",
+            "![image](/images/courses/fcc/image5.png)",
+            "When people feel nervous, they often speak too quickly.",
+            "Speaking fast can make communication difficult for listeners.",
+            "For example, during a presentation a speaker might rush through their explanation without pausing.",
+            "The audience may struggle to follow the message.",
+            "Confident speakers usually:",
+            "• speak at a steady pace",
+            "• pause between important points",
+            "• allow listeners time to understand",
+            "Pausing is especially useful.",
+            "For example:",
+            "\"Our project focuses on renewable energy.\"",
+            "(Pause)",
+            "\"We studied two main sources: solar energy and wind energy.\"",
+            "The pause gives the audience time to absorb the information.",
+            "Speaking slowly also helps the speaker think more clearly.",
+            "This improves both clarity and confidence."
+          ],
+          "summary": "After explaining a key idea, pause for two seconds before continuing."
+        }
+      },
+      {
+        "id": "fcc-mGoal-3",
+        "title": "Maintain Eye Contact",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image4.png)",
+            "Eye contact plays an important role in communication.",
+            "When speakers avoid eye contact, they may appear unsure or unprepared.",
+            "Maintaining eye contact helps build:",
+            "• trust",
+            "• connection",
+            "• confidence",
+            "For example, imagine a presenter reading directly from slides without looking at the audience.",
+            "The audience may lose interest because the speaker does not engage with them.",
+            "Now imagine the presenter looking at different people in the room while speaking.",
+            "This creates a sense of connection and keeps the audience engaged.",
+            "This technique helps maintain natural eye contact.",
+            "It is also about how you present yourself while speaking."
+          ],
+          "summary": "Confidence is not only about what you say."
+        }
+      },
+      {
+        "id": "fcc-mGoal-q",
+        "title": "Module 2 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What helps build confidence before speaking?",
+              "options": [
+                "Speaking louder",
+                "Preparing key points",
+                "Using complex words",
+                "Speaking quickly"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is speaking slowly important?",
+              "options": [
+                "It makes the speech longer",
+                "It helps listeners understand the message",
+                "It avoids eye contact",
+                "It reduces preparation"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is eye contact important in communication?",
+              "options": [
+                "It helps read slides",
+                "It improves voice volume",
+                "It builds trust and engagement",
+                "It shortens conversations"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "fcc-m3",
+    "title": "Module 3: ",
+    "description": "",
+    "units": []
+  },
+  {
+    "id": "fcc-mGoal",
+    "title": "Module Goal: Learn how to communicate clearly and professionally in meetings, discussions, and workplace conversations.",
+    "description": "",
+    "units": [
+      {
+        "id": "fcc-mGoal-2",
+        "title": "Listening Before Responding",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image7.png)",
+            "![image](/images/courses/fcc/image6.png)",
+            "Good communication is not only about speaking.",
+            "It is also about listening carefully.",
+            "Many people focus on preparing their response instead of listening to what the other person is saying.",
+            "This often leads to misunderstandings.",
+            "For example:",
+            "During a team meeting, a colleague explains a problem with a project.",
+            "If someone interrupts before fully listening, they may give an incorrect response.",
+            "Instead, effective communicators:",
+            "• listen fully",
+            "• pause for a moment",
+            "• then respond thoughtfully",
+            "For example:",
+            "Colleague:",
+            "\"We are facing delays because the data from the client is incomplete.\"",
+            "Instead of responding immediately, a good communicator may say:",
+            "\"So the delay is mainly because the client has not shared complete data. Is that correct?\"",
+            "This confirms understanding before responding.",
+            "Active listening helps build trust and improves teamwork."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "fcc-mGoal-3",
+        "title": "Responding Professionally",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image9.png)",
+            "In professional environments, how you respond is just as important as what you say.",
+            "Even during disagreements, communication should remain respectful and clear.",
+            "For example:",
+            "Unprofessional response:",
+            "\"That idea will never work.\"",
+            "Professional response:",
+            "\"I see your idea, but I think we might face some challenges. Maybe we could consider another option.\"",
+            "The second response keeps the conversation constructive.",
+            "Professional responses usually include:",
+            "• respect for the other person’s idea",
+            "• clear reasoning",
+            "• a constructive suggestion",
+            "This approach helps maintain positive working relationships."
+          ],
+          "summary": "Professional communication focuses on solutions, not personal criticism."
+        }
+      },
+      {
+        "id": "fcc-mGoal-q",
+        "title": "Module 3 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What makes a question effective in professional communication?",
+              "options": [
+                "It is long and detailed",
+                "It is specific and clear",
+                "It includes multiple questions",
+                "It avoids details"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is the first step of active listening?",
+              "options": [
+                "Respond quickly",
+                "Interrupt the speaker",
+                "Listen fully before responding",
+                "Repeat your opinion"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What is the best way to respond during a disagreement?",
+              "options": [
+                "Reject the idea immediately",
+                "Ignore the discussion",
+                "Respond respectfully and offer alternatives",
+                "Speak louder"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "fcc-m4",
+    "title": "Module 4: ",
+    "description": "",
+    "units": []
+  },
+  {
+    "id": "fcc-mGoal",
+    "title": "Module Goal: Learn how to explain ideas in a clear, structured, and persuasive way during presentations and discussions.",
+    "description": "",
+    "units": [
+      {
+        "id": "fcc-mGoal-2",
+        "title": "Use Supporting Points",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image8.png)",
+            "![image](/images/courses/fcc/image12.png)",
+            "After presenting the main idea, you should support it with clear points or evidence.",
+            "Supporting points help the audience understand why your idea is important.",
+            "For example, imagine a team member presenting a proposal.",
+            "Main idea:",
+            "\"Our company should adopt remote work for two days a week.\"",
+            "Supporting points:",
+            "• It reduces commuting time for employees",
+            "• It improves productivity",
+            "• It lowers office operating costs",
+            "These points help make the argument stronger.",
+            "Without supporting points, an idea may sound like just an opinion.",
+            "Strong communication uses facts, examples, or data to support the message.",
+            "When presenting ideas, aim to include two or three strong supporting points."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "fcc-mGoal-3",
+        "title": "End With a Clear Conclusion",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image10.png)",
+            "A clear conclusion helps the audience remember the key message.",
+            "Many presentations end without summarizing the main idea.",
+            "For example, a speaker may finish by saying:",
+            "\"That's all for my presentation.\"",
+            "This ending does not reinforce the main point.",
+            "A better approach is to summarize the message.",
+            "Example conclusion:",
+            "\"To summarize, adopting solar energy can reduce electricity costs, decrease pollution, and provide sustainable power for the future.\"",
+            "This reminds the audience of the key idea.",
+            "A strong conclusion should:",
+            "• briefly repeat the main idea",
+            "• highlight the key points",
+            "• leave the audience with a clear takeaway",
+            "Ending clearly makes your communication more effective and memorable."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "fcc-mGoal-q",
+        "title": "Module 4 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is the best way to begin presenting an idea?",
+              "options": [
+                "Start with background information",
+                "Start with the main idea",
+                "Start with a long explanation",
+                "Start with a question"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why are supporting points important?",
+              "options": [
+                "They make presentations longer",
+                "They help explain and strengthen the idea",
+                "They replace the main idea",
+                "They reduce explanation"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is the purpose of a clear conclusion?",
+              "options": [
+                "To repeat the entire presentation",
+                "To end the conversation quickly",
+                "To summarize and reinforce the key message",
+                "To add new information"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "fcc-m5",
+    "title": "Module 5: ",
+    "description": "",
+    "units": []
+  },
+  {
+    "id": "fcc-mGoal",
+    "title": "Module Goal: Learn how to communicate calmly and professionally during disagreements, feedback discussions, and challenging conversations.",
+    "description": "",
+    "units": [
+      {
+        "id": "fcc-mGoal-2",
+        "title": "Give Constructive Feedback",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image11.png)",
+            "![image](/images/courses/fcc/image13.png)",
+            "In professional environments, giving feedback is an important communication skill.",
+            "However, feedback should help improve performance, not discourage people.",
+            "For example:",
+            "Unclear feedback:",
+            "\"Your presentation wasn't good.\"",
+            "This statement does not explain what needs improvement.",
+            "Constructive feedback is more specific.",
+            "Example:",
+            "\"Your presentation had good information. Adding clearer examples could make it easier for the audience to understand.\"",
+            "Constructive feedback usually includes:",
+            "• something positive",
+            "• a clear suggestion for improvement",
+            "This approach encourages improvement while maintaining respect.",
+            "Good feedback focuses on actions and results, not personal criticism."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "fcc-mGoal-3",
+        "title": "Focus on Solutions",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/fcc/image14.png)",
+            "When a problem occurs, conversations can easily become focused on blame.",
+            "For example, in a team discussion someone might say:",
+            "\"This problem happened because your team didn't finish the work.\"",
+            "This approach usually creates conflict instead of solving the issue.",
+            "A better approach is to focus on solutions.",
+            "For example:",
+            "\"We are facing delays in the project. How can we adjust the plan to complete the work on time?\"",
+            "This shifts the conversation from blame to problem-solving.",
+            "Effective communicators try to:",
+            "• identify the problem clearly",
+            "• discuss possible solutions",
+            "• move the conversation forward",
+            "In professional communication, the goal is not to prove someone wrong.",
+            "The goal is to solve the problem and improve results."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "fcc-mGoal-q",
+        "title": "Module 5 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is the best way to respond during a disagreement?",
+              "options": [
+                "Raise your voice",
+                "Reject the idea immediately",
+                "Respond calmly and respectfully",
+                "Ignore the conversation"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What makes feedback constructive?",
+              "options": [
+                "It criticizes the person",
+                "It explains what needs improvement",
+                "It avoids discussion",
+                "It focuses on mistakes only"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why should conversations focus on solutions?",
+              "options": [
+                "To avoid responsibility",
+                "To move discussions toward problem solving",
+                "To reduce communication",
+                "To end meetings quickly"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "fcc-final",
+    "title": "Final Assessment",
+    "description": "Final Assessment for Foundations of Clear Communication",
+    "units": [
+      {
+        "id": "fcc-final-q",
+        "title": "Final Quiz",
+        "type": "quiz",
+        "xp": 100,
+        "duration": "20 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "Before speaking in a meeting, what is the best way to organize your message?",
+              "options": [
+                "Speak immediately",
+                "Use the structure: Idea → Explanation → Example",
+                "Speak for a longer time",
+                "Use complex words"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "During a presentation, why is it important to start with the main idea?",
+              "options": [
+                "It makes the presentation longer",
+                "It helps the audience quickly understand the message",
+                "It avoids discussion",
+                "It removes the need for examples"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is the best way to ask questions in a professional meeting?",
+              "options": [
+                "Ask multiple questions at once",
+                "Ask broad and vague questions",
+                "Ask clear and specific questions",
+                "Avoid questions"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What helps build confidence when speaking in public?",
+              "options": [
+                "Speaking quickly",
+                "Avoiding preparation",
+                "Preparing key points before speaking",
+                "Using complex vocabulary"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What is the main purpose of supporting points in a presentation?",
+              "options": [
+                "To make the presentation longer",
+                "To strengthen and explain the main idea",
+                "To replace the main idea",
+                "To avoid discussion"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "When giving feedback, what approach is most effective?",
+              "options": [
+                "Criticize the person directly",
+                "Ignore the issue",
+                "Provide constructive suggestions for improvement",
+                "Avoid feedback"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What is a key benefit of active listening?",
+              "options": [
+                "It helps respond faster",
+                "It improves understanding and trust",
+                "It reduces communication",
+                "It avoids discussion"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What should you do if a disagreement occurs during a discussion?",
+              "options": [
+                "Raise your voice",
+                "Reject the other person’s idea immediately",
+                "Respond calmly and respectfully",
+                "End the conversation"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why is simple language important in communication?",
+              "options": [
+                "It shortens conversations",
+                "It makes ideas easier to understand",
+                "It avoids explanations",
+                "It removes structure"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is the goal of professional communication?",
+              "options": [
+                "To sound impressive",
+                "To win arguments",
+                "To communicate ideas clearly and effectively",
+                "To speak longer"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -201,11 +201,12 @@ const glassAccent = {
 const LearningPathPage: React.FC = () => {
   const { pathId } = useParams<{ pathId: string }>();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, refreshProfile } = useAuth();
   const { enroll, isEnrolled } = useEnrollment();
   const [enrolling, setEnrolling] = useState(false);
   const [enrollModalOpen, setEnrollModalOpen] = useState(false);
   const enrolled = isEnrolled(pathId || '');
+  const isPending = user?.pendingApplications?.includes(pathId || '');
   const isLoggedIn = !!user;
 
   const [path, setPath] = useState<any>(null);
@@ -234,6 +235,21 @@ const LearningPathPage: React.FC = () => {
 
   const [openModules, setOpenModules] = useState<Set<string>>(new Set());
   const [completedUnits, setCompletedUnits] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    if (user && user.enrolledCourses) {
+      const enrollment = user.enrolledCourses.find((e: any) => e.courseId === pathId);
+      if (enrollment && enrollment.completedUnits) {
+        setCompletedUnits(new Set(enrollment.completedUnits));
+      }
+    }
+  }, [user, pathId]);
+
+  useEffect(() => {
+    if (refreshProfile) {
+      refreshProfile();
+    }
+  }, []);
   const [certModalOpen, setCertModalOpen] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [termsOpen, setTermsOpen] = useState(false);
@@ -473,8 +489,21 @@ const LearningPathPage: React.FC = () => {
                       letterSpacing: '0.06em',
                     }}
                   >
-                    Continue Learning
+                    Open
                     <ArrowRight className="w-4 h-4" />
+                  </motion.button>
+                ) : isPending ? (
+                  <motion.button
+                    disabled
+                    className="flex items-center gap-3 px-9 py-4 rounded-full font-bold text-sm tracking-wider opacity-75 cursor-not-allowed"
+                    style={{
+                      background: 'linear-gradient(135deg, #0a3a2a 0%, #104a36 100%)',
+                      color: '#fff',
+                      border: '1px solid rgba(15,122,85,0.3)',
+                      letterSpacing: '0.06em',
+                    }}
+                  >
+                    Requested
                   </motion.button>
                 ) : (
                   <motion.button
@@ -971,7 +1000,20 @@ const LearningPathPage: React.FC = () => {
                     }}
                   >
                     <PlayCircle className="w-4 h-4" />
-                    Start Learning
+                    Open
+                  </motion.button>
+                ) : isPending ? (
+                  <motion.button
+                    disabled
+                    className="flex items-center gap-2.5 px-9 py-4 rounded-full font-bold text-sm tracking-wider opacity-75 cursor-not-allowed"
+                    style={{
+                      background: 'linear-gradient(135deg, #0a3a2a, #104a36)',
+                      color: '#fff',
+                      border: '1px solid rgba(15,122,85,0.3)',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    Requested
                   </motion.button>
                 ) : (
                   <motion.button
@@ -1168,8 +1210,6 @@ const LearningPathPage: React.FC = () => {
         courseTitle={path.title}
         onEnrolled={() => {
           setEnrollModalOpen(false);
-          // navigate to course player after enrollment
-          setTimeout(() => navigate(`/learn/${pathId}/play`), 300);
         }}
       />
 

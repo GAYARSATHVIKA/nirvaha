@@ -18,12 +18,12 @@ const heroImage = "/meditation/first.jpg";
 const balasana = "/yoga poses/child pose.png";
 const ardha = "/yoga poses/half.png";
 const butterfly = "/yoga poses/butterfly pose.png";
-const savasana = "/poses for medittaion/corpus 5.png";
-const sukhasana = "/poses for medittaion/easy 1.jpg";
-const virkshana = "/poses for medittaion/tree 7.png";
-const vajrasana = "/poses for medittaion/thunder 3.png";
+const savasana = "/poses-for-meditation/corpus-5.png?v=2";
+const sukhasana = "/poses-for-meditation/easy-1.jpg?v=2";
+const virkshana = "/poses-for-meditation/tree-7.png?v=2";
+const vajrasana = "/poses-for-meditation/thunder-3.png?v=2";
 const siddhasana = "/yoga poses/perfect pose.png";
-const paschimottanasana = "/yoga for meditation/seated 2.png";
+const paschimottanasana = "/yoga-for-meditation/seated-2.png?v=2";
 const padmasana = "/lotus.png";
 
 // Main Page Component
@@ -156,7 +156,7 @@ const MeditationImages: React.FC = () => {
 
   const posesSet1 = [
     {
-      src: "/poses for medittaion/easy 1.jpg",
+      src: "/poses-for-meditation/easy-1.jpg?v=2",
       label: "Easy Pose",
       sanskrit: "Sukhasana",
       num: "01",
@@ -209,7 +209,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(186, 230, 253, 0.5)",
     },
     {
-      src: "/poses for medittaion/cosmic 2.png",
+      src: "/poses-for-meditation/cosmic-2.png?v=2",
       label: "Cosmic Stillness",
       sanskrit: "Dhyana Mudra",
       num: "02",
@@ -262,7 +262,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(233, 213, 255, 0.5)",
     },
     {
-      src: "/poses for medittaion/thunder 3.png",
+      src: "/poses-for-meditation/thunder-3.png?v=2",
       label: "Thunderbolt Pose",
       sanskrit: "Vajrasana",
       num: "03",
@@ -315,7 +315,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(254, 243, 199, 0.5)",
     },
     {
-      src: "/poses for medittaion/lotus 4.png",
+      src: "/poses-for-meditation/lotus-4.png?v=2",
       label: "Lotus Pose",
       sanskrit: "Padmasana",
       num: "04",
@@ -368,7 +368,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(252, 231, 243, 0.5)",
     },
     {
-      src: "/poses for medittaion/corpus 5.png",
+      src: "/poses-for-meditation/corpus-5.png?v=2",
       label: "Corpse Pose",
       sanskrit: "Savasana",
       num: "05",
@@ -421,7 +421,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(204, 251, 241, 0.5)",
     },
     {
-      src: "/poses for medittaion/zen 6.png",
+      src: "/poses-for-meditation/zen-6.png?v=2",
       label: "Zen Awareness",
       sanskrit: "Zazen",
       num: "06",
@@ -474,7 +474,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(255, 237, 213, 0.5)",
     },
     {
-      src: "/poses for medittaion/tree 7.png",
+      src: "/poses-for-meditation/tree-7.png?v=2",
       label: "Tree Pose",
       sanskrit: "Vrikshasana",
       num: "07",
@@ -527,7 +527,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(209, 250, 229, 0.5)",
     },
     {
-      src: "/poses for medittaion/deep 8.png",
+      src: "/poses-for-meditation/deep-8.png?v=2",
       label: "Deep Dhyana",
       sanskrit: "Dhyana",
       num: "08",
@@ -583,7 +583,7 @@ const MeditationImages: React.FC = () => {
 
   const posesSet2 = [
     {
-      src: "/yoga for meditation/bound. 1.png",
+      src: "/yoga-for-meditation/bound.-1.png?v=2",
       label: "Bound Angle Pose",
       sanskrit: "Baddha Konasana",
       num: "01",
@@ -636,7 +636,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(255, 228, 230, 0.5)",
     },
     {
-      src: "/yoga for meditation/seated 2.png",
+      src: "/yoga-for-meditation/seated-2.png?v=2",
       label: "Seated Meditation",
       sanskrit: "Sukhasana Dhyana",
       num: "02",
@@ -689,7 +689,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(224, 242, 254, 0.5)",
     },
     {
-      src: "/yoga for meditation/staff 3.png",
+      src: "/yoga-for-meditation/staff-3.png?v=2",
       label: "Staff Pose",
       sanskrit: "Dandasana",
       num: "03",
@@ -742,7 +742,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(247, 254, 231, 0.5)",
     },
     {
-      src: "/yoga for meditation/cow 4.png",
+      src: "/yoga-for-meditation/cow-4.png?v=2",
       label: "Cow Face Pose",
       sanskrit: "Gomukhasana",
       num: "04",
@@ -795,7 +795,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(237, 233, 254, 0.5)",
     },
     {
-      src: "/yoga for meditation/camel 5.png",
+      src: "/yoga-for-meditation/camel-5.png?v=2",
       label: "Camel Pose",
       sanskrit: "Ustrasana",
       num: "05",
@@ -848,7 +848,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(254, 226, 226, 0.5)",
     },
     {
-      src: "/yoga for meditation/cobra 6.png",
+      src: "/yoga-for-meditation/cobra-6.png?v=2",
       label: "Cobra Pose",
       sanskrit: "Bhujangasana",
       num: "06",
@@ -901,7 +901,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(254, 249, 195, 0.5)",
     },
     {
-      src: "/yoga for meditation/boat 7.png",
+      src: "/yoga-for-meditation/boat-7.png?v=2",
       label: "Boat Pose",
       sanskrit: "Navasana",
       num: "07",
@@ -954,7 +954,7 @@ const MeditationImages: React.FC = () => {
       glowOuter: "rgba(207, 250, 254, 0.5)",
     },
     {
-      src: "/yoga for meditation/seated twist 8.png",
+      src: "/yoga-for-meditation/seated-twist-8.png?v=2",
       label: "Seated Twist",
       sanskrit: "Ardha Matsyendrasana",
       num: "08",
@@ -1043,6 +1043,8 @@ const MeditationImages: React.FC = () => {
   });
 
   const selected = selectedPose !== null ? poses[selectedPose] : null;
+
+  console.log("POSES DEBUG:", poses);
 
   return (
     <section
@@ -1236,7 +1238,7 @@ const MeditationImages: React.FC = () => {
                     <div className="med-circle-img" style={{ borderColor: card.color }}>
                       <img
                         key={`${currentSet}-${i}`}
-                        src={card.src}
+                        src={encodeURI(card.src)}
                         alt={card.label}
                       />
                     </div>
@@ -1295,7 +1297,7 @@ const MeditationImages: React.FC = () => {
               <div className="med-modal-hero-row">
                 {/* Left: image */}
                 <img
-                  src={selected.src}
+                  src={encodeURI(selected.src)}
                   alt={selected.label}
                   className="med-modal-hero-img"
                   style={{
@@ -3075,7 +3077,7 @@ const YOGA_CLICK_FX_MS = 1400;
 
 const MeditationPoses: React.FC = () => {
   const [dynamicPoses, setDynamicPoses] = useState<
-    { id: string | number; name: string; intensity: string; duration: string; image: string; youtubeUrl: string }[]
+    { id: string | number; name: string; intensity: string; duration: string; image: string; youtubeUrl: string; description?: string; guidelines?: string[]; benefits?: string[]; precautions?: string[] }[]
   >([]);
   const [loadedDynamic, setLoadedDynamic] = useState(false);
 
@@ -3092,6 +3094,10 @@ const MeditationPoses: React.FC = () => {
               duration: y.duration ? `${y.duration} min` : "—",
               image: y.imageUrl || "",
               youtubeUrl: y.youtubeUrl || "",
+              description: y.description || "",
+              guidelines: y.guidelines || [],
+              benefits: y.benefits || [],
+              precautions: y.precautions || [],
             }))
           );
         }

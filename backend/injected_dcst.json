@@ -1,0 +1,829 @@
+[
+  {
+    "id": "dcst-m1",
+    "title": "Module 1: Understanding Clear Thinking",
+    "description": "Learn why people make unclear decisions and how structured thinking improves judgment.",
+    "units": [
+      {
+        "id": "dcst-m1-1",
+        "title": "Reacting vs Thinking Clearly",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "Many poor decisions happen because people react emotionally instead of thinking carefully.",
+            "For example:",
+            "Imagine a student receiving criticism during a presentation.",
+            "Immediate reaction:",
+            "\"The teacher doesn't like my work.\"",
+            "This emotional reaction may create frustration or self-doubt.",
+            "A clearer thinking process would be:",
+            "\"What specific feedback can help improve the presentation?\"",
+            "The second response focuses on learning instead of emotion.",
+            "Clear thinking means:",
+            "• pausing before reacting",
+            "• understanding the situation properly",
+            "• focusing on facts instead of assumptions",
+            "This skill is important in:",
+            "* studies",
+            "* teamwork",
+            "* leadership",
+            "* professional environments",
+            "A simple habit can improve decision-making:",
+            "Pause → Think → Respond",
+            "Even a short pause can prevent poor decisions."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "dcst-m1-2",
+        "title": "Identify the Real Problem",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image1.png)",
+            "People often try to solve problems before understanding the actual issue.",
+            "For example:",
+            "A team project is delayed.",
+            "The team may assume:",
+            "\"The team members are not working hard enough.\"",
+            "But after discussing the situation, they realize:",
+            "* project instructions were unclear",
+            "* tasks were not assigned properly",
+            "The real problem was poor planning, not lack of effort.",
+            "Good decision-makers first ask:",
+            "• What exactly is the problem?",
+            "• Why is it happening?",
+            "• What information is missing?",
+            "Understanding the real problem helps avoid wasting time on incorrect solutions."
+          ],
+          "summary": "A clear problem definition leads to better decisions."
+        }
+      },
+      {
+        "id": "dcst-m1-3",
+        "title": "Think About Consequences",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image7.png)",
+            "Good decisions consider both short-term and long-term outcomes.",
+            "For example:",
+            "A student may skip studying to spend time on entertainment.",
+            "Short-term result:",
+            "* immediate enjoyment",
+            "Long-term result:",
+            "* poor exam performance",
+            "Strategic thinking means asking:",
+            "• What happens next?",
+            "• What are the long-term effects?",
+            "• Is this decision useful in the future?",
+            "Professionals and leaders often evaluate decisions by considering future consequences before taking action.",
+            "A simple thinking model:",
+            "Decision → Consequence → Long-Term Impact",
+            "This helps improve judgment and reduce impulsive choices."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "dcst-m1-q",
+        "title": "Module 1 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is the first step before making an important decision?",
+              "options": [
+                "React immediately",
+                "Pause and think clearly",
+                "Ask others to decide",
+                "Ignore the situation"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is identifying the real problem important?",
+              "options": [
+                "It avoids discussions",
+                "It helps create better solutions",
+                "It reduces teamwork",
+                "It speeds up emotional decisions"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is an important part of strategic thinking?",
+              "options": [
+                "Ignoring future outcomes",
+                "Making fast decisions",
+                "Considering long-term consequences",
+                "Avoiding analysis"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dcst-m2",
+    "title": "Module 2: Decision-Making Frameworks",
+    "description": "Learn simple frameworks that help organize thinking, evaluate options clearly, and make better decisions in real-life situations.",
+    "units": [
+      {
+        "id": "dcst-m2-1",
+        "title": "Define the Decision Clearly",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image4.png)",
+            "Many people make poor decisions because they are not clear about what decision they are actually making.",
+            "For example:",
+            "A student says:",
+            "\"I don't know what to do with my career.\"",
+            "This problem is too broad.",
+            "A clearer decision would be:",
+            "* Should I prepare for placements or higher studies?",
+            "* Should I focus on software development or design?",
+            "* Should I take an internship or continue learning a skill?",
+            "Breaking a broad problem into a specific decision makes thinking easier.",
+            "Good decision-makers first define:",
+            "• What exactly needs to be decided?",
+            "• What are the available options?",
+            "• What is the timeline for this decision?"
+          ],
+          "summary": "Clear decisions lead to clearer thinking."
+        }
+      },
+      {
+        "id": "dcst-m2-2",
+        "title": "Compare Options Logically",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image8.png)",
+            "Good decisions require comparing options carefully instead of choosing impulsively.",
+            "For example:",
+            "Imagine a student deciding between two internship opportunities.",
+            "Option A:",
+            "* Higher salary",
+            "* Less learning opportunity",
+            "Option B:",
+            "* Lower salary",
+            "* Better skill development",
+            "Instead of choosing emotionally, the student should compare both options based on:",
+            "• long-term value",
+            "• learning opportunities",
+            "• career goals",
+            "• financial needs",
+            "A simple comparison table can help.",
+            "Factor",
+            "Option A",
+            "Option B",
+            "Salary",
+            "High",
+            "Medium",
+            "Learning",
+            "Low",
+            "High",
+            "Career Growth",
+            "Medium",
+            "High",
+            "This makes decision-making more structured.",
+            "Also ask, “What creates better long-term value?”"
+          ],
+          "summary": "Do not ask only, “What feels good now?”"
+        }
+      },
+      {
+        "id": "dcst-m2-3",
+        "title": "Avoid Emotional Decisions",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image10.png)",
+            "Emotions can strongly influence decisions.",
+            "This becomes dangerous when decisions are made during:",
+            "* anger",
+            "* stress",
+            "* excitement",
+            "* frustration",
+            "For example:",
+            "A person receives negative feedback from a manager and immediately decides:",
+            "\"I should quit my job.\"",
+            "This is an emotional reaction, not a strategic decision.",
+            "A better approach is:",
+            "• pause",
+            "• evaluate the situation calmly",
+            "• think about long-term consequences",
+            "Strong decision-makers separate:",
+            "* temporary emotions",
+            "from",
+            "* long-term priorities",
+            "Instead:",
+            "Pause → Analyze → Decide",
+            "This reduces impulsive mistakes."
+          ],
+          "summary": "When emotions are high, avoid making immediate important decisions."
+        }
+      },
+      {
+        "id": "dcst-m2-q",
+        "title": "Module 2 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is the first step in effective decision-making?",
+              "options": [
+                "React quickly",
+                "Define the decision clearly",
+                "Ask others to decide",
+                "Avoid difficult choices"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "Why is comparing options important?",
+              "options": [
+                "It increases confusion",
+                "It helps evaluate long-term value",
+                "It avoids responsibility",
+                "It removes decision-making"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What should you avoid when making important decisions?",
+              "options": [
+                "Structured thinking",
+                "Comparing options",
+                "Emotional reactions",
+                "Long-term analysis"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dcst-m3",
+    "title": "Module 3: Strategic Thinking",
+    "description": "Learn how to think ahead, prioritize effectively, and make decisions with long-term perspective instead of short-term reactions.",
+    "units": [
+      {
+        "id": "dcst-m3-1",
+        "title": "Think Beyond Immediate Results",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image2.png)",
+            "Many people make decisions based only on short-term benefits.",
+            "Strategic thinkers consider both:",
+            "• immediate results",
+            "• future consequences",
+            "For example:",
+            "A student may choose to spend all free time on entertainment instead of building skills.",
+            "Short-term result:",
+            "* enjoyment and comfort",
+            "Long-term result:",
+            "* fewer career opportunities",
+            "Now consider another student who spends one hour daily learning a useful skill.",
+            "Short-term result:",
+            "* more effort and discipline",
+            "Long-term result:",
+            "* stronger opportunities and growth",
+            "Strategic thinking means asking:",
+            "• What happens after this decision?",
+            "• Will this help me in the future?",
+            "• Am I choosing comfort or long-term value?"
+          ],
+          "summary": "Good decisions often prioritize long-term growth over short-term comfort."
+        }
+      },
+      {
+        "id": "dcst-m3-2",
+        "title": "Prioritize What Matters Most",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image9.png)",
+            "Not every task has the same importance.",
+            "Strategic thinkers focus on high-impact activities instead of trying to do everything at once.",
+            "For example:",
+            "Imagine a student preparing for exams.",
+            "The student spends hours:",
+            "* organizing notes",
+            "* changing study templates",
+            "* watching productivity videos",
+            "But very little time is spent actually studying.",
+            "This creates the feeling of being busy without making real progress.",
+            "A strategic approach would be:",
+            "• identify the most important subjects",
+            "• focus on weak areas first",
+            "• spend more time on high-value tasks",
+            "A simple question helps with prioritization:",
+            "Which action creates the biggest positive result?",
+            "Professionals and leaders often prioritize tasks based on:",
+            "* importance",
+            "* impact",
+            "* urgency",
+            "Strategic thinking is not about doing more things.",
+            "It is about doing the right things first."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "dcst-m3-3",
+        "title": "Prepare for Risks and Challenges",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image5.png)",
+            "Strategic thinking also means preparing for possible problems before they happen.",
+            "For example:",
+            "A team plans a college event.",
+            "A non-strategic approach:",
+            "* assuming everything will go perfectly",
+            "A strategic approach:",
+            "* preparing backup plans",
+            "* considering possible delays",
+            "* assigning responsibilities clearly",
+            "This reduces confusion when unexpected situations occur.",
+            "Good decision-makers often ask:",
+            "• What could go wrong?",
+            "• How can we prepare for it?",
+            "• What is the backup plan?",
+            "Preparing for risks does not mean negative thinking.",
+            "It means thinking realistically."
+          ],
+          "summary": "Strong planning includes preparation for uncertainty."
+        }
+      },
+      {
+        "id": "dcst-m3-q",
+        "title": "Module 3 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is an important part of strategic thinking?",
+              "options": [
+                "Focusing only on immediate results",
+                "Ignoring future consequences",
+                "Considering long-term outcomes",
+                "Avoiding planning"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why is prioritization important?",
+              "options": [
+                "It helps focus on high-impact tasks",
+                "It increases workload",
+                "It avoids responsibility",
+                "It reduces planning"
+              ],
+              "correct": 0
+            },
+            {
+              "question": "Why should people prepare for risks and challenges?",
+              "options": [
+                "To think negatively",
+                "To avoid decision-making",
+                "To handle uncertainty more effectively",
+                "To delay action"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dcst-m4",
+    "title": "Module 4: Avoiding Cognitive Mistakes",
+    "description": "Learn how common thinking mistakes affect decisions and how to think more clearly in difficult situations.",
+    "units": [
+      {
+        "id": "dcst-m4-1",
+        "title": "Avoid Confirmation Bias",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image3.png)",
+            "People often look for information that supports what they already believe.",
+            "This is called confirmation bias.",
+            "For example:",
+            "A student believes:",
+            "\"Online learning is ineffective.\"",
+            "So the student only notices:",
+            "* negative online class experiences",
+            "* students who lose focus online",
+            "At the same time, they ignore:",
+            "* people who successfully learn online",
+            "* useful online courses and certifications",
+            "This creates an incomplete understanding.",
+            "Clear thinkers try to examine:",
+            "• different viewpoints",
+            "• opposing opinions",
+            "• evidence from multiple sources",
+            "A useful question to ask is:",
+            "“Am I looking for truth, or only for agreement?”",
+            "Strong decision-makers are willing to challenge their own assumptions."
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "dcst-m4-2",
+        "title": "Avoid Overthinking",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image11.png)",
+            "Thinking carefully is useful.",
+            "Overthinking is not.",
+            "Overthinking happens when people continuously analyze a situation without taking action.",
+            "For example:",
+            "A student wants to apply for an internship.",
+            "Instead of applying, the student spends weeks:",
+            "* repeatedly editing the resume",
+            "* worrying about rejection",
+            "* comparing every possible option",
+            "As a result, no action is taken.",
+            "Clear thinkers understand that:",
+            "• not every decision will be perfect",
+            "• action is often better than endless analysis",
+            "2. Make a reasonable decision",
+            "3. Take action",
+            "4. Adjust if necessary"
+          ],
+          "summary": "Clarity grows through action, not endless thinking."
+        }
+      },
+      {
+        "id": "dcst-m4-3",
+        "title": "Separate Facts From Assumptions",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image6.png)",
+            "People sometimes make decisions based on assumptions instead of facts.",
+            "For example:",
+            "A manager sends a short message saying:",
+            "\"We need to talk tomorrow.\"",
+            "An employee may immediately assume:",
+            "* they are in trouble",
+            "* they made a mistake",
+            "This assumption creates unnecessary stress.",
+            "But the actual conversation may simply be about a new project.",
+            "Clear thinkers separate:",
+            "• facts",
+            "from",
+            "• interpretations",
+            "In this situation:",
+            "Fact:",
+            "* the manager scheduled a meeting",
+            "Assumption:",
+            "* the meeting is negative",
+            "This habit helps reduce emotional reactions and improves decision-making.",
+            "A useful question to ask is:",
+            "“What do I know for certain?”"
+          ],
+          "summary": ""
+        }
+      },
+      {
+        "id": "dcst-m4-q",
+        "title": "Module 4 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "What is confirmation bias?",
+              "options": [
+                "Ignoring all information",
+                "Looking only for information that supports existing beliefs",
+                "Making fast decisions",
+                "Avoiding discussions"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is a major problem with overthinking?",
+              "options": [
+                "It improves action",
+                "It reduces preparation",
+                "It delays decision-making and action",
+                "It increases confidence"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why is it important to separate facts from assumptions?",
+              "options": [
+                "To avoid communication",
+                "To reduce emotional reactions and think clearly",
+                "To make faster emotional decisions",
+                "To ignore uncertainty"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dcst-m5",
+    "title": "Module 5: Problem Solving & Execution",
+    "description": "Learn how to break down problems, create practical action plans, and execute decisions effectively.",
+    "units": [
+      {
+        "id": "dcst-m5-1",
+        "title": "Break Large Problems Into Smaller Steps",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image13.png)",
+            "Large problems often feel stressful because people try to solve everything at once.",
+            "Effective problem-solvers break complex situations into smaller manageable steps.",
+            "For example:",
+            "A student wants to prepare for placements but feels overwhelmed by:",
+            "* aptitude preparation",
+            "* coding practice",
+            "* resume building",
+            "* interview preparation",
+            "Trying to handle everything at the same time creates confusion.",
+            "A better approach is to divide the goal into smaller tasks.",
+            "Example:",
+            "Week 1:",
+            "* update resume",
+            "Week 2:",
+            "* practice aptitude questions",
+            "Week 3:",
+            "* prepare interview answers",
+            "This makes progress more organized and realistic."
+          ],
+          "summary": "Small consistent progress solves large problems."
+        }
+      },
+      {
+        "id": "dcst-m5-2",
+        "title": "Create Action Plans",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image14.png)",
+            "Good decisions only create results when followed by action.",
+            "Many people spend time planning but never begin execution.",
+            "For example:",
+            "A person decides to improve communication skills.",
+            "Without an action plan, the goal remains vague.",
+            "A better approach would be:",
+            "Goal:",
+            "* improve communication skills",
+            "Action plan:",
+            "* practice speaking for 10 minutes daily",
+            "* participate in one discussion every week",
+            "* record and review presentations",
+            "Clear action plans usually include:",
+            "• what needs to be done",
+            "• when it should be done",
+            "• how progress will be measured",
+            "This creates accountability and direction."
+          ],
+          "summary": "A decision without action remains only an idea."
+        }
+      },
+      {
+        "id": "dcst-m5-3",
+        "title": "Review and Improve Decisions",
+        "type": "reading",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "body": [
+            "![image](/images/courses/dcst/image12.png)",
+            "Strong decision-makers regularly review their actions and learn from results.",
+            "For example:",
+            "A team completes a college event successfully, but some activities were delayed.",
+            "Instead of ignoring the problems, the team reviews:",
+            "• what worked well",
+            "• what caused delays",
+            "• what can be improved next time",
+            "This process improves future performance.",
+            "Reviewing decisions helps people:",
+            "* identify mistakes",
+            "* improve strategies",
+            "* make better future decisions",
+            "Professionals and leaders continuously refine their decisions based on experience and feedback."
+          ],
+          "summary": "Plan → Act → Review → Improve"
+        }
+      },
+      {
+        "id": "dcst-m5-q",
+        "title": "Module 5 Quiz",
+        "type": "quiz",
+        "xp": 50,
+        "duration": "5 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "Why is it useful to break large problems into smaller steps?",
+              "options": [
+                "It increases confusion",
+                "It makes progress more manageable",
+                "It delays execution",
+                "It removes planning"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is an important part of an action plan?",
+              "options": [
+                "Avoiding deadlines",
+                "Keeping goals unclear",
+                "Defining specific actions and timelines",
+                "Focusing only on ideas"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why should decisions be reviewed after execution?",
+              "options": [
+                "To avoid future planning",
+                "To identify improvements and learn from results",
+                "To repeat the same mistakes",
+                "To reduce accountability"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "dcst-final",
+    "title": "Final Assessment",
+    "description": "Final Assessment for Decision Clarity & Strategic Thinking",
+    "units": [
+      {
+        "id": "dcst-final-q",
+        "title": "Final Quiz",
+        "type": "quiz",
+        "xp": 100,
+        "duration": "20 min",
+        "content": {
+          "quizQuestions": [
+            {
+              "question": "A student receives critical feedback on a presentation and immediately feels discouraged.\nWhat is the best first response?",
+              "options": [
+                "Ignore the feedback",
+                "React emotionally",
+                "Pause and identify useful improvements",
+                "Stop presenting in the future"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why is it important to clearly define a problem before solving it?",
+              "options": [
+                "It reduces discussion",
+                "It helps create better solutions",
+                "It makes decisions faster without analysis",
+                "It avoids responsibility"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "A student must choose between:\n* a high-paying internship with little learning\n* a lower-paying internship with strong skill development\nWhat is the most strategic approach?",
+              "options": [
+                "Choose only based on salary",
+                "Choose randomly",
+                "Compare long-term value and career growth",
+                "Avoid making the decision"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What is a key characteristic of strategic thinking?",
+              "options": [
+                "Focusing only on immediate comfort",
+                "Ignoring future outcomes",
+                "Considering long-term consequences",
+                "Avoiding planning"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "What is confirmation bias?",
+              "options": [
+                "Ignoring all information",
+                "Seeking only information that supports existing beliefs",
+                "Making decisions slowly",
+                "Avoiding analysis"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "What is the main problem with overthinking?",
+              "options": [
+                "It improves execution",
+                "It delays action and decision-making",
+                "It reduces analysis",
+                "It guarantees perfect decisions"
+              ],
+              "correct": 1
+            },
+            {
+              "question": "A manager sends a short message saying:\n\"We need to talk tomorrow.\"\nAn employee immediately assumes something negative.\nWhat thinking mistake is happening?",
+              "options": [
+                "Strategic thinking",
+                "Prioritization",
+                "Confusing assumptions with facts",
+                "Long-term planning"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why should large problems be broken into smaller steps?",
+              "options": [
+                "To make progress easier to manage",
+                "To avoid responsibility",
+                "To increase confusion",
+                "To delay execution"
+              ],
+              "correct": 0
+            },
+            {
+              "question": "What is an important part of effective execution?",
+              "options": [
+                "Planning without action",
+                "Waiting for perfect conditions",
+                "Creating a clear action plan",
+                "Avoiding timelines"
+              ],
+              "correct": 2
+            },
+            {
+              "question": "Why is reviewing decisions important?",
+              "options": [
+                "To avoid future planning",
+                "To learn from outcomes and improve future decisions",
+                "To repeat the same process",
+                "To reduce accountability"
+              ],
+              "correct": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

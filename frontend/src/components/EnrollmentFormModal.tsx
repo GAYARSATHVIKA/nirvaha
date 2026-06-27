@@ -94,16 +94,9 @@ export const EnrollmentFormModal: React.FC<EnrollmentFormModalProps> = ({
         await syncUserFromServer();
       }
 
-      if (data.isFree) {
-        setStep('success');
-        toast.success('Enrollment request submitted successfully!');
-        setTimeout(() => {
-          onEnrolled?.();
-          onClose();
-        }, 3000);
-      } else {
-        setStep('payment');
-      }
+      toast.success('Enrollment request submitted successfully!');
+      onEnrolled?.();
+      onClose();
     } catch (err: any) {
       setStep('form');
       setError(err.message || 'Something went wrong. Please try again.');

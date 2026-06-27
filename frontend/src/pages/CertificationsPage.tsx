@@ -242,8 +242,7 @@ const CertificationsPage: React.FC = () => {
 
                         {/* Description */}
                         <p className="text-[#3d5249] text-[15px] leading-[1.85] font-normal mb-12 max-w-[480px]">
-Discover emotionally grounded certifications designed to nurture
-                            clarity, reflection, awareness, and meaningful personal transformation.
+                            Structured educational programs offering certifications in various wellness disciplines. Users can enroll in courses, complete modules, earn certifications, and become certified practitioners in areas such as meditation instruction, sound healing facilitation, and wellness coaching.
                         </p>
 
                         {/* Stats */}
@@ -503,7 +502,7 @@ Discover emotionally grounded certifications designed to nurture
                             Continue Your Transformation Journey
                         </h3>
                         <p className="text-emerald-200/60 text-[13.5px] leading-relaxed mb-6 font-light font-sans">
-                            Discover emotionally grounded certifications designed to nurture clarity, reflection, and transformation. Empower yourself and others with our professional certification programs.
+                            Structured educational programs offering certifications in various wellness disciplines. Users can enroll in courses, complete modules, earn certifications, and become certified practitioners.
                         </p>
                         <button
                             onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); navigate('/learn'); }}

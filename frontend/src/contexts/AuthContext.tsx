@@ -51,6 +51,7 @@ export interface User {
     courseId: string;
     enrolledAt: string;
   }>;
+  pendingApplications?: string[];
 }
 
 interface AuthContextType {

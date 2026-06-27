@@ -178,6 +178,10 @@ export type YogaItem = {
   youtubeUrl: string;
   imageUrl: string;
   status: string;
+  description?: string;
+  guidelines?: string[];
+  benefits?: string[];
+  precautions?: string[];
   createdAt?: string;
   updatedAt?: string;
 };

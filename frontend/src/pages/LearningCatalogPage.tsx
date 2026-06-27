@@ -98,6 +98,7 @@ const LearningCatalogPage: React.FC = () => {
               const pathImage = path.image || PATH_IMAGES[path.id] || '/learn1.png';
             const isHov = hovered === path.id;
             const enrolled = isEnrolled(path.id);
+            const isPending = user?.pendingApplications?.includes(path.id);
 
             return (
               <motion.div
@@ -193,8 +194,15 @@ const LearningCatalogPage: React.FC = () => {
                         }}
                         className="bg-[#0f7a55] text-white hover:bg-[#0b5e41] text-xs font-black uppercase py-3 px-6 rounded-full shadow-[0_4px_14px_rgba(15,122,85,0.30)] flex items-center justify-center gap-2 transition-all font-sans"
                       >
-                        Continue Learning
+                        Open
                         <ChevronLeft className="w-4 h-4 rotate-180" />
+                      </motion.button>
+                    ) : isPending ? (
+                      <motion.button
+                        disabled
+                        className="bg-[#0a3a2a] text-white text-xs font-black uppercase py-3 px-6 rounded-full shadow-sm flex items-center justify-center gap-2 transition-all font-sans opacity-75 cursor-not-allowed border border-emerald-900/50"
+                      >
+                        Requested
                       </motion.button>
                     ) : (
                       <motion.button
@@ -381,8 +389,6 @@ const LearningCatalogPage: React.FC = () => {
         courseTitle={enrollModal.title}
         onEnrolled={() => {
           setEnrollModal(m => ({ ...m, open: false }));
-          // Navigate to course detail after enrollment
-          setTimeout(() => navigate(`/learn/${enrollModal.pathId}`), 300);
         }}
       />
 

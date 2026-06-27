@@ -10,6 +10,10 @@ const yogaSchema = new mongoose.Schema(
     youtubeUrl: { type: String, default: '' },
     imageUrl: { type: String, default: '' },
     status: { type: String, default: 'Active' },
+    description: { type: String, default: '' },
+    guidelines: { type: [String], default: [] },
+    benefits: { type: [String], default: [] },
+    precautions: { type: [String], default: [] },
     // true = created/edited via admin panel; false = seeded default pose
     adminManaged: { type: Boolean, default: false },
   },
