@@ -71,7 +71,8 @@ const CertificationCoursesSection: React.FC = () => {
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
                             whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)" }}
-                            className={`flex flex-col sm:flex-row rounded-[24px] overflow-hidden shadow-lg border border-white/20 transition-all duration-300 ${course.bgColor || 'bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]'}`}
+                            onClick={() => { navigate(`/learn/${course.id}`); window.scrollTo({ top: 0, behavior: 'instant' }); }}
+                            className={`cursor-pointer flex flex-col sm:flex-row rounded-[24px] overflow-hidden shadow-lg border border-white/20 transition-all duration-300 ${course.bgColor || 'bg-gradient-to-br from-[#f2f7eb] to-[#e6f0de]'}`}
                         >
                             {/* Image Half */}
                             <div className="w-full sm:w-2/5 h-48 sm:h-auto shrink-0 relative overflow-hidden">
