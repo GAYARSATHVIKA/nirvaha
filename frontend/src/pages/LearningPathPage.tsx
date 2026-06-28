@@ -328,21 +328,12 @@ const LearningPathPage: React.FC = () => {
     setEnrollModalOpen(true);
   };
 
-  const toggleUnit = (id: string) => {
+  const handleUnitClick = (id: string) => {
     if (!enrolled) {
       handleEnrollClick();
       return;
     }
-    setCompletedUnits(prev => {
-      const n = new Set(prev);
-      n.has(id) ? n.delete(id) : n.add(id);
-      
-      const isNowAllComplete = allUnits.every(u => n.has(u.id));
-      if (isNowAllComplete) {
-        setTimeout(() => setCertModalOpen(true), 500);
-      }
-      return n;
-    });
+    navigate(`/learn/${pathId}/play`);
   };
 
   const circumference = 2 * Math.PI * 52;
@@ -862,7 +853,7 @@ const LearningPathPage: React.FC = () => {
                                       initial={{ opacity: 0, x: -8 }}
                                       animate={{ opacity: 1, x: 0 }}
                                       transition={{ duration: 0.3, delay: uIdx * 0.05 }}
-                                      onClick={() => !unit.locked && toggleUnit(unit.id)}
+                                      onClick={() => !unit.locked && handleUnitClick(unit.id)}
                                       className="flex items-center gap-3.5 px-4 py-3 rounded-[14px] transition-all group"
                                       style={{
                                         background: done
