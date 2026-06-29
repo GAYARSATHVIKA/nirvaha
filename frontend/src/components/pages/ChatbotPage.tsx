@@ -26,6 +26,7 @@ import { useSettings } from "@/contexts/SettingsContext";
 import { InitialsAvatar } from "@/components/ui/InitialsAvatar";
 import type { ChatbotPersona } from "@/types/settings";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type Message = { type: "ai" | "user"; content: string; timestamp: string };
 type Session = { id: string; title: string; messages: Message[]; createdAt: number; updatedAt: number };
@@ -69,6 +70,7 @@ const formatFriendlyTimestamp = (timestamp: string | number | undefined): string
 };
 
 export function ChatbotPage() {
+  const navigate = useNavigate();
   const { user, setCurrentUser } = useAuth();
   const { settings, setMusicEnabled, setChatbotPersona } = useSettings();
   const bgMusicEnabled = settings.music.enabled;
@@ -721,7 +723,18 @@ export function ChatbotPage() {
 
       if (res.ok) {
         const data = await res.json();
-        const replyText = data.reply || generateAIResponse(sentMessage, contextMessages);
+        let replyText = data.reply || generateAIResponse(sentMessage, contextMessages);
+        
+        // Handle Redirections
+        const redirectMatch = replyText.match(/\[REDIRECT:(.*?)\]/);
+        if (redirectMatch) {
+          const path = redirectMatch[1];
+          replyText = replyText.replace(redirectMatch[0], '').trim();
+          setTimeout(() => {
+            navigate(path);
+          }, 2000);
+        }
+
         await new Promise(resolve => setTimeout(resolve, 800));
         appendAiReply(replyText);
       } else {

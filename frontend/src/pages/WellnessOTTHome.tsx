@@ -325,31 +325,6 @@ export default function WellnessOTTHome() {
           >
             NIRVAHA
           </h1>
-          
-          {/* Navigation Links */}
-          <div className="hidden lg:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-white/70 ml-6 relative">
-            {navItems.map(item => (
-              <span 
-                key={item}
-                onClick={() => setActiveTab(item as any)}
-                className={`cursor-pointer transition-colors relative pb-1 ${activeTab === item ? 'text-white font-black' : 'hover:text-white'}`}
-              >
-                {item}
-                {activeTab === item && (
-                  <motion.div 
-                    layoutId="navbar-indicator" 
-                    className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#2ed899] shadow-[0_0_12px_rgba(46,216,153,0.8)] rounded-full" 
-                  />
-                )}
-              </span>
-            ))}
-            <span 
-              onClick={() => navigate('/wellness-ott/library')} 
-              className="cursor-pointer hover:text-white transition-colors pb-1 border-b-[2px] border-transparent"
-            >
-              My List
-            </span>
-          </div>
         </div>
         
         {/* Right Nav Options */}
