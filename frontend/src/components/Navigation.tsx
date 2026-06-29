@@ -338,18 +338,6 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
               >
                 <span className="text-sm font-bold uppercase tracking-wider">Companion</span>
               </motion.button>
-
-              {/* Gaming Hub */}
-              <motion.button
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavigate("gaming-hub")}
-                className={`flex items-center gap-2 px-4 py-2 transition-all ${
-                  currentPage === "gaming-hub" ? "text-white" : "text-white/70 hover:text-white"
-                }`}
-              >
-                <span className="text-sm font-bold uppercase tracking-wider">Gaming Hub</span>
-              </motion.button>
             </div>
 
             {/* Search + Profile (Desktop) */}
