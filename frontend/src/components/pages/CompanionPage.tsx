@@ -761,8 +761,7 @@ export function CompanionPage() {
   // Advanced Filter States
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [priceSort, setPriceSort] = useState<"none" | "low-to-high" | "high-to-low">("none");
-  const [priceRanges, setPriceRanges] = useState<string[]>([]); // "under1000", "1000-2000", "above2000"
+  // Price filters removed because companions are free
   const [availabilities, setAvailabilities] = useState<string[]>([]); // "morning", "afternoon", "evening", "night", "today", "week"
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]); // "beginner", "3plus", "5plus", "10plus"
   const [minRating, setMinRating] = useState<number | null>(null); // 4, 4.5, 5
@@ -780,8 +779,6 @@ export function CompanionPage() {
 
   const hasActiveFilters = 
     selectedCategories.length > 0 ||
-    priceSort !== "none" ||
-    priceRanges.length > 0 ||
     availabilities.length > 0 ||
     selectedExperience.length > 0 ||
     minRating !== null ||
@@ -789,8 +786,6 @@ export function CompanionPage() {
 
   const activeFiltersCount = 
     (selectedCategories.length > 0 ? 1 : 0) +
-    (priceSort !== "none" ? 1 : 0) +
-    (priceRanges.length > 0 ? 1 : 0) +
     (availabilities.length > 0 ? 1 : 0) +
     (selectedExperience.length > 0 ? 1 : 0) +
     (minRating !== null ? 1 : 0) +
@@ -832,22 +827,9 @@ export function CompanionPage() {
 
       const color = c.color || companionPalette[index % companionPalette.length];
 
-      const priceVal = c.hourlyRate || c.price || 1000;
-      const priceStr = typeof priceVal === 'string' && priceVal.includes('₹')
-        ? priceVal
-        : `₹${priceVal}`;
-
-      const hourlyRateStr = typeof c.hourlyRate === 'string' && c.hourlyRate.includes('₹')
-        ? c.hourlyRate
-        : c.hourlyRate !== undefined
-          ? `₹${c.hourlyRate}`
-          : priceStr;
-
-      const callRateStr = typeof c.callRate === 'string' && c.callRate.includes('₹')
-        ? c.callRate
-        : c.callRate !== undefined
-          ? `₹${c.callRate}`
-          : `₹${Math.round(parseInt(priceStr.replace('₹', '')) / 2) || 500}`;
+      const priceStr = "Free";
+      const hourlyRateStr = "Free";
+      const callRateStr = "Free";
 
       return {
         ...c,
@@ -891,18 +873,7 @@ export function CompanionPage() {
       });
     }
 
-    // 2. Price Tier Range Filter
-    if (priceRanges.length > 0) {
-      result = result.filter(c => {
-        const numericPrice = parseInt(String(c.price).replace("₹", "")) || 0;
-        return priceRanges.some(range => {
-          if (range === "under1000") return numericPrice < 1000;
-          if (range === "1000-2000") return numericPrice >= 1000 && numericPrice <= 2000;
-          if (range === "above2000") return numericPrice > 2000;
-          return true;
-        });
-      });
-    }
+
 
     // 3. Availability Filter
     if (availabilities.length > 0) {
@@ -951,31 +922,16 @@ export function CompanionPage() {
       });
     }
 
-    // 7. Price Sorting
-    if (priceSort === "low-to-high") {
-      result.sort((a, b) => {
-        const priceA = parseInt(String(a.price).replace("₹", "")) || 0;
-        const priceB = parseInt(String(b.price).replace("₹", "")) || 0;
-        return priceA - priceB;
-      });
-    } else if (priceSort === "high-to-low") {
-      result.sort((a, b) => {
-        const priceA = parseInt(String(a.price).replace("₹", "")) || 0;
-        const priceB = parseInt(String(b.price).replace("₹", "")) || 0;
-        return priceB - priceA;
-      });
-    }
+
 
     return result;
   }, [
     mergedCompanionsList,
     selectedCategories,
-    priceRanges,
     availabilities,
     selectedExperience,
     minRating,
-    selectedLanguages,
-    priceSort
+    selectedLanguages
   ]);
 
   return (
@@ -1100,7 +1056,7 @@ export function CompanionPage() {
                   },
                   {
                     title: "Estimated Earnings",
-                    value: `₹${(companionSessions.filter(s => s.status?.toLowerCase() === "completed").length * (parseInt(String(companionProfile?.hourlyRate || "").replace(/[^\d]/g, "")) || 1000))}`,
+                    value: "₹0",
                     icon: DollarSign,
                     color: "from-teal-500/10 to-emerald-500/10 text-teal-600 border-teal-500/20",
                     pulse: false,
@@ -1799,64 +1755,7 @@ export function CompanionPage() {
                           </div>
                         </div>
 
-                        {/* 2. Price / Rate Filters Column */}
-                        <div className="space-y-3">
-                          <h4 className="text-xs font-black uppercase tracking-wider text-emerald-800/60 mb-2">Price & Sorting</h4>
-                          
-                          {/* Sort Toggle */}
-                          <div className="flex gap-2 mb-3">
-                            <button
-                              onClick={() => setPriceSort(priceSort === "low-to-high" ? "none" : "low-to-high")}
-                              className={`flex-1 py-2.5 rounded-xl border text-xs font-bold transition-all ${
-                                priceSort === "low-to-high"
-                                ? "bg-emerald-600 border-emerald-600 text-white shadow-sm"
-                                : "bg-white/50 border-gray-100 text-[#1B4332]/70 hover:border-emerald-100"
-                              }`}
-                            >
-                              ₹ Low to High
-                            </button>
-                            <button
-                              onClick={() => setPriceSort(priceSort === "high-to-low" ? "none" : "high-to-low")}
-                              className={`flex-1 py-2.5 rounded-xl border text-xs font-bold transition-all ${
-                                priceSort === "high-to-low"
-                                ? "bg-emerald-600 border-emerald-600 text-white shadow-sm"
-                                : "bg-white/50 border-gray-100 text-[#1B4332]/70 hover:border-emerald-100"
-                              }`}
-                            >
-                              ₹ High to Low
-                            </button>
-                          </div>
 
-                          <div className="flex flex-col gap-2">
-                            {[
-                              { id: "under1000", label: "Under ₹1000" },
-                              { id: "1000-2000", label: "₹1000 – ₹2000" },
-                              { id: "above2000", label: "Above ₹2000" }
-                            ].map((range) => {
-                              const isChecked = priceRanges.includes(range.id);
-                              return (
-                                <button
-                                  key={range.id}
-                                  onClick={() => {
-                                    setPriceRanges(prev => 
-                                      prev.includes(range.id) ? prev.filter(r => r !== range.id) : [...prev, range.id]
-                                    );
-                                  }}
-                                  className={`flex items-center justify-between px-4 py-3 rounded-2xl border text-sm font-semibold transition-all ${
-                                    isChecked 
-                                    ? "bg-emerald-50 border-emerald-300 text-emerald-800 shadow-sm" 
-                                    : "bg-white/50 border-gray-100 hover:border-emerald-100 text-[#1B4332]/70"
-                                  }`}
-                                >
-                                  <span>{range.label}</span>
-                                  <div className={`w-4 h-4 rounded-md border flex items-center justify-center transition-colors ${isChecked ? "bg-emerald-600 border-emerald-600 text-white" : "border-gray-300"}`}>
-                                    {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
-                                  </div>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
 
                         {/* 3. Availability / Time Filters Column */}
                         <div className="space-y-3">

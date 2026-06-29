@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import axios from 'axios';
+import BACKEND_CONFIG from '@/config/backend';
 
-const features = [
+const defaultFeatures = [
     {
         title: "AI Spiritual Chatbot (ZenChat)",
         description: "An intelligent conversational AI assistant designed to provide spiritual guidance, wellness advice, and personalized recommendations. The chatbot leverages artificial intelligence to understand user queries and provide thoughtful, contextual responses related to meditation, wellness, spirituality, and personal growth.",
@@ -42,19 +44,39 @@ const features = [
     {
         title: "Marketplace",
         description: "An integrated marketplace for wellness products including meditation aids, sound healing devices, wellness supplements, books, and related items. Users can browse products, make purchases, and have items delivered directly to them, enhancing their wellness journey.",
-        image: "/guided_meditation_pop.png",
+        image: "/SpiritualJourneyKit.png",
         color: "#1a5d47"
     },
     {
         title: "User Dashboard",
         description: "A personalized dashboard providing users with an overview of their wellness journey. The dashboard displays progress metrics, meditation statistics, upcoming sessions, community activity, marketplace orders, and personalized recommendations based on user behavior and preferences.",
-        image: "/Productivity Flow.jpg",
+        image: "/user_with_laptop.png",
         color: "#ce93d8"
     }
 ];
 
 export const FeaturesBentoGrid = () => {
+    const [features, setFeatures] = useState<any[]>(defaultFeatures);
     const [activeIndex, setActiveIndex] = useState(0);
+
+    useEffect(() => {
+        const fetchFeatures = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_CONFIG.API_BASE_URL}/api/pages`);
+                if (res.data && res.data.length > 0) {
+                    setFeatures(res.data.map((page: any) => ({
+                        title: page.title,
+                        description: page.description || 'No description available.',
+                        image: page.image || '/Productivity Flow.jpg',
+                        color: page.color || '#ce93d8'
+                    })));
+                }
+            } catch (error) {
+                console.error("Error fetching features:", error);
+            }
+        };
+        fetchFeatures();
+    }, []);
 
     const handleNext = () => {
         setActiveIndex((prev) => (prev + 1) % features.length);

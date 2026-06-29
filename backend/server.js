@@ -54,6 +54,8 @@ const commonProblemRoutes = require('./routes/commonProblemRoutes');
 const essentialGuidanceRoutes = require('./routes/essentialGuidanceRoutes');
 const healingFrequenciesRoutes = require('./routes/healingFrequenciesRoutes');
 const enrollmentRoutes = require('./routes/enrollmentRoutes');
+const pageRoutes = require('./routes/pages');
+const faqRoutes = require('./routes/faqRoutes');
 const { syncAllApprovedCompanionsToUsers } = require('./utils/companionStatus');
 
 // Import models for seeding
@@ -1197,6 +1199,8 @@ app.use('/api/healing-frequencies', healingFrequenciesRoutes);
 app.use('/api/enrollments', enrollmentRoutes);
 app.use('/api', utilityRoutes);
 app.use('/api/ai-guide', aiGuideRoutes);
+app.use('/api/pages', pageRoutes);
+app.use('/api/faqs', faqRoutes);
 
 // Legacy route compatibility (for existing frontend code)
 app.post('/api/upload', upload.single('file'), (req, res) => {

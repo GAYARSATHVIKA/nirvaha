@@ -45,6 +45,7 @@ import AncientCharacterPage from './pages/AncientCharacterPage';
 import TempleOfBalancePage from './pages/TempleOfBalancePage';
 import AutographPage from './pages/AutographPage';
 import AboutPage from './pages/AboutPage';
+import DynamicPage from './pages/DynamicPage';
 
 import { FeaturesBentoGrid } from "./components/dashboard/FeaturesBentoGrid";
 import { CommonProblems } from "./components/dashboard/CommonProblems";
@@ -57,6 +58,7 @@ import { FAQSection } from "./components/dashboard/FAQSection";
 import { DashboardFooter } from "./components/dashboard/DashboardFooter";
 import { AdminLayout } from "./admin/layout/AdminLayout";
 import { AdminDashboardPage } from "./admin/pages/AdminDashboardPage";
+import { PagesManagementPage } from "./admin/pages/PagesManagementPage";
 import { AnalyticsPage } from "./admin/pages/AnalyticsPage";
 import { BookingManagementPage } from "./admin/pages/BookingManagementPage";
 import { CompanionManagementPage } from "./admin/pages/CompanionManagementPage";
@@ -72,6 +74,8 @@ import { LandingManagementPage } from "./admin/pages/LandingManagementPage";
 import { MarketplaceManagementPage } from "./admin/pages/MarketplaceManagementPage";
 import { ProductManagementPage } from "./admin/pages/ProductManagementPage";
 import { ContactManagementPage } from "./admin/pages/ContactManagementPage";
+import { PrivacyPolicyManagementPage } from "./admin/pages/PrivacyPolicyManagementPage";
+import { FAQManagementPage } from "./admin/pages/FAQManagementPage";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { TrustedNetworkManager } from "./components/admin/TrustedNetworkManager";
 import { WellnessOTTProvider } from "./contexts/WellnessOTTContext";
@@ -105,6 +109,7 @@ function AppInner() {
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/page/:slug" element={<DynamicPage />} />
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
@@ -172,6 +177,9 @@ function AppInner() {
           <Route path="marketplace" element={<MarketplaceManagementPage />} />
           <Route path="products" element={<ProductManagementPage />} />
           <Route path="landing" element={<LandingManagementPage />} />
+          <Route path="pages" element={<PagesManagementPage />} />
+          <Route path="privacy-policy" element={<PrivacyPolicyManagementPage />} />
+          <Route path="faqs" element={<FAQManagementPage />} />
           <Route path="content" element={<ContentManagementPage />} />
           <Route path="content/meditation" element={<MeditationContent />} />
           <Route path="content/sound" element={<SoundHealingContent />} />

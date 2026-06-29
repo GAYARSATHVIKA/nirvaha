@@ -110,6 +110,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           path: "/admin/landing",
         },
         {
+          title: "Dynamic Pages",
+          icon: FileText,
+          path: "/admin/pages",
+        },
+        {
           title: "Inquiries & Leads",
           icon: MessageSquare,
           path: "/admin/inquiries",
@@ -134,30 +139,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           icon: HelpCircle,
           path: "/admin/common-problems",
         },
+
         {
-          title: "Features",
-          icon: LayoutDashboard,
-          path: "/admin/features",
-        },
-        {
-          title: "Gaming Hub",
-          icon: Play,
-          path: "/admin/gaming-hub",
-        },
-        {
-          title: "Chakra Experience",
-          icon: Compass,
-          path: "/admin/chakra-experience",
-        },
-        {
-          title: "Inspirational Quotes",
-          icon: MessageSquare,
-          path: "/admin/quotes",
-        },
-        {
-          title: "Case Studies",
+          title: "Privacy Policy",
           icon: FileText,
-          path: "/admin/case-studies",
+          path: "/admin/privacy-policy",
         },
         {
           title: "FAQs",

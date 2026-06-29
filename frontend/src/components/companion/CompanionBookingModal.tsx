@@ -40,10 +40,10 @@ interface Companion {
 const mentors: Companion[] = [];
 
 const sessionTypes = [
-  { id: '30min', title: '30-Minute Session', description: 'Quick check-in & guidance', icon: MessageCircle, price: '₹500' },
-  { id: '1hour', title: '1-Hour Deep Dive', description: 'Comprehensive healing session', icon: Heart, price: '₹1000' },
-  { id: 'group', title: 'Group Session', description: 'Learn & grow with others', icon: User, price: '₹300' },
-  { id: 'emergency', title: 'Emergency Support', description: 'Instant 1-on-1 priority call', icon: Zap, price: '₹1500' },
+  { id: '30min', title: '30-Minute Session', description: 'Quick check-in & guidance', icon: MessageCircle, price: 'Free' },
+  { id: '1hour', title: '1-Hour Deep Dive', description: 'Comprehensive healing session', icon: Heart, price: 'Free' },
+  { id: 'group', title: 'Group Session', description: 'Learn & grow with others', icon: User, price: 'Free' },
+  { id: 'emergency', title: 'Emergency Support', description: 'Instant 1-on-1 priority call', icon: Zap, price: 'Free' },
 ];
 
 const timeSlots = [

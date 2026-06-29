@@ -3,8 +3,9 @@ import { BarChart3, Settings, LogOut, Menu, X, Compass } from 'lucide-react';
 import { motion } from 'motion/react';
 import { TrustedNetworkManager } from '../components/admin/TrustedNetworkManager';
 import { CertificationsManager } from '../components/admin/CertificationsManager';
-import { Award, Layout } from 'lucide-react';
+import { Award, Layout, FileText } from 'lucide-react';
 import { LandingManagementPage } from '../admin/pages/LandingManagementPage';
+import { PagesManagementPage } from '../admin/pages/PagesManagementPage';
 
 interface SidebarItem {
   id: string;
@@ -23,6 +24,12 @@ export function AdminDashboard() {
       label: 'Landing Page CMS',
       icon: <Layout className="w-5 h-5" />,
       component: <div className="p-8"><LandingManagementPage /></div>
+    },
+    {
+      id: 'dynamic-pages-cms',
+      label: 'Dynamic Pages CMS',
+      icon: <FileText className="w-5 h-5" />,
+      component: <PagesManagementPage />
     },
     {
       id: 'trusted-network',

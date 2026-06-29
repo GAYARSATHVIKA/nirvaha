@@ -1,43 +1,29 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Plus, Minus, HelpCircle } from 'lucide-react';
+import axios from 'axios';
+import BACKEND_CONFIG from '@/config/backend';
 
 export const FAQSection = () => {
-    const faqs = [
-        {
-            q: "Is Nirvaha suitable for beginners?",
-            a: "Yes. Our paths are gentle and designed to welcome you exactly as you are, regardless of prior experience.",
-            image: "/images/faq_beginners.png"
-        },
-        {
-            q: "How does the AI Reflection Companion work?",
-            a: "It acts as a secure, non-judgmental space. It listens to your thoughts and softly guides you toward emotional clarity.",
-            image: "/images/faq_ai_companion.png"
-        },
-        {
-            q: "Is Nirvaha a therapy platform?",
-            a: "No. We are a supportive wellness space meant for mindfulness and emotional reflection, not a replacement for clinical therapy.",
-            image: "/images/faq_therapy_ancient.png"
-        },
-        {
-            q: "Can I use Nirvaha during stressful moments?",
-            a: "Absolutely. We offer immediate grounding techniques and emergency calm modules to help you navigate sudden overwhelm.",
-            image: "https://images.unsplash.com/photo-1493666438817-866a91353ca9?q=80&w=800&auto=format&fit=crop"
-        },
-        {
-            q: "Are conversations private?",
-            a: "Yes. Your emotional space is entirely your own. All reflections are strictly confidential and securely encrypted.",
-            image: "/images/faq_privacy.png"
-        },
-        {
-            q: "How long are wellness sessions?",
-            a: "Sessions adapt to your needs. Choose from a quick 3-minute breathwork reset to a deep 45-minute guided release.",
-            image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=800&auto=format&fit=crop"
-        }
-    ];
-
+    const [faqs, setFaqs] = useState<any[]>([]);
     const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+    useEffect(() => {
+        const fetchFaqs = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_CONFIG.API_BASE_URL}/api/faqs`);
+                if (res.data && res.data.length > 0) {
+                    setFaqs(res.data);
+                }
+            } catch (error) {
+                console.error("Error fetching FAQs:", error);
+            }
+        };
+        fetchFaqs();
+    }, []);
+
+    if (faqs.length === 0) return null;
 
     return (
         <section className="py-8 bg-[#EEF7F1] overflow-hidden">
@@ -91,7 +77,7 @@ export const FAQSection = () => {
                                 >
                                     <span className={`font-semibold text-base md:text-lg tracking-tight transition-all duration-300 ${openIndex === idx ? 'text-[#1a5d47] pl-1' : 'text-[#0F131A] group-hover:text-[#1a5d47]/80'
                                         }`}>
-                                        {faq.q}
+                                        {faq.question}
                                     </span>
                                     <div className={`p-1.5 rounded-full transition-all duration-300 ${openIndex === idx
                                         ? 'bg-[#1a5d47]/10 text-[#1a5d47] rotate-0'
@@ -111,7 +97,7 @@ export const FAQSection = () => {
                                             className="overflow-hidden"
                                         >
                                             <div className="pb-6 pl-1 text-gray-500 text-sm leading-relaxed max-w-xl">
-                                                {faq.a}
+                                                {faq.answer}
                                             </div>
                                         </motion.div>
                                     )}

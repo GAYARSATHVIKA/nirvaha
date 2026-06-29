@@ -702,7 +702,7 @@ export function CommonProblemsManagementPage() {
                           type="text"
                           value={editingProblem.title}
                           onChange={(e) => setEditingProblem({ ...editingProblem, title: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full bg-white text-gray-900 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                           placeholder="e.g., Burnout"
                         />
                       </div>
@@ -711,7 +711,7 @@ export function CommonProblemsManagementPage() {
                         <select
                           value={editingProblem.icon}
                           onChange={(e) => setEditingProblem({ ...editingProblem, icon: e.target.value })}
-                          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full bg-white text-gray-900 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         >
                           {AVAILABLE_ICONS.map(icon => <option key={icon} value={icon}>{icon}</option>)}
                         </select>
@@ -724,7 +724,7 @@ export function CommonProblemsManagementPage() {
                         value={editingProblem.description}
                         onChange={(e) => setEditingProblem({ ...editingProblem, description: e.target.value })}
                         rows={3}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                        className="w-full bg-white text-gray-900 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         placeholder="Describe this wellness problem..."
                       />
                     </div>
@@ -768,7 +768,7 @@ export function CommonProblemsManagementPage() {
                           type="text"
                           value={editingProblem.accentColor}
                           onChange={(e) => setEditingProblem({ ...editingProblem, accentColor: e.target.value })}
-                          className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="flex-1 bg-white text-gray-900 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         />
                       </div>
                     </div>
@@ -785,7 +785,7 @@ export function CommonProblemsManagementPage() {
                           type="text"
                           value={editingProblem.accentLight}
                           onChange={(e) => setEditingProblem({ ...editingProblem, accentLight: e.target.value })}
-                          className="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                          className="flex-1 bg-white text-gray-900 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                         />
                       </div>
                     </div>
@@ -812,7 +812,7 @@ export function CommonProblemsManagementPage() {
                       onChange={(e) => setSolutionInput(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && addSolution()}
                       placeholder="Add a solution..."
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#1a5d47]"
+                      className="flex-1 bg-white text-gray-900 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#1a5d47]"
                     />
                     <button onClick={addSolution} className="px-4 py-2 bg-[#1a5d47] text-white rounded-lg text-sm font-semibold hover:bg-[#113d2f]">
                       Add
@@ -834,7 +834,7 @@ export function CommonProblemsManagementPage() {
                         <select
                           value={rec.icon}
                           onChange={(e) => updateRecommendation(idx, 'icon', e.target.value)}
-                          className="w-36 px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                          className="w-36 bg-white text-gray-900 px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                         >
                           {RECOMMENDATION_ICONS.map(icon => <option key={icon} value={icon}>{icon}</option>)}
                         </select>
@@ -843,7 +843,7 @@ export function CommonProblemsManagementPage() {
                           value={rec.text}
                           onChange={(e) => updateRecommendation(idx, 'text', e.target.value)}
                           placeholder="Action text..."
-                          className="flex-1 px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                          className="flex-1 bg-white text-gray-900 px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                         />
                         <button onClick={() => removeRecommendation(idx)} className="text-red-400 hover:text-red-600">
                           <X className="w-4 h-4" />
@@ -870,7 +870,7 @@ export function CommonProblemsManagementPage() {
                       type="text"
                       value={editingProblem.dropdownSectionTitle}
                       onChange={(e) => setEditingProblem({ ...editingProblem, dropdownSectionTitle: e.target.value })}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
+                      className="w-full bg-white text-gray-900 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-[#1a5d47]"
                     />
                   </div>
                   <div className="space-y-3">
@@ -884,14 +884,14 @@ export function CommonProblemsManagementPage() {
                           value={dd.title}
                           onChange={(e) => updateDropdown(idx, 'title', e.target.value)}
                           placeholder="Dropdown title..."
-                          className="w-full px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full bg-white text-gray-900 px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                         />
                         <textarea
                           value={dd.description}
                           onChange={(e) => updateDropdown(idx, 'description', e.target.value)}
                           placeholder="Dropdown description..."
                           rows={2}
-                          className="w-full px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
+                          className="w-full bg-white text-gray-900 px-3 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-[#1a5d47]"
                         />
                       </div>
                     ))}
