@@ -17,7 +17,6 @@ import { ChakraSection } from "../dashboard/ChakraSection";
 import { InspirationalQuotes } from "../dashboard/InspirationalQuotes";
 import { CaseStudies } from "../dashboard/CaseStudies";
 import { FAQSection } from "../dashboard/FAQSection";
-import { DynamicPagesSection } from "../dashboard/DynamicPagesSection";
 import { DashboardFooter } from "../dashboard/DashboardFooter";
 
 export function DashboardPage() {
@@ -239,7 +238,6 @@ export function DashboardPage() {
       <InspirationalQuotes />
       <CaseStudies />
       <FAQSection />
-      <DynamicPagesSection />
       <DashboardFooter />
     </div>
   );

@@ -40,6 +40,14 @@ const LandingSchema = new mongoose.Schema({
     imageUrl: String,
     image: String // legacy map
   }],
+  unveil: [{ // Used for Golden Showcase / Unveil The Secret
+    image: String,
+    title: String,
+    subtitle: String,
+    desc: String,
+    btn: String,
+    route: String
+  }],
   academy: {
     title: { type: String, default: '' },
     subtitle: { type: String, default: '' },

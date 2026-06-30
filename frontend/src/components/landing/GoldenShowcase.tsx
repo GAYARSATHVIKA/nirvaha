@@ -4,64 +4,43 @@ import { useNavigate } from 'react-router-dom';
 import SplitDoorAnimation from './SplitDoorAnimation';
 import { useAuth } from '../../contexts/AuthContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import BACKEND_CONFIG from '../../config/backend';
 
 const GoldenShowcase: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [isRevealed, setIsRevealed] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [slideData, setSlideData] = useState<any[]>([]);
 
-  const slideData = [
-    {
-      image: "/image 01.png",
-      title: "About Us",
-      subtitle: "Ancient Wisdom, Modern Science",
-      desc: "Nirvaha is more than a platform—it's a sanctuary where timeless spiritual practices meet modern tools to find your inner balance.",
-      btn: "Read Our Stories",
-      route: "/stories"
-    },
-    {
-      image: "/image 02.png",
-      title: "Our Vision",
-      subtitle: "Neuroscience Meets Spirit",
-      desc: "We leverage cutting-edge tech to quantify spiritual growth, making the intangible measurable for modern seekers.",
-      btn: "Explore Tech",
-      route: "/certifications"
-    },
-    {
-      image: "/image 03.png",
-      subtitle: "Personalized AI Guidance",
-      title: "AI Guide",
-      desc: "Experience the convergence of technology and tranquility with an AI guide that learns and grows with your spirit.",
-      btn: "Meet Your Guide",
-      route: "/dashboard/chatbot"
-    },
-    {
-      image: "/image 04.png",
-      title: "Harmony",
-      subtitle: "A Sanctuary for the Soul",
-      desc: "Find your center in a chaotic world. Our guided sessions are designed to align your mind, body, and breath.",
-      btn: "Start Healing",
-      route: "/dashboard/meditation"
-    },
-    {
-      image: "/image 05.png",
-      title: "Growth",
-      subtitle: "The Power of Together",
-      desc: "Join a global circle of seekers and healers. Together, we create a resonance that heals the world.",
-      btn: "Join the Circle",
-      route: "/dashboard/community"
-    }
-  ];
+  useEffect(() => {
+    const fetchLandingData = async () => {
+      try {
+        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing`);
+        if (res.ok) {
+          const result = await res.json();
+          if (result.unveil && result.unveil.length > 0) {
+            setSlideData(result.unveil);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch slide data:', error);
+      }
+    };
+    fetchLandingData();
+  }, []);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slideData.length);
+    if (slideData.length > 0) {
+      setCurrentSlide((prev) => (prev + 1) % slideData.length);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slideData.length) % slideData.length);
+    if (slideData.length > 0) {
+      setCurrentSlide((prev) => (prev - 1 + slideData.length) % slideData.length);
+    }
   };
-
   useEffect(() => {
     if (!isRevealed) return;
     const timer = setInterval(() => {
@@ -121,7 +100,7 @@ const GoldenShowcase: React.FC = () => {
           <AnimatePresence mode="wait">
             <motion.img
               key={currentSlide}
-              src={slideData[currentSlide].image}
+              src={slideData.length > 0 ? slideData[currentSlide].image : ''}
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -179,20 +158,21 @@ const GoldenShowcase: React.FC = () => {
                 className="text-6xl sm:text-7xl lg:text-8xl font-black text-[#1a442f] mb-6 tracking-tighter leading-none drop-shadow-sm" 
                 style={{ fontFamily: "'Cinzel', serif" }}
               >
-                {slideData[currentSlide].title}
+                {slideData.length > 0 ? slideData[currentSlide].title : ''}
               </h2>
               <div className="w-40 h-2 bg-emerald-400 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.3)] mb-10" />
 
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-emerald-700 mb-8" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                {slideData[currentSlide].subtitle}
+                {slideData.length > 0 ? slideData[currentSlide].subtitle : ''}
               </h3>
               <p className="text-lg sm:text-xl lg:text-2xl text-[#2a5940]/80 leading-relaxed mb-16 italic font-light" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                {slideData[currentSlide].desc}
+                {slideData.length > 0 ? slideData[currentSlide].desc : ''}
               </p>
 
               <button
                 onClick={(e) => {
                   e.stopPropagation();
+                  if (slideData.length === 0) return;
                   const targetRoute = slideData[currentSlide].route;
                   
                   // Check if this route requires protection (most of these do, like dashboard)
@@ -207,7 +187,9 @@ const GoldenShowcase: React.FC = () => {
                 className="group relative px-12 py-5 rounded-full bg-[#1a442f] text-white font-black text-2xl overflow-hidden border border-[#23583e] transition-all duration-500 shadow-2xl hover:shadow-[0_20px_40px_rgba(26,68,47,0.4)] hover:-translate-y-1"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                <span className="relative z-10 transition-colors group-hover:text-white">{slideData[currentSlide].btn}</span>
+                <span className="relative z-10 transition-colors group-hover:text-white">
+                  {slideData.length > 0 ? slideData[currentSlide].btn : ''}
+                </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </button>
             </motion.div>

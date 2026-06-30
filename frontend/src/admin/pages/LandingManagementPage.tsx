@@ -33,7 +33,7 @@ const SECTIONS: Section[] = [
   // { id: 'academy', label: 'Academy', icon: <BookOpen size={18} /> },
   { id: 'library', label: 'Vast Library', icon: <BookOpen size={18} /> },
   // { id: 'stats', label: 'Trusted Stats', icon: <Plus size={18} /> },
-  // { id: 'wisdom', label: 'Ancient Wisdom', icon: <Type size={18} /> },
+  { id: 'wisdom', label: 'Ancient Wisdom', icon: <Type size={18} /> },
   // { id: 'settings', label: 'Access Controls', icon: <Shield size={18} /> }
 ];
 
@@ -88,7 +88,7 @@ export function LandingManagementPage() {
     try {
       setSaving(true);
       const token = localStorage.getItem('token');
-      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/admin/landing`, {
+      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing/admin`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -135,9 +135,9 @@ export function LandingManagementPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-emerald-100 pb-8">
         <div>
           <h1 className="text-3xl font-bold text-[#1b4332] flex items-center gap-3">
-            <BookOpen className="text-emerald-500" /> Vast Library CMS
+            <BookOpen className="text-emerald-500" /> Library & Ancient Wisdom CMS
           </h1>
-          <p className="text-gray-500 mt-1">Manage all public-facing content and access controls dynamically.</p>
+          <p className="text-gray-500 mt-1">Manage all public-facing content for the Library and Ancient Wisdom sections dynamically.</p>
         </div>
         <div className="flex items-center gap-3">
           <button 
@@ -530,18 +530,64 @@ export function LandingManagementPage() {
                           className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[80px]"
                           placeholder="Goal Description"
                         />
-                        <input
-                          type="text"
-                          value={goal.image || goal.imageUrl || ''}
-                          onChange={e => {
-                            const newGoals = [...data.goals];
-                            newGoals[idx].image = e.target.value;
-                            newGoals[idx].imageUrl = e.target.value;
-                            updateNestedField('goals', newGoals);
-                          }}
-                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
-                          placeholder="Image URL"
-                        />
+                        <div className="space-y-2">
+                          {(goal.image || goal.imageUrl) && (
+                            <div className="relative h-32 w-full rounded-xl overflow-hidden mb-2 border border-emerald-100 shadow-sm">
+                               <img src={goal.image || goal.imageUrl} className="w-full h-full object-cover bg-gray-50" />
+                            </div>
+                          )}
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={goal.image || goal.imageUrl || ''}
+                              onChange={e => {
+                                const newGoals = [...data.goals];
+                                newGoals[idx].image = e.target.value;
+                                newGoals[idx].imageUrl = e.target.value;
+                                updateNestedField('goals', newGoals);
+                              }}
+                              className="flex-1 bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                              placeholder="Image URL"
+                            />
+                            <label className="cursor-pointer bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 flex items-center justify-center gap-2 transition-colors">
+                              <Upload size={16} />
+                              <span className="text-sm font-bold whitespace-nowrap">Upload</span>
+                              <input
+                                type="file"
+                                className="hidden"
+                                accept="image/*"
+                                onChange={async (e) => {
+                                    const file = e.target.files?.[0];
+                                    if (!file) return;
+                                    
+                                    const formData = new FormData();
+                                    formData.append('file', file);
+                                    formData.append('key', 'goal-upload-' + Date.now()); 
+                                    
+                                    try {
+                                        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/upload`, {
+                                            method: 'POST',
+                                            body: formData
+                                        });
+                                        const uploaded = await res.json();
+                                        if (uploaded && uploaded.fileUrl) {
+                                            const newGoals = [...data.goals];
+                                            newGoals[idx].image = uploaded.fileUrl;
+                                            newGoals[idx].imageUrl = uploaded.fileUrl;
+                                            updateNestedField('goals', newGoals);
+                                            toast.success('Image uploaded successfully');
+                                        } else {
+                                            toast.error(uploaded.error || 'Upload failed');
+                                        }
+                                    } catch (err) {
+                                        console.error('Upload error:', err);
+                                        toast.error('Failed to upload image');
+                                    }
+                                }}
+                              />
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     ))}
                     <button
@@ -901,8 +947,8 @@ export function LandingManagementPage() {
                                                     const file = e.target.files[0];
                                                     try {
                                                         const formData = new FormData();
-                                                        formData.append('image', file);
-                                                        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/upload`, {
+                                                        formData.append('file', file);
+                                                        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/upload`, {
                                                             method: 'POST',
                                                             body: formData,
                                                         });
@@ -910,7 +956,7 @@ export function LandingManagementPage() {
                                                             const result = await res.json();
                                                             setEditingLibraryItem({ 
                                                                 ...editingLibraryItem, 
-                                                                data: { ...editingLibraryItem.data, image: result.url } 
+                                                                data: { ...editingLibraryItem.data, image: result.fileUrl } 
                                                             });
                                                         } else {
                                                             console.error('Upload failed');
@@ -975,12 +1021,12 @@ export function LandingManagementPage() {
                                                         if (e.target.files && e.target.files[0]) {
                                                             try {
                                                                 const formData = new FormData();
-                                                                formData.append('image', e.target.files[0]);
-                                                                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/content/upload`, { method: 'POST', body: formData });
+                                                                formData.append('file', e.target.files[0]);
+                                                                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/upload`, { method: 'POST', body: formData });
                                                                 if (res.ok) {
                                                                     const result = await res.json();
                                                                     const newGallery = [...(editingLibraryItem.data.galleryImages || ['', '', ''])];
-                                                                    newGallery[imgIdx] = result.url;
+                                                                    newGallery[imgIdx] = result.fileUrl;
                                                                     setEditingLibraryItem({ ...editingLibraryItem, data: { ...editingLibraryItem.data, galleryImages: newGallery } });
                                                                 }
                                                             } catch (err) {}

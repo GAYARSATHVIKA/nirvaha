@@ -105,7 +105,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           path: "/admin/marketplace",
         },
         {
-          title: "Vast Library",
+          title: "Library & Ancient Wisdom",
           icon: BookOpen,
           path: "/admin/landing",
         },
@@ -178,6 +178,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               title: "Marketplace",
               icon: ShoppingBag,
               path: "/admin/content/products",
+            },
+            {
+              title: "Unveil The Secret",
+              icon: FileText,
+              path: "/admin/content/unveil",
             },
           ],
         },

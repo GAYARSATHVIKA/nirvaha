@@ -70,6 +70,7 @@ import { SoundHealingContent } from "./admin/pages/content/SoundHealingContent";
 import { HealingFrequenciesContent } from "./admin/pages/content/HealingFrequenciesContent";
 import { PosesContent } from "./admin/pages/content/PosesContent";
 import { ProductsContent } from "./admin/pages/content/ProductsContent";
+import { UnveilTheSecretContent } from "./admin/pages/content/UnveilTheSecretContent";
 import { LandingManagementPage } from "./admin/pages/LandingManagementPage";
 import { MarketplaceManagementPage } from "./admin/pages/MarketplaceManagementPage";
 import { ProductManagementPage } from "./admin/pages/ProductManagementPage";
@@ -186,6 +187,7 @@ function AppInner() {
           <Route path="content/healing-frequencies" element={<HealingFrequenciesContent />} />
           <Route path="content/poses" element={<PosesContent />} />
           <Route path="content/products" element={<ProductsContent />} />
+          <Route path="content/unveil" element={<UnveilTheSecretContent />} />
           <Route path="content/landing" element={<ContentManagementPage />} />
           <Route path="content/dynamic" element={<ContentManagementPage />} />
           <Route path="settings" element={<SettingsPage />} />

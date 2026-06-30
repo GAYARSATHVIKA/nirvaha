@@ -5,13 +5,14 @@ import { MeditationContent } from "./content/MeditationContent";
 import { SoundHealingContent } from "./content/SoundHealingContent";
 import { ProductsContent } from "./content/ProductsContent";
 import { ContentEditor } from "../components/ContentEditor";
-
+import { UnveilTheSecretContent } from "./content/UnveilTheSecretContent";
 
 const TAB_TO_PATH: Record<string, string> = {
   meditation: "/admin/content/meditation",
   sound: "/admin/content/sound",
   products: "/admin/content/products",
   dynamic: "/admin/content/dynamic",
+  unveil: "/admin/content/unveil",
 };
 
 const PATH_TO_TAB: Record<string, string> = {
@@ -19,6 +20,7 @@ const PATH_TO_TAB: Record<string, string> = {
   "/admin/content/sound": "sound",
   "/admin/content/products": "products",
   "/admin/content/dynamic": "dynamic",
+  "/admin/content/unveil": "unveil",
 };
 
 export function ContentManagementPage() {
@@ -63,6 +65,9 @@ export function ContentManagementPage() {
           <TabsTrigger value="dynamic" className="data-[state=active]:bg-gray-50 text-black data-[state=active]:text-gray-700">
             Dynamic Content
           </TabsTrigger>
+          <TabsTrigger value="unveil" className="data-[state=active]:bg-gray-50 text-black data-[state=active]:text-gray-700">
+            Unveil The Secret
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="meditation" className="mt-6">
@@ -76,6 +81,9 @@ export function ContentManagementPage() {
         </TabsContent>
         <TabsContent value="dynamic" className="mt-6">
           <ContentEditor />
+        </TabsContent>
+        <TabsContent value="unveil" className="mt-6">
+          <UnveilTheSecretContent />
         </TabsContent>
       </Tabs>
     </div>

@@ -3,9 +3,10 @@ import { BarChart3, Settings, LogOut, Menu, X, Compass } from 'lucide-react';
 import { motion } from 'motion/react';
 import { TrustedNetworkManager } from '../components/admin/TrustedNetworkManager';
 import { CertificationsManager } from '../components/admin/CertificationsManager';
-import { Award, Layout, FileText } from 'lucide-react';
+import { Award, Layout, FileText, ImageIcon } from 'lucide-react';
 import { LandingManagementPage } from '../admin/pages/LandingManagementPage';
 import { PagesManagementPage } from '../admin/pages/PagesManagementPage';
+import { UnveilTheSecretContent } from '../admin/pages/content/UnveilTheSecretContent';
 
 interface SidebarItem {
   id: string;
@@ -42,6 +43,12 @@ export function AdminDashboard() {
       label: 'Certifications',
       icon: <Award className="w-5 h-5" />,
       component: <CertificationsManager />
+    },
+    {
+      id: 'unveil-the-secret',
+      label: 'Unveil The Secret',
+      icon: <ImageIcon className="w-5 h-5" />,
+      component: <UnveilTheSecretContent />
     },
     {
       id: 'settings',

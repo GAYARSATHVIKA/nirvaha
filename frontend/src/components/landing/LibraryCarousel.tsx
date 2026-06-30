@@ -106,16 +106,7 @@ const LibraryCarousel: React.FC = () => {
                 if (res.ok) {
                     const data = await res.json();
                     if (data && data.library && Array.isArray(data.library) && data.library.length > 0) {
-                        // Merge with default items to ensure stories or other missing fields are present
-                        const merged = defaultLibraryItems.map(def => {
-                            const saved = data.library.find((p: any) => p.title === def.title);
-                            return saved ? { ...def, ...saved } : def;
-                        });
-                        
-                        // Add any completely new items that aren't in defaults
-                        const newItems = data.library.filter((p: any) => !defaultLibraryItems.some(def => def.title === p.title));
-                        
-                        setLibraryItems([...merged, ...newItems]);
+                        setLibraryItems(data.library);
                         return;
                     }
                 }
@@ -128,11 +119,7 @@ const LibraryCarousel: React.FC = () => {
             if (savedLibrary) {
                 try {
                     const parsed = JSON.parse(savedLibrary);
-                    const merged = defaultLibraryItems.map(def => {
-                        const saved = parsed.find((p: any) => p.title === def.title);
-                        return saved ? { ...def, ...saved } : def;
-                    });
-                    setLibraryItems(merged);
+                    setLibraryItems(parsed);
                 } catch (e) {
                     console.error("Failed to load library items from localStorage", e);
                     setLibraryItems(defaultLibraryItems);
