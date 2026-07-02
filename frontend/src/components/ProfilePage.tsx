@@ -36,12 +36,15 @@ import {
   Volume2,
   Key,
   X,
+  MessageSquare,
+  Send,
 } from "lucide-react";
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ShareProfileCard } from "./ShareProfileCard";
 import { MeditationSessionModal } from "./MeditationSessionModal";
 import { CompanionApplicationModal } from "./CompanionApplicationModal";
+import { StoryManager } from "./dashboard/StoryManager";
 import { useAuth } from "../contexts/AuthContext";
 import { useSettings } from "../contexts/SettingsContext";
 import { useSocket } from "../contexts/SocketContext";
@@ -486,6 +489,9 @@ export function ProfilePage() {
   const [quoteInputValue, setQuoteInputValue] = useState("");
   const [isSavingQuote, setIsSavingQuote] = useState(false);
 
+  const [blogInputValue, setBlogInputValue] = useState("");
+  const [isSubmittingBlog, setIsSubmittingBlog] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
 
@@ -548,6 +554,38 @@ export function ProfilePage() {
       toast.error("Error updating quote");
     } finally {
       setIsSavingQuote(false);
+    }
+  };
+
+  const handleSubmitBlog = async () => {
+    if (!blogInputValue.trim()) {
+      toast.error("Please enter some text before sharing");
+      return;
+    }
+    
+    setIsSubmittingBlog(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/landing/inspirations`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        },
+        body: JSON.stringify({ quote: blogInputValue.trim() })
+      });
+      
+      if (res.ok) {
+        toast.success("Shared successfully! It is now live in Daily Inspirations.");
+        setBlogInputValue("");
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        toast.error(errData.error || "Failed to share your inspiration");
+      }
+    } catch (e) {
+      toast.error("Error connecting to server");
+    } finally {
+      setIsSubmittingBlog(false);
     }
   };
 
@@ -1958,6 +1996,67 @@ export function ProfilePage() {
               )}
             </AnimatePresence>
           </div>
+        </motion.section>
+
+        {/* Share Your Inspiration (Blog) Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 1.2, ease: "easeOut" }}
+          className="mt-8 mb-8 rounded-[28px] border border-emerald-100/90 bg-white px-6 py-6 md:px-8 md:py-7 shadow-[0_14px_44px_rgba(27,67,50,0.07)] relative"
+        >
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-[#2D6A4F]/65 mb-2">
+                Inspire the Community
+              </p>
+              <h3 className="text-[#1B4332] font-black text-lg md:text-xl tracking-tight flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-[#52B788]" />
+                Share Your Inspiration
+              </h3>
+              <p className="text-xs text-[#2D6A4F]/70 font-medium mt-1">
+                Write a blog or quote to be featured in the Daily Inspirations section on the dashboard.
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-4">
+            <textarea
+              value={blogInputValue}
+              onChange={(e) => setBlogInputValue(e.target.value)}
+              className="w-full bg-emerald-50/50 text-[#1B4332] text-sm md:text-base font-medium leading-relaxed rounded-2xl p-4 border border-emerald-200/50 focus:outline-none focus:ring-2 focus:ring-[#52B788] focus:border-transparent min-h-[100px] resize-y placeholder:text-emerald-700/30"
+              placeholder="What wisdom would you like to share today?"
+            />
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={handleSubmitBlog}
+                disabled={isSubmittingBlog || !blogInputValue.trim()}
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#2D6A4F] to-[#1B4332] text-white text-sm font-bold hover:from-[#1B4332] hover:to-[#081C15] transition-all shadow-md flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
+              >
+                {isSubmittingBlog ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                Publish to Daily Inspiration
+              </button>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* ── Story Manager (Full Blog Section) ── */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 1.3, ease: "easeOut" }}
+          className="mt-8 mb-8"
+        >
+          <div className="mb-4">
+            <h3 className="text-[#1B4332] font-black text-lg md:text-xl tracking-tight flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#52B788]" />
+              Manage My Inspiration Story
+            </h3>
+            <p className="text-xs text-[#2D6A4F]/70 font-medium mt-1">
+              Create a full-length blog post with a banner, content, and track the comments it receives.
+            </p>
+          </div>
+          <StoryManager user={user} />
         </motion.section>
 
         {/* ── User's Booked Sessions Section (Visible when companion mode is OFF) ── */}

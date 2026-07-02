@@ -110,6 +110,11 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           path: "/admin/landing",
         },
         {
+          title: "Daily Inspiration",
+          icon: MessageSquare,
+          path: "/admin/inspirations",
+        },
+        {
           title: "Dynamic Pages",
           icon: FileText,
           path: "/admin/pages",

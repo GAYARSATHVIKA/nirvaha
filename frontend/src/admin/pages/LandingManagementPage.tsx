@@ -15,7 +15,8 @@ import {
   ToggleLeft,
   BookOpen,
   Upload,
-  X
+  X,
+  MessageSquare
 } from 'lucide-react';
 import BACKEND_CONFIG from '../../config/backend';
 import { useAuth } from '../../contexts/AuthContext';
@@ -29,7 +30,7 @@ interface Section {
 
 const SECTIONS: Section[] = [
   // { id: 'hero', label: 'Hero Section', icon: <ImageIcon size={18} /> },
-  // { id: 'pillars', label: 'Core Pillars', icon: <ToggleLeft size={18} /> },
+  { id: 'pillars', label: 'What is Nirvaha?', icon: <ToggleLeft size={18} /> },
   // { id: 'academy', label: 'Academy', icon: <BookOpen size={18} /> },
   { id: 'library', label: 'Vast Library', icon: <BookOpen size={18} /> },
   // { id: 'stats', label: 'Trusted Stats', icon: <Plus size={18} /> },
@@ -412,7 +413,12 @@ export function LandingManagementPage() {
 
               {activeTab === 'pillars' && (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Core Pillars</h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-bold text-[#1b4332] border-l-4 border-emerald-500 pl-4">Core Pillars</h3>
+                    <span className="text-xs text-emerald-700 font-medium bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+                      📸 Recommended Image Size: <span className="font-bold">1000x1200px (Portrait)</span>
+                    </span>
+                  </div>
                   <div className="grid grid-cols-1 gap-6">
                     {(data.pillars || []).map((pillar: any, idx: number) => (
                       <div key={idx} className="p-6 bg-white shadow-sm border border-emerald-100 rounded-3xl space-y-4 relative">
@@ -451,17 +457,62 @@ export function LandingManagementPage() {
                           className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50 min-h-[80px]"
                           placeholder="Pillar Description"
                         />
-                        <input
-                          type="text"
-                          value={pillar.image || ''}
-                          onChange={e => {
-                            const newPillars = [...data.pillars];
-                            newPillars[idx].image = e.target.value;
-                            updateNestedField('pillars', newPillars);
-                          }}
-                          className="w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
-                          placeholder="Image URL"
-                        />
+                        <div className="space-y-2">
+                          {(pillar.image) && (
+                            <div className="relative h-32 w-full rounded-xl overflow-hidden mb-2 border border-emerald-100 shadow-sm">
+                               <img src={pillar.image} className="w-full h-full object-cover bg-gray-50" />
+                            </div>
+                          )}
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={pillar.image || ''}
+                              onChange={e => {
+                                const newPillars = [...data.pillars];
+                                newPillars[idx].image = e.target.value;
+                                updateNestedField('pillars', newPillars);
+                              }}
+                              className="flex-1 w-full bg-white shadow-sm border border-emerald-200 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-emerald-500/50"
+                              placeholder="Image URL"
+                            />
+                            <label className="cursor-pointer bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded-xl px-4 py-3 flex items-center justify-center gap-2 transition-colors">
+                              <Upload size={16} />
+                              <span className="text-sm font-bold whitespace-nowrap">Upload</span>
+                              <input
+                                type="file"
+                                className="hidden"
+                                accept="image/*"
+                                onChange={async (e) => {
+                                    const file = e.target.files?.[0];
+                                    if (!file) return;
+                                    
+                                    const formData = new FormData();
+                                    formData.append('file', file);
+                                    formData.append('key', 'pillar-upload-' + Date.now()); 
+                                    
+                                    try {
+                                        const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/upload`, {
+                                            method: 'POST',
+                                            body: formData
+                                        });
+                                        const uploaded = await res.json();
+                                        if (uploaded && uploaded.fileUrl) {
+                                            const newPillars = [...data.pillars];
+                                            newPillars[idx].image = uploaded.fileUrl;
+                                            updateNestedField('pillars', newPillars);
+                                            toast.success('Image uploaded successfully');
+                                        } else {
+                                            toast.error(uploaded.error || 'Upload failed');
+                                        }
+                                    } catch (err) {
+                                        console.error('Upload error:', err);
+                                        toast.error('Failed to upload image');
+                                    }
+                                }}
+                              />
+                            </label>
+                          </div>
+                        </div>
                       </div>
                     ))}
                     <button

@@ -42,6 +42,7 @@ const utilityRoutes = require('./routes/utilityRoutes');
 const aiGuideRoutes = require('./routes/aiGuide');
 const postRoutes = require('./routes/postRoutes');
 const landingRoutes = require('./modules/landing/landing.routes');
+const storyRoutes = require('./modules/story/story.routes');
 const contactRoutes = require('./modules/contact/contact.routes');
 
 const userRoutes = require('./routes/userRoutes');
@@ -1186,6 +1187,7 @@ app.use('/api/marketplace', marketplaceRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/landing', landingRoutes);
+app.use('/api/stories', storyRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);

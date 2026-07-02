@@ -90,10 +90,14 @@ const stories = {
     }
 };
 
+import BACKEND_CONFIG from '../config/backend';
+
 export default function InspirationStoryPage() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const story = id ? stories[id as keyof typeof stories] : null;
+    
+    const [storyData, setStoryData] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
     
     // Comments State
     interface Reply {
@@ -149,58 +153,152 @@ export default function InspirationStoryPage() {
     const [replyingTo, setReplyingTo] = useState<string | null>(null);
     const [replyText, setReplyText] = useState('');
 
-    const handleAddComment = (e: React.FormEvent) => {
+    const handleAddComment = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!newComment.trim()) return;
         
-        const comment: Comment = {
-            id: Date.now().toString(),
-            user: 'You',
-            avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=You&backgroundColor=c8e6c9',
-            text: newComment,
-            time: 'Just now',
-            likes: 0,
-            isLiked: false,
-            replies: []
-        };
-        
-        setComments([comment, ...comments]);
+        if (id && id.length > 10) {
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/stories/${id}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ text: newComment })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    setComments(data.comments.map((c: any) => ({
+                        id: c._id,
+                        user: c.userName,
+                        avatar: c.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${c.userName}`,
+                        text: c.text,
+                        time: new Date(c.createdAt).toLocaleDateString(),
+                        likes: c.likes,
+                        isLiked: false, 
+                        replies: (c.replies || []).map((r: any) => ({
+                            id: r._id,
+                            user: r.userName,
+                            avatar: r.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${r.userName}`,
+                            text: r.text,
+                            time: new Date(r.createdAt).toLocaleDateString()
+                        }))
+                    })));
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        } else {
+            const comment: Comment = {
+                id: Date.now().toString(),
+                user: 'You',
+                avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=You&backgroundColor=c8e6c9',
+                text: newComment,
+                time: 'Just now',
+                likes: 0,
+                isLiked: false,
+                replies: []
+            };
+            setComments([comment, ...comments]);
+        }
         setNewComment('');
     };
 
-    const handleToggleLike = (commentId: string) => {
-        setComments(comments.map(c => {
-            if (c.id === commentId) {
-                return {
-                    ...c,
-                    isLiked: !c.isLiked,
-                    likes: c.isLiked ? c.likes - 1 : c.likes + 1
-                };
+    const handleToggleLike = async (commentId: string) => {
+        if (id && id.length > 10) {
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/stories/${id}/comments/${commentId}/like`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    setComments(data.comments.map((c: any) => ({
+                        id: c._id,
+                        user: c.userName,
+                        avatar: c.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${c.userName}`,
+                        text: c.text,
+                        time: new Date(c.createdAt).toLocaleDateString(),
+                        likes: c.likes,
+                        isLiked: false, 
+                        replies: (c.replies || []).map((r: any) => ({
+                            id: r._id,
+                            user: r.userName,
+                            avatar: r.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${r.userName}`,
+                            text: r.text,
+                            time: new Date(r.createdAt).toLocaleDateString()
+                        }))
+                    })));
+                }
+            } catch (err) {
+                console.error(err);
             }
-            return c;
-        }));
+        } else {
+            setComments(comments.map(c => {
+                if (c.id === commentId) {
+                    return {
+                        ...c,
+                        isLiked: !c.isLiked,
+                        likes: c.isLiked ? c.likes - 1 : c.likes + 1
+                    };
+                }
+                return c;
+            }));
+        }
     };
 
-    const handleAddReply = (commentId: string) => {
+    const handleAddReply = async (commentId: string) => {
         if (!replyText.trim()) return;
 
-        const reply: Reply = {
-            id: Date.now().toString(),
-            user: 'You',
-            avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=You&backgroundColor=c8e6c9',
-            text: replyText,
-            time: 'Just now'
-        };
-
-        setComments(comments.map(c => {
-            if (c.id === commentId) {
-                return {
-                    ...c,
-                    replies: [...c.replies, reply]
-                };
+        if (id && id.length > 10) {
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/stories/${id}/comments/${commentId}/reply`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ text: replyText })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    setComments(data.comments.map((c: any) => ({
+                        id: c._id,
+                        user: c.userName,
+                        avatar: c.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${c.userName}`,
+                        text: c.text,
+                        time: new Date(c.createdAt).toLocaleDateString(),
+                        likes: c.likes,
+                        isLiked: false, 
+                        replies: (c.replies || []).map((r: any) => ({
+                            id: r._id,
+                            user: r.userName,
+                            avatar: r.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${r.userName}`,
+                            text: r.text,
+                            time: new Date(r.createdAt).toLocaleDateString()
+                        }))
+                    })));
+                }
+            } catch (err) {
+                console.error(err);
             }
-            return c;
-        }));
+        } else {
+            const reply: Reply = {
+                id: Date.now().toString(),
+                user: 'You',
+                avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=You&backgroundColor=c8e6c9',
+                text: replyText,
+                time: 'Just now'
+            };
+
+            setComments(comments.map(c => {
+                if (c.id === commentId) {
+                    return {
+                        ...c,
+                        replies: [...c.replies, reply]
+                    };
+                }
+                return c;
+            }));
+        }
 
         setReplyingTo(null);
         setReplyText('');
@@ -208,15 +306,57 @@ export default function InspirationStoryPage() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []);
+        
+        const fetchStory = async () => {
+            setLoading(true);
+            try {
+                if (id && id.length > 10) {
+                    // Looks like a MongoDB ID, try fetching
+                    const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/stories/${id}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        setStoryData({
+                            ...data,
+                            name: data.authorName,
+                            avatar: data.authorAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${data.authorName}`,
+                        });
+                        if (data.comments) {
+                            setComments(data.comments.map((c: any) => ({
+                                id: c._id,
+                                user: c.userName,
+                                avatar: c.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${c.userName}`,
+                                text: c.text,
+                                time: new Date(c.createdAt).toLocaleDateString(),
+                                likes: c.likes,
+                                isLiked: false, 
+                                replies: (c.replies || []).map((r: any) => ({
+                                    id: r._id,
+                                    user: r.userName,
+                                    avatar: r.userAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${r.userName}`,
+                                    text: r.text,
+                                    time: new Date(r.createdAt).toLocaleDateString()
+                                }))
+                            })));
+                        }
+                    } else {
+                        navigate('/dashboard');
+                    }
+                } else if (id) {
+                    setStoryData(stories[id as keyof typeof stories]);
+                }
+            } catch (e) {
+                console.error(e);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchStory();
+    }, [id, navigate]);
 
-    if (!story) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-[#FAFAF8]">
-                <h1 className="text-2xl text-[#1a5d47]">Story not found.</h1>
-            </div>
-        );
-    }
+    if (loading) return <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center">Loading...</div>;
+    if (!storyData) return <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center">Story not found.</div>;
+
+    const story = storyData;
 
     return (
         <div className="min-h-screen bg-[#FAFAF8]">

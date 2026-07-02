@@ -72,6 +72,7 @@ import { PosesContent } from "./admin/pages/content/PosesContent";
 import { ProductsContent } from "./admin/pages/content/ProductsContent";
 import { UnveilTheSecretContent } from "./admin/pages/content/UnveilTheSecretContent";
 import { LandingManagementPage } from "./admin/pages/LandingManagementPage";
+import { DailyInspirationManagementPage } from "./admin/pages/DailyInspirationManagementPage";
 import { MarketplaceManagementPage } from "./admin/pages/MarketplaceManagementPage";
 import { ProductManagementPage } from "./admin/pages/ProductManagementPage";
 import { ContactManagementPage } from "./admin/pages/ContactManagementPage";
@@ -178,6 +179,7 @@ function AppInner() {
           <Route path="marketplace" element={<MarketplaceManagementPage />} />
           <Route path="products" element={<ProductManagementPage />} />
           <Route path="landing" element={<LandingManagementPage />} />
+          <Route path="inspirations" element={<DailyInspirationManagementPage />} />
           <Route path="pages" element={<PagesManagementPage />} />
           <Route path="privacy-policy" element={<PrivacyPolicyManagementPage />} />
           <Route path="faqs" element={<FAQManagementPage />} />

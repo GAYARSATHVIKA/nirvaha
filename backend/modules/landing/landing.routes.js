@@ -46,4 +46,7 @@ router.get('/', landingController.getLandingData);
 
 router.put('/admin', authenticateJWT, isAdmin, landingController.updateLandingData);
 
+// Route for users to submit a new inspiration
+router.post('/inspirations', authenticateJWT, landingController.addInspiration);
+
 module.exports = router;

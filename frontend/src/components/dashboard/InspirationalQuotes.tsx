@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import BACKEND_CONFIG from '../../config/backend';
 
-const notes = [
+const defaultNotes = [
     {
         id: 1,
         quote: "Breathe. You are exactly where you need to be.",
@@ -53,6 +54,34 @@ const notes = [
 ];
 
 export const InspirationalQuotes = () => {
+    const [notes, setNotes] = useState(defaultNotes);
+
+    useEffect(() => {
+        const fetchInspirations = async () => {
+            try {
+                const res = await fetch(`${BACKEND_CONFIG.API_BASE_URL}/api/stories`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && Array.isArray(data) && data.length > 0) {
+                        const formattedStories = data.map((story: any) => ({
+                            id: story._id,
+                            quote: story.quote || story.title,
+                            chant: story.favorites?.chant || "Peace",
+                            link: "/healing-music",
+                            author: story.authorName,
+                            avatar: story.authorAvatar || `https://api.dicebear.com/7.x/notionists/svg?seed=${story.authorName}`
+                        }));
+                        // Merge db stories with default ones and cap at 6 items total
+                        setNotes([...formattedStories, ...defaultNotes].slice(0, 6));
+                    }
+                }
+            } catch (err) {
+                console.warn("Failed to fetch stories from backend", err);
+            }
+        };
+        fetchInspirations();
+    }, []);
+
     const gradients = [
         'linear-gradient(135deg, #f0fdf4, #dcfce7)',
         'linear-gradient(135deg, #fefce8, #f0fdf4)',

@@ -63,44 +63,90 @@ export function Navigation({ currentPage, onNavigate }: { currentPage: string; o
     path: string;
     category: string;
     desc?: string;
+    tags?: string[];
   };
 
   const searchableRoutes: SearchRoute[] = [
-    { name: "Home", path: "/", category: "Pages" as const },
-    { name: "Academy", path: "/academy", category: "Pages" as const },
-    { name: "Stories", path: "/stories", category: "Pages" as const },
-    { name: "Overview", path: "/dashboard/overview", category: "Dashboard" as const },
-    { name: "Meditation", path: "/dashboard/meditation", category: "Features" as const },
-    { name: "Sound Healing", path: "/dashboard/sound", category: "Features" as const },
-    { name: "AI Guide", path: "/dashboard/chatbot", category: "Features" as const },
-    { name: "Community", path: "/dashboard/community", category: "Features" as const },
-    { name: "Marketplace", path: "/dashboard/marketplace", category: "Dashboard" as const },
-    { name: "Companion", path: "/dashboard/companion", category: "Dashboard" as const },
-    { name: "My Profile", path: "/dashboard/profile", category: "Account" as const },
-    { name: "Settings", path: "/dashboard/profile?open=settings", category: "Account" as const },
-    { name: "Chakra Experience", path: "/chakra-experience", category: "Academy" as const },
-    { name: "Healing Music", path: "/healing-music", category: "Academy" as const },
-    { name: "Wellness OTT", path: "/wellness-ott", category: "Features" as const, desc: "Watch wellness experiences on-demand." },
-    { name: "OTT Wellness", path: "/wellness-ott", category: "Features" as const, desc: "Netflix-style wellness series and films." },
-    { name: "Gaming Wellness Hub", path: "/dashboard/overview?scrollTo=gaming-hub", category: "Features" as const, desc: "Gamified wellness and interactive sessions." },
-    { name: "Breathing", path: "/breathing", category: "Academy" as const },
+    { name: "Home", path: "/", category: "Pages", tags: ["landing", "main"] },
+    { name: "Academy", path: "/academy", category: "Pages", tags: ["learn", "education", "course", "certification"] },
+    { name: "Stories", path: "/stories", category: "Pages", tags: ["blog", "inspiration", "post"] },
+    { name: "Overview", path: "/dashboard/overview", category: "Dashboard", tags: ["home", "main"] },
+    { name: "Meditation", path: "/dashboard/meditation", category: "Features", tags: ["peace", "mindfulness", "zen", "breathe", "calm"] },
+    { name: "Sound Healing", path: "/dashboard/sound", category: "Features", tags: ["music", "audio", "frequency", "relax"] },
+    { name: "AI Guide", path: "/dashboard/chatbot", category: "Features", tags: ["bot", "companion", "help", "chat"] },
+    { name: "Community", path: "/dashboard/community", category: "Features", tags: ["social", "network", "friends", "post"] },
+    { name: "Marketplace", path: "/dashboard/marketplace", category: "Dashboard", tags: ["shop", "buy", "store", "product", "booking"] },
+    { name: "Companion", path: "/dashboard/companion", category: "Dashboard", tags: ["expert", "doctor", "guide", "mentor"] },
+    { name: "My Profile", path: "/dashboard/profile", category: "Account", tags: ["user", "account", "me"] },
+    { name: "Settings", path: "/dashboard/profile?open=settings", category: "Account", tags: ["preferences", "config"] },
+    { name: "Chakra Experience", path: "/chakra-experience", category: "Academy", tags: ["energy", "balance", "spiritual"] },
+    { name: "Healing Music", path: "/healing-music", category: "Academy", tags: ["song", "tune", "relax"] },
+    { name: "Wellness OTT", path: "/wellness-ott", category: "Features", desc: "Watch wellness experiences on-demand.", tags: ["video", "watch", "series", "movie", "show", "stream"] },
+    { name: "Gaming Wellness Hub", path: "/dashboard/overview?scrollTo=gaming-hub", category: "Features", desc: "Gamified wellness and interactive sessions.", tags: ["game", "play", "fun", "hub"] },
+    { name: "Breathing", path: "/breathing", category: "Academy", tags: ["pranayama", "inhale", "exhale"] },
+    
+    // New Sections added:
+    { name: "About Us", path: "/about", category: "Pages", tags: ["company", "team", "info", "nirvaha"] },
+    { name: "Learning Catalog", path: "/learn", category: "Academy", tags: ["courses", "study", "explore", "learn"] },
+    { name: "Certifications", path: "/certifications", category: "Academy", tags: ["certificate", "grad", "achievements", "diploma"] },
+    { name: "Life Quiz", path: "/life-quiz", category: "Academy", tags: ["quiz", "test", "personality", "life", "questions"] },
+    { name: "Ancient Character", path: "/ancient-character", category: "Academy", tags: ["history", "mythology", "character", "ancient", "avatar"] },
+    { name: "Temple of Balance", path: "/temple-of-balance", category: "Academy", tags: ["temple", "balance", "peace", "harmony", "meditation"] },
+    { name: "Add Your Autograph", path: "/add-your-autograph", category: "Academy", tags: ["autograph", "sign", "reflection", "journal"] },
+    { name: "Login", path: "/login", category: "Account", tags: ["sign in", "auth"] },
+    { name: "Sign Up", path: "/signup", category: "Account", tags: ["register", "create account"] },
     ...wellnessSessions.map((s) => ({
       name: s.title,
       path: `/wellness-ott/series/${s.id}`,
       category: "Wellness OTT",
       desc: s.description,
+      tags: ["ott", "series", "watch", "video"]
     })),
+    // Admin Sections unconditionally added to search (will redirect to dashboard if not an admin)
+    { name: "Admin Dashboard", path: "/admin", category: "Admin", tags: ["admin", "dashboard", "overview"] },
+    { name: "Analytics", path: "/admin/analytics", category: "Admin", tags: ["stats", "data", "analytics", "admin"] },
+    { name: "Manage Bookings", path: "/admin/bookings", category: "Admin", tags: ["bookings", "appointments", "sessions"] },
+    { name: "Manage Companions", path: "/admin/companions", category: "Admin", tags: ["companions", "experts", "doctors"] },
+    { name: "Manage Users", path: "/admin/users", category: "Admin", tags: ["users", "members", "accounts"] },
+    { name: "Manage Content", path: "/admin/content", category: "Admin", tags: ["content", "meditations", "sounds", "upload"] },
+    { name: "Manage Market", path: "/admin/marketplace", category: "Admin", tags: ["market", "shop", "products", "session"] },
+    { name: "Inquiries & Leads", path: "/admin/inquiries", category: "Admin", tags: ["messages", "contact", "support", "leads"] },
+    { name: "Daily Inspirations", path: "/admin/inspirations", category: "Admin", tags: ["quotes", "inspirations", "blogs", "stories"] },
+    { name: "Dynamic Pages", path: "/admin/pages", category: "Admin", tags: ["pages", "dynamic", "cms"] },
+    { name: "Trusted Network", path: "/admin/trusted-network", category: "Admin", tags: ["network", "trusted", "partners"] },
+    { name: "Wellness OTT Admin", path: "/admin/wellness-ott", category: "Admin", tags: ["ott", "video", "series", "management"] },
+    { name: "Library & Ancient Wisdom", path: "/admin/landing", category: "Admin", tags: ["library", "ancient", "wisdom", "landing"] },
+    { name: "Admin Certifications", path: "/admin/certifications", category: "Admin", tags: ["certifications", "academy", "grad"] },
+    { name: "Common Problems", path: "/admin/common-problems", category: "Admin", tags: ["common", "problems", "issues"] },
+    { name: "Privacy Policy Admin", path: "/admin/privacy-policy", category: "Admin", tags: ["privacy", "policy", "legal"] },
+    { name: "FAQs Admin", path: "/admin/faqs", category: "Admin", tags: ["faqs", "questions", "answers", "help"] },
+    { name: "Meditation Content", path: "/admin/content/meditation", category: "Admin", tags: ["meditation", "content", "music"] },
+    { name: "Pose Management", path: "/admin/content/poses", category: "Admin", tags: ["poses", "yoga", "management"] },
+    { name: "Sound Healing Content", path: "/admin/content/sound", category: "Admin", tags: ["sound", "healing", "music", "audio"] },
+    { name: "Healing Frequencies", path: "/admin/content/healing-frequencies", category: "Admin", tags: ["frequencies", "healing", "hz"] },
+    { name: "Products Content", path: "/admin/content/products", category: "Admin", tags: ["products", "marketplace", "shop"] },
+    { name: "Unveil The Secret", path: "/admin/content/unveil", category: "Admin", tags: ["unveil", "secret", "content", "secrets"] },
+    { name: "Platform Settings", path: "/admin/settings", category: "Admin", tags: ["settings", "platform", "config"] }
   ];
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
+  const searchWords = normalizedQuery.split(/\s+/).filter(w => w.length > 0);
+  
   const filteredRoutes =
-    normalizedQuery === ""
+    searchWords.length === 0
       ? []
       : searchableRoutes
-          .filter((r) => (r.name + " " + r.path).toLowerCase().includes(normalizedQuery))
+          .filter((r) => {
+            const targetText = (r.name + " " + r.path + " " + (r.desc || "") + " " + (r.tags ? r.tags.join(" ") : "")).toLowerCase();
+            return searchWords.every(word => {
+              // Basic plural/singular matching
+              const wordSingular = word.endsWith('s') ? word.slice(0, -1) : word;
+              return targetText.includes(word) || targetText.includes(wordSingular);
+            });
+          })
           .slice(0, 10);
 
-  const categoryOrder = ["Pages", "Dashboard", "Features", "Academy", "Wellness OTT", "Account"] as const;
+  const categoryOrder = ["Pages", "Dashboard", "Features", "Academy", "Wellness OTT", "Account", "Admin"] as const;
   const routeCategories = categoryOrder.filter((cat) => filteredRoutes.some((r) => r.category === cat));
 
   const [isVisible, setIsVisible] = useState(true);

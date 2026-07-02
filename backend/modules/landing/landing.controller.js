@@ -6,7 +6,7 @@ const Landing = require('./landing.model');
  */
 exports.getLandingData = async (req, res) => {
   try {
-    let landingData = await Landing.findOne();
+    let landingData = await Landing.findOne().lean();
     
     // If no landing data exists, return a default structure
     if (!landingData) {
@@ -24,9 +24,11 @@ exports.getLandingData = async (req, res) => {
           { value: "4.9★", label: "Average Rating", icon: "⭐" }
         ],
         pillars: [
-          { id: "01", title: "Systemic Diagnostics", desc: "We analyze your organizational pulse through confidential, culturally-aware assessments to identify latent stressors.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop" },
-          { id: "02", title: "Scalable Protocols", desc: "Deployment of curated wellness frameworks that adapt to team size, location, and operational intensity.", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop" },
-          { id: "03", title: "Leadership Synergy", desc: "Equipping managers with high-EQ toolkits to foster psychological safety and resilient decision-making.", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop" }
+          { id: "01", title: "Systemic Diagnostics", desc: "We analyze your organizational pulse through confidential, culturally-aware assessments to identify latent stressors.", image: "/pillar_systemic_diagnostics.png" },
+          { id: "02", title: "Scalable Protocols", desc: "Deployment of curated wellness frameworks that adapt to team size, location, and operational intensity.", image: "/pillar_scalable_protocols.png" },
+          { id: "03", title: "Leadership Synergy", desc: "Equipping managers with high-EQ toolkits to foster psychological safety and resilient decision-making.", image: "/pillar_leadership_synergy.png" },
+          { id: "04", title: "Cultural Integration", desc: "Weaving emotional intelligence into the daily fabric of operations, transforming wellness from a perk to a practice.", image: "/pillar_cultural_integration.png" },
+          { id: "05", title: "Impact & ROI", desc: "Real-time analytics measuring engagement, retention shifts, and emotional capital growth.", image: "/pillar_impact_roi.png" }
         ],
         library: [
           { 
@@ -182,10 +184,14 @@ exports.getLandingData = async (req, res) => {
       };
     }
 
+    let responseData = landingData;
+    if (landingData && landingData.toObject) {
+      responseData = landingData.toObject();
+    }
+
     // Fallback: If document exists but is missing the unveil array
-    if (landingData && (!landingData.unveil || landingData.unveil.length === 0)) {
-      landingData = landingData.toObject ? landingData.toObject() : landingData;
-      landingData.unveil = [
+    if (responseData && (!responseData.unveil || responseData.unveil.length === 0)) {
+      responseData.unveil = [
         {
           image: "/image 01.png",
           title: "About Us",
@@ -228,8 +234,31 @@ exports.getLandingData = async (req, res) => {
         }
       ];
     }
+
+    // Fallback: If document exists but is missing the pillars array
+    if (responseData && (!responseData.pillars || responseData.pillars.length === 0)) {
+      responseData.pillars = [
+          { id: "01", title: "Systemic Diagnostics", desc: "We analyze your organizational pulse through confidential, culturally-aware assessments to identify latent stressors.", image: "/pillar_systemic_diagnostics.png" },
+          { id: "02", title: "Scalable Protocols", desc: "Deployment of curated wellness frameworks that adapt to team size, location, and operational intensity.", image: "/pillar_scalable_protocols.png" },
+          { id: "03", title: "Leadership Synergy", desc: "Equipping managers with high-EQ toolkits to foster psychological safety and resilient decision-making.", image: "/pillar_leadership_synergy.png" },
+          { id: "04", title: "Cultural Integration", desc: "Weaving emotional intelligence into the daily fabric of operations, transforming wellness from a perk to a practice.", image: "/pillar_cultural_integration.png" },
+          { id: "05", title: "Impact & ROI", desc: "Real-time analytics measuring engagement, retention shifts, and emotional capital growth.", image: "/pillar_impact_roi.png" }
+      ];
+    }
+
+    // Fallback: If document exists but is missing the inspirations array
+    if (responseData && (!responseData.inspirations || responseData.inspirations.length === 0)) {
+      responseData.inspirations = [
+          { id: 1, quote: "Breathe. You are exactly where you need to be.", chant: "Cosmic OM Chant", link: "/healing-music", author: "Aisha Patel", avatar: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?q=80&w=150&auto=format&fit=crop" },
+          { id: 2, quote: "Stillness is where healing begins.", chant: "Gayatri Resonance", link: "/healing-music", author: "Arjun Verma", avatar: "/arjun verma.png" },
+          { id: 3, quote: "Let go of what no longer serves you.", chant: "Soma Lunar Nectar", link: "/healing-music", author: "Rohan Sharma", avatar: "/rohan.jpg" },
+          { id: 4, quote: "Every breath is a new beginning.", chant: "Brahma Nada", link: "/healing-music", author: "Aditya Rao", avatar: "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=150&auto=format&fit=crop" },
+          { id: 5, quote: "Your peace is your power.", chant: "Maha Mrityunjaya", link: "/healing-music", author: "Priya Desai", avatar: "/priya.jpg" },
+          { id: 6, quote: "Find beauty in the present moment.", chant: "Anahata Heart Frequency", link: "/healing-music", author: "Kavya Iyer", avatar: "/kavya.png" }
+      ];
+    }
     
-    res.status(200).json(landingData);
+    res.status(200).json(responseData);
   } catch (error) {
     console.error('Error fetching landing data:', error);
     res.status(500).json({ error: 'Server error while fetching landing data' });
@@ -264,5 +293,50 @@ exports.updateLandingData = async (req, res) => {
   } catch (error) {
     console.error('Error updating landing data:', error);
     res.status(500).json({ error: 'Server error while updating landing data' });
+  }
+};
+
+/**
+ * Add a new daily inspiration (For Users)
+ * POST /api/landing/inspirations
+ */
+exports.addInspiration = async (req, res) => {
+  try {
+    const { quote } = req.body;
+    if (!quote) {
+      return res.status(400).json({ error: 'Quote content is required' });
+    }
+
+    const userName = req.user.name || 'Anonymous Seeker';
+    const userAvatar = req.user.profilePicture || '';
+
+    // Create new inspiration object
+    const newInspiration = {
+      id: Date.now(),
+      quote: quote,
+      chant: '',
+      link: '',
+      author: userName,
+      avatar: userAvatar
+    };
+
+    // Find the document and append to inspirations
+    const landingData = await Landing.findOneAndUpdate(
+      {},
+      { $push: { inspirations: newInspiration } },
+      { new: true, upsert: true }
+    );
+
+    // Clear the cache
+    const { clearCache } = require('../../utils/cache');
+    await clearCache();
+
+    res.status(200).json({
+      message: 'Inspiration added successfully',
+      inspiration: newInspiration
+    });
+  } catch (error) {
+    console.error('Error adding inspiration:', error);
+    res.status(500).json({ error: 'Server error while adding inspiration' });
   }
 };

@@ -40,6 +40,14 @@ const LandingSchema = new mongoose.Schema({
     imageUrl: String,
     image: String // legacy map
   }],
+  inspirations: [{ // Used for Daily Inspiration
+    id: Number,
+    quote: String,
+    chant: String,
+    link: String,
+    author: String,
+    avatar: String
+  }],
   unveil: [{ // Used for Golden Showcase / Unveil The Secret
     image: String,
     title: String,
