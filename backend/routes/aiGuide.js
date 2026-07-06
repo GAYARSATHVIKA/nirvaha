@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { moderateText } = require('../utils/moderation');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const CONTEXT_FILE = path.join(__dirname, '../config/nirvaha_context.txt');
@@ -24,6 +25,11 @@ router.post('/chat', async (req, res) => {
 
     if (!message) {
       return res.status(400).json({ error: 'Message is required' });
+    }
+
+    const modResult = moderateText(message);
+    if (!modResult.approved) {
+      return res.json({ reply: modResult.reason });
     }
 
     const nirvahaContext = getNirvahaContext();

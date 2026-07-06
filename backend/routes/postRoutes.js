@@ -6,16 +6,7 @@ const Hashtag = require('../models/Hashtag');
 const router = express.Router();
 
 // ── Predefined banned words (server-side only, no admin management) ───────
-const BANNED_WORDS = [
-  'fuck', 'shit', 'bitch', 'asshole', 'bastard', 'cunt', 'dick', 'pussy',
-  'nigger', 'nigga', 'faggot', 'retard', 'whore', 'slut', 'motherfucker',
-  'wanker', 'bollocks', 'scam', 'casino', 'viagra', 'porn',
-  'piss', 'cock', 'crap', 'twat', 'prick',
-  'douchebag', 'jackass', 'dipshit', 'bullshit', 'horseshit', 'shithead',
-  'fuckhead', 'arsehole', 'arse', 'spastic',
-  'rape', 'terrorist', 'bomb',
-  'racist', 'sexist', 'homophobic', 'transphobic',
-];
+const { moderateText } = require('../utils/moderation');
 
 // ── Auto Category Detection ───────────────────────────────────────────────
 function detectCategories(text) {
@@ -124,15 +115,10 @@ const WELLNESS_KEYWORDS = [
 function moderatePost(title, body) {
   const fullText = ((title || '') + ' ' + body).toLowerCase();
 
-  // Check banned words
-  for (const word of BANNED_WORDS) {
-    const regex = new RegExp('\\b' + escapeRegExp(word) + '\\b', 'i');
-    if (regex.test(fullText)) {
-      return {
-        approved: false,
-        reason: 'Your post contains inappropriate language. Please edit and try again.',
-      };
-    }
+  // Check banned words and crisis topics
+  const modResult = moderateText(fullText);
+  if (!modResult.approved) {
+    return modResult;
   }
 
   // Block spam links
@@ -364,6 +350,11 @@ router.post('/:id/comment', async (req, res) => {
   try {
     const { userId, userName, userInitial, avatarColor, text } = req.body;
     if (!text || !text.trim()) return res.status(400).json({ error: 'Comment text required' });
+
+    const modResult = moderateText(text);
+    if (!modResult.approved) {
+      return res.status(400).json({ error: modResult.reason });
+    }
 
     const post = await Post.findOne({ id: req.params.id });
     if (!post) return res.status(404).json({ error: 'Post not found' });
