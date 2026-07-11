@@ -13,10 +13,33 @@ const bcrypt = require('bcryptjs');
 const { cacheMiddleware, initCache } = require('./utils/cache');
 const { startRetentionJobs, ensureBackupDir } = require('./utils/retention');
 const allowedOrigins = [
-  'https://nirvaha-wellnessllp.vercel.app',
-  'https://nirvaha.org',
-  'https://www.nirvaha.org'
+  "https://nirvaha.org",
+  "https://www.nirvaha.org",
+  "https://nirvaha-wellnessllp.vercel.app",
+  "https://nirvaha-i6qi.onrender.com",
+  "http://localhost:5173",
+  "http://localhost:3000"
 ];
+
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    console.log("Blocked Origin:", origin);
+
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+  methods: ["GET","POST","PUT","PATCH","DELETE","OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization"
+  ]
+};
 
 // Load environment variables immediately (explicit path to guarantee resolution)
 dotenv.config({ path: path.join(__dirname, '.env') });
@@ -53,20 +76,8 @@ const Hashtag = require('./models/Hashtag');
 const app = express();
 app.disable('x-powered-by');
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    credentials: true,
-  },
+const io = new Server(server,{
+    cors: corsOptions
 });
 
 const PORT = process.env.PORT || 5001;
@@ -444,20 +455,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(compression());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
