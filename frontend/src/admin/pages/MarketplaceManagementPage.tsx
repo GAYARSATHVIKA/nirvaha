@@ -417,7 +417,10 @@ export function MarketplaceManagementPage() {
 
   useEffect(() => {
     load();
-    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL);
+    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL, {
+      transports: ["websocket", "polling"],
+      withCredentials: true
+    });
     socket.on("marketplace-new-request", load);
     socket.on("marketplace-request-approved", load);
     socket.on("booking-created", load);

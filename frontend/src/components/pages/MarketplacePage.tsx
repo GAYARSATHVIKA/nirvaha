@@ -499,7 +499,10 @@ export function MarketplacePage() {
   useEffect(() => {
     loadApprovedItems();
 
-    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL);
+    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL, {
+      transports: ["websocket", "polling"],
+      withCredentials: true
+    });
     socket.on("marketplace-item-created", loadApprovedItems);
     socket.on("marketplace-item-completed", loadApprovedItems);
     socket.on("booking-updated", loadApprovedItems);

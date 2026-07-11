@@ -184,7 +184,10 @@ export function ProfilePage() {
     };
     loadProfile();
 
-    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL);
+    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL, {
+      transports: ["websocket", "polling"],
+      withCredentials: true
+    });
     socket.on("profile_updated", (data: any) => {
       if (data.userId === user?.id) {
         setProfileData((prev: any) => prev ? { ...prev, stats: data.stats } : prev);

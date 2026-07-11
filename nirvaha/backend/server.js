@@ -14,10 +14,8 @@ const { cacheMiddleware, initCache } = require('./utils/cache');
 const { startRetentionJobs, ensureBackupDir } = require('./utils/retention');
 const allowedOrigins = [
   'https://nirvaha-wellnessllp.vercel.app',
-  'http://localhost:3000',
-  'http://localhost:3001',
-  'http://localhost:5173',
-  'http://localhost:5001'
+  'https://nirvaha.org',
+  'https://www.nirvaha.org'
 ];
 
 // Load environment variables immediately (explicit path to guarantee resolution)
@@ -521,8 +519,8 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 // Multi-file upload for meditation/sound content
 app.post('/api/upload/media', upload.fields([
   { name: 'thumbnail', maxCount: 1 },
-  { name: 'banner',    maxCount: 1 },
-  { name: 'audio',     maxCount: 1 },
+  { name: 'banner', maxCount: 1 },
+  { name: 'audio', maxCount: 1 },
 ]), (req, res) => {
   try {
     const BASE = process.env.BASE_URL || `http://localhost:${PORT}`;
