@@ -1,6 +1,6 @@
 const BACKEND_CONFIG = {
-  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001',
-  SOCKET_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001'
+  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'https://nirvaha-i6qi.onrender.com',
+  SOCKET_BASE_URL: import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_BASE_URL || 'https://nirvaha-i6qi.onrender.com'
 };
 
 export default BACKEND_CONFIG;

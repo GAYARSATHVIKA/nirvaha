@@ -13,6 +13,8 @@ const bcrypt = require('bcryptjs');
 const { cacheMiddleware, initCache } = require('./utils/cache');
 const { startRetentionJobs, ensureBackupDir } = require('./utils/retention');
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
+  'https://nirvaha.org',
+  'https://www.nirvaha.org',
   'http://localhost:5173',
   'https://nirvaha-git-railway-code-chang-0161fa-dtarun2202-6431s-projects.vercel.app',
   'https://nirvaha.vercel.app',
@@ -74,6 +76,8 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: [
+      'https://nirvaha.org',
+      'https://www.nirvaha.org',
       'https://nirvaha-three.vercel.app',
       'http://localhost:5173',
       'http://localhost:3000'
