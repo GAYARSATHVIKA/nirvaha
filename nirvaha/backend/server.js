@@ -17,6 +17,7 @@ const allowedOrigins = [
   "https://www.nirvaha.org",
   "https://nirvaha-wellnessllp.vercel.app",
   "https://nirvaha-i6qi.onrender.com",
+  "https://nirvaha-three.vercel.app",
   "http://localhost:5173",
   "http://localhost:3000"
 ];
