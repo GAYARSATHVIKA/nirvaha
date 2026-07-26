@@ -46,6 +46,9 @@ import TempleOfBalancePage from './pages/TempleOfBalancePage';
 import AutographPage from './pages/AutographPage';
 import AboutPage from './pages/AboutPage';
 import DynamicPage from './pages/DynamicPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import DeleteAccountPage from './pages/DeleteAccountPage';
+import SupportPage from './pages/SupportPage';
 
 import { FeaturesBentoGrid } from "./components/dashboard/FeaturesBentoGrid";
 import { CommonProblems } from "./components/dashboard/CommonProblems";
@@ -112,6 +115,9 @@ function AppInner() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/page/:slug" element={<DynamicPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/delete-account" element={<DeleteAccountPage />} />
+        <Route path="/support" element={<SupportPage />} />
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />

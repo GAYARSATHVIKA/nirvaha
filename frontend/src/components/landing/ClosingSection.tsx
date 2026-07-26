@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Instagram, Linkedin } from 'lucide-react';
 import DecorativeShapes from './DecorativeShapes';
 
@@ -158,6 +158,28 @@ const ClosingSection: React.FC = () => {
                             >
                                 Contact
                             </motion.a>
+                        </div>
+
+                        {/* Legal & Compliance Links */}
+                        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                            <Link
+                                to="/privacy"
+                                className="text-white/60 text-sm font-medium hover:text-[#4ade80] transition-colors duration-300"
+                            >
+                                Privacy Policy
+                            </Link>
+                            <Link
+                                to="/delete-account"
+                                className="text-white/60 text-sm font-medium hover:text-[#4ade80] transition-colors duration-300"
+                            >
+                                Delete Account
+                            </Link>
+                            <Link
+                                to="/support"
+                                className="text-white/60 text-sm font-medium hover:text-[#4ade80] transition-colors duration-300"
+                            >
+                                Support
+                            </Link>
                         </div>
 
                         {/* Social Media Cards */}
