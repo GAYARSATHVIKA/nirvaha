@@ -86,7 +86,7 @@ const Contact = () => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || BACKEND_CONFIG.API_BASE_URL;
+      const API_BASE_URL = BACKEND_CONFIG.API_BASE_URL;
       const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: {
