@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import BACKEND_CONFIG from "@/config/backend";
-import io from "socket.io-client";
+import { socket } from "@/lib/socket";
 import AddItemModal from "../marketplace/AddItemModal";
 import CheckoutModal from "../marketplace/CheckoutModal";
 import { SessionRegistrationModal } from "../marketplace/SessionRegistrationModal";
@@ -499,10 +499,9 @@ export function MarketplacePage() {
   useEffect(() => {
     loadApprovedItems();
 
-    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL, {
-      transports: ["websocket", "polling"],
-      withCredentials: true
-    });
+    if (!socket.connected) {
+      socket.connect();
+    }
     socket.on("marketplace-item-created", loadApprovedItems);
     socket.on("marketplace-item-completed", loadApprovedItems);
     socket.on("booking-updated", loadApprovedItems);
@@ -512,7 +511,9 @@ export function MarketplacePage() {
     window.addEventListener("pageshow", handleFocus);
 
     return () => {
-      socket.disconnect();
+      socket.off("marketplace-item-created", loadApprovedItems);
+      socket.off("marketplace-item-completed", loadApprovedItems);
+      socket.off("booking-updated", loadApprovedItems);
       window.removeEventListener("focus", handleFocus);
       window.removeEventListener("pageshow", handleFocus);
     };

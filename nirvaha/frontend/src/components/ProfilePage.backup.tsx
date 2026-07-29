@@ -31,7 +31,7 @@ import { useState, useEffect, useRef } from "react";
 import { ShareProfileCard } from "./ShareProfileCard";
 import { MeditationSessionModal } from "./MeditationSessionModal";
 import { useAuth } from "../contexts/AuthContext";
-import { io } from "socket.io-client";
+import { socket } from "@/lib/socket";
 import BACKEND_CONFIG from "../config/backend";
 import html2canvas from "html2canvas";
 import {
@@ -184,13 +184,15 @@ export function ProfilePage() {
     };
     loadProfile();
 
-    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL);
+    if (!socket.connected) {
+      socket.connect();
+    }
     socket.on("profile_updated", (data: any) => {
       if (data.userId === user?.id) {
         setProfileData((prev: any) => prev ? { ...prev, stats: data.stats } : prev);
       }
     });
-    return () => { socket.disconnect(); };
+    return () => { socket.off("profile_updated"); };
   }, [user?.id]);
 
   const handleStartSession = (session: any) => {

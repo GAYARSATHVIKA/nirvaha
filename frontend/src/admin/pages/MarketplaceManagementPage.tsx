@@ -5,7 +5,7 @@ import {
   Clock, Users, CalendarCheck, Inbox, X,
   Phone, Mail, User, Leaf, Target
 } from "lucide-react";
-import io from "socket.io-client";
+import { socket } from "@/lib/socket";
 import BACKEND_CONFIG from "@/config/backend";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -417,16 +417,20 @@ export function MarketplaceManagementPage() {
 
   useEffect(() => {
     load();
-    const socket = io(BACKEND_CONFIG.SOCKET_BASE_URL, {
-      transports: ["websocket", "polling"],
-      withCredentials: true
-    });
+    if (!socket.connected) {
+      socket.connect();
+    }
     socket.on("marketplace-new-request", load);
     socket.on("marketplace-request-approved", load);
     socket.on("booking-created", load);
     // Increased to 60s to reduce visible flicker; overrides handle persistence
     const iv = setInterval(load, 60000);
-    return () => { socket.disconnect(); clearInterval(iv); };
+    return () => { 
+      socket.off("marketplace-new-request", load);
+      socket.off("marketplace-request-approved", load);
+      socket.off("booking-created", load);
+      clearInterval(iv); 
+    };
   }, []);
 
   // ── Actions ───────────────────────────────────────────────────────────────

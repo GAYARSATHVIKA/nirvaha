@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import io, { Socket } from 'socket.io-client';
+import { Socket } from 'socket.io-client';
+import { socket as singletonSocket } from '../lib/socket';
 import { toast } from 'react-toastify';
 import BACKEND_CONFIG from '../config/backend';
 
@@ -35,14 +36,10 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [content, setContent] = useState<Record<string, any>>({});
 
   useEffect(() => {
-    const newSocket = io(BACKEND_CONFIG.SOCKET_BASE_URL, {
-      reconnection: true,
-      reconnectionAttempts: 10,
-      reconnectionDelay: 1000,
-      transports: ['websocket', 'polling'],
-      withCredentials: true,
-      upgrade: true,
-    });
+    const newSocket = singletonSocket;
+    if (!newSocket.connected) {
+      newSocket.connect();
+    }
 
     newSocket.on('connect', () => {
       console.log('Connected to server');
@@ -126,7 +123,12 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setSocket(newSocket);
 
     return () => {
-      newSocket.close();
+      newSocket.off('connect');
+      newSocket.off('disconnect');
+      newSocket.off('content-updated');
+      newSocket.off('content-deleted');
+      newSocket.off('request-status-updated');
+      newSocket.off('new-companion-request');
     };
   }, []);
 
